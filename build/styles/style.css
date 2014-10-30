@@ -2145,7 +2145,7 @@ address {
     display: none !important;
   }
 }
-/* line 7, ../../src/styles/style.sass */
+/* line 11, ../../src/styles/style.sass */
 .row {
   margin: 0;
 }
@@ -2154,53 +2154,54 @@ address {
   font-family: zantroke;
   src: url(../fonts/Zantroke.otf);
 }
-/* line 14, ../../src/styles/style.sass */
+/* line 18, ../../src/styles/style.sass */
 body {
   font-family: zantroke;
   background-color: #878f8e;
   font-size: 14px;
-  display: flex;
-  flex-flow: column;
-  margin: 0;
 }
 
-/* line 22, ../../src/styles/style.sass */
+/* line 23, ../../src/styles/style.sass */
 header {
   background-color: #506362;
   color: white;
   padding: 20px 0;
 }
-/* line 26, ../../src/styles/style.sass */
+/* line 27, ../../src/styles/style.sass */
 header .container {
   display: flex;
 }
 
-/* line 28, ../../src/styles/style.sass */
+/* line 29, ../../src/styles/style.sass */
 .logo {
   position: relative;
   max-width: 100px;
   height: auto;
 }
-/* line 32, ../../src/styles/style.sass */
+/* line 33, ../../src/styles/style.sass */
 .logo img {
   width: 100%;
   max-width: 100%;
 }
 
-/* line 35, ../../src/styles/style.sass */
+/* line 36, ../../src/styles/style.sass */
 .title {
   padding-left: 20px;
   display: flex;
   flex: 1;
   align-items: center;
 }
-
 /* line 41, ../../src/styles/style.sass */
+.title:hover {
+  cursor: default;
+}
+
+/* line 44, ../../src/styles/style.sass */
 nav {
   background-color: #6b7877;
   height: 45px;
 }
-/* line 44, ../../src/styles/style.sass */
+/* line 47, ../../src/styles/style.sass */
 nav ul {
   margin: 0;
   padding: 0;
@@ -2210,44 +2211,56 @@ nav ul {
   align-items: center;
   height: 45px;
 }
-/* line 52, ../../src/styles/style.sass */
+/* line 55, ../../src/styles/style.sass */
 nav ul li {
   height: 100%;
   padding: 0 10px;
   display: flex;
   align-items: stretch;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
-/* line 57, ../../src/styles/style.sass */
+/* line 61, ../../src/styles/style.sass */
 nav ul li:hover {
   background-color: #b3b6b6;
 }
-/* line 59, ../../src/styles/style.sass */
+/* line 63, ../../src/styles/style.sass */
 nav ul li a {
   display: flex;
   align-items: center;
   color: whitesmoke;
+  -webkit-transition: color 0.3s ease;
+  -moz-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
 }
-/* line 63, ../../src/styles/style.sass */
+/* line 68, ../../src/styles/style.sass */
 nav ul li a:hover {
   color: #506362;
 }
 
-/* line 66, ../../src/styles/style.sass */
+/* line 71, ../../src/styles/style.sass */
 .calendar {
   background-color: whitesmoke;
   margin-top: 25px;
 }
 
-/* line 69, ../../src/styles/style.sass */
+/* line 74, ../../src/styles/style.sass */
 .day {
   height: 400px;
+  -webkit-transition: border 0.3s ease;
+  -moz-transition: border 0.3s ease;
+  -o-transition: border 0.3s ease;
+  transition: border 0.3s ease;
 }
-/* line 71, ../../src/styles/style.sass */
+/* line 77, ../../src/styles/style.sass */
 .day.over {
   border: 2px dashed #6b7877;
 }
 
-/* line 73, ../../src/styles/style.sass */
+/* line 79, ../../src/styles/style.sass */
 .day-header {
   padding: 0;
   text-align: center;
@@ -2258,26 +2271,26 @@ nav ul li a:hover {
   border-bottom: 1px solid #b3b6b6;
 }
 
-/* line 82, ../../src/styles/style.sass */
+/* line 88, ../../src/styles/style.sass */
 .day + *, .day-header + * {
   border-left: 1px solid #b3b6b6;
 }
 
-/* line 85, ../../src/styles/style.sass */
+/* line 91, ../../src/styles/style.sass */
 .recipes-container {
-  flex: 1 1;
-  min-height: 0;
+  max-height: 310px;
   overflow: auto;
-  padding-top: 5px;
+  margin-top: 20px;
 }
 
-/* line 90, ../../src/styles/style.sass */
+/* line 95, ../../src/styles/style.sass */
 .recipe {
   margin: 5px;
   float: left;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 19%;
   height: 50px;
   background-color: #b3b6b6;
@@ -2286,8 +2299,12 @@ nav ul li a:hover {
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+  -webkit-transition: opacity 0.3s ease;
+  -moz-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
-/* line 104, ../../src/styles/style.sass */
+/* line 111, ../../src/styles/style.sass */
 .recipe:hover {
   cursor: move;
 }

@@ -1,8 +1,12 @@
 @import bootstrap
 
-@mixin size($width, $height: $width)
-	width: $width
-	height: $height
+//color palette url - http://paletton.com/#uid=13g0u0k1It801XU0-Dn3toq6ekh
+
+@mixin transition($params)
+	-webkit-transition: $params
+	-moz-transition: $params
+	-o-transition: $params
+	transition: $params
 
 .row
 	margin: 0
@@ -15,9 +19,6 @@ body
 	font-family: zantroke
 	background-color: #878F8E
 	font-size: 14px
-	display: flex
-	flex-flow: column
-	margin: 0
 
 header
 	background-color: #506362
@@ -37,6 +38,8 @@ header
 	display: flex
 	flex: 1
 	align-items: center
+	&:hover
+		cursor: default
 
 nav
 	background-color: #6B7877
@@ -54,12 +57,14 @@ nav
 			padding: 0 10px
 			display: flex
 			align-items: stretch
+			+transition(background-color 0.3s ease)
 			&:hover
 				background-color: #B3B6B6
 			a
 				display: flex
 				align-items: center
 				color: #F5F5F5
+				+transition(color 0.3s ease)
 				&:hover
 					color: #506362
 
@@ -68,6 +73,7 @@ nav
 	margin-top: 25px
 .day
 	height: 400px
+	+transition(border 0.3s ease)
 	&.over
 		border: 2px dashed #6B7877
 .day-header
@@ -83,16 +89,16 @@ nav
 		border-left: 1px solid #B3B6B6
 
 .recipes-container
-	flex: 1 1
-	min-height: 0
+	max-height: 310px
 	overflow: auto
-	padding-top: 5px
+	margin-top: 20px
 .recipe
 	margin: 5px
 	float: left
 	display: flex
 	align-items: center
 	justify-content: center
+	text-align: center
 	width: 19%
 	height: 50px
 	background-color: #B3B6B6
@@ -101,5 +107,6 @@ nav
 	-moz-border-radius: 5px
 	-o-border-radius: 5px
 	border-radius: 5px
+	+transition(opacity 0.3s ease)
 	&:hover
 		cursor: move

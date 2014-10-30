@@ -27,14 +27,14 @@
           .col-md-2.day-header Friday
           .col-md-1.day-header Saturday
           .col-md-1.day-header Sunday
-        .calendar-recipes
-          .col-md-2.day.monday
-          .col-md-2.day.tuesday
-          .col-md-2.day.wednesday
-          .col-md-2.day.thursday
-          .col-md-2.day.friday
-          .col-md-1.day.saturday
-          .col-md-1.day.sunday
+        .calendar-recipes{:'ng-controller' => 'CalendarCtrl'}
+          .col-md-2.day.monday{:ondragover => "event.preventDefault()"}
+          .col-md-2.day.tuesday{:ondragover => "event.preventDefault()"}
+          .col-md-2.day.wednesday{:ondragover => "event.preventDefault()"}
+          .col-md-2.day.thursday{:ondragover => "event.preventDefault()"}
+          .col-md-2.day.friday{:ondragover => "event.preventDefault()"}
+          .col-md-1.day.saturday{:ondragover => "event.preventDefault()"}
+          .col-md-1.day.sunday{:ondragover => "event.preventDefault()"}
     .container.recipes-container{:'ng-controller' => 'RecipesCtrl'}
       .recipe{:'ng-repeat' => 'recipe in recipes', :draggable => 'true'}
         {{ recipe.name }}
