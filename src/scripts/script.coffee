@@ -50,7 +50,9 @@ app.controller 'RecipesCtrl', ['$scope', ($scope) ->
 
 	recipesContainer.addEventListener 'dragstart', (event) ->
 		el = event.target
-		if el.classList[0] == 'recipe' then event.target.style.opacity = '0.4'
+		if el.classList[0] == 'recipe' 
+			el.style.opacity = '0.4'
+			event.dataTransfer.setData('draggable', el)
 	, false
 	calendar.addEventListener 'dragenter', (event) ->
 		el = event.target
@@ -66,9 +68,13 @@ app.controller 'CalendarCtrl', ['$scope', ($scope) ->
 	$scope.weeklyMenu = {}
 	calendar = document.querySelector('.calendar-recipes')
 	calendar.addEventListener 'drop', (event) ->
-		draggable = event.target
-		droppable = this
-		if droppable.classList[1] == 'day' then $scope.weeklyMenu[droppable.classList[2]].push JSON.parse(event.dataTransfer.getData('json'))
-		console.log($scope.weeklyMenu)
+		droppable = event.target
+		draggable = event.dataTransfer.getData('draggable')
+		if droppable.classList[1] == 'day' 
+			if !$scope.weeklyMenu[droppable.classList[2]]
+				$scope.weeklyMenu[droppable.classList[2]] = []
+			$scope.weeklyMenu[droppable.classList[2]].push 'done'
+			
+			console.log($scope.weeklyMenu)
 	, false
 ]

@@ -22,7 +22,8 @@ app.controller('RecipesCtrl', [
       var el;
       el = event.target;
       if (el.classList[0] === 'recipe') {
-        return event.target.style.opacity = '0.4';
+        el.style.opacity = '0.4';
+        return event.dataTransfer.setData('draggable', el);
       }
     }, false);
     calendar.addEventListener('dragenter', function(event) {
@@ -49,12 +50,15 @@ app.controller('CalendarCtrl', [
     calendar = document.querySelector('.calendar-recipes');
     return calendar.addEventListener('drop', function(event) {
       var draggable, droppable;
-      draggable = event.target;
-      droppable = this;
+      droppable = event.target;
+      draggable = event.dataTransfer.getData('draggable');
       if (droppable.classList[1] === 'day') {
-        $scope.weeklyMenu[droppable.classList[2]].push(JSON.parse(event.dataTransfer.getData('json')));
+        if (!$scope.weeklyMenu[droppable.classList[2]]) {
+          $scope.weeklyMenu[droppable.classList[2]] = [];
+        }
+        $scope.weeklyMenu[droppable.classList[2]].push('done');
+        return console.log($scope.weeklyMenu);
       }
-      return console.log($scope.weeklyMenu);
     }, false);
   }
 ]);
