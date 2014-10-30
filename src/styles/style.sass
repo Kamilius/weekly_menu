@@ -1,0 +1,105 @@
+@import bootstrap
+
+@mixin size($width, $height: $width)
+	width: $width
+	height: $height
+
+.row
+	margin: 0
+
+@font-face
+	font-family: zantroke
+	src: url(../fonts/Zantroke.otf)
+
+body
+	font-family: zantroke
+	background-color: #878F8E
+	font-size: 14px
+	display: flex
+	flex-flow: column
+	margin: 0
+
+header
+	background-color: #506362
+	color: #fff
+	padding: 20px 0
+	.container
+		display: flex
+.logo
+	position: relative
+	max-width: 100px
+	height: auto
+	img
+		width: 100%
+		max-width: 100%
+.title
+	padding-left: 20px
+	display: flex
+	flex: 1
+	align-items: center
+
+nav
+	background-color: #6B7877
+	height: 45px
+	ul
+		margin: 0
+		padding: 0
+		display: flex
+		justify-content: flex-start
+		list-style: none
+		align-items: center
+		height: 45px
+		li
+			height: 100%
+			padding: 0 10px
+			display: flex
+			align-items: stretch
+			&:hover
+				background-color: #B3B6B6
+			a
+				display: flex
+				align-items: center
+				color: #F5F5F5
+				&:hover
+					color: #506362
+
+.calendar
+	background-color: #F5F5F5
+	margin-top: 25px
+.day
+	height: 400px
+	&.over
+		border: 2px dashed #6B7877
+.day-header
+	padding: 0
+	text-align: center
+	height: 50px
+	display: flex
+	align-items: center
+	justify-content: center
+	border-bottom: 1px solid #B3B6B6
+.day, .day-header
+	&+*
+		border-left: 1px solid #B3B6B6
+
+.recipes-container
+	flex: 1 1
+	min-height: 0
+	overflow: auto
+	padding-top: 5px
+.recipe
+	margin: 5px
+	float: left
+	display: flex
+	align-items: center
+	justify-content: center
+	width: 19%
+	height: 50px
+	background-color: #B3B6B6
+	font-size: 1.5rem
+	-webkit-border-radius: 5px
+	-moz-border-radius: 5px
+	-o-border-radius: 5px
+	border-radius: 5px
+	&:hover
+		cursor: move

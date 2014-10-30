@@ -1,0 +1,58 @@
+<html ng-app='weeklyMenuApp'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <title>Weekly Menu</title>
+    <link href='styles/style.css' rel='stylesheet'>
+  </head>
+  <body>
+    <header>
+      <div class='container'>
+        <div class='logo'>
+          <img src='images/chef_hat_logo.png'>
+        </div>
+        <h2 class='title'>Weekly Menu</h2>
+      </div>
+    </header>
+    <nav>
+      <div class='container'>
+        <ul>
+          <li>
+            <a href=''>Recipe list</a>
+          </li>
+          <li>
+            <a href=''>Add recipe</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class='container'>
+      <section class='row calendar'>
+        <div class='calendar-days'>
+          <div class='col-md-2 day-header'>Monday</div>
+          <div class='col-md-2 day-header'>Tuesday</div>
+          <div class='col-md-2 day-header'>Wednesday</div>
+          <div class='col-md-2 day-header'>Thursday</div>
+          <div class='col-md-2 day-header'>Friday</div>
+          <div class='col-md-1 day-header'>Saturday</div>
+          <div class='col-md-1 day-header'>Sunday</div>
+        </div>
+        <div class='calendar-recipes'>
+          <div class='col-md-2 day monday'></div>
+          <div class='col-md-2 day tuesday'></div>
+          <div class='col-md-2 day wednesday'></div>
+          <div class='col-md-2 day thursday'></div>
+          <div class='col-md-2 day friday'></div>
+          <div class='col-md-1 day saturday'></div>
+          <div class='col-md-1 day sunday'></div>
+        </div>
+      </section>
+    </div>
+    <div class='container recipes-container' ng-controller='RecipesCtrl'>
+      <div class='recipe' draggable='true' ng-repeat='recipe in recipes'>
+        {{ recipe.name }}
+      </div>
+    </div>
+    <script src='scripts/main.min.js'></script>
+  </body>
+</html>

@@ -1,0 +1,319 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"of",
+				"offsetLeft"
+			],
+			[
+				"offse",
+				"offsetHeight"
+			],
+			[
+				"off",
+				"offsetWidth"
+			],
+			[
+				"o",
+				"offsetTop"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/scripts/script.coffee",
+			"settings":
+			{
+				"buffer_size": 266,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/index.haml",
+			"settings":
+			{
+				"buffer_size": 691,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 54.0,
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"cd ~/.config/sublime-text-3/packages",
+			"cd PACKAGE_PATH;",
+			"cd PACKAGE_PATH",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/kamilius/proj/weekly_menu/src",
+		"/home/kamilius/proj/weekly_menu/src/images",
+		"/home/kamilius/proj/weekly_menu/src/scripts",
+		"/home/kamilius/proj/weekly_menu/src/styles"
+	],
+	"file_history":
+	[
+		"/home/kamilius/proj/grunt/src/scripts/script.coffee",
+		"/home/kamilius/proj/grunt/Gruntfile.js",
+		"/home/kamilius/proj/grunt/src/index.haml",
+		"/home/kamilius/proj/grunt/src/styles/style.sass",
+		"/media/kamilius/90BF-1439/Studprofkom/Database/Studprofkom_init_database.sql",
+		"/home/kamilius/proj/grunt/src/scripts/script.js",
+		"/home/kamilius/proj/grunt/build/scripts/main.min.js",
+		"/home/kamilius/proj/grunt/package.json",
+		"/home/kamilius/proj/grunt/build/scripts/grunt-tutorial.min.js",
+		"/home/kamilius/proj/grunt/build/scripts/jquery-2.1.1.min.js",
+		"/home/kamilius/proj/grunt/build/index.html",
+		"/home/kamilius/proj/nodejs/stream.js",
+		"/home/kamilius/proj/nodejs/script.js",
+		"/home/kamilius/proj/nodejs/3.txt",
+		"/home/kamilius/proj/nodejs/myModule.js",
+		"/home/kamilius/proj/grunt/src/styles/_box-shadow.sass",
+		"/home/kamilius/proj/grunt/src/scripts/grunt-tutorial.js",
+		"/home/kamilius/Desktop/script.js",
+		"/home/kamilius/proj/grunt/README.md",
+		"/home/kamilius/Desktop/index.html",
+		"/home/kamilius/proj/grunt/src/styles/_colors.sass",
+		"/home/kamilius/proj/grunt/src/style.sass",
+		"/home/kamilius/proj/grunt/src/grunt-tutorial.js",
+		"/home/kamilius/proj/grunt/src/sass-import.sass",
+		"/home/kamilius/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/kamilius/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/kamilius/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/kamilius/.config/sublime-text-3/Packages/Package Control/Package Control.sublime-settings",
+		"/home/kamilius/proj/grunt/Gruntfile"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"StudProfkomDiploma",
+			"  ",
+			"size"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"StudProfkomUAD",
+			"\\t"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/scripts/script.coffee",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 266,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								216,
+								216
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/index.haml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 691,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								598,
+								598
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "weekly_menu.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 203.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

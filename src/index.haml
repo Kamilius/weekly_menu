@@ -1,0 +1,41 @@
+%html{:'ng-app' => 'weeklyMenuApp'}
+  %head
+    %meta{:charset => 'UTF-8'}
+    %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1'}
+    %title Weekly Menu
+    %link{:href => 'styles/style.css', :rel => 'stylesheet'}
+  %body
+    %header
+      .container
+        .logo
+          %img{:src => 'images/chef_hat_logo.png'}
+        %h2.title Weekly Menu
+    %nav
+      .container
+        %ul
+          %li
+            %a{:href => ''} Recipe list
+          %li
+            %a{:href => ''} Add recipe
+    .container
+      %section.row.calendar
+        .calendar-days
+          .col-md-2.day-header Monday
+          .col-md-2.day-header Tuesday
+          .col-md-2.day-header Wednesday
+          .col-md-2.day-header Thursday
+          .col-md-2.day-header Friday
+          .col-md-1.day-header Saturday
+          .col-md-1.day-header Sunday
+        .calendar-recipes
+          .col-md-2.day.monday
+          .col-md-2.day.tuesday
+          .col-md-2.day.wednesday
+          .col-md-2.day.thursday
+          .col-md-2.day.friday
+          .col-md-1.day.saturday
+          .col-md-1.day.sunday
+    .container.recipes-container{:'ng-controller' => 'RecipesCtrl'}
+      .recipe{:'ng-repeat' => 'recipe in recipes', :draggable => 'true'}
+        {{ recipe.name }}
+    %script{:src => 'scripts/main.min.js'}

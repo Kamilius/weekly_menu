@@ -14,7 +14,8 @@ module.exports = function(grunt) {
 		uglify: {
 			options: {
 				banner: '/*! "Weekly menu" <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-				//compress: true,
+				mangle: false,
+				compress: false,
 				beautify: true
 			},
 			my_target: {
