@@ -2,31 +2,31 @@
   %head
     %meta{:charset => 'UTF-8'}
     %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1'}
-    %title Weekly Menu
+    %title Меню на тиждень
     %link{:href => 'styles/style.css', :rel => 'stylesheet'}
   %body
     %header
       .container
         .logo
           %img{:src => 'images/chef_hat_logo.png'}
-        %h2.title Weekly Menu
+        %h2.title Меню на тиждень
     %nav
       .container
         %ul
           %li
-            %a{:href => ''} Recipe list
+            %a{:href => ''} Перелік рецептів
           %li
-            %a{:href => ''} Add recipe
+            %a{:href => ''} Додати рецепт
     .container
       %section.row.calendar
         .calendar-days
-          .col-md-2.day-header Monday
-          .col-md-2.day-header Tuesday
-          .col-md-2.day-header Wednesday
-          .col-md-2.day-header Thursday
-          .col-md-2.day-header Friday
-          .col-md-1.day-header Saturday
-          .col-md-1.day-header Sunday
+          .col-md-2.day-header Понеділок
+          .col-md-2.day-header Вівторок
+          .col-md-2.day-header Середа
+          .col-md-2.day-header Четвер
+          .col-md-2.day-header П'ятниця
+          .col-md-1.day-header Субота
+          .col-md-1.day-header Неділя
         .calendar-recipes{:'ng-controller' => 'CalendarCtrl'}
           .col-md-2.day.monday{:ondragover => "event.preventDefault()"}
           .col-md-2.day.tuesday{:ondragover => "event.preventDefault()"}
