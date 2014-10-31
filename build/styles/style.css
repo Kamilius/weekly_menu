@@ -1,4 +1,4 @@
-/*! "Weekly menu" 2014-10-30 */
+/*! "Weekly menu" 2014-10-31 */
 /* line 1, ../../src/styles/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -2242,57 +2242,7 @@ nav ul li a:hover {
 }
 
 /* line 71, ../../src/styles/style.sass */
-.calendar {
-  background-color: whitesmoke;
-  margin-top: 25px;
-}
-
-/* line 74, ../../src/styles/style.sass */
-.day {
-  height: 400px;
-  -webkit-transition: border 0.3s ease;
-  -moz-transition: border 0.3s ease;
-  -o-transition: border 0.3s ease;
-  transition: border 0.3s ease;
-}
-/* line 77, ../../src/styles/style.sass */
-.day.over {
-  border: 2px dashed #6b7877;
-}
-
-/* line 79, ../../src/styles/style.sass */
-.day-header {
-  padding: 0;
-  text-align: center;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid #b3b6b6;
-}
-
-/* line 88, ../../src/styles/style.sass */
-.day + *, .day-header + * {
-  border-left: 1px solid #b3b6b6;
-}
-
-/* line 91, ../../src/styles/style.sass */
-.recipes-container {
-  max-height: 310px;
-  overflow: auto;
-  margin-top: 20px;
-}
-
-/* line 95, ../../src/styles/style.sass */
 .recipe {
-  margin: 5px;
-  float: left;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 19%;
-  height: 50px;
   background-color: #b3b6b6;
   font-size: 1.5rem;
   -webkit-border-radius: 5px;
@@ -2304,7 +2254,79 @@ nav ul li a:hover {
   -o-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
-/* line 111, ../../src/styles/style.sass */
-.recipe:hover {
+/* line 80, ../../src/styles/style.sass */
+.recipe[draggable=true]:hover {
   cursor: move;
+}
+
+/* line 83, ../../src/styles/style.sass */
+.calendar {
+  background-color: whitesmoke;
+  margin-top: 25px;
+}
+/* line 86, ../../src/styles/style.sass */
+.calendar .col-md-1 {
+  width: 14.28571%;
+  *width: 14.28571%;
+}
+
+/* line 89, ../../src/styles/style.sass */
+.day {
+  height: 400px;
+}
+/* line 91, ../../src/styles/style.sass */
+.day.over {
+  border: 2px dashed #6b7877;
+}
+/* line 93, ../../src/styles/style.sass */
+.day .recipe {
+  width: 100%;
+  height: auto;
+  margin: 5px 0;
+  padding: 10px 0;
+}
+/* line 98, ../../src/styles/style.sass */
+.day .recipe .recipe-title {
+  text-align: center;
+  margin-top: 0;
+}
+/* line 101, ../../src/styles/style.sass */
+.day .recipe .recipe-ingredients {
+  margin: 0;
+  font-size: 12px;
+  padding: 0 0 0 27px;
+}
+
+/* line 105, ../../src/styles/style.sass */
+.day-header {
+  padding: 0;
+  text-align: center;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #b3b6b6;
+}
+
+/* line 114, ../../src/styles/style.sass */
+.day + *, .day-header + * {
+  border-left: 1px solid #b3b6b6;
+}
+
+/* line 117, ../../src/styles/style.sass */
+.recipes-container {
+  max-height: 310px;
+  overflow: auto;
+  margin-top: 20px;
+}
+/* line 121, ../../src/styles/style.sass */
+.recipes-container .recipe {
+  margin: 5px;
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 19%;
+  height: 50px;
 }
