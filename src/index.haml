@@ -18,7 +18,7 @@
           %li
             %a{:href => '#/recipes'} Додати рецепт
     
-    %div{:'ng-view' => ''}
+    %div.page-body{:'ng-view' => ''}
 
     %script{:type => 'text/ng-template', :id => 'calendar.html'}
       .container
@@ -32,7 +32,7 @@
             .col-md-1.day-header Субота
             .col-md-1.day-header Неділя
           .calendar-recipes
-            .day.col-md-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true }', :ondragover => "event.preventDefault()"}
+            .day.col-md-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true }', :ondragover => "event.preventDefault()", :ondragenter => "DragEnterHandler", :ondragleave => "DragLeaveHandler"}
               .recipe{:'ng-repeat' => 'recipe in day.recipes'}
                 %h5.recipe-title
                   {{ recipe.name }}
@@ -52,6 +52,14 @@
     %script{:type => 'text/ng-template', :id => 'recipesCRUD.html'}
       .container
         %section.row
-          %form.col-md-12
+          %form.recipe-form.col-md-12{:role => "form"}
+            .form-group
+              %label{:for => "recipe-title"} Назва рецепту
+              %input.form-control#recipe-title{:type => "text", :'ng-model' => 'recipe.name'}
+            .form-group.recipe-ingredients
+              %label Інгридієнти
+              %input.form-control.ingredient{:type => "text", :'ng-repeat' => 'ingredient in recipe.ingredients', :'ng-model' => 'recipe.ingredients[$index].name'}
+            %button.btn.btn-default{:'ng-click' => 'addIngredient()'}
+              Додати інгредієнт
 
     %script{:src => 'scripts/main.min.js'}

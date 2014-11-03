@@ -994,6 +994,966 @@ address
   .col-lg-offset-0
     margin-left: 0%
 
+fieldset
+  padding: 0
+  margin: 0
+  border: 0
+  min-width: 0
+
+legend
+  display: block
+  width: 100%
+  padding: 0
+  margin-bottom: 20px
+  font-size: 21px
+  line-height: inherit
+  color: #333333
+  border: 0
+  border-bottom: 1px solid #e5e5e5
+
+label
+  display: inline-block
+  max-width: 100%
+  margin-bottom: 5px
+  font-weight: bold
+
+input
+  &[type="search"]
+    -webkit-box-sizing: border-box
+    -moz-box-sizing: border-box
+    box-sizing: border-box
+  &[type="radio"], &[type="checkbox"]
+    margin: 4px 0 0
+    margin-top: 1px \9
+    line-height: normal
+  &[type="file"]
+    display: block
+  &[type="range"]
+    display: block
+    width: 100%
+
+select
+  &[multiple], &[size]
+    height: auto
+
+input
+  &[type="file"]:focus, &[type="radio"]:focus, &[type="checkbox"]:focus
+    outline: thin dotted
+    outline: 5px auto -webkit-focus-ring-color
+    outline-offset: -2px
+
+output
+  display: block
+  padding-top: 7px
+  font-size: 14px
+  line-height: 1.42857143
+  color: #555555
+
+.form-control
+  display: block
+  width: 100%
+  height: 34px
+  padding: 6px 12px
+  font-size: 14px
+  line-height: 1.42857143
+  color: #555555
+  background-color: #ffffff
+  background-image: none
+  border: 1px solid #cccccc
+  border-radius: 4px
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+  -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+  &:focus
+    border-color: #66afe9
+    outline: 0
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6)
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6)
+  &::-moz-placeholder
+    color: #999999
+    opacity: 1
+  &:-ms-input-placeholder, &::-webkit-input-placeholder
+    color: #999999
+  &[disabled], &[readonly]
+    cursor: not-allowed
+    background-color: #eeeeee
+    opacity: 1
+
+fieldset[disabled] .form-control
+  cursor: not-allowed
+  background-color: #eeeeee
+  opacity: 1
+
+textarea.form-control
+  height: auto
+
+input
+  &[type="search"]
+    -webkit-appearance: none
+  &[type="date"], &[type="time"], &[type="datetime-local"], &[type="month"]
+    line-height: 34px
+    line-height: 1.42857143 \0
+  &[type="date"].input-sm, &[type="time"].input-sm, &[type="datetime-local"].input-sm, &[type="month"].input-sm
+    line-height: 30px
+    line-height: 1.5 \0
+  &[type="date"].input-lg, &[type="time"].input-lg, &[type="datetime-local"].input-lg, &[type="month"].input-lg
+    line-height: 46px
+    line-height: 1.33 \0
+
+_:-ms-fullscreen, :root input[type="date"], _:-ms-fullscreen, :root input[type="time"], _:-ms-fullscreen, :root input[type="datetime-local"], _:-ms-fullscreen, :root input[type="month"]
+  line-height: 1.42857143
+
+_:-ms-fullscreen.input-sm, :root input[type="date"].input-sm, _:-ms-fullscreen.input-sm, :root input[type="time"].input-sm, _:-ms-fullscreen.input-sm, :root input[type="datetime-local"].input-sm, _:-ms-fullscreen.input-sm, :root input[type="month"].input-sm
+  line-height: 1.5
+
+_:-ms-fullscreen.input-lg, :root input[type="date"].input-lg, _:-ms-fullscreen.input-lg, :root input[type="time"].input-lg, _:-ms-fullscreen.input-lg, :root input[type="datetime-local"].input-lg, _:-ms-fullscreen.input-lg, :root input[type="month"].input-lg
+  line-height: 1.33
+
+.form-group
+  margin-bottom: 15px
+
+.radio, .checkbox
+  position: relative
+  display: block
+  margin-top: 10px
+  margin-bottom: 10px
+
+.radio label, .checkbox label
+  min-height: 20px
+  padding-left: 20px
+  margin-bottom: 0
+  font-weight: normal
+  cursor: pointer
+
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"]
+  position: absolute
+  margin-left: -20px
+  margin-top: 4px \9
+
+.radio + .radio, .checkbox + .checkbox
+  margin-top: -5px
+
+.radio-inline, .checkbox-inline
+  display: inline-block
+  padding-left: 20px
+  margin-bottom: 0
+  vertical-align: middle
+  font-weight: normal
+  cursor: pointer
+
+.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline
+  margin-top: 0
+  margin-left: 10px
+
+input
+  &[type="radio"][disabled], &[type="checkbox"][disabled], &[type="radio"].disabled, &[type="checkbox"].disabled
+    cursor: not-allowed
+
+fieldset[disabled] input
+  &[type="radio"], &[type="checkbox"]
+    cursor: not-allowed
+
+.radio-inline.disabled, .checkbox-inline.disabled
+  cursor: not-allowed
+
+fieldset[disabled]
+  .radio-inline, .checkbox-inline
+    cursor: not-allowed
+
+.radio.disabled label, .checkbox.disabled label
+  cursor: not-allowed
+
+fieldset[disabled]
+  .radio label, .checkbox label
+    cursor: not-allowed
+
+.form-control-static
+  padding-top: 7px
+  padding-bottom: 7px
+  margin-bottom: 0
+  &.input-lg, &.input-sm
+    padding-left: 0
+    padding-right: 0
+
+.input-sm, .form-group-sm .form-control
+  height: 30px
+  padding: 5px 10px
+  font-size: 12px
+  line-height: 1.5
+  border-radius: 3px
+
+select
+  &.input-sm, &.form-group-sm .form-control
+    height: 30px
+    line-height: 30px
+
+textarea
+  &.input-sm, &.form-group-sm .form-control
+    height: auto
+
+select[multiple]
+  &.input-sm, &.form-group-sm .form-control
+    height: auto
+
+.input-lg, .form-group-lg .form-control
+  height: 46px
+  padding: 10px 16px
+  font-size: 18px
+  line-height: 1.33
+  border-radius: 6px
+
+select
+  &.input-lg, &.form-group-lg .form-control
+    height: 46px
+    line-height: 46px
+
+textarea
+  &.input-lg, &.form-group-lg .form-control
+    height: auto
+
+select[multiple]
+  &.input-lg, &.form-group-lg .form-control
+    height: auto
+
+.has-feedback
+  position: relative
+  .form-control
+    padding-right: 42.5px
+
+.form-control-feedback
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 2
+  display: block
+  width: 34px
+  height: 34px
+  line-height: 34px
+  text-align: center
+  pointer-events: none
+
+.input-lg + .form-control-feedback
+  width: 46px
+  height: 46px
+  line-height: 46px
+
+.input-sm + .form-control-feedback
+  width: 30px
+  height: 30px
+  line-height: 30px
+
+.has-success
+  .help-block, .control-label, .radio, .checkbox, .radio-inline, .checkbox-inline, &.radio label, &.checkbox label, &.radio-inline label, &.checkbox-inline label
+    color: #3c763d
+  .form-control
+    border-color: #3c763d
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+    &:focus
+      border-color: #2b542c
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168
+  .input-group-addon
+    color: #3c763d
+    border-color: #3c763d
+    background-color: #dff0d8
+  .form-control-feedback
+    color: #3c763d
+
+.has-warning
+  .help-block, .control-label, .radio, .checkbox, .radio-inline, .checkbox-inline, &.radio label, &.checkbox label, &.radio-inline label, &.checkbox-inline label
+    color: #8a6d3b
+  .form-control
+    border-color: #8a6d3b
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+    &:focus
+      border-color: #66512c
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b
+  .input-group-addon
+    color: #8a6d3b
+    border-color: #8a6d3b
+    background-color: #fcf8e3
+  .form-control-feedback
+    color: #8a6d3b
+
+.has-error
+  .help-block, .control-label, .radio, .checkbox, .radio-inline, .checkbox-inline, &.radio label, &.checkbox label, &.radio-inline label, &.checkbox-inline label
+    color: #a94442
+  .form-control
+    border-color: #a94442
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)
+    &:focus
+      border-color: #843534
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483
+  .input-group-addon
+    color: #a94442
+    border-color: #a94442
+    background-color: #f2dede
+  .form-control-feedback
+    color: #a94442
+
+.has-feedback label
+  ~ .form-control-feedback
+    top: 25px
+  &.sr-only ~ .form-control-feedback
+    top: 0
+
+.help-block
+  display: block
+  margin-top: 5px
+  margin-bottom: 10px
+  color: #737373
+
+@media (min-width: 768px)
+  .form-inline
+    .form-group
+      display: inline-block
+      margin-bottom: 0
+      vertical-align: middle
+    .form-control
+      display: inline-block
+      width: auto
+      vertical-align: middle
+    .form-control-static
+      display: inline-block
+    .input-group
+      display: inline-table
+      vertical-align: middle
+      .input-group-addon, .input-group-btn, .form-control
+        width: auto
+      > .form-control
+        width: 100%
+    .control-label
+      margin-bottom: 0
+      vertical-align: middle
+    .radio, .checkbox
+      display: inline-block
+      margin-top: 0
+      margin-bottom: 0
+      vertical-align: middle
+    .radio label, .checkbox label
+      padding-left: 0
+    .radio input[type="radio"], .checkbox input[type="checkbox"]
+      position: relative
+      margin-left: 0
+    .has-feedback .form-control-feedback
+      top: 0
+
+.form-horizontal
+  .radio, .checkbox, .radio-inline, .checkbox-inline
+    margin-top: 0
+    margin-bottom: 0
+    padding-top: 7px
+  .radio, .checkbox
+    min-height: 27px
+  .form-group
+    margin-left: -15px
+    margin-right: -15px
+  .has-feedback .form-control-feedback
+    right: 15px
+
+@media (min-width: 768px)
+  .form-horizontal .control-label
+    text-align: right
+    margin-bottom: 0
+    padding-top: 7px
+
+@media (min-width: 768px)
+  .form-horizontal .form-group-lg .control-label
+    padding-top: 14.3px
+
+@media (min-width: 768px)
+  .form-horizontal .form-group-sm .control-label
+    padding-top: 6px
+
+.btn
+  display: inline-block
+  margin-bottom: 0
+  font-weight: normal
+  text-align: center
+  vertical-align: middle
+  touch-action: manipulation
+  cursor: pointer
+  background-image: none
+  border: 1px solid transparent
+  white-space: nowrap
+  padding: 6px 12px
+  font-size: 14px
+  line-height: 1.42857143
+  border-radius: 4px
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  &:focus, &:active:focus, &.active:focus, &.focus, &:active.focus, &.active.focus
+    outline: thin dotted
+    outline: 5px auto -webkit-focus-ring-color
+    outline-offset: -2px
+  &:hover, &:focus, &.focus
+    color: #333333
+    text-decoration: none
+  &:active, &.active
+    outline: 0
+    background-image: none
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+  &.disabled, &[disabled]
+    cursor: not-allowed
+    pointer-events: none
+    opacity: 0.65
+    filter: alpha(opacity = 65)
+    -webkit-box-shadow: none
+    box-shadow: none
+
+fieldset[disabled] .btn
+  cursor: not-allowed
+  pointer-events: none
+  opacity: 0.65
+  filter: alpha(opacity = 65)
+  -webkit-box-shadow: none
+  box-shadow: none
+
+.btn-default
+  color: #333333
+  background-color: #ffffff
+  border-color: #cccccc
+  &:hover, &:focus, &.focus, &:active, &.active
+    color: #333333
+    background-color: #e6e6e6
+    border-color: #adadad
+
+.open > .dropdown-toggle.btn-default
+  color: #333333
+  background-color: #e6e6e6
+  border-color: #adadad
+
+.btn-default
+  &:active, &.active
+    background-image: none
+
+.open > .dropdown-toggle.btn-default
+  background-image: none
+
+.btn-default
+  &.disabled, &[disabled]
+    background-color: #ffffff
+    border-color: #cccccc
+
+fieldset[disabled] .btn-default
+  background-color: #ffffff
+  border-color: #cccccc
+
+.btn-default
+  &.disabled:hover, &[disabled]:hover
+    background-color: #ffffff
+    border-color: #cccccc
+
+fieldset[disabled] .btn-default:hover
+  background-color: #ffffff
+  border-color: #cccccc
+
+.btn-default
+  &.disabled:focus, &[disabled]:focus
+    background-color: #ffffff
+    border-color: #cccccc
+
+fieldset[disabled] .btn-default:focus
+  background-color: #ffffff
+  border-color: #cccccc
+
+.btn-default
+  &.disabled.focus, &[disabled].focus
+    background-color: #ffffff
+    border-color: #cccccc
+
+fieldset[disabled] .btn-default.focus
+  background-color: #ffffff
+  border-color: #cccccc
+
+.btn-default
+  &.disabled:active, &[disabled]:active
+    background-color: #ffffff
+    border-color: #cccccc
+
+fieldset[disabled] .btn-default:active
+  background-color: #ffffff
+  border-color: #cccccc
+
+.btn-default
+  &.disabled.active, &[disabled].active
+    background-color: #ffffff
+    border-color: #cccccc
+
+fieldset[disabled] .btn-default.active
+  background-color: #ffffff
+  border-color: #cccccc
+
+.btn-default .badge
+  color: #ffffff
+  background-color: #333333
+
+.btn-primary
+  color: #ffffff
+  background-color: #428bca
+  border-color: #357ebd
+  &:hover, &:focus, &.focus, &:active, &.active
+    color: #ffffff
+    background-color: #3071a9
+    border-color: #285e8e
+
+.open > .dropdown-toggle.btn-primary
+  color: #ffffff
+  background-color: #3071a9
+  border-color: #285e8e
+
+.btn-primary
+  &:active, &.active
+    background-image: none
+
+.open > .dropdown-toggle.btn-primary
+  background-image: none
+
+.btn-primary
+  &.disabled, &[disabled]
+    background-color: #428bca
+    border-color: #357ebd
+
+fieldset[disabled] .btn-primary
+  background-color: #428bca
+  border-color: #357ebd
+
+.btn-primary
+  &.disabled:hover, &[disabled]:hover
+    background-color: #428bca
+    border-color: #357ebd
+
+fieldset[disabled] .btn-primary:hover
+  background-color: #428bca
+  border-color: #357ebd
+
+.btn-primary
+  &.disabled:focus, &[disabled]:focus
+    background-color: #428bca
+    border-color: #357ebd
+
+fieldset[disabled] .btn-primary:focus
+  background-color: #428bca
+  border-color: #357ebd
+
+.btn-primary
+  &.disabled.focus, &[disabled].focus
+    background-color: #428bca
+    border-color: #357ebd
+
+fieldset[disabled] .btn-primary.focus
+  background-color: #428bca
+  border-color: #357ebd
+
+.btn-primary
+  &.disabled:active, &[disabled]:active
+    background-color: #428bca
+    border-color: #357ebd
+
+fieldset[disabled] .btn-primary:active
+  background-color: #428bca
+  border-color: #357ebd
+
+.btn-primary
+  &.disabled.active, &[disabled].active
+    background-color: #428bca
+    border-color: #357ebd
+
+fieldset[disabled] .btn-primary.active
+  background-color: #428bca
+  border-color: #357ebd
+
+.btn-primary .badge
+  color: #428bca
+  background-color: #ffffff
+
+.btn-success
+  color: #ffffff
+  background-color: #5cb85c
+  border-color: #4cae4c
+  &:hover, &:focus, &.focus, &:active, &.active
+    color: #ffffff
+    background-color: #449d44
+    border-color: #398439
+
+.open > .dropdown-toggle.btn-success
+  color: #ffffff
+  background-color: #449d44
+  border-color: #398439
+
+.btn-success
+  &:active, &.active
+    background-image: none
+
+.open > .dropdown-toggle.btn-success
+  background-image: none
+
+.btn-success
+  &.disabled, &[disabled]
+    background-color: #5cb85c
+    border-color: #4cae4c
+
+fieldset[disabled] .btn-success
+  background-color: #5cb85c
+  border-color: #4cae4c
+
+.btn-success
+  &.disabled:hover, &[disabled]:hover
+    background-color: #5cb85c
+    border-color: #4cae4c
+
+fieldset[disabled] .btn-success:hover
+  background-color: #5cb85c
+  border-color: #4cae4c
+
+.btn-success
+  &.disabled:focus, &[disabled]:focus
+    background-color: #5cb85c
+    border-color: #4cae4c
+
+fieldset[disabled] .btn-success:focus
+  background-color: #5cb85c
+  border-color: #4cae4c
+
+.btn-success
+  &.disabled.focus, &[disabled].focus
+    background-color: #5cb85c
+    border-color: #4cae4c
+
+fieldset[disabled] .btn-success.focus
+  background-color: #5cb85c
+  border-color: #4cae4c
+
+.btn-success
+  &.disabled:active, &[disabled]:active
+    background-color: #5cb85c
+    border-color: #4cae4c
+
+fieldset[disabled] .btn-success:active
+  background-color: #5cb85c
+  border-color: #4cae4c
+
+.btn-success
+  &.disabled.active, &[disabled].active
+    background-color: #5cb85c
+    border-color: #4cae4c
+
+fieldset[disabled] .btn-success.active
+  background-color: #5cb85c
+  border-color: #4cae4c
+
+.btn-success .badge
+  color: #5cb85c
+  background-color: #ffffff
+
+.btn-info
+  color: #ffffff
+  background-color: #5bc0de
+  border-color: #46b8da
+  &:hover, &:focus, &.focus, &:active, &.active
+    color: #ffffff
+    background-color: #31b0d5
+    border-color: #269abc
+
+.open > .dropdown-toggle.btn-info
+  color: #ffffff
+  background-color: #31b0d5
+  border-color: #269abc
+
+.btn-info
+  &:active, &.active
+    background-image: none
+
+.open > .dropdown-toggle.btn-info
+  background-image: none
+
+.btn-info
+  &.disabled, &[disabled]
+    background-color: #5bc0de
+    border-color: #46b8da
+
+fieldset[disabled] .btn-info
+  background-color: #5bc0de
+  border-color: #46b8da
+
+.btn-info
+  &.disabled:hover, &[disabled]:hover
+    background-color: #5bc0de
+    border-color: #46b8da
+
+fieldset[disabled] .btn-info:hover
+  background-color: #5bc0de
+  border-color: #46b8da
+
+.btn-info
+  &.disabled:focus, &[disabled]:focus
+    background-color: #5bc0de
+    border-color: #46b8da
+
+fieldset[disabled] .btn-info:focus
+  background-color: #5bc0de
+  border-color: #46b8da
+
+.btn-info
+  &.disabled.focus, &[disabled].focus
+    background-color: #5bc0de
+    border-color: #46b8da
+
+fieldset[disabled] .btn-info.focus
+  background-color: #5bc0de
+  border-color: #46b8da
+
+.btn-info
+  &.disabled:active, &[disabled]:active
+    background-color: #5bc0de
+    border-color: #46b8da
+
+fieldset[disabled] .btn-info:active
+  background-color: #5bc0de
+  border-color: #46b8da
+
+.btn-info
+  &.disabled.active, &[disabled].active
+    background-color: #5bc0de
+    border-color: #46b8da
+
+fieldset[disabled] .btn-info.active
+  background-color: #5bc0de
+  border-color: #46b8da
+
+.btn-info .badge
+  color: #5bc0de
+  background-color: #ffffff
+
+.btn-warning
+  color: #ffffff
+  background-color: #f0ad4e
+  border-color: #eea236
+  &:hover, &:focus, &.focus, &:active, &.active
+    color: #ffffff
+    background-color: #ec971f
+    border-color: #d58512
+
+.open > .dropdown-toggle.btn-warning
+  color: #ffffff
+  background-color: #ec971f
+  border-color: #d58512
+
+.btn-warning
+  &:active, &.active
+    background-image: none
+
+.open > .dropdown-toggle.btn-warning
+  background-image: none
+
+.btn-warning
+  &.disabled, &[disabled]
+    background-color: #f0ad4e
+    border-color: #eea236
+
+fieldset[disabled] .btn-warning
+  background-color: #f0ad4e
+  border-color: #eea236
+
+.btn-warning
+  &.disabled:hover, &[disabled]:hover
+    background-color: #f0ad4e
+    border-color: #eea236
+
+fieldset[disabled] .btn-warning:hover
+  background-color: #f0ad4e
+  border-color: #eea236
+
+.btn-warning
+  &.disabled:focus, &[disabled]:focus
+    background-color: #f0ad4e
+    border-color: #eea236
+
+fieldset[disabled] .btn-warning:focus
+  background-color: #f0ad4e
+  border-color: #eea236
+
+.btn-warning
+  &.disabled.focus, &[disabled].focus
+    background-color: #f0ad4e
+    border-color: #eea236
+
+fieldset[disabled] .btn-warning.focus
+  background-color: #f0ad4e
+  border-color: #eea236
+
+.btn-warning
+  &.disabled:active, &[disabled]:active
+    background-color: #f0ad4e
+    border-color: #eea236
+
+fieldset[disabled] .btn-warning:active
+  background-color: #f0ad4e
+  border-color: #eea236
+
+.btn-warning
+  &.disabled.active, &[disabled].active
+    background-color: #f0ad4e
+    border-color: #eea236
+
+fieldset[disabled] .btn-warning.active
+  background-color: #f0ad4e
+  border-color: #eea236
+
+.btn-warning .badge
+  color: #f0ad4e
+  background-color: #ffffff
+
+.btn-danger
+  color: #ffffff
+  background-color: #d9534f
+  border-color: #d43f3a
+  &:hover, &:focus, &.focus, &:active, &.active
+    color: #ffffff
+    background-color: #c9302c
+    border-color: #ac2925
+
+.open > .dropdown-toggle.btn-danger
+  color: #ffffff
+  background-color: #c9302c
+  border-color: #ac2925
+
+.btn-danger
+  &:active, &.active
+    background-image: none
+
+.open > .dropdown-toggle.btn-danger
+  background-image: none
+
+.btn-danger
+  &.disabled, &[disabled]
+    background-color: #d9534f
+    border-color: #d43f3a
+
+fieldset[disabled] .btn-danger
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger
+  &.disabled:hover, &[disabled]:hover
+    background-color: #d9534f
+    border-color: #d43f3a
+
+fieldset[disabled] .btn-danger:hover
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger
+  &.disabled:focus, &[disabled]:focus
+    background-color: #d9534f
+    border-color: #d43f3a
+
+fieldset[disabled] .btn-danger:focus
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger
+  &.disabled.focus, &[disabled].focus
+    background-color: #d9534f
+    border-color: #d43f3a
+
+fieldset[disabled] .btn-danger.focus
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger
+  &.disabled:active, &[disabled]:active
+    background-color: #d9534f
+    border-color: #d43f3a
+
+fieldset[disabled] .btn-danger:active
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger
+  &.disabled.active, &[disabled].active
+    background-color: #d9534f
+    border-color: #d43f3a
+
+fieldset[disabled] .btn-danger.active
+  background-color: #d9534f
+  border-color: #d43f3a
+
+.btn-danger .badge
+  color: #d9534f
+  background-color: #ffffff
+
+.btn-link
+  color: #428bca
+  font-weight: normal
+  border-radius: 0
+  background-color: transparent
+  -webkit-box-shadow: none
+  box-shadow: none
+  &:active, &.active, &[disabled]
+    background-color: transparent
+    -webkit-box-shadow: none
+    box-shadow: none
+
+fieldset[disabled] .btn-link
+  background-color: transparent
+  -webkit-box-shadow: none
+  box-shadow: none
+
+.btn-link
+  border-color: transparent
+  &:hover, &:focus, &:active
+    border-color: transparent
+  &:hover, &:focus
+    color: #2a6496
+    text-decoration: underline
+    background-color: transparent
+  &[disabled]:hover
+    color: #777777
+    text-decoration: none
+
+fieldset[disabled] .btn-link:hover, .btn-link[disabled]:focus, fieldset[disabled] .btn-link:focus
+  color: #777777
+  text-decoration: none
+
+.btn-lg
+  padding: 10px 16px
+  font-size: 18px
+  line-height: 1.33
+  border-radius: 6px
+
+.btn-sm
+  padding: 5px 10px
+  font-size: 12px
+  line-height: 1.5
+  border-radius: 3px
+
+.btn-xs
+  padding: 1px 5px
+  font-size: 12px
+  line-height: 1.5
+  border-radius: 3px
+
+.btn-block
+  display: block
+  width: 100%
+  + .btn-block
+    margin-top: 5px
+
+input
+  &[type="submit"].btn-block, &[type="reset"].btn-block, &[type="button"].btn-block
+    width: 100%
+
 .clearfix
   &:before, &:after
     content: " "
@@ -1019,7 +1979,12 @@ address
     content: " "
     display: table
 
-.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after
+.form-horizontal .form-group
+  &:before, &:after
+    content: " "
+    display: table
+
+.clearfix:after, .dl-horizontal dd:after, .container:after, .container-fluid:after, .row:after, .form-horizontal .form-group:after
   clear: both
 
 .center-block

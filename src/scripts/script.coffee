@@ -1,5 +1,8 @@
 class Recipe
-	constructor: (@name, @ingredients, @id = 0) ->
+	constructor: (@name = '', @ingredients = [new Ingredient], @id = 0) ->
+
+class Ingredient
+	constructor: (@name = '') ->
 
 class DayOfWeek
 	constructor: (@name, @recipes) ->
@@ -11,23 +14,57 @@ app.config [
 	($routeProvider) ->
 		$routeProvider.when('/home',
 			templateUrl: 'home.html'
+		).when('/recipes/:recipeId',
+			templateUrl: 'recipesCRUD.html'
+			controller: 'RecipesCRUDCtrl'
 		).when('/recipes',
 			templateUrl: 'recipesCRUD.html'
 			controller: 'RecipesCRUDCtrl'
 		).
-		otherwise(
-			redirectTo: '/home')
+		otherwise(redirectTo: '/home')
 ]
+
+app.directive 'calendar', ->
+	{
+		restrict: 'E'
+		templateUrl: 'calendar.html'
+		controller: 'CalendarCtrl'
+		transclude: true
+		replace: true
+	}
+
+app.directive 'recipescontainer', ->
+	{
+		restrict: 'E'
+		templateUrl: 'recipesContainer.html'
+		controller: 'RecipesCtrl'
+		transclude: true
+		replace: true
+	}
+
+app.directive 'index', ->
+	{
+		restrict: 'E'
+		templateUrl: 'home.html'
+		transclude: true
+		replace: true
+	}
+
+app.directive 'recipecrud', ->
+	{
+		restrict: 'E'
+		templateUrl: 'recipeCRUD.html'
+		transclude: true
+		replace: true
+	}
 
 app.service 'recipeService', ->
 	recipes = [
-		new Recipe 'Baked potato', ['potato', 'spice'], 1
-		new Recipe 'Steak', ['beef meat', 'spice'], 2
-		new Recipe 'Baked potato', ['potato', 'spice'], 3
-		new Recipe 'Steak', ['beef meat', 'spice'], 4
-		new Recipe 'Baked potato', ['potato', 'spice'], 5
-		new Recipe 'Steak', ['beef meat', 'spice'], 6
-		new Recipe 'Baked potato', ['potato', 'spice'], 7
+		new Recipe 'Смажена картопля', ['картопля', 'спеції'], 1
+		new Recipe 'Борщ', ['картопля', 'буряк', 'морква', 'цибуля', 'куряче філе', 'спеції'], 2
+		new Recipe 'Смажена ковбаса з кетчупом', ['ковбаса молочна', 'кетчуп'], 3
+		new Recipe 'Стейк', ['м\'ясо', 'спеції'], 4
+		new Recipe 'Солянка', ['телятина', 'ковбаса копчена', 'шпондер', 'полядвиця', 'мисливські ковбаски', 'картопля', 'морква', 'цибуля', 'томатна паста', 'спеції'], 5
 	]
 
 	getById = (id) ->
@@ -37,6 +74,7 @@ app.service 'recipeService', ->
 			return recipe if recipe.id == id
 
 	add = (recipe) ->
+		recipe.id = recipes[recipes.length - 1].id + 1
 		recipes.push(recipe)
 
 	remove = (id) ->
@@ -63,6 +101,14 @@ indexOfDay = (dayName, daysList) ->
 		return index if day.name is dayName
 
 	return -1
+
+DragEnterHandler = (event) ->
+	el = this
+	if el.classList[0] is 'day' then el.classList.add('over')
+
+DragLeaveHandler = (event) ->
+	el = this
+	if el.classList[0] is 'day' then el.classList.remove('over')
 
 app.controller 'CalendarCtrl', ['$scope', 'recipeService', ($scope, recipeService) ->
 	$scope.weeklyMenu = []
@@ -100,50 +146,16 @@ app.controller 'RecipesCtrl', ['$scope', 'recipeService', ($scope, recipeService
 			el.style.opacity = '0.4'
 			event.dataTransfer.setData('id', el.dataset.id)
 	, false
-	calendar.addEventListener 'dragenter', (event) ->
-		el = event.target
-		if el.classList[0] is 'day' then el.classList.add('over')
-	, false
-	calendar.addEventListener 'dragleave', (event) ->
-		el = event.target
-		if el.classList[0] is 'day' then el.classList.remove('over')	
-	, false
 ]
 
-app.controller 'RecipesCRUDCtrl', ['$scope', 'recipeService', ($scope, recipeService) ->
-	$scope.recipes = recipeService.recipes
+app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', ($scope, $routeParams, $recipeService) ->
+	$scope.recipes = $recipeService.recipes
+	if $routeParams.recipeId
+		$scope.recipe = $recipeService.getById(+$routeParams.recipeId)
+	else
+		$scope.recipe
+	$scope.recipe = $routeParams.recipeId new Recipe()
+
+	$scope.addIngredient = ->
+		$scope.recipe.ingredients.push(new Ingredient())
 ]
-
-app.directive 'calendar', ->
-	{
-		restrict: 'E'
-		templateUrl: 'calendar.html'
-		controller: 'CalendarCtrl'
-		transclude: true
-		replace: true
-	}
-
-app.directive 'recipescontainer', ->
-	{
-		restrict: 'E'
-		templateUrl: 'recipesContainer.html'
-		controller: 'RecipesCtrl'
-		transclude: true
-		replace: true
-	}
-
-app.directive 'index', ->
-	{
-		restrict: 'E'
-		templateUrl: 'home.html'
-		transclude: true
-		replace: true
-	}
-
-app.directive 'recipecrud', ->
-	{
-		restrict: 'E'
-		templateUrl: 'recipeCRUD.html'
-		transclude: true
-		replace: true
-	}

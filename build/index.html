@@ -26,7 +26,7 @@
         </ul>
       </div>
     </nav>
-    <div ng-view=''></div>
+    <div class='page-body' ng-view=''></div>
     <script id='calendar.html' type='text/ng-template'>
       <div class='container'>
         <section class='row calendar'>
@@ -40,7 +40,7 @@
             <div class='col-md-1 day-header'>Неділя</div>
           </div>
           <div class='calendar-recipes'>
-            <div class='day col-md-1' ng-class='{ {{day.name}}: true }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
+            <div class='day col-md-1' ng-class='{ {{day.name}}: true }' ng-repeat='day in weeklyMenu' ondragenter='DragEnterHandler' ondragleave='DragLeaveHandler' ondragover='event.preventDefault()'>
               <div class='recipe' ng-repeat='recipe in day.recipes'>
                 <h5 class='recipe-title'>
                   {{ recipe.name }}
@@ -70,7 +70,19 @@
     <script id='recipesCRUD.html' type='text/ng-template'>
       <div class='container'>
         <section class='row'>
-          <form class='col-md-12'></form>
+          <form class='recipe-form col-md-12' role='form'>
+            <div class='form-group'>
+              <label for='recipe-title'>Назва рецепту</label>
+              <input class='form-control' id='recipe-title' ng-model='recipe.name' type='text'>
+            </div>
+            <div class='form-group recipe-ingredients'>
+              <label>Інгридієнти</label>
+              <input class='form-control ingredient' ng-model='recipe.ingredients[$index].name' ng-repeat='ingredient in recipe.ingredients' type='text'>
+            </div>
+            <button class='btn btn-default' ng-click='addIngredient()'>
+              Додати інгредієнт
+            </button>
+          </form>
         </section>
       </div>
     </script>
