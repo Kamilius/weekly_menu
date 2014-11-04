@@ -1,6 +1,6 @@
 class Recipe
-	constructor: (@name = '', @ingredients = [new Ingredient], @id = 0) ->
-
+	constructor: (@name = '', ingredients = [new Ingredient], @id = 0) ->
+		@ingredients = [].concat(ingredients)
 class Ingredient
 	constructor: (@name = '') ->
 
@@ -47,7 +47,7 @@ app.directive 'calendar', ->
 		restrict: 'E'
 		templateUrl: 'calendar.html'
 		controller: 'CalendarCtrl'
-		transclude: true
+		# transclude: true
 		replace: true
 	}
 
@@ -56,7 +56,7 @@ app.directive 'recipescontainer', ->
 		restrict: 'E'
 		templateUrl: 'recipesContainer.html'
 		controller: 'RecipesCtrl'
-		transclude: true
+		# transclude: true
 		replace: true
 	}
 
@@ -64,7 +64,7 @@ app.directive 'index', ->
 	{
 		restrict: 'E'
 		templateUrl: 'home.html'
-		transclude: true
+		# transclude: true
 		replace: true
 	}
 
@@ -80,7 +80,7 @@ app.directive 'recipecontrols', ->
 	{
 		restrict: 'E'
 		templateUrl: 'recipeControls.html'
-		transclude: true
+		#transclude: true
 		replace: true
 	}
 
@@ -127,29 +127,56 @@ app.service 'recipeService', ->
 		remove: remove
 	}
 
+app.service 'calendarService',['recipeService', ($recipeService) ->
+	weeklyMenu = []
+
+	weeklyMenu.push new DayOfWeek('monday', [])
+	weeklyMenu.push new DayOfWeek('tuesday', [])
+	weeklyMenu.push new DayOfWeek('wednesday', [])
+	weeklyMenu.push new DayOfWeek('thursday', [])
+	weeklyMenu.push new DayOfWeek('friday', [])
+	weeklyMenu.push new DayOfWeek('saturday', [])
+	weeklyMenu.push new DayOfWeek('sunday', [])
+
+
+	indexOfDay = (dayName) ->
+		for day, index in weeklyMenu
+			return index if day.name is dayName
+
+		return -1
+
+	addRecipe = (day, recipeId) ->
+		weeklyMenu[indexOfDay(day)]?.recipes?.push $recipeService.getById(recipeId)
+
+	removeAllRecipeInstances = (recipe) ->
+		for day, index in weeklyMenu
+			index = day.recipes.indexOf(recipe)
+			if index > -1
+				day.recipes.splice(index, 1)
+
+	{
+		weeklyMenu: weeklyMenu
+		addRecipe: addRecipe
+		removeAllRecipeInstances: removeAllRecipeInstances
+	}
+] 
+
 getCalendarDayClass = (dayName) ->
 	if dayName is 'saturday' or dayName is 'sunday'
 		'col-md-1'
 	else
 		'col-md-2'
 
-indexOfDay = (dayName, daysList) ->
-	for day, index in daysList
-		return index if day.name is dayName
-
-	return -1
-
-app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', ($scope, recipeService, $rootScope) ->
-	$scope.weeklyMenu = []
-	$scope.weeklyMenu.push new DayOfWeek('monday', [])
-	$scope.weeklyMenu.push new DayOfWeek('tuesday', [])
-	$scope.weeklyMenu.push new DayOfWeek('wednesday', [])
-	$scope.weeklyMenu.push new DayOfWeek('thursday', [])
-	$scope.weeklyMenu.push new DayOfWeek('friday', [])
-	$scope.weeklyMenu.push new DayOfWeek('saturday', [])
-	$scope.weeklyMenu.push new DayOfWeek('sunday', [])
+app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', 'calendarService', ($scope, $recipeService, $rootScope, $calendarService) ->
+	$scope.weeklyMenu = $calendarService.weeklyMenu
 
 	$scope.getCalendarDayClass = getCalendarDayClass
+
+	# $scope.removeRecipe = (id, day) ->
+	# 	index = $scope.weeklyMenu[day].recipes.indexOf(recipe)
+	# 	if index > -1
+	# 		$scope.weeklyMenu[day].recipes.splice(index, 1)
+
 
 	calendar = document.querySelector('.calendar-recipes')
 	
@@ -157,28 +184,31 @@ app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', ($scope
 		droppable = event.target
 		draggableId = +event.dataTransfer.getData('id')
 		if droppable.classList[0] is 'day'
-			$scope.weeklyMenu[indexOfDay(droppable.classList[3], $scope.weeklyMenu)]?.recipes?.push recipeService.getById(draggableId)
+			$calendarService.addRecipe(droppable.classList[3], draggableId)
 			droppable.classList.remove('over')
+			document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
 			$scope.$apply()
 	, true
 
 ]
 
-app.controller 'RecipesCtrl', ['$scope', 'recipeService', ($scope, recipeService) ->
-	$scope.recipes = recipeService.recipes
+app.controller 'RecipesCtrl', ['$scope', 'recipeService', 'calendarService', ($scope, $recipeService, $calendarService) ->
+	$scope.recipes = $recipeService.recipes
 
 	$scope.removeRecipe = (recipe) ->
 		index = $scope.recipes.indexOf(recipe)
-		$scope.recipes.splice(index, 1)
+		$scope.recipes.splice(index, 1) if index > -1
+		$calendarService.removeAllRecipeInstances(recipe)
 
 	recipesContainer = document.querySelector('.recipes-container')
 	calendar = document.querySelector('.calendar-recipes')
 
 	recipesContainer.addEventListener 'dragstart', (event) ->
 		el = event.target
-		if el.classList[0] is 'recipe' 
+		if el.classList[0] is 'recipe'
 			el.style.opacity = '0.4'
 			event.dataTransfer.setData('id', el.dataset.id)
+			event.dataTransfer.setData('element', el)
 	, true
 ]
 
@@ -186,8 +216,12 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 	$scope.recipes = $recipeService.recipes
 
 	if $routeParams.recipeId
-		$scope.recipe = $recipeService.getById(+$routeParams.recipeId)
-		console.log($scope.recipe)
+		recipe = $recipeService.getById(+$routeParams.recipeId)
+		$scope.recipe = {
+			id: recipe.id
+			name: recipe.name
+			ingredients: [].concat(recipe.ingredients)
+		}
 	else
 		$scope.recipe = new Recipe()
 
@@ -208,6 +242,10 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 			if $scope.recipe.id is 0
 				$recipeService.add new Recipe($scope.recipe.name, $scope.recipe.ingredients)
 				$rootScope.setStatusMessage('Рецепт успішно збережено.', 'success')
+			else
+				recipe = $recipeService.getById($scope.recipe.id)
+				recipe.name = $scope.recipe.name
+				recipe.ingredients = [].concat($scope.recipe.ingredients)
 				
 			$location.path("/home")
 ]

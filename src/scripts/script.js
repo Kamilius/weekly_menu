@@ -1,10 +1,13 @@
-var DayOfWeek, DragEnterHandler, DragLeaveHandler, Ingredient, Recipe, app, getCalendarDayClass, indexOfDay;
+var DayOfWeek, DragEnterHandler, DragLeaveHandler, Ingredient, Recipe, app, getCalendarDayClass;
 
 Recipe = (function() {
   function Recipe(name, ingredients, id) {
     this.name = name != null ? name : '';
-    this.ingredients = ingredients != null ? ingredients : [new Ingredient];
+    if (ingredients == null) {
+      ingredients = [new Ingredient];
+    }
     this.id = id != null ? id : 0;
+    this.ingredients = [].concat(ingredients);
   }
 
   return Recipe;
@@ -73,7 +76,6 @@ app.directive('calendar', function() {
     restrict: 'E',
     templateUrl: 'calendar.html',
     controller: 'CalendarCtrl',
-    transclude: true,
     replace: true
   };
 });
@@ -83,7 +85,6 @@ app.directive('recipescontainer', function() {
     restrict: 'E',
     templateUrl: 'recipesContainer.html',
     controller: 'RecipesCtrl',
-    transclude: true,
     replace: true
   };
 });
@@ -92,7 +93,6 @@ app.directive('index', function() {
   return {
     restrict: 'E',
     templateUrl: 'home.html',
-    transclude: true,
     replace: true
   };
 });
@@ -110,7 +110,6 @@ app.directive('recipecontrols', function() {
   return {
     restrict: 'E',
     templateUrl: 'recipeControls.html',
-    transclude: true,
     replace: true
   };
 });
@@ -218,6 +217,53 @@ app.service('recipeService', function() {
   };
 });
 
+app.service('calendarService', [
+  'recipeService', function($recipeService) {
+    var addRecipe, indexOfDay, removeAllRecipeInstances, weeklyMenu;
+    weeklyMenu = [];
+    weeklyMenu.push(new DayOfWeek('monday', []));
+    weeklyMenu.push(new DayOfWeek('tuesday', []));
+    weeklyMenu.push(new DayOfWeek('wednesday', []));
+    weeklyMenu.push(new DayOfWeek('thursday', []));
+    weeklyMenu.push(new DayOfWeek('friday', []));
+    weeklyMenu.push(new DayOfWeek('saturday', []));
+    weeklyMenu.push(new DayOfWeek('sunday', []));
+    indexOfDay = function(dayName) {
+      var day, index, _i, _len;
+      for (index = _i = 0, _len = weeklyMenu.length; _i < _len; index = ++_i) {
+        day = weeklyMenu[index];
+        if (day.name === dayName) {
+          return index;
+        }
+      }
+      return -1;
+    };
+    addRecipe = function(day, recipeId) {
+      var _ref, _ref1;
+      return (_ref = weeklyMenu[indexOfDay(day)]) != null ? (_ref1 = _ref.recipes) != null ? _ref1.push($recipeService.getById(recipeId)) : void 0 : void 0;
+    };
+    removeAllRecipeInstances = function(recipe) {
+      var day, index, _i, _len, _results;
+      _results = [];
+      for (index = _i = 0, _len = weeklyMenu.length; _i < _len; index = ++_i) {
+        day = weeklyMenu[index];
+        index = day.recipes.indexOf(recipe);
+        if (index > -1) {
+          _results.push(day.recipes.splice(index, 1));
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+    return {
+      weeklyMenu: weeklyMenu,
+      addRecipe: addRecipe,
+      removeAllRecipeInstances: removeAllRecipeInstances
+    };
+  }
+]);
+
 getCalendarDayClass = function(dayName) {
   if (dayName === 'saturday' || dayName === 'sunday') {
     return 'col-md-1';
@@ -226,41 +272,20 @@ getCalendarDayClass = function(dayName) {
   }
 };
 
-indexOfDay = function(dayName, daysList) {
-  var day, index, _i, _len;
-  for (index = _i = 0, _len = daysList.length; _i < _len; index = ++_i) {
-    day = daysList[index];
-    if (day.name === dayName) {
-      return index;
-    }
-  }
-  return -1;
-};
-
 app.controller('CalendarCtrl', [
-  '$scope', 'recipeService', '$rootScope', function($scope, recipeService, $rootScope) {
+  '$scope', 'recipeService', '$rootScope', 'calendarService', function($scope, $recipeService, $rootScope, $calendarService) {
     var calendar;
-    $scope.weeklyMenu = [];
-    $scope.weeklyMenu.push(new DayOfWeek('monday', []));
-    $scope.weeklyMenu.push(new DayOfWeek('tuesday', []));
-    $scope.weeklyMenu.push(new DayOfWeek('wednesday', []));
-    $scope.weeklyMenu.push(new DayOfWeek('thursday', []));
-    $scope.weeklyMenu.push(new DayOfWeek('friday', []));
-    $scope.weeklyMenu.push(new DayOfWeek('saturday', []));
-    $scope.weeklyMenu.push(new DayOfWeek('sunday', []));
+    $scope.weeklyMenu = $calendarService.weeklyMenu;
     $scope.getCalendarDayClass = getCalendarDayClass;
     calendar = document.querySelector('.calendar-recipes');
     return calendar.addEventListener('drop', function(event) {
-      var draggableId, droppable, _ref, _ref1;
+      var draggableId, droppable;
       droppable = event.target;
       draggableId = +event.dataTransfer.getData('id');
       if (droppable.classList[0] === 'day') {
-        if ((_ref = $scope.weeklyMenu[indexOfDay(droppable.classList[3], $scope.weeklyMenu)]) != null) {
-          if ((_ref1 = _ref.recipes) != null) {
-            _ref1.push(recipeService.getById(draggableId));
-          }
-        }
+        $calendarService.addRecipe(droppable.classList[3], draggableId);
         droppable.classList.remove('over');
+        document.querySelector("[data-id=\"" + draggableId + "\"]").style.opacity = '1';
         return $scope.$apply();
       }
     }, true);
@@ -268,13 +293,16 @@ app.controller('CalendarCtrl', [
 ]);
 
 app.controller('RecipesCtrl', [
-  '$scope', 'recipeService', function($scope, recipeService) {
+  '$scope', 'recipeService', 'calendarService', function($scope, $recipeService, $calendarService) {
     var calendar, recipesContainer;
-    $scope.recipes = recipeService.recipes;
+    $scope.recipes = $recipeService.recipes;
     $scope.removeRecipe = function(recipe) {
       var index;
       index = $scope.recipes.indexOf(recipe);
-      return $scope.recipes.splice(index, 1);
+      if (index > -1) {
+        $scope.recipes.splice(index, 1);
+      }
+      return $calendarService.removeAllRecipeInstances(recipe);
     };
     recipesContainer = document.querySelector('.recipes-container');
     calendar = document.querySelector('.calendar-recipes');
@@ -283,7 +311,8 @@ app.controller('RecipesCtrl', [
       el = event.target;
       if (el.classList[0] === 'recipe') {
         el.style.opacity = '0.4';
-        return event.dataTransfer.setData('id', el.dataset.id);
+        event.dataTransfer.setData('id', el.dataset.id);
+        return event.dataTransfer.setData('element', el);
       }
     }, true);
   }
@@ -291,10 +320,15 @@ app.controller('RecipesCtrl', [
 
 app.controller('RecipesCRUDCtrl', [
   '$scope', '$routeParams', 'recipeService', '$location', '$rootScope', function($scope, $routeParams, $recipeService, $location, $rootScope) {
+    var recipe;
     $scope.recipes = $recipeService.recipes;
     if ($routeParams.recipeId) {
-      $scope.recipe = $recipeService.getById(+$routeParams.recipeId);
-      console.log($scope.recipe);
+      recipe = $recipeService.getById(+$routeParams.recipeId);
+      $scope.recipe = {
+        id: recipe.id,
+        name: recipe.name,
+        ingredients: [].concat(recipe.ingredients)
+      };
     } else {
       $scope.recipe = new Recipe();
     }
@@ -316,6 +350,10 @@ app.controller('RecipesCRUDCtrl', [
         if ($scope.recipe.id === 0) {
           $recipeService.add(new Recipe($scope.recipe.name, $scope.recipe.ingredients));
           $rootScope.setStatusMessage('Рецепт успішно збережено.', 'success');
+        } else {
+          recipe = $recipeService.getById($scope.recipe.id);
+          recipe.name = $scope.recipe.name;
+          recipe.ingredients = [].concat($scope.recipe.ingredients);
         }
         return $location.path("/home");
       }
