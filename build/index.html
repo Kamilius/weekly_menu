@@ -26,9 +26,12 @@
         </ul>
       </div>
     </nav>
+    <div class='message' ng-class='{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'>
+      {{ statusMessage.text }}
+    </div>
     <div class='page-body' ng-view=''></div>
     <script id='calendar.html' type='text/ng-template'>
-      <div class='container'>
+      <div class='container margin-top-25'>
         <section class='row calendar'>
           <div class='calendar-days'>
             <div class='col-md-1 day-header'>Понеділок</div>
@@ -40,14 +43,15 @@
             <div class='col-md-1 day-header'>Неділя</div>
           </div>
           <div class='calendar-recipes'>
-            <div class='day col-md-1' ng-class='{ {{day.name}}: true }' ng-repeat='day in weeklyMenu' ondragenter='DragEnterHandler' ondragleave='DragLeaveHandler' ondragover='event.preventDefault()'>
+            <div class='day col-md-1' drag-enter-leave-animation='' ng-class='{ {{day.name}}: true }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
               <div class='recipe' ng-repeat='recipe in day.recipes'>
+                <recipecontrols></recipecontrols>
                 <h5 class='recipe-title'>
                   {{ recipe.name }}
                 </h5>
                 <ul class='recipe-ingredients'>
                   <li ng-repeat='ingredient in recipe.ingredients'>
-                    {{ ingredient }}
+                    {{ ingredient.name }}
                   </li>
                 </ul>
               </div>
@@ -59,6 +63,7 @@
     <script id='recipesContainer.html' type='text/ng-template'>
       <div class='container recipes-container'>
         <div class='recipe' data-id='{{ recipe.id }}' draggable='true' ng-repeat='recipe in recipes'>
+          <recipecontrols></recipecontrols>
           {{ recipe.name }}
         </div>
       </div>
@@ -68,22 +73,38 @@
       <recipescontainer></recipescontainer>
     </script>
     <script id='recipesCRUD.html' type='text/ng-template'>
-      <div class='container'>
+      <div class='container margin-top-25'>
         <section class='row'>
-          <form class='recipe-form col-md-12' role='form'>
+          <form class='recipe-form col-md-12' name='recipeForm' role='form'>
             <div class='form-group'>
               <label for='recipe-title'>Назва рецепту</label>
-              <input class='form-control' id='recipe-title' ng-model='recipe.name' type='text'>
+              <input class='form-control' id='recipe-title' ng-model='recipe.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
             </div>
             <div class='form-group recipe-ingredients'>
               <label>Інгридієнти</label>
-              <input class='form-control ingredient' ng-model='recipe.ingredients[$index].name' ng-repeat='ingredient in recipe.ingredients' type='text'>
+              <div class='ingredient' ng-repeat='ingredient in recipe.ingredients'>
+                <input class='form-control' ng-model='ingredient.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
+                <div class='remove-ingredient' ng-click='removeIngredient(recipe.ingredients[$index])'>&#57364;</div>
+              </div>
+              <button class='btn btn-default' ng-click='addIngredient()'>
+                Додати інгредієнт
+              </button>
             </div>
-            <button class='btn btn-default' ng-click='addIngredient()'>
-              Додати інгредієнт
+            <a class='btn btn-default pull-right' href='#/home'>
+              Повернутись на головну
+            </a>
+            <button class='btn btn-success pull-right' ng-click='saveRecipe()'>
+              Зберегти рецепт
             </button>
           </form>
         </section>
+      </div>
+    </script>
+    <script id='recipeControls.html' type='text/ng-template'>
+      <div class='recipe-controls'>
+        <span class='glyphicon glyphicon-chevron-left'></span>
+        <a class='glyphicon glyphicon-pencil' href='#/recipes/{{ recipe.id }}' title='Редагувати'></a>
+        <span class='glyphicon glyphicon-remove' ng-click='removeRecipe(recipe)' title='Видалити'></span>
       </div>
     </script>
     <script src='scripts/main.min.js'></script>

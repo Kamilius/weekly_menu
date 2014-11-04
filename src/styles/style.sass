@@ -14,8 +14,15 @@
 	-o-border-radius: $params
 	border-radius: $params
 
-.page-body
-	padding-top: 25px
+@keyframes slidepanel
+	0%
+		opacity: 1
+	99%
+		opacity: 0.9
+		display: inline
+	100%
+		opacity: 0
+		display: none
 
 .row
 	margin: 0
@@ -77,15 +84,61 @@ nav
 				&:hover
 					color: #506362
 
+.message
+	text-align: center
+	line-height: 25px
+	height: 45px
+	max-height: 0
+	overflow: hidden
+	font-size: 12px
+	+transition(max-height 0.5s)
+	background-color: transparent
+	&.error, &.success
+		max-height: 45px
+		padding: 10px 0
+	&.error
+		background-color: #A28382
+	&.success
+		background-color: #71876D
+
+.margin-top-25
+	margin-top: 25px
+
 .recipe
+	overflow: hidden
 	background-color: #B3B6B6
 	font-size: 1.5rem
+	position: relative
 	+border-radius(5px)
 	+transition(opacity 0.3s ease)
 	&[draggable=true]
 		&:hover
 			cursor: move
-
+			.recipe-controls
+				opacity: 1
+	.recipe-controls
+		position: absolute
+		top: 0
+		right: -38px
+		padding-right: 5px
+		+transition(all 0.3s ease)
+	&:hover
+		.recipe-controls
+			background-color: rgba(255, 255, 255, 0.6)
+			right: 0
+			padding-left: 5px
+			.glyphicon-chevron-left
+				display: none
+	.glyphicon
+		font-size: 12px
+		width: 12px
+		height: 14px
+		color: #333
+		+transition(color 0.3s ease)
+		&:hover
+			color: #6B7877
+			cursor: pointer
+			text-decoration: none
 .calendar
 	background-color: #F5F5F5
 	.col-md-1
@@ -137,9 +190,30 @@ nav
 .recipe-form
 	background-color: #B3B6B6
 	padding: 25px
+	overflow: hidden
 	+border-radius(5px)
 
 	label
 		font-weight: normal
-	.ingredient + *
-		margin-top: 10px
+	.ingredient
+		position: relative
+		.remove-ingredient
+			position: absolute
+			top: 8px
+			right: 8px
+			font-family: "Glyphicons Halflings"
+			display: block
+			width: 14px
+			height: 14px
+			opacity: 0
+			+transition(opacity 0.3s ease)
+			&:hover
+				cursor: pointer
+				color: #6B7877
+		& + *
+			margin-top: 10px
+		&:active, &:hover
+			&>.remove-ingredient
+				opacity: 1
+	.btn-success
+		margin-right: 5px

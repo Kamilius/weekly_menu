@@ -36,15 +36,35 @@ app.config([
   '$routeProvider', function($routeProvider) {
     return $routeProvider.when('/home', {
       templateUrl: 'home.html'
-    }).when('/recipes/:recipeId', {
+    }).when('/recipes', {
       templateUrl: 'recipesCRUD.html',
       controller: 'RecipesCRUDCtrl'
-    }).when('/recipes', {
+    }).when('/recipes/:recipeId', {
       templateUrl: 'recipesCRUD.html',
       controller: 'RecipesCRUDCtrl'
     }).otherwise({
       redirectTo: '/home'
     });
+  }
+]);
+
+app.run([
+  '$rootScope', function($rootScope) {
+    $rootScope.statusMessage = {
+      text: '',
+      type: ''
+    };
+    return $rootScope.setStatusMessage = function(text, type) {
+      this.statusMessage.text = text;
+      this.statusMessage.type = type;
+      return setTimeout(function() {
+        return (function() {
+          $rootScope.statusMessage.text = '';
+          $rootScope.statusMessage.type = '';
+          return $rootScope.$apply();
+        })($rootScope);
+      }, 10000);
+    };
   }
 ]);
 
@@ -86,9 +106,89 @@ app.directive('recipecrud', function() {
   };
 });
 
+app.directive('recipecontrols', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'recipeControls.html',
+    transclude: true,
+    replace: true
+  };
+});
+
+DragEnterHandler = function(event) {
+  return this.classList.add('over');
+};
+
+DragLeaveHandler = function(event) {
+  return this.classList.remove('over');
+};
+
+app.directive('dragEnterLeaveAnimation', function() {
+  return function(scope, element, attrs) {
+    element.on('dragenter', DragEnterHandler);
+    return element.on('dragleave', DragLeaveHandler);
+  };
+});
+
 app.service('recipeService', function() {
   var add, getById, recipes, remove;
-  recipes = [new Recipe('Смажена картопля', ['картопля', 'спеції'], 1), new Recipe('Борщ', ['картопля', 'буряк', 'морква', 'цибуля', 'куряче філе', 'спеції'], 2), new Recipe('Смажена ковбаса з кетчупом', ['ковбаса молочна', 'кетчуп'], 3), new Recipe('Стейк', ['м\'ясо', 'спеції'], 4), new Recipe('Солянка', ['телятина', 'ковбаса копчена', 'шпондер', 'полядвиця', 'мисливські ковбаски', 'картопля', 'морква', 'цибуля', 'томатна паста', 'спеції'], 5)];
+  recipes = [
+    new Recipe('Смажена картопля', [
+      {
+        name: 'картопля'
+      }, {
+        name: 'спеції'
+      }
+    ], 1), new Recipe('Борщ', [
+      {
+        name: 'картопля'
+      }, {
+        name: 'буряк'
+      }, {
+        name: 'морква'
+      }, {
+        name: 'цибуля'
+      }, {
+        name: 'куряче філе'
+      }, {
+        name: 'спеції'
+      }
+    ], 2), new Recipe('Смажена ковбаса з кетчупом', [
+      {
+        name: 'ковбаса молочна'
+      }, {
+        name: 'кетчуп'
+      }
+    ], 3), new Recipe('Стейк', [
+      {
+        name: 'м\'ясо'
+      }, {
+        name: 'спеції'
+      }
+    ], 4), new Recipe('Солянка', [
+      {
+        name: 'телятина'
+      }, {
+        name: 'ковбаса копчена'
+      }, {
+        name: 'шпондер'
+      }, {
+        name: 'полядвиця'
+      }, {
+        name: 'мисливські ковбаски'
+      }, {
+        name: 'картопля'
+      }, {
+        name: 'морква'
+      }, {
+        name: 'цибуля'
+      }, {
+        name: 'томатна паста'
+      }, {
+        name: 'спеції'
+      }
+    ], 5)
+  ];
   getById = function(id) {
     var recipe, returnValue, _i, _len;
     returnValue = null;
@@ -103,11 +203,11 @@ app.service('recipeService', function() {
     recipe.id = recipes[recipes.length - 1].id + 1;
     return recipes.push(recipe);
   };
-  remove = function(id) {
-    var recipe;
-    recipe = getById(id);
-    if (recipe === true) {
-      return recipes.splice(recipes.indexOf(recipe), 1);
+  remove = function(recipe) {
+    var index;
+    index = recipes.indexOf(recipe);
+    if (index === !-1) {
+      return recipes.splice(index, 1);
     }
   };
   return {
@@ -137,24 +237,8 @@ indexOfDay = function(dayName, daysList) {
   return -1;
 };
 
-DragEnterHandler = function(event) {
-  var el;
-  el = this;
-  if (el.classList[0] === 'day') {
-    return el.classList.add('over');
-  }
-};
-
-DragLeaveHandler = function(event) {
-  var el;
-  el = this;
-  if (el.classList[0] === 'day') {
-    return el.classList.remove('over');
-  }
-};
-
 app.controller('CalendarCtrl', [
-  '$scope', 'recipeService', function($scope, recipeService) {
+  '$scope', 'recipeService', '$rootScope', function($scope, recipeService, $rootScope) {
     var calendar;
     $scope.weeklyMenu = [];
     $scope.weeklyMenu.push(new DayOfWeek('monday', []));
@@ -179,7 +263,7 @@ app.controller('CalendarCtrl', [
         droppable.classList.remove('over');
         return $scope.$apply();
       }
-    }, false);
+    }, true);
   }
 ]);
 
@@ -187,6 +271,11 @@ app.controller('RecipesCtrl', [
   '$scope', 'recipeService', function($scope, recipeService) {
     var calendar, recipesContainer;
     $scope.recipes = recipeService.recipes;
+    $scope.removeRecipe = function(recipe) {
+      var index;
+      index = $scope.recipes.indexOf(recipe);
+      return $scope.recipes.splice(index, 1);
+    };
     recipesContainer = document.querySelector('.recipes-container');
     calendar = document.querySelector('.calendar-recipes');
     return recipesContainer.addEventListener('dragstart', function(event) {
@@ -196,21 +285,40 @@ app.controller('RecipesCtrl', [
         el.style.opacity = '0.4';
         return event.dataTransfer.setData('id', el.dataset.id);
       }
-    }, false);
+    }, true);
   }
 ]);
 
 app.controller('RecipesCRUDCtrl', [
-  '$scope', '$routeParams', 'recipeService', function($scope, $routeParams, $recipeService) {
+  '$scope', '$routeParams', 'recipeService', '$location', '$rootScope', function($scope, $routeParams, $recipeService, $location, $rootScope) {
     $scope.recipes = $recipeService.recipes;
     if ($routeParams.recipeId) {
       $scope.recipe = $recipeService.getById(+$routeParams.recipeId);
+      console.log($scope.recipe);
     } else {
-      $scope.recipe;
+      $scope.recipe = new Recipe();
     }
-    $scope.recipe = $routeParams.recipeId(new Recipe());
-    return $scope.addIngredient = function() {
+    $scope.addIngredient = function() {
       return $scope.recipe.ingredients.push(new Ingredient());
+    };
+    $scope.removeIngredient = function(ing) {
+      var index;
+      index = $scope.recipe.ingredients.indexOf(ing);
+      if (index > -1 && $scope.recipe.ingredients.length > 1) {
+        $scope.recipe.ingredients.splice(index, 1);
+        return $rootScope.setStatusMessage('', '');
+      } else {
+        return $rootScope.setStatusMessage('Має бути принаймні один інгридієнт.', 'error');
+      }
+    };
+    return $scope.saveRecipe = function() {
+      if ($scope.recipeForm.$dirty === true && $scope.recipeForm.$invalid === false) {
+        if ($scope.recipe.id === 0) {
+          $recipeService.add(new Recipe($scope.recipe.name, $scope.recipe.ingredients));
+          $rootScope.setStatusMessage('Рецепт успішно збережено.', 'success');
+        }
+        return $location.path("/home");
+      }
     };
   }
 ]);
