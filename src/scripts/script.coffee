@@ -170,6 +170,11 @@ app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $
 			weeklyMenu.push new DayOfWeek('saturday', [], new Date(2014, 10, 8))
 			weeklyMenu.push new DayOfWeek('sunday', [], new Date(2014, 10, 9))
 
+	recipeInDay = (day, recipeId) ->
+		for weekDay in weeklyMenu when weekDay.name is day
+			for recipe in weekDay.recipes when recipe.id is recipeId
+				return true
+		return false
 
 	indexOfDay = (dayName) ->
 		for day, index in weeklyMenu
@@ -185,8 +190,6 @@ app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $
 				recipes: day.recipes.map (recipe) ->
 					recipe.id
 				date: new Date(day.date)
-
-		console.log(menu)
 
 		menu
 
@@ -216,6 +219,7 @@ app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $
 		addRecipe: addRecipe
 		removeAllRecipeInstances: removeAllRecipeInstances
 		removeRecipe: removeRecipe
+		recipeInDay: recipeInDay
 	}
 ] 
 
@@ -238,11 +242,13 @@ app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', 'calend
 	calendar.addEventListener 'drop', (event) ->
 		droppable = event.target
 		draggableId = +event.dataTransfer.getData('id')
+		dayName = droppable.classList[3]
 		if droppable.classList[0] is 'day'
-			$calendarService.addRecipe(droppable.classList[3], draggableId)
-			droppable.classList.remove('over')
-			document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
-			$scope.$apply()
+			if not $calendarService.recipeInDay(dayName, draggableId)
+				$calendarService.addRecipe(dayName, draggableId)
+				$scope.$apply()
+		droppable.classList.remove('over')
+		document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
 	, true
 
 ]

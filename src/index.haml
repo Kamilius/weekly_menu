@@ -26,16 +26,16 @@
       .container.margin-top-25
         %section.row.calendar
           .calendar-days
-            .col-md-1.day-header Понеділок
-            .col-md-1.day-header Вівторок
-            .col-md-1.day-header Середа
-            .col-md-1.day-header Четвер
-            .col-md-1.day-header П'ятниця
-            .col-md-1.day-header Субота
-            .col-md-1.day-header Неділя
+            .col-xs-1.day-header Понеділок
+            .col-xs-1.day-header Вівторок
+            .col-xs-1.day-header Середа
+            .col-xs-1.day-header Четвер
+            .col-xs-1.day-header П'ятниця
+            .col-xs-1.day-header Субота
+            .col-xs-1.day-header Неділя
           .calendar-recipes
-            .day.col-md-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true, today: day.today() }', :ondragover => "event.preventDefault()", :'drag-enter-leave-animation' => ''}
-              .recipe{:'ng-repeat' => 'recipe in day.recipes'}
+            .day.col-xs-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true, today: day.today() }', :ondragover => "event.preventDefault()", :'drag-enter-leave-animation' => ''}
+              .recipe{:'ng-repeat' => 'recipe in day.recipes track by $index'}
                 %recipecontrols
                 %h5.recipe-title
                   {{ recipe.name }}

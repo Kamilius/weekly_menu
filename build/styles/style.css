@@ -4712,7 +4712,7 @@ nav ul li a:hover {
   background-color: whitesmoke;
 }
 /* line 144, ../../src/styles/style.sass */
-.calendar .col-md-1 {
+.calendar .col-xs-1 {
   width: 14.28571%;
   *width: 14.28571%;
 }

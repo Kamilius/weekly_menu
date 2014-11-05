@@ -192,7 +192,7 @@ app.service('recipeService', [
 
 app.service('calendarService', [
   'recipeService', '$rootScope', function($recipeService, $rootScope) {
-    var addRecipe, getCompactRecipes, indexOfDay, loadFromLocalStorage, removeAllRecipeInstances, removeRecipe, weeklyMenu;
+    var addRecipe, getCompactRecipes, indexOfDay, loadFromLocalStorage, recipeInDay, removeAllRecipeInstances, removeRecipe, weeklyMenu;
     weeklyMenu = [];
     loadFromLocalStorage = function() {
       var data, temp;
@@ -213,6 +213,22 @@ app.service('calendarService', [
         weeklyMenu.push(new DayOfWeek('saturday', [], new Date(2014, 10, 8)));
         return weeklyMenu.push(new DayOfWeek('sunday', [], new Date(2014, 10, 9)));
       }
+    };
+    recipeInDay = function(day, recipeId) {
+      var recipe, weekDay, _i, _j, _len, _len1, _ref;
+      for (_i = 0, _len = weeklyMenu.length; _i < _len; _i++) {
+        weekDay = weeklyMenu[_i];
+        if (weekDay.name === day) {
+          _ref = weekDay.recipes;
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            recipe = _ref[_j];
+            if (recipe.id === recipeId) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
     };
     indexOfDay = function(dayName) {
       var day, index, _i, _len;
@@ -236,7 +252,6 @@ app.service('calendarService', [
           date: new Date(day.date)
         });
       });
-      console.log(menu);
       return menu;
     };
     addRecipe = function(day, recipeId) {
@@ -273,7 +288,8 @@ app.service('calendarService', [
       weeklyMenu: weeklyMenu,
       addRecipe: addRecipe,
       removeAllRecipeInstances: removeAllRecipeInstances,
-      removeRecipe: removeRecipe
+      removeRecipe: removeRecipe,
+      recipeInDay: recipeInDay
     };
   }
 ]);
@@ -296,15 +312,18 @@ app.controller('CalendarCtrl', [
     };
     calendar = document.querySelector('.calendar-recipes');
     return calendar.addEventListener('drop', function(event) {
-      var draggableId, droppable;
+      var dayName, draggableId, droppable;
       droppable = event.target;
       draggableId = +event.dataTransfer.getData('id');
+      dayName = droppable.classList[3];
       if (droppable.classList[0] === 'day') {
-        $calendarService.addRecipe(droppable.classList[3], draggableId);
-        droppable.classList.remove('over');
-        document.querySelector("[data-id=\"" + draggableId + "\"]").style.opacity = '1';
-        return $scope.$apply();
+        if (!$calendarService.recipeInDay(dayName, draggableId)) {
+          $calendarService.addRecipe(dayName, draggableId);
+          $scope.$apply();
+        }
       }
+      droppable.classList.remove('over');
+      return document.querySelector("[data-id=\"" + draggableId + "\"]").style.opacity = '1';
     }, true);
   }
 ]);
