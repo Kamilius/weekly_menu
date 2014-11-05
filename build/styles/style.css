@@ -1,4 +1,4 @@
-/*! "Weekly menu" 2014-11-04 */
+/*! "Weekly menu" 2014-11-05 */
 /* line 1, ../../src/styles/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -4746,6 +4746,11 @@ nav ul li a:hover {
 }
 
 /* line 164, ../../src/styles/style.sass */
+.today {
+  background-color: #f0f2ed;
+}
+
+/* line 166, ../../src/styles/style.sass */
 .day-header {
   padding: 0;
   text-align: center;
@@ -4756,18 +4761,18 @@ nav ul li a:hover {
   border-bottom: 1px solid #b3b6b6;
 }
 
-/* line 173, ../../src/styles/style.sass */
+/* line 175, ../../src/styles/style.sass */
 .day + *, .day-header + * {
   border-left: 1px solid #b3b6b6;
 }
 
-/* line 176, ../../src/styles/style.sass */
+/* line 178, ../../src/styles/style.sass */
 .recipes-container {
   max-height: 310px;
   overflow: auto;
   margin-top: 20px;
 }
-/* line 180, ../../src/styles/style.sass */
+/* line 182, ../../src/styles/style.sass */
 .recipes-container .recipe {
   margin: 5px;
   float: left;
@@ -4779,7 +4784,7 @@ nav ul li a:hover {
   height: 50px;
 }
 
-/* line 190, ../../src/styles/style.sass */
+/* line 192, ../../src/styles/style.sass */
 .recipe-form {
   background-color: #b3b6b6;
   padding: 25px;
@@ -4789,15 +4794,15 @@ nav ul li a:hover {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 196, ../../src/styles/style.sass */
+/* line 198, ../../src/styles/style.sass */
 .recipe-form label {
   font-weight: normal;
 }
-/* line 198, ../../src/styles/style.sass */
+/* line 200, ../../src/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 200, ../../src/styles/style.sass */
+/* line 202, ../../src/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -4812,20 +4817,20 @@ nav ul li a:hover {
   -o-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
 }
-/* line 210, ../../src/styles/style.sass */
+/* line 212, ../../src/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   cursor: pointer;
   color: #6b7877;
 }
-/* line 213, ../../src/styles/style.sass */
+/* line 215, ../../src/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 216, ../../src/styles/style.sass */
+/* line 218, ../../src/styles/style.sass */
 .recipe-form .ingredient:active > .remove-ingredient, .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 218, ../../src/styles/style.sass */
+/* line 220, ../../src/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }

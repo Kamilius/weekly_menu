@@ -34,7 +34,7 @@
             .col-md-1.day-header Субота
             .col-md-1.day-header Неділя
           .calendar-recipes
-            .day.col-md-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true }', :ondragover => "event.preventDefault()", :'drag-enter-leave-animation' => ''}
+            .day.col-md-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true, today: day.today() }', :ondragover => "event.preventDefault()", :'drag-enter-leave-animation' => ''}
               .recipe{:'ng-repeat' => 'recipe in day.recipes'}
                 %recipecontrols
                 %h5.recipe-title
@@ -76,6 +76,6 @@
       .recipe-controls
         %span.glyphicon.glyphicon-chevron-left
         %a.glyphicon.glyphicon-pencil{:title => 'Редагувати', :href => '#/recipes/{{ recipe.id }}'}
-        %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeRecipe(recipe)'}
+        %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeRecipe(recipe, day)'}
 
     %script{:src => 'scripts/main.min.js'}

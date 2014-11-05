@@ -43,7 +43,7 @@
             <div class='col-md-1 day-header'>Неділя</div>
           </div>
           <div class='calendar-recipes'>
-            <div class='day col-md-1' drag-enter-leave-animation='' ng-class='{ {{day.name}}: true }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
+            <div class='day col-md-1' drag-enter-leave-animation='' ng-class='{ {{day.name}}: true, today: day.today() }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
               <div class='recipe' ng-repeat='recipe in day.recipes'>
                 <recipecontrols></recipecontrols>
                 <h5 class='recipe-title'>
@@ -104,7 +104,7 @@
       <div class='recipe-controls'>
         <span class='glyphicon glyphicon-chevron-left'></span>
         <a class='glyphicon glyphicon-pencil' href='#/recipes/{{ recipe.id }}' title='Редагувати'></a>
-        <span class='glyphicon glyphicon-remove' ng-click='removeRecipe(recipe)' title='Видалити'></span>
+        <span class='glyphicon glyphicon-remove' ng-click='removeRecipe(recipe, day)' title='Видалити'></span>
       </div>
     </script>
     <script src='scripts/main.min.js'></script>

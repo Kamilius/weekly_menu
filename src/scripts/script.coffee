@@ -5,7 +5,9 @@ class Ingredient
 	constructor: (@name = '') ->
 
 class DayOfWeek
-	constructor: (@name, @recipes) ->
+	constructor: (@name, @recipes, @date) ->
+	today: ->
+		@date.toLocaleDateString() == new Date().toLocaleDateString()
 
 app = angular.module 'weeklyMenuApp', ['ngRoute']		
 
@@ -40,69 +42,70 @@ app.run ['$rootScope', ($rootScope) ->
 				$rootScope.$apply()
 			)($rootScope)
 		, 10000
+
+	$rootScope.saveToLocalStorage = (key, data) ->
+		localStorage.setItem(key, JSON.stringify(data))
 ]
 
 app.directive 'calendar', ->
 	{
 		restrict: 'E'
 		templateUrl: 'calendar.html'
+		scope: {}
 		controller: 'CalendarCtrl'
-		# transclude: true
-		replace: true
 	}
 
 app.directive 'recipescontainer', ->
 	{
 		restrict: 'E'
 		templateUrl: 'recipesContainer.html'
+		scope: {}
 		controller: 'RecipesCtrl'
-		# transclude: true
-		replace: true
 	}
 
 app.directive 'index', ->
 	{
 		restrict: 'E'
 		templateUrl: 'home.html'
-		# transclude: true
-		replace: true
 	}
 
 app.directive 'recipecrud', ->
 	{
 		restrict: 'E'
 		templateUrl: 'recipeCRUD.html'
-		transclude: true
-		replace: true
 	}
 
 app.directive 'recipecontrols', ->
 	{
 		restrict: 'E'
 		templateUrl: 'recipeControls.html'
-		#transclude: true
-		replace: true
 	}
 
-DragEnterHandler = (event) ->
-	@.classList.add('over')
-
-DragLeaveHandler = (event) ->
-	@.classList.remove('over')
-
-app.directive 'dragEnterLeaveAnimation', ->
+app.directive 'dragEnterLeaveAnimation', -> 
 	(scope, element, attrs) ->
-		element.on 'dragenter', DragEnterHandler
-		element.on 'dragleave', DragLeaveHandler
+		element.on 'dragenter', (event) ->
+			@.classList.add('over')
+		element.on 'dragleave', (event) ->
+			@.classList.remove('over')
 
-app.service 'recipeService', ->
-	recipes = [
-		new Recipe 'Смажена картопля', [{ name: 'картопля' }, { name:'спеції' }], 1
-		new Recipe 'Борщ', [{ name:'картопля' }, { name:'буряк' }, { name:'морква' }, { name:'цибуля' }, { name:'куряче філе' }, { name:'спеції' }], 2
-		new Recipe 'Смажена ковбаса з кетчупом', [{ name:'ковбаса молочна' }, { name:'кетчуп' }], 3
-		new Recipe 'Стейк', [{ name:'м\'ясо' }, { name:'спеції' }], 4
-		new Recipe 'Солянка', [{ name:'телятина' }, { name:'ковбаса копчена' }, { name:'шпондер' }, { name:'полядвиця' }, { name:'мисливські ковбаски' }, { name:'картопля' }, { name:'морква' }, { name:'цибуля' }, { name:'томатна паста' }, { name:'спеції' }], 5
-	]
+app.service 'recipeService', ['$rootScope', ($rootScope) ->
+	# recipes = [
+	# 	new Recipe 'Смажена картопля', [{ name: 'картопля' }, { name:'спеції' }], 1
+	# 	new Recipe 'Борщ', [{ name:'картопля' }, { name:'буряк' }, { name:'морква' }, { name:'цибуля' }, { name:'куряче філе' }, { name:'спеції' }], 2
+	# 	new Recipe 'Смажена ковбаса з кетчупом', [{ name:'ковбаса молочна' }, { name:'кетчуп' }], 3
+	# 	new Recipe 'Стейк', [{ name:'м\'ясо' }, { name:'спеції' }], 4
+	# 	new Recipe 'Солянка', [{ name:'телятина' }, { name:'ковбаса копчена' }, { name:'шпондер' }, { name:'полядвиця' }, { name:'мисливські ковбаски' }, { name:'картопля' }, { name:'морква' }, { name:'цибуля' }, { name:'томатна паста' }, { name:'спеції' }], 5
+	# ]
+	recipes = []
+
+	loadFromLocalStorage = ->
+		data = localStorage.getItem('recipes')
+
+		if data
+			recipes = JSON.parse(data).map (recipe) ->
+				new Recipe(recipe.name, recipe.ingredients.map((ing) ->
+					new Ingredient(ing.name)
+				), recipe.id)
 
 	getById = (id) ->
 		returnValue = null
@@ -111,32 +114,61 @@ app.service 'recipeService', ->
 			return recipe if recipe.id == id
 
 	add = (recipe) ->
-		recipe.id = recipes[recipes.length - 1].id + 1
+		recipe.id = if recipes.length > 0 then recipes[recipes.length - 1].id + 1 else 1
 		recipes.push(recipe)
+		$rootScope.saveToLocalStorage('recipes', recipes)
+
+	save = (recipe) ->
+		if recipe.id is 0
+			@add new Recipe(recipe.name, recipe.ingredients)
+			$rootScope.setStatusMessage('Рецепт успішно збережено.', 'success')
+		else
+			temp = @getById(recipe.id)
+			temp.name = recipe.name
+			temp.ingredients = [].concat(recipe.ingredients)
+
+		$rootScope.saveToLocalStorage('recipes', recipes)
 
 	remove = (recipe) ->
 		index = recipes.indexOf(recipe)
 
-		if index is not -1
+		if index > -1
 			recipes.splice(index, 1)
+
+		$rootScope.saveToLocalStorage('recipes', recipes)
+
+	loadFromLocalStorage()	
 
 	return {
 		recipes: recipes
 		getById: getById
 		add: add
+		save: save
 		remove: remove
 	}
+]
 
-app.service 'calendarService',['recipeService', ($recipeService) ->
+app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $rootScope) ->
 	weeklyMenu = []
 
-	weeklyMenu.push new DayOfWeek('monday', [])
-	weeklyMenu.push new DayOfWeek('tuesday', [])
-	weeklyMenu.push new DayOfWeek('wednesday', [])
-	weeklyMenu.push new DayOfWeek('thursday', [])
-	weeklyMenu.push new DayOfWeek('friday', [])
-	weeklyMenu.push new DayOfWeek('saturday', [])
-	weeklyMenu.push new DayOfWeek('sunday', [])
+	loadFromLocalStorage = ->
+		data = localStorage.getItem('calendar')
+
+		if data
+			temp = JSON.parse(data)
+			temp.forEach (day) ->
+				weeklyMenu.push new DayOfWeek(day.name, day.recipes.map((id) ->
+						$recipeService.getById(id)
+					), new Date(day.date))
+
+		else
+			weeklyMenu.push new DayOfWeek('monday', [], new Date(2014, 10, 3))
+			weeklyMenu.push new DayOfWeek('tuesday', [], new Date(2014, 10, 4))
+			weeklyMenu.push new DayOfWeek('wednesday', [], new Date(2014, 10, 5))
+			weeklyMenu.push new DayOfWeek('thursday', [], new Date(2014, 10, 6))
+			weeklyMenu.push new DayOfWeek('friday', [], new Date(2014, 10, 6))
+			weeklyMenu.push new DayOfWeek('saturday', [], new Date(2014, 10, 8))
+			weeklyMenu.push new DayOfWeek('sunday', [], new Date(2014, 10, 9))
 
 
 	indexOfDay = (dayName) ->
@@ -145,19 +177,45 @@ app.service 'calendarService',['recipeService', ($recipeService) ->
 
 		return -1
 
+	getCompactRecipes = ->
+		menu = []
+		weeklyMenu.forEach (day) ->
+			menu.push 
+				name: day.name
+				recipes: day.recipes.map (recipe) ->
+					recipe.id
+				date: new Date(day.date)
+
+		console.log(menu)
+
+		menu
+
 	addRecipe = (day, recipeId) ->
 		weeklyMenu[indexOfDay(day)]?.recipes?.push $recipeService.getById(recipeId)
+
+		$rootScope.saveToLocalStorage('calendar', getCompactRecipes())
+
+	removeRecipe = (recipe, day) ->
+		dayIndex = weeklyMenu.indexOf(day)
+		recipeIndex = weeklyMenu[dayIndex].recipes.indexOf(recipe)
+		if recipeIndex > -1
+			weeklyMenu[dayIndex].recipes.splice(recipeIndex, 1)
+			$rootScope.saveToLocalStorage('calendar', getCompactRecipes())
 
 	removeAllRecipeInstances = (recipe) ->
 		for day, index in weeklyMenu
 			index = day.recipes.indexOf(recipe)
 			if index > -1
 				day.recipes.splice(index, 1)
+		$rootScope.saveToLocalStorage('calendar', getCompactRecipes())
+
+	loadFromLocalStorage()
 
 	{
 		weeklyMenu: weeklyMenu
 		addRecipe: addRecipe
 		removeAllRecipeInstances: removeAllRecipeInstances
+		removeRecipe: removeRecipe
 	}
 ] 
 
@@ -172,11 +230,8 @@ app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', 'calend
 
 	$scope.getCalendarDayClass = getCalendarDayClass
 
-	# $scope.removeRecipe = (id, day) ->
-	# 	index = $scope.weeklyMenu[day].recipes.indexOf(recipe)
-	# 	if index > -1
-	# 		$scope.weeklyMenu[day].recipes.splice(index, 1)
-
+	$scope.removeRecipe = (recipe, day) ->
+		$calendarService.removeRecipe(recipe, day)
 
 	calendar = document.querySelector('.calendar-recipes')
 	
@@ -196,8 +251,7 @@ app.controller 'RecipesCtrl', ['$scope', 'recipeService', 'calendarService', ($s
 	$scope.recipes = $recipeService.recipes
 
 	$scope.removeRecipe = (recipe) ->
-		index = $scope.recipes.indexOf(recipe)
-		$scope.recipes.splice(index, 1) if index > -1
+		$recipeService.remove(recipe)
 		$calendarService.removeAllRecipeInstances(recipe)
 
 	recipesContainer = document.querySelector('.recipes-container')
@@ -238,14 +292,8 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 			$rootScope.setStatusMessage('Має бути принаймні один інгридієнт.', 'error')
 
 	$scope.saveRecipe = ->
-		if $scope.recipeForm.$dirty is true and $scope.recipeForm.$invalid is false
-			if $scope.recipe.id is 0
-				$recipeService.add new Recipe($scope.recipe.name, $scope.recipe.ingredients)
-				$rootScope.setStatusMessage('Рецепт успішно збережено.', 'success')
-			else
-				recipe = $recipeService.getById($scope.recipe.id)
-				recipe.name = $scope.recipe.name
-				recipe.ingredients = [].concat($scope.recipe.ingredients)
-				
+		if $scope.recipeForm.$invalid is false
+			$recipeService.save($scope.recipe)
+
 			$location.path("/home")
 ]

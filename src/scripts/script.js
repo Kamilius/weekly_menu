@@ -1,4 +1,4 @@
-var DayOfWeek, DragEnterHandler, DragLeaveHandler, Ingredient, Recipe, app, getCalendarDayClass;
+var DayOfWeek, Ingredient, Recipe, app, getCalendarDayClass;
 
 Recipe = (function() {
   function Recipe(name, ingredients, id) {
@@ -24,10 +24,15 @@ Ingredient = (function() {
 })();
 
 DayOfWeek = (function() {
-  function DayOfWeek(name, recipes) {
+  function DayOfWeek(name, recipes, date) {
     this.name = name;
     this.recipes = recipes;
+    this.date = date;
   }
+
+  DayOfWeek.prototype.today = function() {
+    return this.date.toLocaleDateString() === new Date().toLocaleDateString();
+  };
 
   return DayOfWeek;
 
@@ -57,7 +62,7 @@ app.run([
       text: '',
       type: ''
     };
-    return $rootScope.setStatusMessage = function(text, type) {
+    $rootScope.setStatusMessage = function(text, type) {
       this.statusMessage.text = text;
       this.statusMessage.type = type;
       return setTimeout(function() {
@@ -68,6 +73,9 @@ app.run([
         })($rootScope);
       }, 10000);
     };
+    return $rootScope.saveToLocalStorage = function(key, data) {
+      return localStorage.setItem(key, JSON.stringify(data));
+    };
   }
 ]);
 
@@ -75,8 +83,8 @@ app.directive('calendar', function() {
   return {
     restrict: 'E',
     templateUrl: 'calendar.html',
-    controller: 'CalendarCtrl',
-    replace: true
+    scope: {},
+    controller: 'CalendarCtrl'
   };
 });
 
@@ -84,150 +92,128 @@ app.directive('recipescontainer', function() {
   return {
     restrict: 'E',
     templateUrl: 'recipesContainer.html',
-    controller: 'RecipesCtrl',
-    replace: true
+    scope: {},
+    controller: 'RecipesCtrl'
   };
 });
 
 app.directive('index', function() {
   return {
     restrict: 'E',
-    templateUrl: 'home.html',
-    replace: true
+    templateUrl: 'home.html'
   };
 });
 
 app.directive('recipecrud', function() {
   return {
     restrict: 'E',
-    templateUrl: 'recipeCRUD.html',
-    transclude: true,
-    replace: true
+    templateUrl: 'recipeCRUD.html'
   };
 });
 
 app.directive('recipecontrols', function() {
   return {
     restrict: 'E',
-    templateUrl: 'recipeControls.html',
-    replace: true
+    templateUrl: 'recipeControls.html'
   };
 });
-
-DragEnterHandler = function(event) {
-  return this.classList.add('over');
-};
-
-DragLeaveHandler = function(event) {
-  return this.classList.remove('over');
-};
 
 app.directive('dragEnterLeaveAnimation', function() {
   return function(scope, element, attrs) {
-    element.on('dragenter', DragEnterHandler);
-    return element.on('dragleave', DragLeaveHandler);
+    element.on('dragenter', function(event) {
+      return this.classList.add('over');
+    });
+    return element.on('dragleave', function(event) {
+      return this.classList.remove('over');
+    });
   };
 });
 
-app.service('recipeService', function() {
-  var add, getById, recipes, remove;
-  recipes = [
-    new Recipe('Смажена картопля', [
-      {
-        name: 'картопля'
-      }, {
-        name: 'спеції'
+app.service('recipeService', [
+  '$rootScope', function($rootScope) {
+    var add, getById, loadFromLocalStorage, recipes, remove, save;
+    recipes = [];
+    loadFromLocalStorage = function() {
+      var data;
+      data = localStorage.getItem('recipes');
+      if (data) {
+        return recipes = JSON.parse(data).map(function(recipe) {
+          return new Recipe(recipe.name, recipe.ingredients.map(function(ing) {
+            return new Ingredient(ing.name);
+          }), recipe.id);
+        });
       }
-    ], 1), new Recipe('Борщ', [
-      {
-        name: 'картопля'
-      }, {
-        name: 'буряк'
-      }, {
-        name: 'морква'
-      }, {
-        name: 'цибуля'
-      }, {
-        name: 'куряче філе'
-      }, {
-        name: 'спеції'
+    };
+    getById = function(id) {
+      var recipe, returnValue, _i, _len;
+      returnValue = null;
+      for (_i = 0, _len = recipes.length; _i < _len; _i++) {
+        recipe = recipes[_i];
+        if (recipe.id === id) {
+          return recipe;
+        }
       }
-    ], 2), new Recipe('Смажена ковбаса з кетчупом', [
-      {
-        name: 'ковбаса молочна'
-      }, {
-        name: 'кетчуп'
+    };
+    add = function(recipe) {
+      recipe.id = recipes.length > 0 ? recipes[recipes.length - 1].id + 1 : 1;
+      recipes.push(recipe);
+      return $rootScope.saveToLocalStorage('recipes', recipes);
+    };
+    save = function(recipe) {
+      var temp;
+      if (recipe.id === 0) {
+        this.add(new Recipe(recipe.name, recipe.ingredients));
+        $rootScope.setStatusMessage('Рецепт успішно збережено.', 'success');
+      } else {
+        temp = this.getById(recipe.id);
+        temp.name = recipe.name;
+        temp.ingredients = [].concat(recipe.ingredients);
       }
-    ], 3), new Recipe('Стейк', [
-      {
-        name: 'м\'ясо'
-      }, {
-        name: 'спеції'
+      return $rootScope.saveToLocalStorage('recipes', recipes);
+    };
+    remove = function(recipe) {
+      var index;
+      index = recipes.indexOf(recipe);
+      if (index > -1) {
+        recipes.splice(index, 1);
       }
-    ], 4), new Recipe('Солянка', [
-      {
-        name: 'телятина'
-      }, {
-        name: 'ковбаса копчена'
-      }, {
-        name: 'шпондер'
-      }, {
-        name: 'полядвиця'
-      }, {
-        name: 'мисливські ковбаски'
-      }, {
-        name: 'картопля'
-      }, {
-        name: 'морква'
-      }, {
-        name: 'цибуля'
-      }, {
-        name: 'томатна паста'
-      }, {
-        name: 'спеції'
-      }
-    ], 5)
-  ];
-  getById = function(id) {
-    var recipe, returnValue, _i, _len;
-    returnValue = null;
-    for (_i = 0, _len = recipes.length; _i < _len; _i++) {
-      recipe = recipes[_i];
-      if (recipe.id === id) {
-        return recipe;
-      }
-    }
-  };
-  add = function(recipe) {
-    recipe.id = recipes[recipes.length - 1].id + 1;
-    return recipes.push(recipe);
-  };
-  remove = function(recipe) {
-    var index;
-    index = recipes.indexOf(recipe);
-    if (index === !-1) {
-      return recipes.splice(index, 1);
-    }
-  };
-  return {
-    recipes: recipes,
-    getById: getById,
-    add: add,
-    remove: remove
-  };
-});
+      return $rootScope.saveToLocalStorage('recipes', recipes);
+    };
+    loadFromLocalStorage();
+    return {
+      recipes: recipes,
+      getById: getById,
+      add: add,
+      save: save,
+      remove: remove
+    };
+  }
+]);
 
 app.service('calendarService', [
-  'recipeService', function($recipeService) {
-    var addRecipe, indexOfDay, removeAllRecipeInstances, weeklyMenu;
+  'recipeService', '$rootScope', function($recipeService, $rootScope) {
+    var addRecipe, getCompactRecipes, indexOfDay, loadFromLocalStorage, removeAllRecipeInstances, removeRecipe, weeklyMenu;
     weeklyMenu = [];
-    weeklyMenu.push(new DayOfWeek('monday', []));
-    weeklyMenu.push(new DayOfWeek('tuesday', []));
-    weeklyMenu.push(new DayOfWeek('wednesday', []));
-    weeklyMenu.push(new DayOfWeek('thursday', []));
-    weeklyMenu.push(new DayOfWeek('friday', []));
-    weeklyMenu.push(new DayOfWeek('saturday', []));
-    weeklyMenu.push(new DayOfWeek('sunday', []));
+    loadFromLocalStorage = function() {
+      var data, temp;
+      data = localStorage.getItem('calendar');
+      if (data) {
+        temp = JSON.parse(data);
+        return temp.forEach(function(day) {
+          return weeklyMenu.push(new DayOfWeek(day.name, day.recipes.map(function(id) {
+            return $recipeService.getById(id);
+          }), new Date(day.date)));
+        });
+      } else {
+        weeklyMenu.push(new DayOfWeek('monday', [], new Date(2014, 10, 3)));
+        weeklyMenu.push(new DayOfWeek('tuesday', [], new Date(2014, 10, 4)));
+        weeklyMenu.push(new DayOfWeek('wednesday', [], new Date(2014, 10, 5)));
+        weeklyMenu.push(new DayOfWeek('thursday', [], new Date(2014, 10, 6)));
+        weeklyMenu.push(new DayOfWeek('friday', [], new Date(2014, 10, 6)));
+        weeklyMenu.push(new DayOfWeek('saturday', [], new Date(2014, 10, 8)));
+        return weeklyMenu.push(new DayOfWeek('sunday', [], new Date(2014, 10, 9)));
+      }
+    };
     indexOfDay = function(dayName) {
       var day, index, _i, _len;
       for (index = _i = 0, _len = weeklyMenu.length; _i < _len; index = ++_i) {
@@ -238,28 +224,56 @@ app.service('calendarService', [
       }
       return -1;
     };
+    getCompactRecipes = function() {
+      var menu;
+      menu = [];
+      weeklyMenu.forEach(function(day) {
+        return menu.push({
+          name: day.name,
+          recipes: day.recipes.map(function(recipe) {
+            return recipe.id;
+          }),
+          date: new Date(day.date)
+        });
+      });
+      console.log(menu);
+      return menu;
+    };
     addRecipe = function(day, recipeId) {
       var _ref, _ref1;
-      return (_ref = weeklyMenu[indexOfDay(day)]) != null ? (_ref1 = _ref.recipes) != null ? _ref1.push($recipeService.getById(recipeId)) : void 0 : void 0;
+      if ((_ref = weeklyMenu[indexOfDay(day)]) != null) {
+        if ((_ref1 = _ref.recipes) != null) {
+          _ref1.push($recipeService.getById(recipeId));
+        }
+      }
+      return $rootScope.saveToLocalStorage('calendar', getCompactRecipes());
+    };
+    removeRecipe = function(recipe, day) {
+      var dayIndex, recipeIndex;
+      dayIndex = weeklyMenu.indexOf(day);
+      recipeIndex = weeklyMenu[dayIndex].recipes.indexOf(recipe);
+      if (recipeIndex > -1) {
+        weeklyMenu[dayIndex].recipes.splice(recipeIndex, 1);
+        return $rootScope.saveToLocalStorage('calendar', getCompactRecipes());
+      }
     };
     removeAllRecipeInstances = function(recipe) {
-      var day, index, _i, _len, _results;
-      _results = [];
+      var day, index, _i, _len;
       for (index = _i = 0, _len = weeklyMenu.length; _i < _len; index = ++_i) {
         day = weeklyMenu[index];
         index = day.recipes.indexOf(recipe);
         if (index > -1) {
-          _results.push(day.recipes.splice(index, 1));
-        } else {
-          _results.push(void 0);
+          day.recipes.splice(index, 1);
         }
       }
-      return _results;
+      return $rootScope.saveToLocalStorage('calendar', getCompactRecipes());
     };
+    loadFromLocalStorage();
     return {
       weeklyMenu: weeklyMenu,
       addRecipe: addRecipe,
-      removeAllRecipeInstances: removeAllRecipeInstances
+      removeAllRecipeInstances: removeAllRecipeInstances,
+      removeRecipe: removeRecipe
     };
   }
 ]);
@@ -277,6 +291,9 @@ app.controller('CalendarCtrl', [
     var calendar;
     $scope.weeklyMenu = $calendarService.weeklyMenu;
     $scope.getCalendarDayClass = getCalendarDayClass;
+    $scope.removeRecipe = function(recipe, day) {
+      return $calendarService.removeRecipe(recipe, day);
+    };
     calendar = document.querySelector('.calendar-recipes');
     return calendar.addEventListener('drop', function(event) {
       var draggableId, droppable;
@@ -297,11 +314,7 @@ app.controller('RecipesCtrl', [
     var calendar, recipesContainer;
     $scope.recipes = $recipeService.recipes;
     $scope.removeRecipe = function(recipe) {
-      var index;
-      index = $scope.recipes.indexOf(recipe);
-      if (index > -1) {
-        $scope.recipes.splice(index, 1);
-      }
+      $recipeService.remove(recipe);
       return $calendarService.removeAllRecipeInstances(recipe);
     };
     recipesContainer = document.querySelector('.recipes-container');
@@ -346,15 +359,8 @@ app.controller('RecipesCRUDCtrl', [
       }
     };
     return $scope.saveRecipe = function() {
-      if ($scope.recipeForm.$dirty === true && $scope.recipeForm.$invalid === false) {
-        if ($scope.recipe.id === 0) {
-          $recipeService.add(new Recipe($scope.recipe.name, $scope.recipe.ingredients));
-          $rootScope.setStatusMessage('Рецепт успішно збережено.', 'success');
-        } else {
-          recipe = $recipeService.getById($scope.recipe.id);
-          recipe.name = $scope.recipe.name;
-          recipe.ingredients = [].concat($scope.recipe.ingredients);
-        }
+      if ($scope.recipeForm.$invalid === false) {
+        $recipeService.save($scope.recipe);
         return $location.path("/home");
       }
     };
