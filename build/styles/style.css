@@ -1,4 +1,4 @@
-/*! "Weekly menu" 2014-11-05 */
+/*! "Weekly menu" 2014-11-06 */
 /* line 1, ../../src/styles/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -4498,25 +4498,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     display: none !important;
   }
 }
-@keyframes slidepanel {
-  /* line 18, ../../src/styles/style.sass */
-  0% {
-    opacity: 1;
-  }
-
-  /* line 20, ../../src/styles/style.sass */
-  99% {
-    opacity: 0.9;
-    display: inline;
-  }
-
-  /* line 23, ../../src/styles/style.sass */
-  100% {
-    opacity: 0;
-    display: none;
-  }
-}
-/* line 27, ../../src/styles/style.sass */
+/* line 22, ../../src/styles/style.sass */
 .row {
   margin: 0;
 }
@@ -4525,55 +4507,66 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
   font-family: zantroke;
   src: url(../fonts/Zantroke.otf);
 }
-/* line 34, ../../src/styles/style.sass */
+/* line 29, ../../src/styles/style.sass */
 body {
   font-family: zantroke;
   background-color: #878f8e;
   font-size: 14px;
 }
 
-/* line 39, ../../src/styles/style.sass */
+/* line 34, ../../src/styles/style.sass */
 header {
+  position: relative;
+  z-index: 3;
   background-color: #506362;
   color: white;
   padding: 20px 0;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 43, ../../src/styles/style.sass */
+/* line 41, ../../src/styles/style.sass */
 header .container {
   display: flex;
 }
 
-/* line 45, ../../src/styles/style.sass */
+/* line 43, ../../src/styles/style.sass */
 .logo {
   position: relative;
+  z-index: 2;
   max-width: 100px;
   height: auto;
 }
-/* line 49, ../../src/styles/style.sass */
+/* line 48, ../../src/styles/style.sass */
 .logo img {
   width: 100%;
   max-width: 100%;
 }
 
-/* line 52, ../../src/styles/style.sass */
+/* line 51, ../../src/styles/style.sass */
 .title {
   padding-left: 20px;
   display: flex;
   flex: 1;
   align-items: center;
 }
-/* line 57, ../../src/styles/style.sass */
+/* line 56, ../../src/styles/style.sass */
 .title:hover {
   cursor: default;
 }
 
-/* line 60, ../../src/styles/style.sass */
+/* line 59, ../../src/styles/style.sass */
 nav {
+  position: relative;
   background-color: #6b7877;
   height: 45px;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 63, ../../src/styles/style.sass */
+/* line 64, ../../src/styles/style.sass */
 nav ul {
+  position: relative;
   margin: 0;
   padding: 0;
   display: flex;
@@ -4582,37 +4575,59 @@ nav ul {
   align-items: center;
   height: 45px;
 }
-/* line 71, ../../src/styles/style.sass */
+/* line 73, ../../src/styles/style.sass */
 nav ul li {
+  position: relative;
+  z-index: 3;
+  background-color: #6b7877;
   height: 100%;
   padding: 0 10px;
   display: flex;
   align-items: stretch;
-  -webkit-transition: background-color 0.3s ease;
-  -moz-transition: background-color 0.3s ease;
-  -o-transition: background-color 0.3s ease;
-  transition: background-color 0.3s ease;
+  -webkit-transition: background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 77, ../../src/styles/style.sass */
+/* line 82, ../../src/styles/style.sass */
+nav ul li:first-child {
+  -webkit-box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.7);
+}
+/* line 84, ../../src/styles/style.sass */
+nav ul li:last-child {
+  -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.7);
+}
+/* line 86, ../../src/styles/style.sass */
 nav ul li:hover {
-  background-color: #b3b6b6;
+  z-index: 4;
+  -webkit-box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.7);
 }
-/* line 79, ../../src/styles/style.sass */
+/* line 89, ../../src/styles/style.sass */
 nav ul li a {
   display: flex;
   align-items: center;
   color: whitesmoke;
-  -webkit-transition: color 0.3s ease;
-  -moz-transition: color 0.3s ease;
-  -o-transition: color 0.3s ease;
-  transition: color 0.3s ease;
+  -webkit-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 84, ../../src/styles/style.sass */
+/* line 94, ../../src/styles/style.sass */
 nav ul li a:hover {
-  color: #506362;
+  color: whitesmoke;
+}
+/* line 96, ../../src/styles/style.sass */
+nav ul li.active a {
+  text-decoration: underline;
 }
 
-/* line 87, ../../src/styles/style.sass */
+/* line 99, ../../src/styles/style.sass */
 .message {
   text-align: center;
   line-height: 25px;
@@ -4620,34 +4635,35 @@ nav ul li a:hover {
   max-height: 0;
   overflow: hidden;
   font-size: 12px;
-  -webkit-transition: max-height 0.5s;
-  -moz-transition: max-height 0.5s;
-  -o-transition: max-height 0.5s;
-  transition: max-height 0.5s;
   background-color: transparent;
+  -webkit-transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 96, ../../src/styles/style.sass */
+/* line 108, ../../src/styles/style.sass */
 .message.error, .message.success {
   max-height: 45px;
   padding: 10px 0;
 }
-/* line 99, ../../src/styles/style.sass */
+/* line 111, ../../src/styles/style.sass */
 .message.error {
   background-color: #a28382;
 }
-/* line 101, ../../src/styles/style.sass */
+/* line 113, ../../src/styles/style.sass */
 .message.success {
   background-color: #71876d;
 }
 
-/* line 104, ../../src/styles/style.sass */
+/* line 116, ../../src/styles/style.sass */
 .margin-top-25 {
   margin-top: 25px;
 }
 
-/* line 107, ../../src/styles/style.sass */
+/* line 119, ../../src/styles/style.sass */
 .recipe {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   background-color: #b3b6b6;
   font-size: 1.5rem;
   position: relative;
@@ -4655,102 +4671,151 @@ nav ul li a:hover {
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  -webkit-transition: opacity 0.3s ease;
-  -moz-transition: opacity 0.3s ease;
-  -o-transition: opacity 0.3s ease;
-  transition: opacity 0.3s ease;
+  -webkit-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 115, ../../src/styles/style.sass */
+/* line 129, ../../src/styles/style.sass */
 .recipe[draggable=true]:hover {
   cursor: move;
 }
-/* line 117, ../../src/styles/style.sass */
+/* line 131, ../../src/styles/style.sass */
 .recipe[draggable=true]:hover .recipe-controls {
   opacity: 1;
 }
-/* line 119, ../../src/styles/style.sass */
+/* line 133, ../../src/styles/style.sass */
 .recipe .recipe-controls {
   position: absolute;
   top: 0;
   right: -38px;
   padding-right: 5px;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 126, ../../src/styles/style.sass */
+/* line 140, ../../src/styles/style.sass */
 .recipe:hover .recipe-controls {
   background-color: rgba(255, 255, 255, 0.6);
   right: 0;
   padding-left: 5px;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 130, ../../src/styles/style.sass */
+/* line 145, ../../src/styles/style.sass */
 .recipe:hover .recipe-controls .glyphicon-chevron-left {
   display: none;
 }
-/* line 132, ../../src/styles/style.sass */
+/* line 147, ../../src/styles/style.sass */
 .recipe .glyphicon {
   font-size: 12px;
   width: 12px;
   height: 14px;
   color: #333333;
-  -webkit-transition: color 0.3s ease;
-  -moz-transition: color 0.3s ease;
-  -o-transition: color 0.3s ease;
-  transition: color 0.3s ease;
+  -webkit-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 138, ../../src/styles/style.sass */
+/* line 153, ../../src/styles/style.sass */
 .recipe .glyphicon:hover {
   color: #6b7877;
   cursor: pointer;
   text-decoration: none;
 }
 
-/* line 142, ../../src/styles/style.sass */
-.calendar {
+/* line 158, ../../src/styles/style.sass */
+.calendar-pagination {
+  position: relative;
+  z-index: 2;
+}
+/* line 161, ../../src/styles/style.sass */
+.calendar-pagination .pagination-container {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid #b3b6b6;
+  border-left: 1px solid #b3b6b6;
+}
+/* line 168, ../../src/styles/style.sass */
+.calendar-pagination .current-week {
+  padding: 0 5px 0 5px;
+  font-size: 12px;
+  text-align: center;
+}
+/* line 172, ../../src/styles/style.sass */
+.calendar-pagination button {
+  padding: 0;
+  background: none;
+  border: none;
   background-color: whitesmoke;
 }
-/* line 144, ../../src/styles/style.sass */
-.calendar .col-xs-1 {
+
+/* line 178, ../../src/styles/style.sass */
+.calendar {
+  position: relative;
+  z-index: 2;
+  background-color: whitesmoke;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+}
+
+/* line 183, ../../src/styles/style.sass */
+calendar .col-xs-1 {
   width: 14.28571%;
   *width: 14.28571%;
 }
 
-/* line 147, ../../src/styles/style.sass */
+/* line 186, ../../src/styles/style.sass */
 .day {
   height: 400px;
   overflow: auto;
 }
-/* line 150, ../../src/styles/style.sass */
+/* line 189, ../../src/styles/style.sass */
 .day.over {
   border: 2px dashed #6b7877;
 }
-/* line 152, ../../src/styles/style.sass */
+/* line 191, ../../src/styles/style.sass */
+.day .date {
+  width: 100%;
+  font-size: 12px;
+  line-height: 25px;
+  text-align: center;
+}
+/* line 196, ../../src/styles/style.sass */
 .day .recipe {
   width: 100%;
   height: auto;
   margin: 5px 0;
   padding: 10px 0;
 }
-/* line 157, ../../src/styles/style.sass */
+/* line 201, ../../src/styles/style.sass */
 .day .recipe .recipe-title {
   text-align: center;
   margin-top: 0;
 }
-/* line 160, ../../src/styles/style.sass */
+/* line 204, ../../src/styles/style.sass */
 .day .recipe .recipe-ingredients {
   margin: 0;
   font-size: 12px;
   padding: 0 0 0 27px;
 }
 
-/* line 164, ../../src/styles/style.sass */
+/* line 209, ../../src/styles/style.sass */
 .today {
   background-color: #f0f2ed;
 }
 
-/* line 166, ../../src/styles/style.sass */
+/* line 211, ../../src/styles/style.sass */
 .day-header {
   padding: 0;
   text-align: center;
@@ -4761,20 +4826,20 @@ nav ul li a:hover {
   border-bottom: 1px solid #b3b6b6;
 }
 
-/* line 175, ../../src/styles/style.sass */
+/* line 220, ../../src/styles/style.sass */
 .day + *, .day-header + * {
   border-left: 1px solid #b3b6b6;
 }
 
-/* line 178, ../../src/styles/style.sass */
+/* line 224, ../../src/styles/style.sass */
 .recipes-container {
   max-height: 310px;
   overflow: auto;
   margin-top: 20px;
 }
-/* line 182, ../../src/styles/style.sass */
+/* line 228, ../../src/styles/style.sass */
 .recipes-container .recipe {
-  margin: 5px;
+  margin: 5px 5px 10px 5px;
   float: left;
   display: flex;
   align-items: center;
@@ -4784,7 +4849,14 @@ nav ul li a:hover {
   height: 50px;
 }
 
-/* line 192, ../../src/styles/style.sass */
+/* line 240, ../../src/styles/style.sass */
+.recipe-form button:hover, .recipe-form a:hover, [draggable=true]:hover {
+  -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
+}
+
+/* line 243, ../../src/styles/style.sass */
 .recipe-form {
   background-color: #b3b6b6;
   padding: 25px;
@@ -4793,16 +4865,29 @@ nav ul li a:hover {
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 198, ../../src/styles/style.sass */
+/* line 250, ../../src/styles/style.sass */
+.recipe-form input[type=text], .recipe-form button, .recipe-form a {
+  -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
+  -webkit-transition: box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
+}
+/* line 254, ../../src/styles/style.sass */
 .recipe-form label {
   font-weight: normal;
 }
-/* line 200, ../../src/styles/style.sass */
+/* line 256, ../../src/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 202, ../../src/styles/style.sass */
+/* line 258, ../../src/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -4812,25 +4897,25 @@ nav ul li a:hover {
   width: 14px;
   height: 14px;
   opacity: 0;
-  -webkit-transition: opacity 0.3s ease;
-  -moz-transition: opacity 0.3s ease;
-  -o-transition: opacity 0.3s ease;
-  transition: opacity 0.3s ease;
+  -webkit-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -moz-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
+  transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 212, ../../src/styles/style.sass */
+/* line 268, ../../src/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   cursor: pointer;
   color: #6b7877;
 }
-/* line 215, ../../src/styles/style.sass */
+/* line 271, ../../src/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 218, ../../src/styles/style.sass */
+/* line 274, ../../src/styles/style.sass */
 .recipe-form .ingredient:active > .remove-ingredient, .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 220, ../../src/styles/style.sass */
+/* line 276, ../../src/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }

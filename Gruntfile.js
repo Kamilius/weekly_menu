@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 			},
 			my_target: {
 				files: {
-					'build/scripts/main.min.js': ['src/scripts/angular.js', 'src/scripts/angular-route.min.js', 'src/scripts/script.js']
+					'build/scripts/main.min.js': ['src/scripts/angular.js', 'src/scripts/angular-locale_uk-ua.js', 'src/scripts/angular-route.min.js', 'src/scripts/script.js']
 				}
 			}
 		},

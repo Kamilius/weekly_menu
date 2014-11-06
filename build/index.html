@@ -17,10 +17,10 @@
     <nav>
       <div class='container'>
         <ul>
-          <li>
+          <li ng-class='getClass("/home")'>
             <a href='#/home'>Перелік рецептів</a>
           </li>
-          <li>
+          <li ng-class='getClass("/recipes")'>
             <a href='#/recipes'>Додати рецепт</a>
           </li>
         </ul>
@@ -32,6 +32,17 @@
     <div class='page-body' ng-view=''></div>
     <script id='calendar.html' type='text/ng-template'>
       <div class='container margin-top-25'>
+        <section class='row calendar-pagination'>
+          <div class='col-xs-1 pull-right pagination-container'>
+            <button ng-click='prevWeek()' ng-disabled='calendarService.currentWeek === 1'>
+              <span class='glyphicon glyphicon-backward'></span>
+            </button>
+            <div class='current-week'>{{ "Тиждень №" + calendarService.currentWeek() }}</div>
+            <button ng-click='nextWeek()'>
+              <span class='glyphicon glyphicon-forward'></span>
+            </button>
+          </div>
+        </section>
         <section class='row calendar'>
           <div class='calendar-days'>
             <div class='col-xs-1 day-header'>Понеділок</div>
@@ -44,6 +55,7 @@
           </div>
           <div class='calendar-recipes'>
             <div class='day col-xs-1' drag-enter-leave-animation='' ng-class='{ {{day.name}}: true, today: day.today() }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
+              <div class='date'>{{ day.date | date }}</div>
               <div class='recipe' ng-repeat='recipe in day.recipes track by $index'>
                 <recipecontrols></recipecontrols>
                 <h5 class='recipe-title'>

@@ -26,7 +26,7 @@ app.config [
 		otherwise(redirectTo: '/home')
 ]
 
-app.run ['$rootScope', ($rootScope) ->
+app.run ['$rootScope', '$location', ($rootScope, $location) ->
 
 	$rootScope.statusMessage = 
 		text: ''
@@ -45,6 +45,9 @@ app.run ['$rootScope', ($rootScope) ->
 
 	$rootScope.saveToLocalStorage = (key, data) ->
 		localStorage.setItem(key, JSON.stringify(data))
+
+	$rootScope.getClass = (path) ->
+		if $location.path().substr(0, path.length) == path then 'active' else ''
 ]
 
 app.directive 'calendar', ->
@@ -150,9 +153,27 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 
 app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $rootScope) ->
 	weeklyMenu = []
+	dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+	currentWeek = 1
 
-	loadFromLocalStorage = ->
-		data = localStorage.getItem('calendar')
+	currentWeekNumber = (firstWeekDate) ->
+		ONE_WEEK = 1000 * 60 * 60 * 24 * 7
+
+		date1_ms = firstWeekDate
+		date2_ms = new Date()
+
+		difference_ms = Math.abs(date1_ms - date2_ms)
+
+		currentWeek = Math.floor(difference_ms / ONE_WEEK) || 1
+
+	loadFromLocalStorage = (weekNum) ->
+		if weeklyMenu.length > 0
+			weeklyMenu.splice(0, weeklyMenu.length)
+		if not weekNum
+			data = localStorage.getItem("week_1")
+			weekNum = if data = JSON.parse(data) then currentWeekNumber(new Date(data[0].date)) else 1
+
+		data = localStorage.getItem("week_#{weekNum}")
 
 		if data
 			temp = JSON.parse(data)
@@ -160,15 +181,29 @@ app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $
 				weeklyMenu.push new DayOfWeek(day.name, day.recipes.map((id) ->
 						$recipeService.getById(id)
 					), new Date(day.date))
-
 		else
-			weeklyMenu.push new DayOfWeek('monday', [], new Date(2014, 10, 3))
-			weeklyMenu.push new DayOfWeek('tuesday', [], new Date(2014, 10, 4))
-			weeklyMenu.push new DayOfWeek('wednesday', [], new Date(2014, 10, 5))
-			weeklyMenu.push new DayOfWeek('thursday', [], new Date(2014, 10, 6))
-			weeklyMenu.push new DayOfWeek('friday', [], new Date(2014, 10, 6))
-			weeklyMenu.push new DayOfWeek('saturday', [], new Date(2014, 10, 8))
-			weeklyMenu.push new DayOfWeek('sunday', [], new Date(2014, 10, 9))
+			buildWeek(weekNum)
+
+	buildWeek = (weekNum = 1) ->
+		if weeklyMenu.length > 0
+			lastDate = new Date(weeklyMenu[6].date)
+			lastDate = new Date(lastDate.setDate(lastDate.getDate() + 1))
+			
+			weeklyMenu.splice(0, weeklyMenu.length) 
+		else
+			today = new Date()
+			lastDate = new Date(today.setDate((today.getDate() - today.getDay() + 1) * weekNum))
+
+		for index in [0..6]
+			weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(lastDate).setDate(lastDate.getDate() + index))))
+
+	nextWeek = () ->
+		currentWeek++
+		loadFromLocalStorage(currentWeek)
+
+	prevWeek = () ->
+		currentWeek = currentWeek - 1 if currentWeek > 1
+		loadFromLocalStorage(currentWeek)
 
 	recipeInDay = (day, recipeId) ->
 		for weekDay in weeklyMenu when weekDay.name is day
@@ -196,21 +231,21 @@ app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $
 	addRecipe = (day, recipeId) ->
 		weeklyMenu[indexOfDay(day)]?.recipes?.push $recipeService.getById(recipeId)
 
-		$rootScope.saveToLocalStorage('calendar', getCompactRecipes())
+		$rootScope.saveToLocalStorage("week_#{currentWeek}", getCompactRecipes())
 
 	removeRecipe = (recipe, day) ->
 		dayIndex = weeklyMenu.indexOf(day)
 		recipeIndex = weeklyMenu[dayIndex].recipes.indexOf(recipe)
 		if recipeIndex > -1
 			weeklyMenu[dayIndex].recipes.splice(recipeIndex, 1)
-			$rootScope.saveToLocalStorage('calendar', getCompactRecipes())
+			$rootScope.saveToLocalStorage("week_#{currentWeek}", getCompactRecipes())
 
 	removeAllRecipeInstances = (recipe) ->
 		for day, index in weeklyMenu
 			index = day.recipes.indexOf(recipe)
 			if index > -1
 				day.recipes.splice(index, 1)
-		$rootScope.saveToLocalStorage('calendar', getCompactRecipes())
+		$rootScope.saveToLocalStorage("week_#{currentWeek}", getCompactRecipes())
 
 	loadFromLocalStorage()
 
@@ -220,19 +255,18 @@ app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $
 		removeAllRecipeInstances: removeAllRecipeInstances
 		removeRecipe: removeRecipe
 		recipeInDay: recipeInDay
+		nextWeek: nextWeek
+		prevWeek: prevWeek
+		currentWeek: ->
+			currentWeek
 	}
-] 
-
-getCalendarDayClass = (dayName) ->
-	if dayName is 'saturday' or dayName is 'sunday'
-		'col-md-1'
-	else
-		'col-md-2'
+]
 
 app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', 'calendarService', ($scope, $recipeService, $rootScope, $calendarService) ->
 	$scope.weeklyMenu = $calendarService.weeklyMenu
-
-	$scope.getCalendarDayClass = getCalendarDayClass
+	$scope.calendarService = $calendarService
+	$scope.nextWeek = $calendarService.nextWeek
+	$scope.prevWeek = $calendarService.prevWeek
 
 	$scope.removeRecipe = (recipe, day) ->
 		$calendarService.removeRecipe(recipe, day)
@@ -246,11 +280,12 @@ app.controller 'CalendarCtrl', ['$scope', 'recipeService', '$rootScope', 'calend
 		if droppable.classList[0] is 'day'
 			if not $calendarService.recipeInDay(dayName, draggableId)
 				$calendarService.addRecipe(dayName, draggableId)
-				$scope.$apply()
+			else
+				$rootScope.setStatusMessage("Один день не може містити дві страви з однаковим ім'ям.", "error")
+			$scope.$apply()
 		droppable.classList.remove('over')
 		document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
 	, true
-
 ]
 
 app.controller 'RecipesCtrl', ['$scope', 'recipeService', 'calendarService', ($scope, $recipeService, $calendarService) ->

@@ -14,15 +14,10 @@
 	-o-border-radius: $params
 	border-radius: $params
 
-@keyframes slidepanel
-	0%
-		opacity: 1
-	99%
-		opacity: 0.9
-		display: inline
-	100%
-		opacity: 0
-		display: none
+@mixin box-shadow($params)
+	-webkit-box-shadow: $params
+	-moz-box-shadow: $params
+	box-shadow: $params
 
 .row
 	margin: 0
@@ -37,13 +32,17 @@ body
 	font-size: 14px
 
 header
+	position: relative
+	z-index: 3
 	background-color: #506362
 	color: #fff
 	padding: 20px 0
+	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
 	.container
 		display: flex
 .logo
 	position: relative
+	z-index: 2
 	max-width: 100px
 	height: auto
 	img
@@ -58,9 +57,12 @@ header
 		cursor: default
 
 nav
+	position: relative
 	background-color: #6B7877
 	height: 45px
+	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
 	ul
+		position: relative
 		margin: 0
 		padding: 0
 		display: flex
@@ -69,20 +71,30 @@ nav
 		align-items: center
 		height: 45px
 		li
+			position: relative
+			z-index: 3
+			background-color: #6B7877
 			height: 100%
 			padding: 0 10px
 			display: flex
 			align-items: stretch
-			+transition(background-color 0.3s ease)
+			+transition((background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
+			&:first-child
+				+box-shadow(-1px 1px 1px 0px rgba(0, 0, 0, 0.7))
+			&:last-child
+				+box-shadow(1px 1px 1px 0px rgba(0, 0, 0, 0.7))
 			&:hover
-				background-color: #B3B6B6
+				z-index: 4
+				+box-shadow(0px 2px 8px 1px rgba(0, 0, 0, 0.7))
 			a
 				display: flex
 				align-items: center
 				color: #F5F5F5
-				+transition(color 0.3s ease)
+				+transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 				&:hover
-					color: #506362
+					color: #F5F5F5
+			&.active a
+				text-decoration: underline
 
 .message
 	text-align: center
@@ -91,8 +103,8 @@ nav
 	max-height: 0
 	overflow: hidden
 	font-size: 12px
-	+transition(max-height 0.5s)
 	background-color: transparent
+	+transition((max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	&.error, &.success
 		max-height: 45px
 		padding: 10px 0
@@ -105,12 +117,14 @@ nav
 	margin-top: 25px
 
 .recipe
-	overflow: hidden
+	overflow-x: hidden
+	overflow-y: visible
 	background-color: #B3B6B6
 	font-size: 1.5rem
 	position: relative
 	+border-radius(5px)
-	+transition(opacity 0.3s ease)
+	+transition((opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
+	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
 	&[draggable=true]
 		&:hover
 			cursor: move
@@ -121,12 +135,13 @@ nav
 		top: 0
 		right: -38px
 		padding-right: 5px
-		+transition(all 0.3s ease)
+		+transition((right 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	&:hover
 		.recipe-controls
 			background-color: rgba(255, 255, 255, 0.6)
 			right: 0
 			padding-left: 5px
+			+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
 			.glyphicon-chevron-left
 				display: none
 	.glyphicon
@@ -134,21 +149,50 @@ nav
 		width: 12px
 		height: 14px
 		color: #333
-		+transition(color 0.3s ease)
+		+transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 		&:hover
 			color: #6B7877
 			cursor: pointer
 			text-decoration: none
+// Calendar styles
+.calendar-pagination
+	position: relative
+	z-index: 2
+	.pagination-container
+		background-color: #F5F5F5
+		display: flex
+		justify-content: space-between
+		+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+		border-bottom: 1px solid #B3B6B6
+		border-left: 1px solid #B3B6B6
+	.current-week
+		padding: 0 5px 0 5px
+		font-size: 12px
+		text-align: center
+	button
+		padding: 0
+		background: none
+		border: none
+		background-color: whitesmoke
+
 .calendar
+	position: relative
+	z-index: 2
 	background-color: #F5F5F5
-	.col-xs-1
-		width: 14.285714285714285714285714285714%
-		*width: 14.285714285714285714285714285714%
+	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+calendar .col-xs-1
+	width: 14.285714285714285714285714285714%
+	*width: 14.285714285714285714285714285714%
 .day
 	height: 400px
 	overflow: auto
 	&.over
 		border: 2px dashed #6B7877
+	.date
+		width: 100%
+		font-size: 12px
+		line-height: 25px
+		text-align: center
 	.recipe
 		width: 100%
 		height: auto
@@ -161,6 +205,7 @@ nav
 			margin: 0
 			font-size: 12px
 			padding: 0 0 0 27px
+//Day with today's date mark
 .today
 	background-color: #F0F2ED
 .day-header
@@ -175,12 +220,13 @@ nav
 	&+*
 		border-left: 1px solid #B3B6B6
 
+//Container with draggable .recipe elements
 .recipes-container
 	max-height: 310px
 	overflow: auto
 	margin-top: 20px
 	.recipe
-		margin: 5px
+		margin: 5px 5px 10px 5px
 		float: left
 		display: flex
 		align-items: center
@@ -189,11 +235,21 @@ nav
 		width: 19%
 		height: 50px
 
+//Form for creating/editing new recipes
+.recipe-form button, .recipe-form a, [draggable=true]
+	&:hover
+		+box-shadow(0px 3px 8px 1px rgba(0, 0, 0, 0.7))
+
 .recipe-form
 	background-color: #B3B6B6
 	padding: 25px
 	overflow: hidden
 	+border-radius(5px)
+	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+
+	input[type=text], button, a
+		+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+		+transition(box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940))
 
 	label
 		font-weight: normal
@@ -208,7 +264,7 @@ nav
 			width: 14px
 			height: 14px
 			opacity: 0
-			+transition(opacity 0.3s ease)
+			+transition(opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 			&:hover
 				cursor: pointer
 				color: #6B7877

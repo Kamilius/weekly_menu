@@ -1,4 +1,4 @@
-var DayOfWeek, Ingredient, Recipe, app, getCalendarDayClass;
+var DayOfWeek, Ingredient, Recipe, app;
 
 Recipe = (function() {
   function Recipe(name, ingredients, id) {
@@ -57,7 +57,7 @@ app.config([
 ]);
 
 app.run([
-  '$rootScope', function($rootScope) {
+  '$rootScope', '$location', function($rootScope, $location) {
     $rootScope.statusMessage = {
       text: '',
       type: ''
@@ -73,8 +73,15 @@ app.run([
         })($rootScope);
       }, 10000);
     };
-    return $rootScope.saveToLocalStorage = function(key, data) {
+    $rootScope.saveToLocalStorage = function(key, data) {
       return localStorage.setItem(key, JSON.stringify(data));
+    };
+    return $rootScope.getClass = function(path) {
+      if ($location.path().substr(0, path.length) === path) {
+        return 'active';
+      } else {
+        return '';
+      }
     };
   }
 ]);
@@ -192,11 +199,28 @@ app.service('recipeService', [
 
 app.service('calendarService', [
   'recipeService', '$rootScope', function($recipeService, $rootScope) {
-    var addRecipe, getCompactRecipes, indexOfDay, loadFromLocalStorage, recipeInDay, removeAllRecipeInstances, removeRecipe, weeklyMenu;
+    var addRecipe, buildWeek, currentWeek, currentWeekNumber, dayNames, getCompactRecipes, indexOfDay, loadFromLocalStorage, nextWeek, prevWeek, recipeInDay, removeAllRecipeInstances, removeRecipe, weeklyMenu;
     weeklyMenu = [];
-    loadFromLocalStorage = function() {
+    dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    currentWeek = 1;
+    currentWeekNumber = function(firstWeekDate) {
+      var ONE_WEEK, date1_ms, date2_ms, difference_ms;
+      ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
+      date1_ms = firstWeekDate;
+      date2_ms = new Date();
+      difference_ms = Math.abs(date1_ms - date2_ms);
+      return currentWeek = Math.floor(difference_ms / ONE_WEEK) || 1;
+    };
+    loadFromLocalStorage = function(weekNum) {
       var data, temp;
-      data = localStorage.getItem('calendar');
+      if (weeklyMenu.length > 0) {
+        weeklyMenu.splice(0, weeklyMenu.length);
+      }
+      if (!weekNum) {
+        data = localStorage.getItem("week_1");
+        weekNum = (data = JSON.parse(data)) ? currentWeekNumber(new Date(data[0].date)) : 1;
+      }
+      data = localStorage.getItem("week_" + weekNum);
       if (data) {
         temp = JSON.parse(data);
         return temp.forEach(function(day) {
@@ -205,14 +229,37 @@ app.service('calendarService', [
           }), new Date(day.date)));
         });
       } else {
-        weeklyMenu.push(new DayOfWeek('monday', [], new Date(2014, 10, 3)));
-        weeklyMenu.push(new DayOfWeek('tuesday', [], new Date(2014, 10, 4)));
-        weeklyMenu.push(new DayOfWeek('wednesday', [], new Date(2014, 10, 5)));
-        weeklyMenu.push(new DayOfWeek('thursday', [], new Date(2014, 10, 6)));
-        weeklyMenu.push(new DayOfWeek('friday', [], new Date(2014, 10, 6)));
-        weeklyMenu.push(new DayOfWeek('saturday', [], new Date(2014, 10, 8)));
-        return weeklyMenu.push(new DayOfWeek('sunday', [], new Date(2014, 10, 9)));
+        return buildWeek(weekNum);
       }
+    };
+    buildWeek = function(weekNum) {
+      var index, lastDate, today, _i, _results;
+      if (weekNum == null) {
+        weekNum = 1;
+      }
+      if (weeklyMenu.length > 0) {
+        lastDate = new Date(weeklyMenu[6].date);
+        lastDate = new Date(lastDate.setDate(lastDate.getDate() + 1));
+        weeklyMenu.splice(0, weeklyMenu.length);
+      } else {
+        today = new Date();
+        lastDate = new Date(today.setDate((today.getDate() - today.getDay() + 1) * weekNum));
+      }
+      _results = [];
+      for (index = _i = 0; _i <= 6; index = ++_i) {
+        _results.push(weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(lastDate).setDate(lastDate.getDate() + index)))));
+      }
+      return _results;
+    };
+    nextWeek = function() {
+      currentWeek++;
+      return loadFromLocalStorage(currentWeek);
+    };
+    prevWeek = function() {
+      if (currentWeek > 1) {
+        currentWeek = currentWeek - 1;
+      }
+      return loadFromLocalStorage(currentWeek);
     };
     recipeInDay = function(day, recipeId) {
       var recipe, weekDay, _i, _j, _len, _len1, _ref;
@@ -261,7 +308,7 @@ app.service('calendarService', [
           _ref1.push($recipeService.getById(recipeId));
         }
       }
-      return $rootScope.saveToLocalStorage('calendar', getCompactRecipes());
+      return $rootScope.saveToLocalStorage("week_" + currentWeek, getCompactRecipes());
     };
     removeRecipe = function(recipe, day) {
       var dayIndex, recipeIndex;
@@ -269,7 +316,7 @@ app.service('calendarService', [
       recipeIndex = weeklyMenu[dayIndex].recipes.indexOf(recipe);
       if (recipeIndex > -1) {
         weeklyMenu[dayIndex].recipes.splice(recipeIndex, 1);
-        return $rootScope.saveToLocalStorage('calendar', getCompactRecipes());
+        return $rootScope.saveToLocalStorage("week_" + currentWeek, getCompactRecipes());
       }
     };
     removeAllRecipeInstances = function(recipe) {
@@ -281,7 +328,7 @@ app.service('calendarService', [
           day.recipes.splice(index, 1);
         }
       }
-      return $rootScope.saveToLocalStorage('calendar', getCompactRecipes());
+      return $rootScope.saveToLocalStorage("week_" + currentWeek, getCompactRecipes());
     };
     loadFromLocalStorage();
     return {
@@ -289,24 +336,23 @@ app.service('calendarService', [
       addRecipe: addRecipe,
       removeAllRecipeInstances: removeAllRecipeInstances,
       removeRecipe: removeRecipe,
-      recipeInDay: recipeInDay
+      recipeInDay: recipeInDay,
+      nextWeek: nextWeek,
+      prevWeek: prevWeek,
+      currentWeek: function() {
+        return currentWeek;
+      }
     };
   }
 ]);
-
-getCalendarDayClass = function(dayName) {
-  if (dayName === 'saturday' || dayName === 'sunday') {
-    return 'col-md-1';
-  } else {
-    return 'col-md-2';
-  }
-};
 
 app.controller('CalendarCtrl', [
   '$scope', 'recipeService', '$rootScope', 'calendarService', function($scope, $recipeService, $rootScope, $calendarService) {
     var calendar;
     $scope.weeklyMenu = $calendarService.weeklyMenu;
-    $scope.getCalendarDayClass = getCalendarDayClass;
+    $scope.calendarService = $calendarService;
+    $scope.nextWeek = $calendarService.nextWeek;
+    $scope.prevWeek = $calendarService.prevWeek;
     $scope.removeRecipe = function(recipe, day) {
       return $calendarService.removeRecipe(recipe, day);
     };
@@ -319,8 +365,10 @@ app.controller('CalendarCtrl', [
       if (droppable.classList[0] === 'day') {
         if (!$calendarService.recipeInDay(dayName, draggableId)) {
           $calendarService.addRecipe(dayName, draggableId);
-          $scope.$apply();
+        } else {
+          $rootScope.setStatusMessage("Один день не може містити дві страви з однаковим ім'ям.", "error");
         }
+        $scope.$apply();
       }
       droppable.classList.remove('over');
       return document.querySelector("[data-id=\"" + draggableId + "\"]").style.opacity = '1';
