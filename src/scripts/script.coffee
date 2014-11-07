@@ -209,14 +209,21 @@ app.service 'ingredientsService', ['$rootScope', ($rootScope) ->
 
 		$rootScope.saveToLocalStorage('ingredients', ingredients)
 
-	remove = (ingredient) ->
+	remove = (ingredient, recipes) ->
 		index = ingredients.indexOf(ingredient)
+		recipeNames = ''
 
-		if index > -1
+		for recipe in recipes
+			for ing in recipe.ingredients when ing.parent is ingredient
+				recipeNames += "\n \"#{recipe.name}\""
+
+		if index > -1 and recipeNames.length is 0
 			ingredients.splice(index, 1)
-
-		$rootScope.saveToLocalStorage('ingredients', ingredients)
-
+			$rootScope.saveToLocalStorage('ingredients', ingredients)
+		else if recipeNames.length > 0
+			$rootScope.setStatusMessage("Неможливо видалити інгридієнт \"#{ingredient.name}\". Він використовується у наступних рецептах: \n#{ recipeNames }", 'error')
+		else
+			$rootScope.setStatusMessage("Інгридієнту з id: #{ingredient.id} - не існує.", 'error')
 	loadFromLocalStorage()
 
 	{
@@ -384,7 +391,7 @@ app.controller 'RecipesCtrl', ['$scope', 'recipeService', 'calendarService', ($s
 	, true
 ]
 
-app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope', ($scope, $ingredientsService, $rootScope) ->
+app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope', 'recipeService', ($scope, $ingredientsService, $rootScope, $recipeService) ->
 	$scope.ingredients = $ingredientsService.items
 	$scope.ingredient = new Ingredient()
 
@@ -402,7 +409,7 @@ app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope',
 		$scope.ingredient = ingredient
 
 	$scope.removeIngredient = (ingredient) ->
-		$ingredientsService.remove(ingredient)
+		$ingredientsService.remove(ingredient, $recipeService.recipes)
 		$scope.ingredient = new Ingredient()
 ]
 
@@ -428,11 +435,14 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 		$scope.ingModel.name = ing.name
 
 	$scope.addIngredient = () ->
-		$scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units))
-		$scope.ingModel.id = 0
-		$scope.ingModel.name = ''
-		$scope.ingModel.amount = ''
-		$scope.ingModel.units = 'шт.'
+		if $scope.ingModel.id > 0 and $scope.ingModel.amount > 0
+			$scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units))
+			$scope.ingModel.id = 0
+			$scope.ingModel.name = ''
+			$scope.ingModel.amount = ''
+			$scope.ingModel.units = 'шт.'
+		else
+			false
 
 	$scope.removeIngredient = (ing) ->
 		index = $scope.recipe.ingredients.indexOf(ing)

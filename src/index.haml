@@ -112,7 +112,7 @@
           %input.form-control.col-xs-3.ing-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name', :placeholder => 'введіть назву інгридієнта'}
           %button.btn.btn-default.ing-add.material-shadow{:'ng-click' => 'saveIngredient()'} Зберегти
         .row
-          .recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)'}
+          .recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)', :title => 'клікніть аби змінити'}
             {{ item.name }}
             %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeIngredient(item)'}
 

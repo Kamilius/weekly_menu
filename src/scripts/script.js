@@ -281,13 +281,28 @@ app.service('ingredientsService', [
       }
       return $rootScope.saveToLocalStorage('ingredients', ingredients);
     };
-    remove = function(ingredient) {
-      var index;
+    remove = function(ingredient, recipes) {
+      var index, ing, recipe, recipeNames, _i, _j, _len, _len1, _ref;
       index = ingredients.indexOf(ingredient);
-      if (index > -1) {
-        ingredients.splice(index, 1);
+      recipeNames = '';
+      for (_i = 0, _len = recipes.length; _i < _len; _i++) {
+        recipe = recipes[_i];
+        _ref = recipe.ingredients;
+        for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+          ing = _ref[_j];
+          if (ing.parent === ingredient) {
+            recipeNames += "\n \"" + recipe.name + "\"";
+          }
+        }
       }
-      return $rootScope.saveToLocalStorage('ingredients', ingredients);
+      if (index > -1 && recipeNames.length === 0) {
+        ingredients.splice(index, 1);
+        return $rootScope.saveToLocalStorage('ingredients', ingredients);
+      } else if (recipeNames.length > 0) {
+        return $rootScope.setStatusMessage("Неможливо видалити інгридієнт \"" + ingredient.name + "\". Він використовується у наступних рецептах: \n" + recipeNames, 'error');
+      } else {
+        return $rootScope.setStatusMessage("Інгридієнту з id: " + ingredient.id + " - не існує.", 'error');
+      }
     };
     loadFromLocalStorage();
     return {
@@ -502,7 +517,7 @@ app.controller('RecipesCtrl', [
 ]);
 
 app.controller('IngredientsCtrl', [
-  '$scope', 'ingredientsService', '$rootScope', function($scope, $ingredientsService, $rootScope) {
+  '$scope', 'ingredientsService', '$rootScope', 'recipeService', function($scope, $ingredientsService, $rootScope, $recipeService) {
     $scope.ingredients = $ingredientsService.items;
     $scope.ingredient = new Ingredient();
     $scope.ingredientActive = function(ingredient) {
@@ -524,7 +539,7 @@ app.controller('IngredientsCtrl', [
       return $scope.ingredient = ingredient;
     };
     return $scope.removeIngredient = function(ingredient) {
-      $ingredientsService.remove(ingredient);
+      $ingredientsService.remove(ingredient, $recipeService.recipes);
       return $scope.ingredient = new Ingredient();
     };
   }
@@ -553,11 +568,15 @@ app.controller('RecipesCRUDCtrl', [
       return $scope.ingModel.name = ing.name;
     };
     $scope.addIngredient = function() {
-      $scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units));
-      $scope.ingModel.id = 0;
-      $scope.ingModel.name = '';
-      $scope.ingModel.amount = '';
-      return $scope.ingModel.units = 'шт.';
+      if ($scope.ingModel.id > 0 && $scope.ingModel.amount > 0) {
+        $scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units));
+        $scope.ingModel.id = 0;
+        $scope.ingModel.name = '';
+        $scope.ingModel.amount = '';
+        return $scope.ingModel.units = 'шт.';
+      } else {
+        return false;
+      }
     };
     $scope.removeIngredient = function(ing) {
       var index;

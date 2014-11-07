@@ -111,14 +111,13 @@ nav
 .message
 	text-align: center
 	line-height: 25px
-	height: 45px
 	max-height: 0
 	overflow: hidden
 	font-size: 12px
 	background-color: transparent
 	+transition((max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	&.error, &.success
-		max-height: 45px
+		max-height: 999px
 		padding: 10px 0
 	&.error
 		background-color: #A28382
@@ -288,7 +287,7 @@ calendar .col-xs-1
 			background-color: #fff
 			min-width: 25%
 			list-style: none
-			+transition(max-height 0.4s ease)
+			+transition(max-height 1s ease)
 			.ingredient-item
 				padding-left: 12px
 				height: 33px

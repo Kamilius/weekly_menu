@@ -4666,7 +4666,6 @@ nav ul li.active a {
 .message {
   text-align: center;
   line-height: 25px;
-  height: 45px;
   max-height: 0;
   overflow: hidden;
   font-size: 12px;
@@ -4676,26 +4675,26 @@ nav ul li.active a {
   -o-transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 120, ../../src/styles/style.sass */
+/* line 119, ../../src/styles/style.sass */
 .message.error, .message.success {
-  max-height: 45px;
+  max-height: 999px;
   padding: 10px 0;
 }
-/* line 123, ../../src/styles/style.sass */
+/* line 122, ../../src/styles/style.sass */
 .message.error {
   background-color: #a28382;
 }
-/* line 125, ../../src/styles/style.sass */
+/* line 124, ../../src/styles/style.sass */
 .message.success {
   background-color: #71876d;
 }
 
-/* line 128, ../../src/styles/style.sass */
+/* line 127, ../../src/styles/style.sass */
 .margin-top-25 {
   margin-top: 25px;
 }
 
-/* line 131, ../../src/styles/style.sass */
+/* line 130, ../../src/styles/style.sass */
 .recipe {
   overflow-x: hidden;
   overflow-y: visible;
@@ -4714,21 +4713,21 @@ nav ul li.active a {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 140, ../../src/styles/style.sass */
+/* line 139, ../../src/styles/style.sass */
 .recipe.active {
   -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
 }
-/* line 143, ../../src/styles/style.sass */
+/* line 142, ../../src/styles/style.sass */
 .recipe[draggable=true]:hover {
   cursor: move;
 }
-/* line 145, ../../src/styles/style.sass */
+/* line 144, ../../src/styles/style.sass */
 .recipe[draggable=true]:hover .recipe-controls {
   opacity: 1;
 }
-/* line 147, ../../src/styles/style.sass */
+/* line 146, ../../src/styles/style.sass */
 .recipe .recipe-controls {
   position: absolute;
   top: 0;
@@ -4739,7 +4738,7 @@ nav ul li.active a {
   -o-transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 154, ../../src/styles/style.sass */
+/* line 153, ../../src/styles/style.sass */
 .recipe:hover .recipe-controls {
   background-color: rgba(255, 255, 255, 0.6);
   right: 0;
@@ -4748,11 +4747,11 @@ nav ul li.active a {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 159, ../../src/styles/style.sass */
+/* line 158, ../../src/styles/style.sass */
 .recipe:hover .recipe-controls .glyphicon-chevron-left {
   display: none;
 }
-/* line 161, ../../src/styles/style.sass */
+/* line 160, ../../src/styles/style.sass */
 .recipe .glyphicon {
   font-size: 12px;
   width: 12px;
@@ -4763,19 +4762,19 @@ nav ul li.active a {
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 167, ../../src/styles/style.sass */
+/* line 166, ../../src/styles/style.sass */
 .recipe .glyphicon:hover {
   color: #6b7877;
   cursor: pointer;
   text-decoration: none;
 }
 
-/* line 172, ../../src/styles/style.sass */
+/* line 171, ../../src/styles/style.sass */
 .calendar-pagination {
   position: relative;
   z-index: 2;
 }
-/* line 175, ../../src/styles/style.sass */
+/* line 174, ../../src/styles/style.sass */
 .calendar-pagination .pagination-container {
   background-color: whitesmoke;
   display: flex;
@@ -4786,13 +4785,13 @@ nav ul li.active a {
   border-bottom: 1px solid #b3b6b6;
   border-left: 1px solid #b3b6b6;
 }
-/* line 182, ../../src/styles/style.sass */
+/* line 181, ../../src/styles/style.sass */
 .calendar-pagination .current-week {
   padding: 0 5px 0 5px;
   font-size: 12px;
   text-align: center;
 }
-/* line 186, ../../src/styles/style.sass */
+/* line 185, ../../src/styles/style.sass */
 .calendar-pagination button {
   padding: 0;
   background: none;
@@ -4800,7 +4799,7 @@ nav ul li.active a {
   background-color: whitesmoke;
 }
 
-/* line 192, ../../src/styles/style.sass */
+/* line 191, ../../src/styles/style.sass */
 .calendar {
   position: relative;
   z-index: 2;
@@ -4810,53 +4809,53 @@ nav ul li.active a {
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
 
-/* line 197, ../../src/styles/style.sass */
+/* line 196, ../../src/styles/style.sass */
 calendar .col-xs-1 {
   width: 14.28571%;
   *width: 14.28571%;
 }
 
-/* line 200, ../../src/styles/style.sass */
+/* line 199, ../../src/styles/style.sass */
 .day {
   height: 400px;
   overflow: auto;
 }
-/* line 203, ../../src/styles/style.sass */
+/* line 202, ../../src/styles/style.sass */
 .day.over {
   border: 2px dashed #6b7877;
 }
-/* line 205, ../../src/styles/style.sass */
+/* line 204, ../../src/styles/style.sass */
 .day .date {
   width: 100%;
   font-size: 12px;
   line-height: 25px;
   text-align: center;
 }
-/* line 210, ../../src/styles/style.sass */
+/* line 209, ../../src/styles/style.sass */
 .day .recipe {
   width: 100%;
   height: auto;
   margin: 5px 0;
   padding: 10px 0;
 }
-/* line 215, ../../src/styles/style.sass */
+/* line 214, ../../src/styles/style.sass */
 .day .recipe .recipe-title {
   text-align: center;
   margin-top: 0;
 }
-/* line 218, ../../src/styles/style.sass */
+/* line 217, ../../src/styles/style.sass */
 .day .recipe .recipe-ingredients {
   margin: 0;
   font-size: 12px;
   padding: 0 0 0 27px;
 }
 
-/* line 223, ../../src/styles/style.sass */
+/* line 222, ../../src/styles/style.sass */
 .today {
   background-color: #dae5d8;
 }
 
-/* line 225, ../../src/styles/style.sass */
+/* line 224, ../../src/styles/style.sass */
 .day-header {
   padding: 0;
   text-align: center;
@@ -4867,18 +4866,18 @@ calendar .col-xs-1 {
   border-bottom: 1px solid #b3b6b6;
 }
 
-/* line 234, ../../src/styles/style.sass */
+/* line 233, ../../src/styles/style.sass */
 .day + *, .day-header + * {
   border-left: 1px solid #b3b6b6;
 }
 
-/* line 238, ../../src/styles/style.sass */
+/* line 237, ../../src/styles/style.sass */
 .recipes-container, .ingredients-container {
   max-height: 310px;
   overflow: auto;
   margin-top: 20px;
 }
-/* line 242, ../../src/styles/style.sass */
+/* line 241, ../../src/styles/style.sass */
 .recipes-container .recipe, .ingredients-container .recipe {
   margin: 5px 5px 10px 5px;
   float: left;
@@ -4890,14 +4889,14 @@ calendar .col-xs-1 {
   height: 50px;
 }
 
-/* line 254, ../../src/styles/style.sass */
+/* line 253, ../../src/styles/style.sass */
 .recipe-form button:hover, .recipe-form a:hover, [draggable=true]:hover {
   -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
 }
 
-/* line 257, ../../src/styles/style.sass */
+/* line 256, ../../src/styles/style.sass */
 .recipe-form {
   background-color: #b3b6b6;
   padding: 25px;
@@ -4909,36 +4908,36 @@ calendar .col-xs-1 {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 263, ../../src/styles/style.sass */
+/* line 262, ../../src/styles/style.sass */
 .recipe-form button {
   height: 34px;
   max-width: 100%;
 }
-/* line 267, ../../src/styles/style.sass */
+/* line 266, ../../src/styles/style.sass */
 .recipe-form label {
   font-weight: normal;
 }
-/* line 270, ../../src/styles/style.sass */
+/* line 269, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 273, ../../src/styles/style.sass */
+/* line 272, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus {
   -webkit-border-radius: 4px 4px 0 4px;
   -moz-border-radius: 4px 4px 0 4px;
   -o-border-radius: 4px 4px 0 4px;
   border-radius: 4px 4px 0 4px;
 }
-/* line 275, ../../src/styles/style.sass */
+/* line 274, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus + .available-ingredients {
   max-height: 300px;
 }
-/* line 277, ../../src/styles/style.sass */
+/* line 276, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter .col-xs-1, .recipe-form .dropdown-filter .col-xs-2, .recipe-form .dropdown-filter .col-xs-8 {
   padding: 0;
 }
-/* line 279, ../../src/styles/style.sass */
+/* line 278, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients {
   z-index: 10;
   overflow: auto;
@@ -4951,27 +4950,27 @@ calendar .col-xs-1 {
   background-color: white;
   min-width: 25%;
   list-style: none;
-  -webkit-transition: max-height 0.4s ease;
-  -moz-transition: max-height 0.4s ease;
-  -o-transition: max-height 0.4s ease;
-  transition: max-height 0.4s ease;
+  -webkit-transition: max-height 1s ease;
+  -moz-transition: max-height 1s ease;
+  -o-transition: max-height 1s ease;
+  transition: max-height 1s ease;
 }
-/* line 292, ../../src/styles/style.sass */
+/* line 291, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item {
   padding-left: 12px;
   height: 33px;
   line-height: 33px;
 }
-/* line 296, ../../src/styles/style.sass */
+/* line 295, ../../src/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item:hover {
   background-color: whitesmoke;
   cursor: pointer;
 }
-/* line 300, ../../src/styles/style.sass */
+/* line 299, ../../src/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 302, ../../src/styles/style.sass */
+/* line 301, ../../src/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -4986,33 +4985,33 @@ calendar .col-xs-1 {
   -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 312, ../../src/styles/style.sass */
+/* line 311, ../../src/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   cursor: pointer;
   color: #6b7877;
 }
-/* line 315, ../../src/styles/style.sass */
+/* line 314, ../../src/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 318, ../../src/styles/style.sass */
+/* line 317, ../../src/styles/style.sass */
 .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 320, ../../src/styles/style.sass */
+/* line 319, ../../src/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }
 
-/* line 324, ../../src/styles/style.sass */
+/* line 323, ../../src/styles/style.sass */
 .ingredients-container .ing-input-wrapper {
   padding-bottom: 10px;
 }
-/* line 326, ../../src/styles/style.sass */
+/* line 325, ../../src/styles/style.sass */
 .ingredients-container .recipe:hover {
   cursor: pointer;
 }
-/* line 328, ../../src/styles/style.sass */
+/* line 327, ../../src/styles/style.sass */
 .ingredients-container .ing-name {
   width: 25%;
   max-height: 33px;
@@ -5021,14 +5020,14 @@ calendar .col-xs-1 {
   -o-border-radius: 4px 0px 0px 4px;
   border-radius: 4px 0px 0px 4px;
 }
-/* line 332, ../../src/styles/style.sass */
+/* line 331, ../../src/styles/style.sass */
 .ingredients-container .ing-add {
   -webkit-border-radius: 0px 4px 4px 0px;
   -moz-border-radius: 0px 4px 4px 0px;
   -o-border-radius: 0px 4px 4px 0px;
   border-radius: 0px 4px 4px 0px;
 }
-/* line 335, ../../src/styles/style.sass */
+/* line 334, ../../src/styles/style.sass */
 .ingredients-container .glyphicon-remove {
   position: absolute;
   top: 5px;
