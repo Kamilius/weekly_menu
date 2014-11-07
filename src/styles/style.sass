@@ -56,6 +56,10 @@ header
 	&:hover
 		cursor: default
 
+.material-shadow
+	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	+transition(box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940))
+
 nav
 	position: relative
 	background-color: #6B7877
@@ -125,6 +129,8 @@ nav
 	+border-radius(5px)
 	+transition((opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	&.active
+		+box-shadow(0px 3px 8px 1px rgba(0, 0, 0, 0.7))
 	&[draggable=true]
 		&:hover
 			cursor: move
@@ -221,7 +227,7 @@ calendar .col-xs-1
 		border-left: 1px solid #B3B6B6
 
 //Container with draggable .recipe elements
-.recipes-container
+.recipes-container, .ingredients-container
 	max-height: 310px
 	overflow: auto
 	margin-top: 20px
@@ -247,10 +253,6 @@ calendar .col-xs-1
 	+border-radius(5px)
 	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
 
-	input[type=text], button, a
-		+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
-		+transition(box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940))
-
 	label
 		font-weight: normal
 	.ingredient
@@ -275,3 +277,15 @@ calendar .col-xs-1
 				opacity: 1
 	.btn-success
 		margin-right: 5px
+
+.ingredients-container
+	.ing-input-wrapper
+		padding-bottom: 10px
+	.recipe:hover
+		cursor: pointer
+	.ing-name
+		width: 25%
+		max-height: 33px
+		+border-radius(4px 0px 0px 4px)
+	.ing-add
+		+border-radius(0px 4px 4px 0px)

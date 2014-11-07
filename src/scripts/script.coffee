@@ -1,8 +1,9 @@
 class Recipe
 	constructor: (@name = '', ingredients = [new Ingredient], @id = 0) ->
 		@ingredients = [].concat(ingredients)
+
 class Ingredient
-	constructor: (@name = '') ->
+	constructor: (@name = '', @id = 0, @amount = '') ->
 
 class DayOfWeek
 	constructor: (@name, @recipes, @date) ->
@@ -11,9 +12,7 @@ class DayOfWeek
 
 app = angular.module 'weeklyMenuApp', ['ngRoute']		
 
-app.config [
-	'$routeProvider',
-	($routeProvider) ->
+app.config ['$routeProvider', ($routeProvider) ->
 		$routeProvider.when('/home',
 			templateUrl: 'home.html'
 		).when('/recipes',
@@ -22,12 +21,14 @@ app.config [
 		).when('/recipes/:recipeId',
 			templateUrl: 'recipesCRUD.html'
 			controller: 'RecipesCRUDCtrl'
+		).when('/ingredients',
+			templateUrl: 'ingredients.html'
+			controller: 'IngredientsCtrl'
 		).
 		otherwise(redirectTo: '/home')
 ]
 
 app.run ['$rootScope', '$location', ($rootScope, $location) ->
-
 	$rootScope.statusMessage = 
 		text: ''
 		type: ''
@@ -64,6 +65,12 @@ app.directive 'recipescontainer', ->
 		templateUrl: 'recipesContainer.html'
 		scope: {}
 		controller: 'RecipesCtrl'
+	}
+
+app.directive 'ingredients', ->
+	{
+		restrict: 'E'
+		templateUrl: 'ingredients.html'
 	}
 
 app.directive 'index', ->
@@ -111,10 +118,10 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 				), recipe.id)
 
 	getById = (id) ->
-		returnValue = null
-
 		for recipe in recipes
 			return recipe if recipe.id == id
+
+		return null
 
 	add = (recipe) ->
 		recipe.id = if recipes.length > 0 then recipes[recipes.length - 1].id + 1 else 1
@@ -151,7 +158,57 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 	}
 ]
 
-app.service 'calendarService',['recipeService', '$rootScope', ($recipeService, $rootScope) ->
+app.service 'ingredientsService', ['$rootScope', ($rootScope) ->
+	ingredients = []
+
+	loadFromLocalStorage = ->
+		data = localStorage.getItem('ingredients')
+
+		if data
+			ingredients = JSON.parse(data).map (ingredient) ->
+				new Ingredient(ingredient.name, ingredient.id)
+
+	getById = (id) ->
+		for ingredient in ingredients
+			return ingredient if ingredient.id == id
+
+		return null
+
+	add = (ingredient) ->
+		ingredient.id = if ingredients.length > 0 then ingredients[ingredients.length - 1].id + 1 else 1
+		ingredients.push(ingredient)
+		$rootScope.saveToLocalStorage('ingredients', ingredients)
+
+	save = (ingredient) ->
+		if ingredient.id is 0
+			@add new Ingredient(ingredient.name)
+			$rootScope.setStatusMessage('Інгредієнт успішно збережено.', 'success')
+		else
+			temp = @getById(ingredient.id)
+			temp.name = ingredient.name
+
+		$rootScope.saveToLocalStorage('ingredients', ingredients)
+
+	remove = (ingredient) ->
+		index = recipes.indexOf(recipe)
+
+		if index > -1
+			recipes.splice(index, 1)
+
+		$rootScope.saveToLocalStorage('ingredients', ingredients)
+
+	loadFromLocalStorage()
+	
+	{
+		getById: getById
+		items: ingredients
+		add: add
+		save: save
+		remove: remove
+	}
+]
+
+app.service 'calendarService', ['recipeService', '$rootScope', ($recipeService, $rootScope) ->
 	weeklyMenu = []
 	dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 	currentWeek = 1
@@ -305,6 +362,28 @@ app.controller 'RecipesCtrl', ['$scope', 'recipeService', 'calendarService', ($s
 			event.dataTransfer.setData('id', el.dataset.id)
 			event.dataTransfer.setData('element', el)
 	, true
+]
+
+app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope', ($scope, $ingredientsService, $rootScope) ->
+	$scope.ingredients = $ingredientsService.items
+	$scope.ingredient = new Ingredient()
+
+	$scope.ingredientActive = (ingredient) ->
+		if ingredient.id is $scope.ingredient.id then 'active' else ''
+
+	$scope.saveIngredient = ->
+		if $scope.ingredient.name.length > 0
+			$ingredientsService.save($scope.ingredient)
+			$scope.ingredient = new Ingredient()
+		else
+			$rootScope.setStatusMessage('Інгредієнт має мати назву.', 'error')
+
+	$scope.editIngredient = (ingredient) ->
+		$scope.ingredient = ingredient
+
+	$scope.removeIngredient = (ingredient) ->
+		$ingredientsService.remove($scope.ingredient)
+		$scope.ingredient = new Ingredient()
 ]
 
 app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$location', '$rootScope', ($scope, $routeParams, $recipeService, $location, $rootScope) ->

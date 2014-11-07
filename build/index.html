@@ -23,6 +23,9 @@
           <li ng-class='getClass("/recipes")'>
             <a href='#/recipes'>Додати рецепт</a>
           </li>
+          <li ng-class='getClass("/ingredients")'>
+            <a href='#/ingredients'>Інгредієнти</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -90,22 +93,25 @@
           <form class='recipe-form col-md-12' name='recipeForm' role='form'>
             <div class='form-group'>
               <label for='recipe-title'>Назва рецепту</label>
-              <input class='form-control' id='recipe-title' ng-model='recipe.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
+              <input class='form-control material-shadow' id='recipe-title' ng-model='recipe.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
             </div>
             <div class='form-group recipe-ingredients'>
               <label>Інгридієнти</label>
               <div class='ingredient' ng-repeat='ingredient in recipe.ingredients'>
-                <input class='form-control' ng-model='ingredient.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
+                <input class='form-control material-shadow' ng-model='ingredient.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' placeholder='почніть вводити назву інгридієнту' required='' type='text'>
                 <div class='remove-ingredient' ng-click='removeIngredient(recipe.ingredients[$index])'>&#57364;</div>
+                <!-- %ul.available-ingredients -->
+                <!-- %li{:'ng-repeat' => 'item in recipe.ingredients | filter:ingredient.name'} -->
+                <!-- {{ ingredient.name }} -->
               </div>
-              <button class='btn btn-default' ng-click='addIngredient()'>
+              <button class='btn btn-default material-shadow' ng-click='addIngredient()'>
                 Додати інгредієнт
               </button>
             </div>
-            <a class='btn btn-default pull-right' href='#/home'>
+            <a class='btn btn-default pull-right material-shadow' href='#/home'>
               Повернутись на головну
             </a>
-            <button class='btn btn-success pull-right' ng-click='saveRecipe()'>
+            <button class='btn btn-success pull-right material-shadow' ng-click='saveRecipe()'>
               Зберегти рецепт
             </button>
           </form>
@@ -117,6 +123,19 @@
         <span class='glyphicon glyphicon-chevron-left'></span>
         <a class='glyphicon glyphicon-pencil' href='#/recipes/{{ recipe.id }}' title='Редагувати'></a>
         <span class='glyphicon glyphicon-remove' ng-click='removeRecipe(recipe, day)' title='Видалити'></span>
+      </div>
+    </script>
+    <script id='ingredients.html' type='text/ng-template'>
+      <div class='container margin-top-25 ingredients-container'>
+        <div class='row ing-input-wrapper'>
+          <input class='form-control col-xs-3 ing-name material-shadow' ng-model='ingredient.name' type='text'>
+          <button class='btn btn-default ing-add material-shadow' ng-click='saveIngredient()'>Зберегти</button>
+        </div>
+        <div class='row'>
+          <div class='recipe' ng-class='ingredientActive(item)' ng-click='editIngredient(item)' ng-repeat='item in ingredients'>
+            {{ item.name }}
+          </div>
+        </div>
       </div>
     </script>
     <script src='scripts/main.min.js'></script>

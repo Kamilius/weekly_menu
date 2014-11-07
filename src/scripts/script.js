@@ -15,8 +15,10 @@ Recipe = (function() {
 })();
 
 Ingredient = (function() {
-  function Ingredient(name) {
+  function Ingredient(name, id, amount) {
     this.name = name != null ? name : '';
+    this.id = id != null ? id : 0;
+    this.amount = amount != null ? amount : '';
   }
 
   return Ingredient;
@@ -50,6 +52,9 @@ app.config([
     }).when('/recipes/:recipeId', {
       templateUrl: 'recipesCRUD.html',
       controller: 'RecipesCRUDCtrl'
+    }).when('/ingredients', {
+      templateUrl: 'ingredients.html',
+      controller: 'IngredientsCtrl'
     }).otherwise({
       redirectTo: '/home'
     });
@@ -104,6 +109,13 @@ app.directive('recipescontainer', function() {
   };
 });
 
+app.directive('ingredients', function() {
+  return {
+    restrict: 'E',
+    templateUrl: 'ingredients.html'
+  };
+});
+
 app.directive('index', function() {
   return {
     restrict: 'E',
@@ -152,14 +164,14 @@ app.service('recipeService', [
       }
     };
     getById = function(id) {
-      var recipe, returnValue, _i, _len;
-      returnValue = null;
+      var recipe, _i, _len;
       for (_i = 0, _len = recipes.length; _i < _len; _i++) {
         recipe = recipes[_i];
         if (recipe.id === id) {
           return recipe;
         }
       }
+      return null;
     };
     add = function(recipe) {
       recipe.id = recipes.length > 0 ? recipes[recipes.length - 1].id + 1 : 1;
@@ -190,6 +202,64 @@ app.service('recipeService', [
     return {
       recipes: recipes,
       getById: getById,
+      add: add,
+      save: save,
+      remove: remove
+    };
+  }
+]);
+
+app.service('ingredientsService', [
+  '$rootScope', function($rootScope) {
+    var add, getById, ingredients, loadFromLocalStorage, remove, save;
+    ingredients = [];
+    loadFromLocalStorage = function() {
+      var data;
+      data = localStorage.getItem('ingredients');
+      if (data) {
+        return ingredients = JSON.parse(data).map(function(ingredient) {
+          return new Ingredient(ingredient.name, ingredient.id);
+        });
+      }
+    };
+    getById = function(id) {
+      var ingredient, _i, _len;
+      for (_i = 0, _len = ingredients.length; _i < _len; _i++) {
+        ingredient = ingredients[_i];
+        if (ingredient.id === id) {
+          return ingredient;
+        }
+      }
+      return null;
+    };
+    add = function(ingredient) {
+      ingredient.id = ingredients.length > 0 ? ingredients[ingredients.length - 1].id + 1 : 1;
+      ingredients.push(ingredient);
+      return $rootScope.saveToLocalStorage('ingredients', ingredients);
+    };
+    save = function(ingredient) {
+      var temp;
+      if (ingredient.id === 0) {
+        this.add(new Ingredient(ingredient.name));
+        $rootScope.setStatusMessage('Інгредієнт успішно збережено.', 'success');
+      } else {
+        temp = this.getById(ingredient.id);
+        temp.name = ingredient.name;
+      }
+      return $rootScope.saveToLocalStorage('ingredients', ingredients);
+    };
+    remove = function(ingredient) {
+      var index;
+      index = recipes.indexOf(recipe);
+      if (index > -1) {
+        recipes.splice(index, 1);
+      }
+      return $rootScope.saveToLocalStorage('ingredients', ingredients);
+    };
+    loadFromLocalStorage();
+    return {
+      getById: getById,
+      items: ingredients,
       add: add,
       save: save,
       remove: remove
@@ -395,6 +465,35 @@ app.controller('RecipesCtrl', [
         return event.dataTransfer.setData('element', el);
       }
     }, true);
+  }
+]);
+
+app.controller('IngredientsCtrl', [
+  '$scope', 'ingredientsService', '$rootScope', function($scope, $ingredientsService, $rootScope) {
+    $scope.ingredients = $ingredientsService.items;
+    $scope.ingredient = new Ingredient();
+    $scope.ingredientActive = function(ingredient) {
+      if (ingredient.id === $scope.ingredient.id) {
+        return 'active';
+      } else {
+        return '';
+      }
+    };
+    $scope.saveIngredient = function() {
+      if ($scope.ingredient.name.length > 0) {
+        $ingredientsService.save($scope.ingredient);
+        return $scope.ingredient = new Ingredient();
+      } else {
+        return $rootScope.setStatusMessage('Інгредієнт має мати назву.', 'error');
+      }
+    };
+    $scope.editIngredient = function(ingredient) {
+      return $scope.ingredient = ingredient;
+    };
+    return $scope.removeIngredient = function(ingredient) {
+      $ingredientsService.remove($scope.ingredient);
+      return $scope.ingredient = new Ingredient();
+    };
   }
 ]);
 

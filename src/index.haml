@@ -17,6 +17,8 @@
             %a{:href => '#/home'} Перелік рецептів
           %li{:'ng-class' => 'getClass("/recipes")'}
             %a{:href => '#/recipes'} Додати рецепт
+          %li{:'ng-class' => 'getClass("/ingredients")'}
+            %a{:href => '#/ingredients'} Інгредієнти
     
     .message{:'ng-class' => '{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'}
       {{ statusMessage.text }}
@@ -67,17 +69,20 @@
           %form.recipe-form.col-md-12{:role => "form", :name => "recipeForm"}
             .form-group
               %label{:for => "recipe-title"} Назва рецепту
-              %input.form-control#recipe-title{:type => "text", :'ng-model' => 'recipe.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")'}
+              %input.form-control.material-shadow#recipe-title{:type => "text", :'ng-model' => 'recipe.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")'}
             .form-group.recipe-ingredients
               %label Інгридієнти
               .ingredient{:'ng-repeat' => 'ingredient in recipe.ingredients'}
-                %input.form-control{:type => "text", :'ng-model' => 'ingredient.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")'}
+                %input.form-control.material-shadow{:type => "text", :'ng-model' => 'ingredient.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")', :placeholder => 'почніть вводити назву інгридієнту'}
                 .remove-ingredient{:'ng-click' => 'removeIngredient(recipe.ingredients[$index])'} &#57364;
-              %button.btn.btn-default{:'ng-click' => 'addIngredient()'}
+                / %ul.available-ingredients
+                /   %li{:'ng-repeat' => 'item in recipe.ingredients | filter:ingredient.name'}
+                /     {{ ingredient.name }}
+              %button.btn.btn-default.material-shadow{:'ng-click' => 'addIngredient()'}
                 Додати інгредієнт
-            %a.btn.btn-default.pull-right{:href => '#/home'}
+            %a.btn.btn-default.pull-right.material-shadow{:href => '#/home'}
               Повернутись на головну
-            %button.btn.btn-success.pull-right{:'ng-click' => 'saveRecipe()'}
+            %button.btn.btn-success.pull-right.material-shadow{:'ng-click' => 'saveRecipe()'}
               Зберегти рецепт
 
     %script{:type => 'text/ng-template', :id => 'recipeControls.html'}
@@ -85,5 +90,14 @@
         %span.glyphicon.glyphicon-chevron-left
         %a.glyphicon.glyphicon-pencil{:title => 'Редагувати', :href => '#/recipes/{{ recipe.id }}'}
         %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeRecipe(recipe, day)'}
+
+    %script{:type => 'text/ng-template', :id => 'ingredients.html'}
+      .container.margin-top-25.ingredients-container
+        .row.ing-input-wrapper
+          %input.form-control.col-xs-3.ing-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name'}
+          %button.btn.btn-default.ing-add.material-shadow{:'ng-click' => 'saveIngredient()'} Зберегти
+        .row
+          .recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)'}
+            {{ item.name }}
 
     %script{:src => 'scripts/main.min.js'}
