@@ -19,6 +19,14 @@
 	-moz-box-shadow: $params
 	box-shadow: $params
 
+.no-left-border-radius
+	+border-radius(0 4px 4px 0)
+.no-right-border-radius
+	+border-radius(4px 0 0 4px)
+.no-border-radius
+	+border-radius(0)
+
+
 .row
 	margin: 0
 
@@ -249,12 +257,46 @@ calendar .col-xs-1
 .recipe-form
 	background-color: #B3B6B6
 	padding: 25px
-	overflow: hidden
 	+border-radius(5px)
 	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
 
+	button
+		height: 34px
+		max-width: 100%
+
 	label
 		font-weight: normal
+
+	.dropdown-filter
+		position: relative
+		margin-bottom: 10px
+		input[type=text]:focus
+			+border-radius(4px 4px 0 4px)
+			& + .available-ingredients
+				max-height: 300px
+		.col-xs-1, .col-xs-2, .col-xs-8
+			padding: 0
+		.available-ingredients
+			z-index: 10
+			overflow: auto
+			max-height: 0
+			padding: 0
+			margin: 0
+			position: absolute
+			top: 33px
+			left: 0
+			background-color: #fff
+			min-width: 25%
+			list-style: none
+			+transition(max-height 0.4s ease)
+			.ingredient-item
+				padding-left: 12px
+				height: 33px
+				line-height: 33px
+				&:hover
+					background-color: #F5F5F5
+					cursor: pointer
+
 	.ingredient
 		position: relative
 		.remove-ingredient
@@ -272,7 +314,7 @@ calendar .col-xs-1
 				color: #6B7877
 		& + *
 			margin-top: 10px
-		&:active, &:hover
+		&:hover
 			&>.remove-ingredient
 				opacity: 1
 	.btn-success
@@ -289,3 +331,10 @@ calendar .col-xs-1
 		+border-radius(4px 0px 0px 4px)
 	.ing-add
 		+border-radius(0px 4px 4px 0px)
+
+	.glyphicon-remove
+		position: absolute
+		top: 5px
+		right: 0
+		width: 20px
+		height: 20px

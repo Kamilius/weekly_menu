@@ -1,9 +1,12 @@
 class Recipe
-	constructor: (@name = '', ingredients = [new Ingredient], @id = 0) ->
+	constructor: (@name = '', ingredients = [], @id = 0) ->
 		@ingredients = [].concat(ingredients)
 
 class Ingredient
-	constructor: (@name = '', @id = 0, @amount = '') ->
+	constructor: (@name = '', @id = 0) ->
+
+class RecipeIngredient
+	constructor: (@parent, @amount = '', @units = '') ->
 
 class DayOfWeek
 	constructor: (@name, @recipes, @date) ->
@@ -70,6 +73,7 @@ app.directive 'recipescontainer', ->
 app.directive 'ingredients', ->
 	{
 		restrict: 'E'
+		scope: {}
 		templateUrl: 'ingredients.html'
 	}
 
@@ -82,6 +86,7 @@ app.directive 'index', ->
 app.directive 'recipecrud', ->
 	{
 		restrict: 'E'
+		scope: {}
 		templateUrl: 'recipeCRUD.html'
 	}
 
@@ -94,11 +99,11 @@ app.directive 'recipecontrols', ->
 app.directive 'dragEnterLeaveAnimation', -> 
 	(scope, element, attrs) ->
 		element.on 'dragenter', (event) ->
-			@.classList.add('over')
+			@classList.add('over')
 		element.on 'dragleave', (event) ->
-			@.classList.remove('over')
+			@classList.remove('over')
 
-app.service 'recipeService', ['$rootScope', ($rootScope) ->
+app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $ingredientsService) ->
 	# recipes = [
 	# 	new Recipe 'Смажена картопля', [{ name: 'картопля' }, { name:'спеції' }], 1
 	# 	new Recipe 'Борщ', [{ name:'картопля' }, { name:'буряк' }, { name:'морква' }, { name:'цибуля' }, { name:'куряче філе' }, { name:'спеції' }], 2
@@ -114,7 +119,7 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 		if data
 			recipes = JSON.parse(data).map (recipe) ->
 				new Recipe(recipe.name, recipe.ingredients.map((ing) ->
-					new Ingredient(ing.name)
+					new RecipeIngredient($ingredientsService.getById(ing.parent), ing.amount, ing.units)
 				), recipe.id)
 
 	getById = (id) ->
@@ -123,10 +128,26 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 
 		return null
 
+	getCompactRecipes = ->
+		temp = []
+		for recipe in recipes
+			temp.push(
+				id: recipe.id
+				name: recipe.name
+				ingredients: recipe.ingredients.map (ing) ->
+					return {
+						parent: ing.parent.id
+						amount: ing.amount
+						units: ing.units
+					}
+			)
+
+		return temp
+
 	add = (recipe) ->
-		recipe.id = if recipes.length > 0 then recipes[recipes.length - 1].id + 1 else 1
+		recipe.id = if recipes.length > 0 then recipes[recipes.length - 1]?.id + 1 else 1
 		recipes.push(recipe)
-		$rootScope.saveToLocalStorage('recipes', recipes)
+		$rootScope.saveToLocalStorage('recipes', getCompactRecipes())
 
 	save = (recipe) ->
 		if recipe.id is 0
@@ -136,8 +157,7 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 			temp = @getById(recipe.id)
 			temp.name = recipe.name
 			temp.ingredients = [].concat(recipe.ingredients)
-
-		$rootScope.saveToLocalStorage('recipes', recipes)
+			$rootScope.saveToLocalStorage('recipes', getCompactRecipes())
 
 	remove = (recipe) ->
 		index = recipes.indexOf(recipe)
@@ -145,7 +165,7 @@ app.service 'recipeService', ['$rootScope', ($rootScope) ->
 		if index > -1
 			recipes.splice(index, 1)
 
-		$rootScope.saveToLocalStorage('recipes', recipes)
+		$rootScope.saveToLocalStorage('recipes', getCompactRecipes())
 
 	loadFromLocalStorage()	
 
@@ -175,7 +195,7 @@ app.service 'ingredientsService', ['$rootScope', ($rootScope) ->
 		return null
 
 	add = (ingredient) ->
-		ingredient.id = if ingredients.length > 0 then ingredients[ingredients.length - 1].id + 1 else 1
+		ingredient.id = if ingredients.length > 0 then ingredients[ingredients.length - 1]?.id + 1 else 1
 		ingredients.push(ingredient)
 		$rootScope.saveToLocalStorage('ingredients', ingredients)
 
@@ -190,15 +210,15 @@ app.service 'ingredientsService', ['$rootScope', ($rootScope) ->
 		$rootScope.saveToLocalStorage('ingredients', ingredients)
 
 	remove = (ingredient) ->
-		index = recipes.indexOf(recipe)
+		index = ingredients.indexOf(ingredient)
 
 		if index > -1
-			recipes.splice(index, 1)
+			ingredients.splice(index, 1)
 
 		$rootScope.saveToLocalStorage('ingredients', ingredients)
 
 	loadFromLocalStorage()
-	
+
 	{
 		getById: getById
 		items: ingredients
@@ -382,38 +402,49 @@ app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope',
 		$scope.ingredient = ingredient
 
 	$scope.removeIngredient = (ingredient) ->
-		$ingredientsService.remove($scope.ingredient)
+		$ingredientsService.remove(ingredient)
 		$scope.ingredient = new Ingredient()
 ]
 
-app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$location', '$rootScope', ($scope, $routeParams, $recipeService, $location, $rootScope) ->
+app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$location', '$rootScope', 'ingredientsService', ($scope, $routeParams, $recipeService, $location, $rootScope, $ingredientsService) ->
+	
 	$scope.recipes = $recipeService.recipes
+	$scope.ingredients = $ingredientsService.items
+	$scope.ingModel =
+		id: 0
+		name: ''
+		amount: ''
+		units: 'шт.'
+	$scope.recipe = null
 
 	if $routeParams.recipeId
 		recipe = $recipeService.getById(+$routeParams.recipeId)
-		$scope.recipe = {
-			id: recipe.id
-			name: recipe.name
-			ingredients: [].concat(recipe.ingredients)
-		}
+		$scope.recipe = new Recipe(recipe.name, [].concat(recipe.ingredients), recipe.id)
 	else
 		$scope.recipe = new Recipe()
 
-	$scope.addIngredient = ->
-		$scope.recipe.ingredients.push(new Ingredient())
+	$scope.chooseIngredient = (ing) ->
+		$scope.ingModel.id = ing.id
+		$scope.ingModel.name = ing.name
+
+	$scope.addIngredient = () ->
+		$scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units))
+		$scope.ingModel.id = 0
+		$scope.ingModel.name = ''
+		$scope.ingModel.amount = ''
+		$scope.ingModel.units = 'шт.'
 
 	$scope.removeIngredient = (ing) ->
 		index = $scope.recipe.ingredients.indexOf(ing)
 
-		if index > -1 and $scope.recipe.ingredients.length > 1
+		if index > -1 and $scope.recipe.ingredients.length > 0
 			$scope.recipe.ingredients.splice(index, 1)
 			$rootScope.setStatusMessage('', '')
-		else
-			$rootScope.setStatusMessage('Має бути принаймні один інгридієнт.', 'error')
 
 	$scope.saveRecipe = ->
-		if $scope.recipeForm.$invalid is false
+		if $scope.recipeForm.$invalid is false and $scope.recipe.ingredients.length > 0
 			$recipeService.save($scope.recipe)
-
 			$location.path("/home")
+		else
+			$rootScope.setStatusMessage('Рецепт має містити принаймні один інгридієнт.', 'error')
 ]

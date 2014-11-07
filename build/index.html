@@ -65,8 +65,8 @@
                   {{ recipe.name }}
                 </h5>
                 <ul class='recipe-ingredients'>
-                  <li ng-repeat='ingredient in recipe.ingredients'>
-                    {{ ingredient.name }}
+                  <li ng-repeat='ing in recipe.ingredients'>
+                    {{ ing.parent.name }}
                   </li>
                 </ul>
               </div>
@@ -93,20 +93,41 @@
           <form class='recipe-form col-md-12' name='recipeForm' role='form'>
             <div class='form-group'>
               <label for='recipe-title'>Назва рецепту</label>
-              <input class='form-control material-shadow' id='recipe-title' ng-model='recipe.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
+              <input class='form-control material-shadow' ng-model='recipe.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' required='' type='text'>
             </div>
             <div class='form-group recipe-ingredients'>
               <label>Інгридієнти</label>
-              <div class='ingredient' ng-repeat='ingredient in recipe.ingredients'>
-                <input class='form-control material-shadow' ng-model='ingredient.name' oninvalid='setCustomValidity("Це поле не може бути пустим")' placeholder='почніть вводити назву інгридієнту' required='' type='text'>
-                <div class='remove-ingredient' ng-click='removeIngredient(recipe.ingredients[$index])'>&#57364;</div>
-                <!-- %ul.available-ingredients -->
-                <!-- %li{:'ng-repeat' => 'item in recipe.ingredients | filter:ingredient.name'} -->
-                <!-- {{ ingredient.name }} -->
+              <div class='dropdown-filter row'>
+                <div class='col-xs-8'>
+                  <input class='form-control material-shadow no-right-border-radius' ng-model='ingModel.name' placeholder='почніть вводити назву інгридієнта' type='text'>
+                  <ul class='available-ingredients material-shadow'>
+                    <li class='ingredient-item' ng-click='chooseIngredient(item)' ng-repeat='item in ingredients | filter:ingModel.name'>
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
+                <div class='col-xs-2'>
+                  <input class='form-control material-shadow no-border-radius' ng-model='ingModel.amount' placeholder='к-сть' type='text'>
+                </div>
+                <div class='col-xs-1'>
+                  <select class='form-control material-shadow no-border-radius' ng-model='ingModel.units'>
+                    <option value='шт.'>шт.</option>
+                    <option value='кг'>кг</option>
+                    <option value='г'>г</option>
+                    <option value='л'>л</option>
+                    <option value='мл'>мл</option>
+                    <option value='ч.л.'>ч.л.</option>
+                    <option value='стол.л.'>стол.л.</option>
+                  </select>
+                </div>
+                <div class='col-xs-1'>
+                  <button class='btn btn-default material-shadow no-left-border-radius' ng-click='addIngredient()'>Додати</button>
+                </div>
               </div>
-              <button class='btn btn-default material-shadow' ng-click='addIngredient()'>
-                Додати інгредієнт
-              </button>
+              <div class='ingredient form-control material-shadow' ng-repeat='ingredient in recipe.ingredients'>
+                {{ ingredient.parent.name + ' ' + ingredient.amount + ingredient.units }}
+                <div class='remove-ingredient' ng-click='removeIngredient(recipe.ingredients[$index])'>&#57364;</div>
+              </div>
             </div>
             <a class='btn btn-default pull-right material-shadow' href='#/home'>
               Повернутись на головну
@@ -128,12 +149,13 @@
     <script id='ingredients.html' type='text/ng-template'>
       <div class='container margin-top-25 ingredients-container'>
         <div class='row ing-input-wrapper'>
-          <input class='form-control col-xs-3 ing-name material-shadow' ng-model='ingredient.name' type='text'>
+          <input class='form-control col-xs-3 ing-name material-shadow' ng-model='ingredient.name' placeholder='введіть назву інгридієнта' type='text'>
           <button class='btn btn-default ing-add material-shadow' ng-click='saveIngredient()'>Зберегти</button>
         </div>
         <div class='row'>
           <div class='recipe' ng-class='ingredientActive(item)' ng-click='editIngredient(item)' ng-repeat='item in ingredients'>
             {{ item.name }}
+            <span class='glyphicon glyphicon-remove' ng-click='removeIngredient(item)' title='Видалити'></span>
           </div>
         </div>
       </div>

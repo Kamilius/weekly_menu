@@ -50,8 +50,8 @@
                 %h5.recipe-title
                   {{ recipe.name }}
                 %ul.recipe-ingredients
-                  %li{:'ng-repeat' => 'ingredient in recipe.ingredients'}
-                    {{ ingredient.name }}
+                  %li{:'ng-repeat' => 'ing in recipe.ingredients'}
+                    {{ ing.parent.name }}
 
     %script{:type => 'text/ng-template', :id => 'recipesContainer.html'}
       .container.recipes-container
@@ -69,17 +69,32 @@
           %form.recipe-form.col-md-12{:role => "form", :name => "recipeForm"}
             .form-group
               %label{:for => "recipe-title"} Назва рецепту
-              %input.form-control.material-shadow#recipe-title{:type => "text", :'ng-model' => 'recipe.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")'}
+              %input.form-control.material-shadow{:type => "text", :'ng-model' => 'recipe.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")'}
             .form-group.recipe-ingredients
               %label Інгридієнти
-              .ingredient{:'ng-repeat' => 'ingredient in recipe.ingredients'}
-                %input.form-control.material-shadow{:type => "text", :'ng-model' => 'ingredient.name', :required => '', :oninvalid => 'setCustomValidity("Це поле не може бути пустим")', :placeholder => 'почніть вводити назву інгридієнту'}
+              .dropdown-filter.row
+                .col-xs-8
+                  %input.form-control.material-shadow.no-right-border-radius{:type => "text", :'ng-model' => 'ingModel.name', :placeholder => 'почніть вводити назву інгридієнта'}
+                  %ul.available-ingredients.material-shadow
+                    %li.ingredient-item{:'ng-repeat' => 'item in ingredients | filter:ingModel.name', :'ng-click' => 'chooseIngredient(item)'}
+                      {{ item.name }}
+                .col-xs-2
+                  %input.form-control.material-shadow.no-border-radius{:type => "text", :'ng-model' => 'ingModel.amount', :placeholder => 'к-сть'}
+                .col-xs-1
+                  %select.form-control.material-shadow.no-border-radius{:'ng-model' => 'ingModel.units'}
+                    %option{:value => 'шт.'} шт.
+                    %option{:value => 'кг'} кг
+                    %option{:value => 'г'} г
+                    %option{:value => 'л'} л
+                    %option{:value => 'мл'} мл
+                    %option{:value => 'ч.л.'} ч.л.
+                    %option{:value => 'стол.л.'} стол.л.
+                .col-xs-1
+                  %button.btn.btn-default.material-shadow.no-left-border-radius{:'ng-click' => 'addIngredient()'} Додати
+              .ingredient.form-control.material-shadow{:'ng-repeat' => 'ingredient in recipe.ingredients'}
+                {{ ingredient.parent.name + ' ' + ingredient.amount + ingredient.units }}
                 .remove-ingredient{:'ng-click' => 'removeIngredient(recipe.ingredients[$index])'} &#57364;
-                / %ul.available-ingredients
-                /   %li{:'ng-repeat' => 'item in recipe.ingredients | filter:ingredient.name'}
-                /     {{ ingredient.name }}
-              %button.btn.btn-default.material-shadow{:'ng-click' => 'addIngredient()'}
-                Додати інгредієнт
+
             %a.btn.btn-default.pull-right.material-shadow{:href => '#/home'}
               Повернутись на головну
             %button.btn.btn-success.pull-right.material-shadow{:'ng-click' => 'saveRecipe()'}
@@ -94,10 +109,12 @@
     %script{:type => 'text/ng-template', :id => 'ingredients.html'}
       .container.margin-top-25.ingredients-container
         .row.ing-input-wrapper
-          %input.form-control.col-xs-3.ing-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name'}
+          %input.form-control.col-xs-3.ing-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name', :placeholder => 'введіть назву інгридієнта'}
           %button.btn.btn-default.ing-add.material-shadow{:'ng-click' => 'saveIngredient()'} Зберегти
         .row
           .recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)'}
             {{ item.name }}
+            %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeIngredient(item)'}
+
 
     %script{:src => 'scripts/main.min.js'}
