@@ -6,31 +6,36 @@
     <link href='styles/style.css' rel='stylesheet'>
   </head>
   <body>
-    <header>
-      <div class='container'>
-        <div class='logo'>
-          <img src='images/chef_hat_logo.png'>
+    <div class='header-wrapper'>
+      <header>
+        <div class='container'>
+          <div class='logo'>
+            <img src='images/chef_hat_logo.png'>
+          </div>
+          <h2 class='title'>Меню на тиждень</h2>
         </div>
-        <h2 class='title'>Меню на тиждень</h2>
+      </header>
+      <nav>
+        <div class='container'>
+          <ul>
+            <li ng-class='getClass("/home")'>
+              <a href='#/home'>Перелік рецептів</a>
+            </li>
+            <li ng-class='getClass("/recipes")'>
+              <a href='#/recipes'>Додати рецепт</a>
+            </li>
+            <li ng-class='getClass("/ingredients")'>
+              <a href='#/ingredients'>Інгредієнти</a>
+            </li>
+            <li ng-class='getClass("/summary")'>
+              <a href='#/summary'>Чого бракує?</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class='message' ng-class='{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'>
+        {{ statusMessage.text }}
       </div>
-    </header>
-    <nav>
-      <div class='container'>
-        <ul>
-          <li ng-class='getClass("/home")'>
-            <a href='#/home'>Перелік рецептів</a>
-          </li>
-          <li ng-class='getClass("/recipes")'>
-            <a href='#/recipes'>Додати рецепт</a>
-          </li>
-          <li ng-class='getClass("/ingredients")'>
-            <a href='#/ingredients'>Інгредієнти</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class='message' ng-class='{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'>
-      {{ statusMessage.text }}
     </div>
     <div class='page-body' ng-view=''></div>
     <script id='calendar.html' type='text/ng-template'>
@@ -149,13 +154,32 @@
     <script id='ingredients.html' type='text/ng-template'>
       <div class='container margin-top-25 ingredients-container'>
         <div class='row ing-input-wrapper'>
-          <input class='form-control col-xs-3 ing-name material-shadow' ng-model='ingredient.name' placeholder='введіть назву інгридієнта' type='text'>
+          <input class='form-control col-xs-12 col-sm-6 col-lg-3 ing-name material-shadow' ng-model='ingredient.name' placeholder='введіть назву інгридієнта' type='text'>
           <button class='btn btn-default ing-add material-shadow' ng-click='saveIngredient()'>Зберегти</button>
         </div>
         <div class='row'>
           <div class='recipe' ng-class='ingredientActive(item)' ng-click='editIngredient(item)' ng-repeat='item in ingredients' title='клікніть аби змінити'>
             {{ item.name }}
             <span class='glyphicon glyphicon-remove' ng-click='removeIngredient(item)' title='Видалити'></span>
+          </div>
+        </div>
+      </div>
+    </script>
+    <script id='summary.html' type='text/ng-template'>
+      <div class='container margin-top-25 summary'>
+        <div class='row'>
+          <div ng-repeat='item in summaryItems'>
+            <h3>
+              {{ item.week + ', ' + item.year }}
+            </h3>
+            <div ng-repeat='recipe in item.recipes'>
+              <h5>{{ recipe.name }}</h5>
+              <ul>
+                <li ng-repeat='ingredient in recipe.ingredients'>
+                  {{ ingredient.parent }}: {{ ingredient.amount + ingredient.units }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -11,7 +11,27 @@ class RecipeIngredient
 class DayOfWeek
 	constructor: (@name, @recipes, @date) ->
 	today: ->
-		@date.toLocaleDateString() == new Date().toLocaleDateString()
+		@date.toLocaleDateString() is new Date().toLocaleDateString()
+
+class WeekSummary
+	constructor: (@week, @year, @recipes = []) ->
+		temp = {}
+		for recipe in recipes
+			if not temp[recipe.name]
+				temp[recipe.name] =
+					id: recipe.id
+					name: recipe.name
+					ingredients: recipe.ingredients.map (ing) ->
+						new RecipeIngredient(ing.parent.name, ing.amount, ing.units)
+			else
+				for tempIng in temp[recipe.name].ingredients
+					for ing in recipe.ingredients
+						if tempIng.units is ing.units
+							tempIng.amount = +tempIng.amount + +ing.amount
+
+		@recipes = []
+		for key of temp
+			@recipes.push(temp[key]) if temp.hasOwnProperty(key)
 
 app = angular.module 'weeklyMenuApp', ['ngRoute']		
 
@@ -27,6 +47,9 @@ app.config ['$routeProvider', ($routeProvider) ->
 		).when('/ingredients',
 			templateUrl: 'ingredients.html'
 			controller: 'IngredientsCtrl'
+		).when('/summary',
+			templateUrl: 'summary.html'
+			controller: 'SummaryCtrl'
 		).
 		otherwise(redirectTo: '/home')
 ]
@@ -483,4 +506,30 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 			$location.path("/home")
 		else
 			$rootScope.setStatusMessage('Рецепт має містити принаймні один інгридієнт.', 'error')
+]
+
+app.controller 'SummaryCtrl', ['$scope', 'recipeService', ($scope, $recipeService) ->
+	$scope.summaryItems = []
+
+	loadFromLocalStorage = (week, year) ->
+		data = localStorage.getItem("week_#{week}_#{year}")
+		recipes = []
+
+		#forming recipes list for current week of year
+		if data
+			JSON.parse(data).forEach (day) ->
+				recipes = recipes.concat(day.recipes.map((id) ->
+						$recipeService.getById(id)
+					))
+
+		recipes
+
+	initSummary = ->
+		#create separate weekSummary for each week available in base
+		for key of localStorage
+			if key.indexOf('week') is 0
+				monthYear = key.match(/\d+/g)
+				$scope.summaryItems.push(new WeekSummary(monthYear[0], monthYear[1], loadFromLocalStorage(monthYear[0], monthYear[1])))
+
+	initSummary()
 ]
