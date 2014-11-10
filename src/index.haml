@@ -28,9 +28,9 @@
       .container.margin-top-25
         %section.row.calendar-pagination
           .col-xs-1.pull-right.pagination-container
-            %button{:'ng-click' => 'prevWeek()', :'ng-disabled' => 'calendarService.currentWeek === 1'}
+            %button{:'ng-click' => 'prevWeek()'}
               %span.glyphicon.glyphicon-backward
-            .current-week {{ "Тиждень №" + calendarService.currentWeek() }}
+            .current-week {{ "Тиждень №" + calendarService.currentDate() }}
             %button{:'ng-click' => 'nextWeek()'}
               %span.glyphicon.glyphicon-forward
         %section.row.calendar

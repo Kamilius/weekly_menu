@@ -37,10 +37,10 @@
       <div class='container margin-top-25'>
         <section class='row calendar-pagination'>
           <div class='col-xs-1 pull-right pagination-container'>
-            <button ng-click='prevWeek()' ng-disabled='calendarService.currentWeek === 1'>
+            <button ng-click='prevWeek()'>
               <span class='glyphicon glyphicon-backward'></span>
             </button>
-            <div class='current-week'>{{ "Тиждень №" + calendarService.currentWeek() }}</div>
+            <div class='current-week'>{{ "Тиждень №" + calendarService.currentDate() }}</div>
             <button ng-click='nextWeek()'>
               <span class='glyphicon glyphicon-forward'></span>
             </button>

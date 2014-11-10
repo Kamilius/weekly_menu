@@ -47,7 +47,26 @@ app.run ['$rootScope', '$location', ($rootScope, $location) ->
 			)($rootScope)
 		, 10000
 
+	clearEmptyWeeks = (week, weekItemName) ->
+		counter = 0
+		for day in week
+			if day.recipes.length > 0
+				counter++
+				break
+
+		if counter is 0
+			localStorage.removeItem(weekItemName)
+			return true
+
+		return false
+
 	$rootScope.saveToLocalStorage = (key, data) ->
+		# clear week_# variable, if week is empty, 
+		# to optimize local storage capacity
+		if key.indexOf('week') is 0
+			if clearEmptyWeeks(data, key)
+				return
+
 		localStorage.setItem(key, JSON.stringify(data))
 
 	$rootScope.getClass = (path) ->
@@ -235,59 +254,67 @@ app.service 'ingredientsService', ['$rootScope', ($rootScope) ->
 	}
 ]
 
-app.service 'calendarService', ['recipeService', '$rootScope', ($recipeService, $rootScope) ->
+app.service 'calendarService', ['recipeService', '$rootScope', '$filter', ($recipeService, $rootScope, $filter) ->
 	weeklyMenu = []
 	dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-	currentWeek = 1
+	currentWeek = +$filter('date')(new Date(), 'ww')
+	currentYear = new Date().getFullYear()
 
-	currentWeekNumber = (firstWeekDate) ->
-		ONE_WEEK = 1000 * 60 * 60 * 24 * 7
+	currentDate = (firstWeekDate) ->
+		return "#{currentWeek}, #{currentYear}"
 
-		date1_ms = firstWeekDate
-		date2_ms = new Date()
+	loadFromLocalStorage = () ->
+		data = localStorage.getItem("week_#{currentWeek}_#{currentYear}")
 
-		difference_ms = Math.abs(date1_ms - date2_ms)
+		#clear weeklyMenu array if it's not empty
+		weeklyMenu.splice(0, weeklyMenu.length) if weeklyMenu.length > 0
 
-		currentWeek = Math.floor(difference_ms / ONE_WEEK) || 1
-
-	loadFromLocalStorage = (weekNum) ->
-		if weeklyMenu.length > 0
-			weeklyMenu.splice(0, weeklyMenu.length)
-		if not weekNum
-			data = localStorage.getItem("week_1")
-			weekNum = if data = JSON.parse(data) then currentWeekNumber(new Date(data[0].date)) else 1
-
-		data = localStorage.getItem("week_#{weekNum}")
-
+		#if there is previously saved data for this week and year
 		if data
+			#form new week days and init them with previously saved data
 			temp = JSON.parse(data)
 			temp.forEach (day) ->
 				weeklyMenu.push new DayOfWeek(day.name, day.recipes.map((id) ->
 						$recipeService.getById(id)
 					), new Date(day.date))
+		#if no previosly saved data for this week and year
+		#build clear week
 		else
-			buildWeek(weekNum)
+			buildWeek()
 
-	buildWeek = (weekNum = 1) ->
-		if weeklyMenu.length > 0
-			lastDate = new Date(weeklyMenu[6].date)
-			lastDate = new Date(lastDate.setDate(lastDate.getDate() + 1))
-			
-			weeklyMenu.splice(0, weeklyMenu.length) 
-		else
-			today = new Date()
-			lastDate = new Date(today.setDate((today.getDate() - today.getDay() + 1) * weekNum))
+	getDateOfISOWeek = (week, year) ->
+    simple = new Date(year, 0, 1 + (week - 1) * 7)
+    dow = simple.getDay()
+    ISOweekStart = simple
+    if dow <= 4
+      ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
+    else
+      ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
+    ISOweekStart
 
+	buildWeek = () ->
+		monday = getDateOfISOWeek(currentWeek, currentYear)
+		
 		for index in [0..6]
-			weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(lastDate).setDate(lastDate.getDate() + index))))
+			weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(monday).setDate(monday.getDate() + index))))
 
 	nextWeek = () ->
-		currentWeek++
-		loadFromLocalStorage(currentWeek)
+		if currentWeek + 1 > 52
+			currentWeek = 1
+			currentYear++
+		else
+			currentWeek++
+
+		loadFromLocalStorage()
 
 	prevWeek = () ->
-		currentWeek = currentWeek - 1 if currentWeek > 1
-		loadFromLocalStorage(currentWeek)
+		if currentWeek - 1 < 1
+			currentWeek = 52
+			currentYear--
+		else
+			currentWeek--
+
+		loadFromLocalStorage()
 
 	recipeInDay = (day, recipeId) ->
 		for weekDay in weeklyMenu when weekDay.name is day
@@ -315,21 +342,21 @@ app.service 'calendarService', ['recipeService', '$rootScope', ($recipeService, 
 	addRecipe = (day, recipeId) ->
 		weeklyMenu[indexOfDay(day)]?.recipes?.push $recipeService.getById(recipeId)
 
-		$rootScope.saveToLocalStorage("week_#{currentWeek}", getCompactRecipes())
+		$rootScope.saveToLocalStorage("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
 	removeRecipe = (recipe, day) ->
 		dayIndex = weeklyMenu.indexOf(day)
 		recipeIndex = weeklyMenu[dayIndex].recipes.indexOf(recipe)
 		if recipeIndex > -1
 			weeklyMenu[dayIndex].recipes.splice(recipeIndex, 1)
-			$rootScope.saveToLocalStorage("week_#{currentWeek}", getCompactRecipes())
+			$rootScope.saveToLocalStorage("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
 	removeAllRecipeInstances = (recipe) ->
 		for day, index in weeklyMenu
 			index = day.recipes.indexOf(recipe)
 			if index > -1
 				day.recipes.splice(index, 1)
-		$rootScope.saveToLocalStorage("week_#{currentWeek}", getCompactRecipes())
+		$rootScope.saveToLocalStorage("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
 	loadFromLocalStorage()
 
@@ -341,8 +368,7 @@ app.service 'calendarService', ['recipeService', '$rootScope', ($recipeService, 
 		recipeInDay: recipeInDay
 		nextWeek: nextWeek
 		prevWeek: prevWeek
-		currentWeek: ->
-			currentWeek
+		currentDate: currentDate
 	}
 ]
 
