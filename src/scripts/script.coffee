@@ -484,6 +484,11 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 		$scope.ingModel.name = ing.name
 
 	$scope.addIngredient = () ->
+		if typeof $scope.ingModel.amount is "string"
+			$scope.ingModel.amount = $scope.ingModel.amount.replace(',', '.')
+
+		$scope.ingModel.amount = parseFloat($scope.ingModel.amount)
+		
 		if $scope.ingModel.id > 0 and $scope.ingModel.amount > 0
 			$scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units))
 			$scope.ingModel.id = 0

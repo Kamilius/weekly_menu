@@ -636,6 +636,10 @@ app.controller('RecipesCRUDCtrl', [
       return $scope.ingModel.name = ing.name;
     };
     $scope.addIngredient = function() {
+      if (typeof $scope.ingModel.amount === "string") {
+        $scope.ingModel.amount = $scope.ingModel.amount.replace(',', '.');
+      }
+      $scope.ingModel.amount = parseFloat($scope.ingModel.amount);
       if ($scope.ingModel.id > 0 && $scope.ingModel.amount > 0) {
         $scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units));
         $scope.ingModel.id = 0;

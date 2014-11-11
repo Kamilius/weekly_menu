@@ -19,13 +19,14 @@
 	-moz-box-shadow: $params
 	box-shadow: $params
 
+$z-indexes: (header: 200, body: 100)
+
 .no-left-border-radius
 	+border-radius(0 4px 4px 0)
 .no-right-border-radius
 	+border-radius(4px 0 0 4px)
 .no-border-radius
 	+border-radius(0)
-
 
 .row
 	margin: 0
@@ -41,11 +42,13 @@ body
 
 .page-body
 	padding-top: 173px
+	z-index: map-get($z-indexes, body)
 
 .header-wrapper
 	position: fixed
 	width: 100%
 	top: 0
+	z-index: map-get($z-indexes, header)
 
 header
 	position: relative
