@@ -10,6 +10,9 @@ app.config ['$routeProvider', ($routeProvider) ->
 		).when('/ingredients',
 			templateUrl: 'ingredients.html'
 			controller: 'IngredientsCtrl'
+		).when('/units',
+			templateUrl: 'units.html'
+			controller: 'UnitsCtrl'
 		).when('/summary',
 			templateUrl: 'summary.html'
 			controller: 'SummaryCtrl'

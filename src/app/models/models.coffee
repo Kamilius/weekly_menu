@@ -1,9 +1,25 @@
+class Unit
+	constructor: (@id = 0, @name = '') ->
+
+class Ingredient
+	constructor: (@id = 0, @name = '', @unit) ->
+
+class Recipe
+	ingredients: []
+	constructor: (@id = 0, @name = '') ->
+
+class Day
+	recipes: []
+	constructor: (@id = 0, @name = 'monday') ->
+
+class Week
+	days: []
+	constructor: (@id = 0, @week = 1, @year = 1970) ->
+
+
 class Recipe
 	constructor: (@name = '', ingredients = [], @id = 0) ->
 		@ingredients = [].concat(ingredients)
-
-class Ingredient
-	constructor: (@name = '', @id = 0) ->
 
 class RecipeIngredient
 	constructor: (@parent, @amount = '', @units = '') ->

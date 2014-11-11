@@ -20,6 +20,8 @@
 							%a{:href => '#/recipes'} Додати рецепт
 						%li{:'ng-class' => 'getClass("/ingredients")'}
 							%a{:href => '#/ingredients'} Інгредієнти
+						%li{:'ng-class' => 'getClass("/units")'}
+							%a{:href => '#/units'} Одиниці міри
 						%li{:'ng-class' => 'getClass("/summary")'}
 							%a{:href => '#/summary'} Чого бракує?
 			
@@ -111,13 +113,24 @@
 
 		%script{:type => 'text/ng-template', :id => 'ingredients.html'}
 			.container.margin-top-25.ingredients-container
-				.row.ing-input-wrapper
-					%input.form-control.col-xs-12.col-sm-6.col-lg-3.ing-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name', :placeholder => 'введіть назву інгридієнта'}
-					%button.btn.btn-default.ing-add.material-shadow{:'ng-click' => 'saveIngredient()'} Зберегти
+				.row.input-wrapper
+					%input.form-control.col-xs-6.col-sm-3.item-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name', :placeholder => 'введіть назву інгридієнта'}
+					%select.form-control.col-xs-4.col-sm-2.item-units.material-shadow{:'ng-options' => 'unit.name for unit in units', :'ng-model' => 'ingredient.unit' }
+					%button.btn.btn-default.item-add.material-shadow{:'ng-click' => 'saveIngredient()'} Зберегти
 				.row
 					.recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)', :title => 'клікніть аби змінити'}
-						{{ item.name }}
+						{{ item.name + '(' + item.unit.name + ')' }}
 						%span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeIngredient(item)'}
+
+		%script{:type => 'text/ng-template', :id => 'units.html'}
+			.container.margin-top-25.units-container
+				.row.input-wrapper
+					%input.form-control.col-xs-12.col-sm-6.col-lg-3.item-name.material-shadow{:type => 'text', :'ng-model' => 'unit.name', :placeholder => 'введіть назву одиниці міри'}
+					%button.btn.btn-default.item-add.material-shadow{:'ng-click' => 'saveUnit()'} Зберегти
+				.row
+					.recipe{:'ng-repeat' => 'unit in units', :'ng-click' => 'editUnit(unit)', :'ng-class' => 'unitActive(unit)', :title => 'клікніть аби змінити'}
+						{{ unit.name }}
+						%span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeUnit(unit)'}
 
 
 		%script{:type => 'text/ng-template', :id => 'summary.html'}

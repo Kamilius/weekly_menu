@@ -1,6 +1,8 @@
-app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope', 'recipeService', ($scope, $ingredientsService, $rootScope, $recipeService) ->
+app.controller 'IngredientsCtrl', ['$scope', 'ingredientsService', '$rootScope', 'recipeService', 'unitsService', ($scope, $ingredientsService, $rootScope, $recipeService, $unitsService) ->
 	$scope.ingredients = $ingredientsService.items
+	$scope.units = $unitsService.items
 	$scope.ingredient = new Ingredient()
+	$scope.ingredient.unit = $scope.units[0]
 
 	$scope.ingredientActive = (ingredient) ->
 		if ingredient.id is $scope.ingredient.id then 'active' else ''

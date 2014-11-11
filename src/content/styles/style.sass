@@ -245,10 +245,9 @@ calendar .col-xs-1
 		border-left: 1px solid #B3B6B6
 
 //Container with draggable .recipe elements
-.recipes-container, .ingredients-container
+.recipes-container, .ingredients-container, .units-container
 	max-height: 310px
 	overflow: auto
-	margin-top: 20px
 	.recipe
 		margin: 5px 5px 10px 5px
 		float: left
@@ -330,18 +329,21 @@ calendar .col-xs-1
 	.btn-success
 		margin-right: 5px
 
-.ingredients-container
-	.ing-input-wrapper
+.ingredients-container, .units-container
+	.input-wrapper
 		padding-bottom: 10px
 	.recipe:hover
 		cursor: pointer
-	.ing-name
-		width: 25%
+	.item-name, .item-units
 		max-height: 33px
+	.item-name
+		width: 25%
 		+border-radius(4px 0px 0px 4px)
-	.ing-add
+	.item-units
+		width: 15%
+		+border-radius(0)
+	.item-add
 		+border-radius(0px 4px 4px 0px)
-
 	.glyphicon-remove
 		position: absolute
 		top: 5px
