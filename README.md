@@ -1,6 +1,14 @@
 Weekly menu planning
 ----------------------
 
+To build a project you'll need to:
+* install nodejs and npm
+* clone repository
+* run node install in repository
+* run grunt build in repository
+
+After those operations, 'build/' directory will be generated with all needed assets.
+
 This project uses next HTML/HTML5 API's:
 * LocalStorage,
 * Drag and Drop,
@@ -10,7 +18,7 @@ This project uses next HTML/HTML5 API's:
 Technologies used: 
 * AngularJS v1.3.0
 * Bootstrap v3.3.0
-* Grunt JS Task runner
+* NPM/Grunt JS Task runner (for project build and dependencies)
 * HAML/SASS/CoffeeScript
 
 Curently you can plan only for current week. <br/> Week recipes history implementation in progress.
