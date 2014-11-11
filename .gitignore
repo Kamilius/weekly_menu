@@ -31,4 +31,4 @@ node_modules
 .sass-cache
 
 # Build directory, as all files here are generated
-build 
+build
