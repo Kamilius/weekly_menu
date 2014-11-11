@@ -4,8 +4,8 @@ Weekly menu planning
 To build a project you'll need to:
 * install nodejs and npm
 * clone repository
-* run node install in repository
-* run grunt build in repository
+* run '$ node install' in repository
+* run '$ grunt build' in repository
 
 After those operations, 'build/' directory will be generated with all needed assets.
 
