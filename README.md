@@ -21,7 +21,5 @@ Technologies used:
 * NPM/Grunt JS Task runner (for project build and dependencies)
 * HAML/SASS/CoffeeScript
 
-Curently you can plan only for current week. <br/> Week recipes history implementation in progress.
-
 All AngularJS view templates are local, so you don't need any web-server to run this project.<br/>
 All data stored in LocalStorage of your browser.
