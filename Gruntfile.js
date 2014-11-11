@@ -7,7 +7,13 @@ module.exports = function(grunt) {
 					bare: true
 				},
 				files: {
-					'src/scripts/script.js': 'src/scripts/script.coffee'
+					'src/app/script.js': [
+						'src/app/app.coffee',			
+						'src/app/controllers/*.coffee',
+						'src/app/models/*.coffee',
+						'src/app/services/*.coffee',
+						'src/app/config.coffee'
+					]
 				}
 			}
 		},
@@ -20,7 +26,12 @@ module.exports = function(grunt) {
 			},
 			my_target: {
 				files: {
-					'build/scripts/main.min.js': ['src/scripts/angular.js', 'src/scripts/angular-locale_uk-ua.js', 'src/scripts/angular-route.min.js', 'src/scripts/script.js']
+					'build/scripts/main.min.js': [
+						'src/scripts/angular.js',
+						'src/scripts/angular-locale_uk-ua.js',
+						'src/scripts/angular-route.min.js',
+						'src/app/script.js'
+					]
 				}
 			}
 		},
@@ -34,9 +45,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		jshint: {
-    		all: ['Gruntfile.js', 'src/scripts/*.js']
-		},
 		sass: {
 			dist: {
 				options: {
@@ -46,13 +54,17 @@ module.exports = function(grunt) {
 					banner: '/*! "Weekly menu" <%= grunt.template.today("yyyy-mm-dd") %> */'
 				},
 				files: {
-					'build/styles/style.css': 'src/styles/style.sass'
+					'build/styles/style.css': 'src/content/styles/style.sass'
 				}
 			}
 		},
 		watch: {
+			copy: {
+				files: ['src/content/images/*', 'src/content/fonts/*'],
+				tasks: 'copy'
+			},
 			sass: {
-				files: ['src/styles/*.sass'],
+				files: ['src/content/styles/*.sass'],
 				tasks: 'sass'
 			},
 			haml: {
@@ -60,18 +72,30 @@ module.exports = function(grunt) {
 				tasks: 'haml'
 			},
 			scripts: {
-				files: ['src/scripts/*.coffee'],
-				tasks: ['coffee', 'uglify']
+				files: ['src/app/*/*.coffee', 'src/app/*.coffee'],
+				tasks: ['coffee', 'uglify', 'clean']
+			}
+		},
+		clean: {
+			js: 'src/app/script.js'
+		},
+		copy: {
+			main: {
+				files: [
+					{ expand: true, src:'src/content/images/*', dest:'build/images/', flatten: true },
+					{ expand: true, src:'src/content/fonts/*', dest:'build/fonts/', flatten: true }
+				]
 			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-haml');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask('default', ['watch']);
-	grunt.registerTask('build', ['coffee', 'uglify', 'sass', 'haml']);
+	grunt.registerTask('build', ['coffee', 'uglify', 'clean', 'sass', 'haml', 'copy']);
 };
