@@ -1,11 +1,4 @@
 app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $ingredientsService) ->
-	# recipes = [
-	# 	new Recipe 'Смажена картопля', [{ name: 'картопля' }, { name:'спеції' }], 1
-	# 	new Recipe 'Борщ', [{ name:'картопля' }, { name:'буряк' }, { name:'морква' }, { name:'цибуля' }, { name:'куряче філе' }, { name:'спеції' }], 2
-	# 	new Recipe 'Смажена ковбаса з кетчупом', [{ name:'ковбаса молочна' }, { name:'кетчуп' }], 3
-	# 	new Recipe 'Стейк', [{ name:'м\'ясо' }, { name:'спеції' }], 4
-	# 	new Recipe 'Солянка', [{ name:'телятина' }, { name:'ковбаса копчена' }, { name:'шпондер' }, { name:'полядвиця' }, { name:'мисливські ковбаски' }, { name:'картопля' }, { name:'морква' }, { name:'цибуля' }, { name:'томатна паста' }, { name:'спеції' }], 5
-	# ]
 	recipes = []
 
 	loadFromLocalStorage = ->
@@ -13,9 +6,9 @@ app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $
 
 		if data
 			recipes = JSON.parse(data).map (recipe) ->
-				new Recipe(recipe.name, recipe.ingredients.map((ing) ->
-					new RecipeIngredient($ingredientsService.getById(ing.parent), ing.amount, ing.units)
-				), recipe.id)
+				new Recipe(recipe.id, recipe.name, recipe.ingredients.map((ing) ->
+					new IngredientAmount($ingredientsService.getById(ing.id), parseFloat(ing.amount))
+				))
 
 	getById = (id) ->
 		for recipe in recipes
@@ -31,9 +24,8 @@ app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $
 				name: recipe.name
 				ingredients: recipe.ingredients.map (ing) ->
 					return {
-						parent: ing.parent.id
+						id: ing.ingredient.id
 						amount: ing.amount
-						units: ing.units
 					}
 			)
 
@@ -46,7 +38,7 @@ app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $
 
 	save = (recipe) ->
 		if recipe.id is 0
-			@add new Recipe(recipe.name, recipe.ingredients)
+			@add new Recipe(0, recipe.name, recipe.ingredients)
 			$rootScope.setStatusMessage('Рецепт успішно збережено.', 'success')
 		else
 			temp = @getById(recipe.id)
@@ -62,7 +54,7 @@ app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $
 
 		$rootScope.saveToLocalStorage('recipes', getCompactRecipes())
 
-	loadFromLocalStorage()	
+	loadFromLocalStorage()
 
 	return {
 		recipes: recipes

@@ -6,7 +6,6 @@ app.controller 'RecipesCtrl', ['$scope', 'recipeService', 'calendarService', ($s
 		$calendarService.removeAllRecipeInstances(recipe)
 
 	recipesContainer = document.querySelector('.recipes-container')
-	calendar = document.querySelector('.calendar-recipes')
 
 	recipesContainer.addEventListener 'dragstart', (event) ->
 		el = event.target

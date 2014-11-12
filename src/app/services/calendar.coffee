@@ -86,21 +86,21 @@ app.service 'calendarService', ['recipeService', '$rootScope', '$filter', ($reci
 	addRecipe = (day, recipeId) ->
 		weeklyMenu[indexOfDay(day)]?.recipes?.push $recipeService.getById(recipeId)
 
-		$rootScope.saveToLocalStorage("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
+		localStorage.setItem("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
 	removeRecipe = (recipe, day) ->
 		dayIndex = weeklyMenu.indexOf(day)
 		recipeIndex = weeklyMenu[dayIndex].recipes.indexOf(recipe)
 		if recipeIndex > -1
 			weeklyMenu[dayIndex].recipes.splice(recipeIndex, 1)
-			$rootScope.saveToLocalStorage("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
+			localStorage.setItem("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
 	removeAllRecipeInstances = (recipe) ->
 		for day, index in weeklyMenu
 			index = day.recipes.indexOf(recipe)
 			if index > -1
 				day.recipes.splice(index, 1)
-		$rootScope.saveToLocalStorage("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
+		localStorage.setItem("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
 	loadFromLocalStorage()
 

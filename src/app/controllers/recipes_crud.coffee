@@ -1,23 +1,18 @@
 app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$location', '$rootScope', 'ingredientsService', ($scope, $routeParams, $recipeService, $location, $rootScope, $ingredientsService) ->
-	
+
 	$scope.recipes = $recipeService.recipes
 	$scope.ingredients = $ingredientsService.items
-	$scope.ingModel =
-		id: 0
-		name: ''
-		amount: ''
-		units: 'шт.'
+	$scope.ingModel = new IngredientAmount()
 	$scope.recipe = null
 
 	if $routeParams.recipeId
 		recipe = $recipeService.getById(+$routeParams.recipeId)
-		$scope.recipe = new Recipe(recipe.name, [].concat(recipe.ingredients), recipe.id)
+		$scope.recipe = new Recipe(recipe.id, recipe.name, [].concat(recipe.ingredients))
 	else
 		$scope.recipe = new Recipe()
 
 	$scope.chooseIngredient = (ing) ->
-		$scope.ingModel.id = ing.id
-		$scope.ingModel.name = ing.name
+		$scope.ingModel = new IngredientAmount(ing)
 
 	$scope.addIngredient = () ->
 		if typeof $scope.ingModel.amount is "string"
@@ -25,12 +20,9 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 
 		$scope.ingModel.amount = parseFloat($scope.ingModel.amount)
 
-		if $scope.ingModel.id > 0 and $scope.ingModel.amount > 0
-			$scope.recipe.ingredients.push(new RecipeIngredient($ingredientsService.getById($scope.ingModel.id), $scope.ingModel.amount, $scope.ingModel.units))
-			$scope.ingModel.id = 0
-			$scope.ingModel.name = ''
-			$scope.ingModel.amount = ''
-			$scope.ingModel.units = 'шт.'
+		if $scope.ingModel.ingredient.id? > 0 and $scope.ingModel.amount > 0
+			$scope.recipe.ingredients.push(new IngredientAmount($scope.ingModel.ingredient, $scope.ingModel.amount))
+			$scope.ingModel = new IngredientAmount()
 		else
 			false
 
@@ -39,7 +31,6 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', 'recipeService', '$
 
 		if index > -1 and $scope.recipe.ingredients.length > 0
 			$scope.recipe.ingredients.splice(index, 1)
-			$rootScope.setStatusMessage('', '')
 
 	$scope.saveRecipe = ->
 		if $scope.recipeForm.$invalid is false and $scope.recipe.ingredients.length > 0

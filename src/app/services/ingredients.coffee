@@ -41,7 +41,7 @@ app.service 'ingredientsService', ['$rootScope', 'unitsService', ($rootScope, $u
 		recipeNames = ''
 
 		for recipe in recipes
-			for ing in recipe.ingredients when ing.parent is ingredient
+			for ing in recipe.ingredients when ing.ingredient is ingredient
 				recipeNames += "\n \"#{recipe.name}\""
 
 		if index > -1 and recipeNames.length is 0

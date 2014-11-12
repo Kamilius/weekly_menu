@@ -24,7 +24,7 @@
 							%a{:href => '#/units'} Одиниці міри
 						%li{:'ng-class' => 'getClass("/summary")'}
 							%a{:href => '#/summary'} Чого бракує?
-			
+
 			.message{:'ng-class' => '{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'}
 				{{ statusMessage.text }}
 		%div.page-body{:'ng-view' => ''}
@@ -56,7 +56,7 @@
 									{{ recipe.name }}
 								%ul.recipe-ingredients
 									%li{:'ng-repeat' => 'ing in recipe.ingredients'}
-										{{ ing.parent.name }}
+										{{ ing.ingredient.name }}
 
 		%script{:type => 'text/ng-template', :id => 'recipesContainer.html'}
 			.container.recipes-container
@@ -79,25 +79,19 @@
 							%label Інгридієнти
 							.dropdown-filter.row
 								.col-xs-8
-									%input.form-control.material-shadow.no-right-border-radius{:type => "text", :'ng-model' => 'ingModel.name', :placeholder => 'почніть вводити назву інгридієнта'}
+									%input.form-control.material-shadow.no-right-border-radius{:type => "text", :'ng-model' => 'ingModel.ingredient.name', :placeholder => 'почніть вводити назву інгридієнта'}
 									%ul.available-ingredients.material-shadow
 										%li.ingredient-item{:'ng-repeat' => 'item in ingredients | filter:ingModel.name', :'ng-click' => 'chooseIngredient(item)'}
 											{{ item.name }}
 								.col-xs-2
 									%input.form-control.material-shadow.no-border-radius{:type => "text", :'ng-model' => 'ingModel.amount', :placeholder => 'к-сть'}
 								.col-xs-1
-									%select.form-control.material-shadow.no-border-radius{:'ng-model' => 'ingModel.units'}
-										%option{:value => 'шт.'} шт.
-										%option{:value => 'кг'} кг
-										%option{:value => 'г'} г
-										%option{:value => 'л'} л
-										%option{:value => 'мл'} мл
-										%option{:value => 'ч.л.'} ч.л.
-										%option{:value => 'стол.л.'} стол.л.
+									%div.form-control.material-shadow.no-border-radius
+										{{ ingModel.ingredient.unit.name }}
 								.col-xs-1
 									%button.btn.btn-default.material-shadow.no-left-border-radius{:'ng-click' => 'addIngredient()'} Додати
-							.ingredient.form-control.material-shadow{:'ng-repeat' => 'ingredient in recipe.ingredients'}
-								{{ ingredient.parent.name + ' ' + ingredient.amount + ingredient.units }}
+							.ingredient.form-control.material-shadow{:'ng-repeat' => 'ingAmount in recipe.ingredients'}
+								{{ ingAmount.ingredient.name + ' ' + ingAmount.amount + ingAmount.ingredient.unit.name }}
 								.remove-ingredient{:'ng-click' => 'removeIngredient(recipe.ingredients[$index])'} &#57364;
 
 						%a.btn.btn-default.pull-right.material-shadow{:href => '#/home'}
@@ -142,6 +136,6 @@
 						%div{:'ng-repeat' => 'recipe in item.recipes'}
 							%h5 {{ recipe.name }}
 							%ul
-								%li{:'ng-repeat' => 'ingredient in recipe.ingredients'}
-									{{ ingredient.parent }}: {{ ingredient.amount + ingredient.units }}
+								%li{:'ng-repeat' => 'ing in recipe.ingredients'}
+									{{ ing.ingredient.name }}: {{ ing.amount + ing.ingredient.unit }}
 		%script{:src => 'scripts/main.min.js'}
