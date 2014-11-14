@@ -41,7 +41,15 @@ module.exports = function(grunt) {
 					format: 'html5'
 				},
 				files: {
-					'build/index.html': 'src/index.haml'
+					'build/index.html': 'src/index.haml',
+					'build/views/calendar.html': 'src/app/views/calendar.haml',
+					'build/views/home.html': 'src/app/views/home.haml',
+					'build/views/ingredients.html': 'src/app/views/ingredients.haml',
+					'build/views/recipeControls.html': 'src/app/views/recipeControls.haml',
+					'build/views/recipesContainer.html': 'src/app/views/recipesContainer.haml',
+					'build/views/recipesCRUD.html': 'src/app/views/recipesCRUD.haml',
+					'build/views/summary.html': 'src/app/views/summary.haml',
+					'build/views/units.html': 'src/app/views/units.haml'
 				}
 			}
 		},
@@ -94,7 +102,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-contrib-haml');
+	grunt.loadNpmTasks('grunt-haml2html');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask('default', ['watch']);
 	grunt.registerTask('build', ['coffee', 'uglify', 'clean', 'sass', 'haml', 'copy']);

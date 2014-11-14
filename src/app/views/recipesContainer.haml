@@ -1,0 +1,4 @@
+.container.recipes-container
+  .recipe{:'ng-repeat' => 'recipe in recipes', :draggable => 'true', :'data-id' => '{{ recipe.id }}'}
+    %recipecontrols
+    {{ recipe.name }}

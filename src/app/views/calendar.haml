@@ -1,0 +1,27 @@
+.container.margin-top-25
+  %section.row.calendar-pagination
+    .col-xs-1.pull-right.pagination-container
+      %button{:'ng-click' => 'prevWeek()'}
+        %span.glyphicon.glyphicon-backward
+      .current-week {{ "Тиждень №" + calendarService.currentDate() }}
+      %button{:'ng-click' => 'nextWeek()'}
+        %span.glyphicon.glyphicon-forward
+  %section.row.calendar
+    .calendar-days
+      .col-xs-1.day-header Понеділок
+      .col-xs-1.day-header Вівторок
+      .col-xs-1.day-header Середа
+      .col-xs-1.day-header Четвер
+      .col-xs-1.day-header П'ятниця
+      .col-xs-1.day-header Субота
+      .col-xs-1.day-header Неділя
+    .calendar-recipes
+      .day.col-xs-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true, today: day.today() }', :ondragover => "event.preventDefault()", :'drag-enter-leave-animation' => ''}
+        .date {{ day.date | date }}
+        .recipe{:'ng-repeat' => 'recipe in day.recipes track by $index'}
+          %recipecontrols
+          %h5.recipe-title
+            {{ recipe.name }}
+          %ul.recipe-ingredients
+            %li{:'ng-repeat' => 'ing in recipe.ingredients'}
+              {{ ing.ingredient.name }}

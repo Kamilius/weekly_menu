@@ -1,0 +1,8 @@
+.container.margin-top-25.units-container
+  .row.input-wrapper
+    %input.form-control.col-xs-12.col-sm-6.col-lg-3.item-name.material-shadow{:type => 'text', :'ng-model' => 'unit.name', :placeholder => 'введіть назву одиниці міри'}
+    %button.btn.btn-default.item-add.material-shadow{:'ng-click' => 'saveUnit()'} Зберегти
+  .row
+    .recipe{:'ng-repeat' => 'unit in units', :'ng-click' => 'editUnit(unit)', :'ng-class' => 'unitActive(unit)', :title => 'клікніть аби змінити'}
+      {{ unit.name }}
+      %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeUnit(unit)'}

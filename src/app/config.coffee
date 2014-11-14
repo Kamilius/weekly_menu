@@ -1,20 +1,20 @@
 app.config ['$routeProvider', ($routeProvider) ->
 		$routeProvider.when('/home',
-			templateUrl: 'home.html'
+			templateUrl: 'views/home.html'
 		).when('/recipes',
-			templateUrl: 'recipesCRUD.html'
+			templateUrl: 'views/recipesCRUD.html'
 			controller: 'RecipesCRUDCtrl'
 		).when('/recipes/:recipeId',
-			templateUrl: 'recipesCRUD.html'
+			templateUrl: 'views/recipesCRUD.html'
 			controller: 'RecipesCRUDCtrl'
 		).when('/ingredients',
-			templateUrl: 'ingredients.html'
+			templateUrl: 'views/ingredients.html'
 			controller: 'IngredientsCtrl'
 		).when('/units',
-			templateUrl: 'units.html'
+			templateUrl: 'views/units.html'
 			controller: 'UnitsCtrl'
 		).when('/summary',
-			templateUrl: 'summary.html'
+			templateUrl: 'views/summary.html'
 			controller: 'SummaryCtrl'
 		).
 		otherwise(redirectTo: '/home')
@@ -65,7 +65,7 @@ app.run ['$rootScope', '$location', ($rootScope, $location) ->
 app.directive 'calendar', ->
 	{
 		restrict: 'E'
-		templateUrl: 'calendar.html'
+		templateUrl: 'views/calendar.html'
 		scope: {}
 		controller: 'CalendarCtrl'
 	}
@@ -73,7 +73,7 @@ app.directive 'calendar', ->
 app.directive 'recipescontainer', ->
 	{
 		restrict: 'E'
-		templateUrl: 'recipesContainer.html'
+		templateUrl: 'views/recipesContainer.html'
 		scope: {}
 		controller: 'RecipesCtrl'
 	}
@@ -82,26 +82,26 @@ app.directive 'ingredients', ->
 	{
 		restrict: 'E'
 		scope: {}
-		templateUrl: 'ingredients.html'
+		templateUrl: 'views/ingredients.html'
 	}
 
 app.directive 'index', ->
 	{
 		restrict: 'E'
-		templateUrl: 'home.html'
+		templateUrl: 'views/home.html'
 	}
 
 app.directive 'recipecrud', ->
 	{
 		restrict: 'E'
 		scope: {}
-		templateUrl: 'recipeCRUD.html'
+		templateUrl: 'views/recipeCRUD.html'
 	}
 
 app.directive 'recipecontrols', ->
 	{
 		restrict: 'E'
-		templateUrl: 'recipeControls.html'
+		templateUrl: 'views/recipeControls.html'
 	}
 
 app.directive 'dragEnterLeaveAnimation', -> 

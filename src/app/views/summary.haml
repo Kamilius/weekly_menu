@@ -1,0 +1,10 @@
+.container.margin-top-25.summary
+  .row
+    %div{:'ng-repeat' => 'item in summaryItems'}
+      %h3
+        {{ item.week + ', ' + item.year }}
+      %div{:'ng-repeat' => 'recipe in item.recipes'}
+        %h5 {{ recipe.name }}
+        %ul
+          %li{:'ng-repeat' => 'ing in recipe.ingredients'}
+            {{ ing.ingredient.name }}: {{ ing.amount + ing.ingredient.unit }}
