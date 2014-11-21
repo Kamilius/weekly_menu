@@ -1,1 +1,1 @@
-app = angular.module 'weeklyMenuApp', ['ngRoute']
+app = angular.module 'weeklyMenuApp', ['ngAnimate', 'ngRoute']

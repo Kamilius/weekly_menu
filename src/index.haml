@@ -27,5 +27,6 @@
 
 			.message{:'ng-class' => '{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'}
 				{{ statusMessage.text }}
-		%div.page-body{:'ng-view' => ''}
+		.container.animation-wrapper
+			.page-body.fade-animation{:'ng-view' => ''}
 		%script{:src => 'scripts/main.min.js'}

@@ -1,23 +1,23 @@
 app.config ['$routeProvider', ($routeProvider) ->
-		$routeProvider.when('/',
-			templateUrl: 'views/home.html'
-		).when('/recipes',
-			templateUrl: 'views/recipesCRUD.html'
-			controller: 'RecipesCRUDCtrl'
-		).when('/recipes/:recipeId',
-			templateUrl: 'views/recipesCRUD.html'
-			controller: 'RecipesCRUDCtrl'
-		).when('/ingredients',
-			templateUrl: 'views/ingredients.html'
-			controller: 'IngredientsCtrl'
-		).when('/units',
-			templateUrl: 'views/units.html'
-			controller: 'UnitsCtrl'
-		).when('/summary',
-			templateUrl: 'views/summary.html'
-			controller: 'SummaryCtrl'
-		).
-		otherwise(redirectTo: '/')
+	$routeProvider.when('/',
+		templateUrl: 'views/home.html'
+	).when('/recipes',
+		templateUrl: 'views/recipesCRUD.html'
+		controller: 'RecipesCRUDCtrl'
+	).when('/recipes/:recipeId',
+		templateUrl: 'views/recipesCRUD.html'
+		controller: 'RecipesCRUDCtrl'
+	).when('/ingredients',
+		templateUrl: 'views/ingredients.html'
+		controller: 'IngredientsCtrl'
+	).when('/units',
+		templateUrl: 'views/units.html'
+		controller: 'UnitsCtrl'
+	).when('/summary',
+		templateUrl: 'views/summary.html'
+		controller: 'SummaryCtrl'
+	).
+	otherwise(redirectTo: '/')
 ]
 
 app.run ['$rootScope', '$location', ($rootScope, $location) ->

@@ -39,10 +39,27 @@ body
 	font-family: zantroke
 	background-color: #878F8E
 	font-size: 14px
+	position: relative
 
+.animation-wrapper
+	position: relative
 .page-body
 	padding-top: 173px
 	z-index: map-get($z-indexes, body)
+	
+.fade-animation
+	position: absolute
+	top: 0
+	left: 0
+	+transition(opacity 0.4s ease)
+	&.ng-enter
+		opacity: 0
+		&.ng-enter-active
+			opacity: 1
+	&.ng-leave
+		opacity: 1
+		&.ng-leave-active
+		opacity: 0
 
 .header-wrapper
 	position: fixed

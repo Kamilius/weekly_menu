@@ -30,6 +30,7 @@ module.exports = function(grunt) {
 						'src/scripts/angular.js',
 						'src/scripts/angular-locale_uk-ua.js',
 						'src/scripts/angular-route.min.js',
+						'src/scripts/angular-animate.min.js',
 						'src/app/script.js'
 					]
 				}
