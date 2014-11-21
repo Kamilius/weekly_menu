@@ -1,5 +1,5 @@
 app.config ['$routeProvider', ($routeProvider) ->
-		$routeProvider.when('/home',
+		$routeProvider.when('/',
 			templateUrl: 'views/home.html'
 		).when('/recipes',
 			templateUrl: 'views/recipesCRUD.html'
@@ -17,11 +17,11 @@ app.config ['$routeProvider', ($routeProvider) ->
 			templateUrl: 'views/summary.html'
 			controller: 'SummaryCtrl'
 		).
-		otherwise(redirectTo: '/home')
+		otherwise(redirectTo: '/')
 ]
 
 app.run ['$rootScope', '$location', ($rootScope, $location) ->
-	$rootScope.statusMessage = 
+	$rootScope.statusMessage =
 		text: ''
 		type: ''
 
@@ -50,7 +50,7 @@ app.run ['$rootScope', '$location', ($rootScope, $location) ->
 		return false
 
 	$rootScope.saveToLocalStorage = (key, data) ->
-		# clear week_# variable, if week is empty, 
+		# clear week_# variable, if week is empty,
 		# to optimize local storage capacity
 		if key.indexOf('week') is 0
 			if clearEmptyWeeks(data, key)
@@ -104,7 +104,7 @@ app.directive 'recipecontrols', ->
 		templateUrl: 'views/recipeControls.html'
 	}
 
-app.directive 'dragEnterLeaveAnimation', -> 
+app.directive 'dragEnterLeaveAnimation', ->
 	(scope, element, attrs) ->
 		element.on 'dragenter', (event) ->
 			@classList.add('over')

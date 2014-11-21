@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'src/app/script.js': [
-						'src/app/app.coffee',			
+						'src/app/app.coffee',
 						'src/app/controllers/*.coffee',
 						'src/app/models/*.coffee',
 						'src/app/services/*.coffee',
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
 				tasks: 'sass'
 			},
 			haml: {
-				files: ['src/index.haml'],
+				files: ['src/index.haml', 'src/app/views/*.haml'],
 				tasks: 'haml'
 			},
 			scripts: {

@@ -19,7 +19,7 @@
 	-moz-box-shadow: $params
 	box-shadow: $params
 
-$z-indexes: (header: 200, body: 100)
+$z-indexes: (message: 300, header: 200, body: 100)
 
 .no-left-border-radius
 	+border-radius(0 4px 4px 0)
@@ -126,10 +126,15 @@ nav
 	overflow: hidden
 	font-size: 12px
 	background-color: transparent
+	position: absolute
+	top: 0
+	right: 0
+	padding: 10px
+	+border-radius(25px 0 0 25px)
+	z-index: map-get($z-indexes, message)
 	+transition((max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	&.error, &.success
 		max-height: 999px
-		padding: 10px 0
 	&.error
 		background-color: #A28382
 	&.success
@@ -328,6 +333,11 @@ calendar .col-xs-1
 				opacity: 1
 	.btn-success
 		margin-right: 5px
+
+	.recipe-description textarea
+		width: 100%
+		min-height: 250px
+		resize: vertical
 
 .ingredients-container, .units-container
 	.input-wrapper

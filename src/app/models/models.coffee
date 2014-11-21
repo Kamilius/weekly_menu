@@ -2,10 +2,13 @@ class Unit
 	constructor: (@id = 0, @name = '') ->
 
 class Ingredient
-	constructor: (@id = 0, @name = '', @unit) ->
+	unit: new Unit()
+	constructor: (@id = 0, @name = '', unit, @amount = '') ->
+		if unit
+			@unit = new Unit(unit.id, unit.name)
 
 class Recipe
-	constructor: (@id = 0, @name = '', @ingredients = []) ->
+	constructor: (@id = 0, @name = '', @description = '', @ingredients = []) ->
 
 class Day
 	recipes: []
@@ -14,9 +17,6 @@ class Day
 class Week
 	days: []
 	constructor: (@id = 0, @week = 1, @year = 1970) ->
-
-class IngredientAmount
-	constructor: (@ingredient = {}, @amount = '') ->
 
 
 
