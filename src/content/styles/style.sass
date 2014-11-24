@@ -21,6 +21,10 @@
 
 $z-indexes: (message: 300, header: 200, body: 100)
 
+@font-face
+	font-family: zantroke
+	src: url(../fonts/Zantroke.otf)
+
 .no-left-border-radius
 	+border-radius(0 4px 4px 0)
 .no-right-border-radius
@@ -31,9 +35,8 @@ $z-indexes: (message: 300, header: 200, body: 100)
 .row
 	margin: 0
 
-@font-face
-	font-family: zantroke
-	src: url(../fonts/Zantroke.otf)
+a, a:focus, a:active
+	color: #F5F5F5
 
 body
 	font-family: zantroke
@@ -46,7 +49,7 @@ body
 .page-body
 	padding-top: 173px
 	z-index: map-get($z-indexes, body)
-	
+
 .fade-animation
 	position: absolute
 	top: 0
@@ -59,7 +62,7 @@ body
 	&.ng-leave
 		opacity: 1
 		&.ng-leave-active
-		opacity: 0
+			opacity: 0
 
 .header-wrapper
 	position: fixed
