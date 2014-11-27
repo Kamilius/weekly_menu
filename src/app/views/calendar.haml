@@ -3,7 +3,7 @@
     .col-xs-1.pull-right.pagination-container
       %button{:'ng-click' => 'prevWeek()'}
         %span.glyphicon.glyphicon-backward
-      .current-week {{ "Тиждень №" + calendarService.currentDate() }}
+      .current-week {{ "Тиждень №" + currentDate() }}
       %button{:'ng-click' => 'nextWeek()'}
         %span.glyphicon.glyphicon-forward
   %section.row.calendar

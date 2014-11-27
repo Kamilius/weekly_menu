@@ -8,7 +8,7 @@ var express = require('express'),
       // port: 5432,
       // host: 'ec2-184-73-229-220.compute-1.amazonaws.com'
     }),
-    Unit, Ingredient, Recipe, IngredientsRecipes, Day;
+    Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays;
 
 
 //DATABASE
@@ -36,13 +36,15 @@ Recipe.hasMany(Ingredient, { through: IngredientsRecipes });
 Ingredient.hasMany(Recipe, { through: IngredientsRecipes });
 
 Day = sequelize.define('Day', {
-  week: Sequelize.INTEGER,
-  year: Sequelize.INTEGER,
-  'day_num': Sequelize.INTEGER
+  date: Sequelize.DATE
 });
 
-Day.hasMany(Recipe);
-Recipe.hasMany(Day);
+RecipesDays = sequelize.define('RecipesDays', {
+  meal: Sequelize.STRING
+});
+
+Day.hasMany(Recipe, { through: RecipesDays });
+Recipe.hasMany(Day, { through: RecipesDays });
 
 sequelize
   .sync()//pass { force: true } to drop databases
@@ -186,6 +188,27 @@ app.delete('/api/ingredients/:id', function(req, res) {
   });
 });
 
+function recipesToJSON(recipes) {
+  return recipes.map(function(recipe) {
+    return {
+      id: recipe.id,
+      name: recipe.name,
+      description: recipe.description,
+      ingredients: recipe.Ingredients.map(function(ingr) {
+        return {
+          id: ingr.id,
+          name: ingr.name,
+          amount: +ingr.IngredientsRecipe.amount,
+          unit: {
+            id: ingr.Unit.id,
+            name: ingr.Unit.name
+          }
+        }
+      })
+    };
+  })
+}
+
 function getAllRecipes(response) {
   Recipe.findAll({
     include: [{
@@ -194,24 +217,7 @@ function getAllRecipes(response) {
     }],
     order: ['name']
   }).success(function(recipes) {
-    response.json(recipes.map(function(recipe) {
-      return {
-        id: recipe.id,
-        name: recipe.name,
-        description: recipe.description,
-        ingredients: recipe.Ingredients.map(function(ingr) {
-          return {
-            id: ingr.id,
-            name: ingr.name,
-            amount: +ingr.IngredientsRecipe.amount,
-            unit: {
-              id: ingr.Unit.id,
-              name: ingr.Unit.name
-            }
-          }
-        })
-      };
-    }));
+    response.json(recipesToJSON(recipes));
   });
 }
 
@@ -293,6 +299,131 @@ app.delete('/api/recipes/:id', function(req, res) {
     } else {
       getAllRecipes(res);
     }
+  });
+});
+
+function daysToJSON(days) {
+  return days.map(function(day) {
+    return {
+      id: day.id,
+      date: day.date,
+      recipes: day.Recipes.map(function(recipe){
+        return {
+          id: recipe.id,
+          name: recipe.name,
+          description: recipe.description,
+          meal: recipe.RecipesDays.meal,
+          ingredients: recipe.Ingredients.map(function(ingr) {
+            return {
+              id: ingr.id,
+              name: ingr.name,
+              amount: +ingr.IngredientsRecipe.amount,
+              unit: {
+                id: ingr.Unit.id,
+                name: ingr.Unit.name
+              }
+            }
+          })
+        };
+      })
+    };
+  });
+}
+
+//Calendar
+function getWeek(response, date) {
+  //get seven days starting from 'date'
+  Day.findAll({
+    where: {
+      date: {
+        gte: new Date(date),
+        lte: new Date(new Date(date).setDate(date.getDate() + 7))
+      }
+    },
+    include: [{
+      model: Recipe,
+      include: [ Ingredient ]
+    }],
+    order: ['date']
+  }).success(function(days) {
+    response.json(daysToJSON(days));
+  });
+}
+
+app.get('/api/init-calendar/:date', function(req, res) {
+  var recipesJSON, daysJSON,
+      date = new Date(req.params.date);
+
+  Recipe.findAll({
+    include: [{
+      model: Ingredient,
+      include: [ Unit ]
+    }],
+    order: ['name']
+  }).success(function(recipes) {
+    recipesJSON = recipesToJSON(recipes);
+    Day.findAll({
+      where: {
+        date: {
+          gte: new Date(date),
+          lte: new Date(date.setDate(date.getDate() + 7))
+        }
+      },
+      include: [{
+        model: Recipe,
+        include: [ Ingredient ]
+      }],
+      order: ['date']
+    }).success(function(days) {
+      daysJSON = daysToJSON(days);
+      res.json({
+        recipes: recipesJSON || [],
+        days: daysJSON || []
+      });
+    });
+  });
+});
+app.get('/api/calendar/:date', function(req, res) {
+  getWeek(res, new Date(req.params.date));
+});
+app.post('/api/calendar/', function(req, res) {
+  var dayDate = req.body.date,
+      recipeId = req.body.recipeId,
+      meal = req.body.meal;
+
+  Recipe.find(req.body.recipeId).success(function(recipe) {
+    if(recipe) {
+      Day.findOrCreate({
+        where: { date: new Date(req.body.date) }
+      }).success(function(day, created) {
+        recipe.RecipesDays = { meal: req.body.meal };
+
+        day.addRecipes(recipe).success(function() {
+          res.json({
+            message: 'success'
+          });
+        });
+      });
+    }
+  });
+});
+app.delete('/api/calendar/:date/:recipeId', function(req, res) {
+  Recipe.find(recipeId).success(function(recipe) {
+    recipe.RecipesDays.destroy().success(function() {
+      res.json({
+        message: 'success'
+      });
+    }).error(function(msg) {
+      res.json({
+        message: 'error',
+        text: msg
+      });
+    });
+  }).error(function() {
+    res.json({
+      message: 'error',
+      text: 'not found'
+    });
   });
 });
 

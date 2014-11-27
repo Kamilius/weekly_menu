@@ -4,61 +4,58 @@ app.service 'calendarService', ['recipeService', '$rootScope', '$filter', ($reci
 	currentWeek = +$filter('date')(new Date(), 'ww')
 	currentYear = new Date().getFullYear()
 
-	currentDate = (firstWeekDate) ->
-		return "#{currentWeek}, #{currentYear}"
+	# loadFromLocalStorage = () ->
+	# 	data = localStorage.getItem("week_#{currentWeek}_#{currentYear}")
+	#
+	# 	#clear weeklyMenu array if it's not empty
+	# 	weeklyMenu.splice(0, weeklyMenu.length) if weeklyMenu.length > 0
+	#
+	# 	#if there is previously saved data for this week and year
+	# 	if data
+	# 		#form new week days and init them with previously saved data
+	# 		temp = JSON.parse(data)
+	# 		temp.forEach (day) ->
+	# 			weeklyMenu.push new DayOfWeek(day.name, day.recipes.map((id) ->
+	# 					$recipeService.getById(id)
+	# 				), new Date(day.date))
+	# 	#if no previosly saved data for this week and year
+	# 	#build clear week
+	# 	else
+	# 		buildWeek()
 
-	loadFromLocalStorage = () ->
-		data = localStorage.getItem("week_#{currentWeek}_#{currentYear}")
-
-		#clear weeklyMenu array if it's not empty
-		weeklyMenu.splice(0, weeklyMenu.length) if weeklyMenu.length > 0
-
-		#if there is previously saved data for this week and year
-		if data
-			#form new week days and init them with previously saved data
-			temp = JSON.parse(data)
-			temp.forEach (day) ->
-				weeklyMenu.push new DayOfWeek(day.name, day.recipes.map((id) ->
-						$recipeService.getById(id)
-					), new Date(day.date))
-		#if no previosly saved data for this week and year
-		#build clear week
-		else
-			buildWeek()
-
-	getDateOfISOWeek = (week, year) ->
-    simple = new Date(year, 0, 1 + (week - 1) * 7)
-    dow = simple.getDay()
-    ISOweekStart = simple
-    if dow <= 4
-      ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
-    else
-      ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
-    ISOweekStart
-
-	buildWeek = () ->
-		monday = getDateOfISOWeek(currentWeek, currentYear)
-		
-		for index in [0..6]
-			weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(monday).setDate(monday.getDate() + index))))
-
-	nextWeek = () ->
-		if currentWeek + 1 > 52
-			currentWeek = 1
-			currentYear++
-		else
-			currentWeek++
-
-		loadFromLocalStorage()
-
-	prevWeek = () ->
-		if currentWeek - 1 < 1
-			currentWeek = 52
-			currentYear--
-		else
-			currentWeek--
-
-		loadFromLocalStorage()
+	# getDateOfISOWeek = (week, year) ->
+  #   simple = new Date(year, 0, 1 + (week - 1) * 7)
+  #   dow = simple.getDay()
+  #   ISOweekStart = simple
+  #   if dow <= 4
+  #     ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
+  #   else
+  #     ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
+  #   ISOweekStart
+	#
+	# buildWeek = () ->
+	# 	monday = getDateOfISOWeek(currentWeek, currentYear)
+	#
+	# 	for index in [0..6]
+	# 		weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(monday).setDate(monday.getDate() + index))))
+	#
+	# nextWeek = () ->
+	# 	if currentWeek + 1 > 52
+	# 		currentWeek = 1
+	# 		currentYear++
+	# 	else
+	# 		currentWeek++
+	#
+	# 	loadFromLocalStorage()
+	#
+	# prevWeek = () ->
+	# 	if currentWeek - 1 < 1
+	# 		currentWeek = 52
+	# 		currentYear--
+	# 	else
+	# 		currentWeek--
+	#
+	# 	loadFromLocalStorage()
 
 	recipeInDay = (day, recipeId) ->
 		for weekDay in weeklyMenu when weekDay.name is day
@@ -75,7 +72,7 @@ app.service 'calendarService', ['recipeService', '$rootScope', '$filter', ($reci
 	getCompactRecipes = ->
 		menu = []
 		weeklyMenu.forEach (day) ->
-			menu.push 
+			menu.push
 				name: day.name
 				recipes: day.recipes.map (recipe) ->
 					recipe.id
@@ -102,7 +99,7 @@ app.service 'calendarService', ['recipeService', '$rootScope', '$filter', ($reci
 				day.recipes.splice(index, 1)
 		localStorage.setItem("week_#{currentWeek}_#{currentYear}", getCompactRecipes())
 
-	loadFromLocalStorage()
+	#loadFromLocalStorage()
 
 	{
 		weeklyMenu: weeklyMenu
@@ -110,8 +107,5 @@ app.service 'calendarService', ['recipeService', '$rootScope', '$filter', ($reci
 		removeAllRecipeInstances: removeAllRecipeInstances
 		removeRecipe: removeRecipe
 		recipeInDay: recipeInDay
-		nextWeek: nextWeek
-		prevWeek: prevWeek
-		currentDate: currentDate
 	}
 ]

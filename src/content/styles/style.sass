@@ -21,6 +21,18 @@
 
 $z-indexes: (message: 300, header: 200, body: 100)
 
+//Colors
+$whitesmoke: #F5F5F5
+$headerColor: #506362
+$navColor: #6b7877
+$backgroundColor: #878f8e
+$recipeBackgroundColor: #B3B6B6
+$white: #fff
+$error: #A28382
+$success: #71876D
+$shadowColor: rgba(0, 0, 0, 0.7)
+
+
 @font-face
 	font-family: zantroke
 	src: url(../fonts/Zantroke.otf)
@@ -36,11 +48,11 @@ $z-indexes: (message: 300, header: 200, body: 100)
 	margin: 0
 
 a, a:focus, a:active
-	color: #F5F5F5
+	color: $whitesmoke
 
 body
 	font-family: zantroke
-	background-color: #878F8E
+	background-color: $backgroundColor
 	font-size: 14px
 	position: relative
 
@@ -73,10 +85,10 @@ body
 header
 	position: relative
 	z-index: 3
-	background-color: #506362
-	color: #fff
+	background-color: $headerColor
+	color: $white
 	padding: 20px 0
-	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	+box-shadow(0px 2px 1px 0px $shadowColor)
 	.container
 		display: flex
 .logo
@@ -96,14 +108,14 @@ header
 		cursor: default
 
 .material-shadow
-	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	+box-shadow(0px 2px 1px 0px $shadowColor)
 	+transition(box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940))
 
 nav
 	position: relative
-	background-color: #6B7877
+	background-color: $navColor
 	height: 45px
-	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	+box-shadow(0px 2px 1px 0px $shadowColor)
 	ul
 		position: relative
 		margin: 0
@@ -116,26 +128,26 @@ nav
 		li
 			position: relative
 			z-index: 3
-			background-color: #6B7877
+			background-color: $navColor
 			height: 100%
 			padding: 0 10px
 			display: flex
 			align-items: stretch
 			+transition((background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
 			&:first-child
-				+box-shadow(-1px 1px 1px 0px rgba(0, 0, 0, 0.7))
+				+box-shadow(-1px 1px 1px 0px $shadowColor)
 			&:last-child
-				+box-shadow(1px 1px 1px 0px rgba(0, 0, 0, 0.7))
+				+box-shadow(1px 1px 1px 0px $shadowColor)
 			&:hover
 				z-index: 4
-				+box-shadow(0px 2px 8px 1px rgba(0, 0, 0, 0.7))
+				+box-shadow(0px 2px 8px 1px $shadowColor)
 			a
 				display: flex
 				align-items: center
-				color: #F5F5F5
+				color: $whitesmoke
 				+transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 				&:hover
-					color: #F5F5F5
+					color: $whitesmoke
 			&.active a
 				text-decoration: underline
 
@@ -156,9 +168,9 @@ nav
 	&.error, &.success
 		max-height: 999px
 	&.error
-		background-color: #A28382
+		background-color: $error
 	&.success
-		background-color: #71876D
+		background-color: $success
 
 .margin-top-25
 	margin-top: 25px
@@ -166,14 +178,14 @@ nav
 .recipe
 	overflow-x: hidden
 	overflow-y: visible
-	background-color: #B3B6B6
+	background-color: $recipeBackgroundColor
 	font-size: 1.5rem
 	position: relative
 	+border-radius(5px)
 	+transition((opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
-	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	+box-shadow(0px 2px 1px 0px $shadowColor)
 	&.active
-		+box-shadow(0px 3px 8px 1px rgba(0, 0, 0, 0.7))
+		+box-shadow(0px 3px 8px 1px $shadowColor)
 	&[draggable=true]
 		&:hover
 			cursor: move
@@ -190,7 +202,7 @@ nav
 			background-color: rgba(255, 255, 255, 0.6)
 			right: 0
 			padding-left: 5px
-			+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+			+box-shadow(0px 2px 1px 0px $shadowColor)
 			.glyphicon-chevron-left
 				display: none
 	.glyphicon
@@ -200,7 +212,7 @@ nav
 		color: #333
 		+transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 		&:hover
-			color: #6B7877
+			color: $navColor
 			cursor: pointer
 			text-decoration: none
 // Calendar styles
@@ -208,12 +220,12 @@ nav
 	position: relative
 	z-index: 2
 	.pagination-container
-		background-color: #F5F5F5
+		background-color: $whitesmoke
 		display: flex
 		justify-content: space-between
-		+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
-		border-bottom: 1px solid #B3B6B6
-		border-left: 1px solid #B3B6B6
+		+box-shadow(0px 2px 1px 0px $shadowColor)
+		border-bottom: 1px solid $recipeBackgroundColor
+		border-left: 1px solid $recipeBackgroundColor
 	.current-week
 		padding: 0 5px 0 5px
 		font-size: 12px
@@ -222,13 +234,13 @@ nav
 		padding: 0
 		background: none
 		border: none
-		background-color: whitesmoke
+		background-color: $whitesmoke
 
 .calendar
 	position: relative
 	z-index: 2
-	background-color: #F5F5F5
-	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	background-color: $whitesmoke
+	+box-shadow(0px 2px 1px 0px $shadowColor)
 calendar .col-xs-1
 	width: 14.285714285714285714285714285714%
 	*width: 14.285714285714285714285714285714%
@@ -236,7 +248,7 @@ calendar .col-xs-1
 	height: 400px
 	overflow: auto
 	&.over
-		border: 2px dashed #6B7877
+		border: 2px dashed $navColor
 	.date
 		width: 100%
 		font-size: 12px
@@ -264,10 +276,10 @@ calendar .col-xs-1
 	display: flex
 	align-items: center
 	justify-content: center
-	border-bottom: 1px solid #B3B6B6
+	border-bottom: 1px solid $recipeBackgroundColor
 .day, .day-header
 	&+*
-		border-left: 1px solid #B3B6B6
+		border-left: 1px solid $recipeBackgroundColor
 
 //Container with draggable .recipe elements
 .recipes-container, .ingredients-container, .units-container
@@ -286,13 +298,13 @@ calendar .col-xs-1
 //Form for creating/editing new recipes
 .recipe-form button, .recipe-form a, [draggable=true]
 	&:hover
-		+box-shadow(0px 3px 8px 1px rgba(0, 0, 0, 0.7))
+		+box-shadow(0px 3px 8px 1px $shadowColor)
 
 .recipe-form
-	background-color: #B3B6B6
+	background-color: $recipeBackgroundColor
 	padding: 25px
 	+border-radius(5px)
-	+box-shadow(0px 2px 1px 0px rgba(0, 0, 0, 0.7))
+	+box-shadow(0px 2px 1px 0px $shadowColor)
 
 	button
 		height: 34px
@@ -319,7 +331,7 @@ calendar .col-xs-1
 			position: absolute
 			top: 33px
 			left: 0
-			background-color: #fff
+			background-color: $white
 			min-width: 25%
 			list-style: none
 			+transition(max-height 1s ease)
@@ -328,7 +340,7 @@ calendar .col-xs-1
 				height: 33px
 				line-height: 33px
 				&:hover
-					background-color: #F5F5F5
+					background-color: $whitesmoke
 					cursor: pointer
 
 	.ingredient
@@ -345,7 +357,7 @@ calendar .col-xs-1
 			+transition(opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 			&:hover
 				cursor: pointer
-				color: #6B7877
+				color: $navColor
 		& + *
 			margin-top: 10px
 		&:hover
