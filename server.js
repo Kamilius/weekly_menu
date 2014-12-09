@@ -3,6 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     Sequelize = require('sequelize'),
+    sequelize,
     Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays;
 
 if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
@@ -12,12 +13,12 @@ if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     protocol: 'postgres',
     port: match[4],
     host: match[3],
-    logging: true
-  })
+    logging: false
+  });
 } else {
   sequelize = new Sequelize('weekly_menu', 'dev', '1', {
     dialect: 'postgres'
-  })
+  });
 }
 
 
