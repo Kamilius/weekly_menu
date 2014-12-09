@@ -3,13 +3,22 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
     Sequelize = require('sequelize'),
-    sequelize = new Sequelize('weekly_menu', 'dev', '1', {
-      //dialect: 'postgres',
-      protocol: 'postgres',
-      port: 5432,
-      host: 'ec2-184-73-229-220.compute-1.amazonaws.com'
-    }),
     Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays;
+    
+if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
+  var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
+  sequelize = new Sequelize(match[5], match[1], match[2], {
+    dialect: 'posgres',
+    protocol: 'postgres',
+    port: match[4],
+    host: match[3],
+    logging: true
+  })
+} else {
+  sequelize = new Sequelize('weekly_menu', 'dev', '1', {
+    dialect: 'postgres'
+  })
+}
 
 
 //DATABASE
