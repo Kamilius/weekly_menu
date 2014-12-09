@@ -4,11 +4,11 @@ var express = require('express'),
     app = express(),
     Sequelize = require('sequelize'),
     Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays;
-    
+
 if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
   var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
   sequelize = new Sequelize(match[5], match[1], match[2], {
-    dialect: 'posgres',
+    dialect: 'postgres',
     protocol: 'postgres',
     port: match[4],
     host: match[3],
