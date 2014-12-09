@@ -4,10 +4,10 @@ var express = require('express'),
     app = express(),
     Sequelize = require('sequelize'),
     sequelize = new Sequelize('weekly_menu', 'dev', '1', {
-      dialect: 'postgres',
-      // protocol: 'postgres',
-      // port: 5432,
-      // host: 'ec2-184-73-229-220.compute-1.amazonaws.com'
+      //dialect: 'postgres',
+      protocol: 'postgres',
+      port: 5432,
+      host: 'ec2-184-73-229-220.compute-1.amazonaws.com'
     }),
     Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays;
 
