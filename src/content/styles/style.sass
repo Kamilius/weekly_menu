@@ -32,7 +32,6 @@ $error: #A28382
 $success: #71876D
 $shadowColor: rgba(0, 0, 0, 0.7)
 
-
 @font-face
 	font-family: zantroke
 	src: url(../fonts/Zantroke.otf)
@@ -247,13 +246,22 @@ calendar .col-xs-1
 .day
 	height: 400px
 	overflow: auto
-	&.over
-		border: 2px dashed $navColor
+	padding: 0
+	display: flex
+	flex-direction: column
 	.date
 		width: 100%
 		font-size: 12px
 		line-height: 25px
 		text-align: center
+	.meal
+		padding: 0 15px
+		min-height: 33.3%
+		width: 100%
+		&.over
+			border: 2px dashed $navColor
+	.lunch, .breakfast, .dinner
+		border: 1px dashed $navColor
 	.recipe
 		width: 100%
 		height: auto
@@ -294,6 +302,9 @@ calendar .col-xs-1
 		text-align: center
 		width: 19%
 		height: 50px
+
+.recipes-container
+	padding: 15px 10px
 
 //Form for creating/editing new recipes
 .recipe-form button, .recipe-form a, [draggable=true]

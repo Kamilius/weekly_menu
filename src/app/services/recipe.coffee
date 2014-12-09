@@ -4,7 +4,7 @@ app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $
 	setRecipes = (data) ->
 		if data
 			recipes = data.map (recipe) ->
-				new Recipe(recipe.id, recipe.name, recipe.description, recipe.ingredients.map((ing) ->
+				new Recipe(recipe.id, recipe.name, recipe.description, recipe.meal, recipe.ingredients.map((ing) ->
 					new Ingredient(ing.id, ing.name, ing.unit, parseFloat(ing.amount))
 				))
 
@@ -13,7 +13,6 @@ app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $
 			return recipe if recipe.id == id
 
 		return null
-
 
 	return {
 		setRecipes: setRecipes

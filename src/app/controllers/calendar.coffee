@@ -1,11 +1,10 @@
-app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', 'calendarService', ($scope, $http, $filter, $recipeService, $calendarService) ->
+app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', ($scope, $http, $filter, $recipeService) ->
 	#private properties
 	dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 	currentWeek = +$filter('date')(new Date(), 'ww')
 	currentYear = new Date().getFullYear()
 	#scope variables
 	$scope.weeklyMenu = []
-	$scope.calendarService = $calendarService
 
 	$scope.currentDate = ->
 		return "#{currentWeek}, #{currentYear}"
@@ -23,55 +22,109 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', '
 	buildWeek = ->
 		monday = getDateOfISOWeek(currentWeek, currentYear)
 
-		for index in [0..6]
-			$scope.weeklyMenu.push(new DayOfWeek(dayNames[index], [], new Date(new Date(monday).setDate(monday.getDate() + index))))
+		$scope.weeklyMenu.splice(0, $scope.weeklyMenu.length)
 
-	nextWeek = ->
+		for index in [0..6]
+			$scope.weeklyMenu.push(new DayOfWeek(dayNames[index], new Date(new Date(monday).setDate(monday.getDate() + index))))
+
+	getDayByName = (dayName) ->
+		for day in $scope.weeklyMenu
+			if day.name is dayName
+				return day
+
+	getDayByDate = (date) ->
+		for day in $scope.weeklyMenu
+			if day.date.toLocaleDateString() is date
+				return day
+
+	$scope.nextWeek = ->
 		if currentWeek + 1 > 52
 			currentWeek = 1
 			currentYear++
 		else
 			currentWeek++
+		buildWeek()
 
-	prevWeek = ->
+	$scope.prevWeek = ->
 		if currentWeek - 1 < 1
 			currentWeek = 52
 			currentYear--
 		else
 			currentWeek--
-
-	init = ->
-		$http.get('/api/init-calendar/' + encodeURIComponent(new Date().toLocaleDateString()), (data) ->
-			console.log(data)
-		)
 		buildWeek()
 
 	$scope.removeRecipe = (recipe, day) ->
 		recipe.processing = true
-		$http.delete("/api/calendar/#{dayDate}/#{ingredient.id}").success((data, status, headers, config) ->
+		deleteURL = "/api/calendar/#{encodeURIComponent(day.date.toLocaleDateString())}/#{recipe.meal}/#{recipe.id}"
+		$http.delete(deleteURL).success((data, status, headers, config) ->
 			recipe.processing = false
 
 			if data.message is 'error'
-				$scope.setStatusMessage('Виникла помилка. Спробуйте видалити рецепт іще раз.', 'error')
+				$scope.$root.setStatusMessage('Виникла помилка. Спробуйте видалити рецепт іще раз.', 'error')
 			else
-				$scope.setStatusMessage('Рецепт успішно видалено', 'success')
+				day[recipe.meal].splice(day[recipe.meal].indexOf(recipe), 1)
+				$scope.$root.setStatusMessage('Рецепт успішно видалено', 'success')
 		)
 
-	calendar = document.querySelector('.calendar-recipes')
+	removeAllRecipesById = (id) ->
+		filterHelper = (recipe) ->
+			return recipe.id != id
 
-	calendar.addEventListener 'drop', (event) ->
-		droppable = event.target
-		draggableId = +event.dataTransfer.getData('id')
-		dayName = droppable.classList[3]
-		if droppable.classList[0] is 'day'
-			if not $calendarService.recipeInDay(dayName, draggableId)
-				$calendarService.addRecipe(dayName, draggableId)
-			else
-				$scope.setStatusMessage("Один день не може містити дві страви з однаковим ім'ям.", "error")
-			$scope.$apply()
-		droppable.classList.remove('over')
-		document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
-	, true
+		$scope.weeklyMenu.forEach((day) ->
+			day.breakfast = day.breakfast.filter(filterHelper)
+			day.lunch = day.lunch.filter(filterHelper)
+			day.dinner = day.dinner.filter(filterHelper)
+		)
+
+	recipeInMeal = (day, meal, recipeId) ->
+		for weekDay in $scope.weeklyMenu when weekDay.name is day
+			for recipe in weekDay[meal] when recipe.id is recipeId
+				return true
+		return false
+
+	init = () ->
+		$http.get('/api/calendar/' + encodeURIComponent(new Date().toLocaleDateString())).success((data) ->
+			#pack recipes according to day of week
+			data.forEach((dataDay) ->
+				date = new Date(dataDay.date).toLocaleDateString()
+				dayOfWeek = getDayByDate(date)
+				recipe = dataDay.recipe
+				dayOfWeek[dataDay.meal].push(new Recipe(recipe.id, recipe.name, recipe.description, dataDay.meal, recipe.ingredients))
+			)
+		)
+		buildWeek()
+
+		#attach drag and drop "DROP" event handler
+		calendar = document.querySelector('.calendar-recipes')
+
+		calendar.addEventListener 'drop', (event) ->
+			droppable = event.target
+			draggableId = +event.dataTransfer.getData('id')
+			dayName = droppable.parentNode.dataset['dayName']
+			mealName = droppable.dataset['mealName']
+
+			if droppable.classList.contains('meal')
+				day = getDayByName(dayName)
+				date = day.date
+
+				if not recipeInMeal(dayName, mealName, draggableId)
+					$http.post('/api/calendar', {
+						date: date
+						recipeId: draggableId
+						meal: mealName
+					}).success((data) ->
+						recipe = $recipeService.getById(draggableId)
+						day[mealName].push(recipe) if recipe
+					)
+				else
+					$scope.$root.setStatusMessage("Один день не може містити дві страви з однаковим ім'ям.", "error")
+			droppable.classList.remove('over')
+			document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
+		, true
+
+	$scope.$root.$on('recipe:removed', (event, data) ->
+		removeAllRecipesById(data.recipeId)
+	)
 
 	init()
 ]

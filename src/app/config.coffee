@@ -49,15 +49,6 @@ app.run ['$rootScope', '$location', ($rootScope, $location) ->
 
 		return false
 
-	$rootScope.saveToLocalStorage = (key, data) ->
-		# clear week_# variable, if week is empty,
-		# to optimize local storage capacity
-		if key.indexOf('week') is 0
-			if clearEmptyWeeks(data, key)
-				return
-
-		localStorage.setItem(key, JSON.stringify(data))
-
 	$rootScope.getClass = (path) ->
 		if $location.path().substr(0, path.length) == path then 'active' else ''
 ]

@@ -1,3 +1,4 @@
+'use strict';
 var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
@@ -36,15 +37,12 @@ Recipe.hasMany(Ingredient, { through: IngredientsRecipes });
 Ingredient.hasMany(Recipe, { through: IngredientsRecipes });
 
 Day = sequelize.define('Day', {
-  date: Sequelize.DATE
-});
-
-RecipesDays = sequelize.define('RecipesDays', {
+  date: Sequelize.DATE,
   meal: Sequelize.STRING
 });
 
-Day.hasMany(Recipe, { through: RecipesDays });
-Recipe.hasMany(Day, { through: RecipesDays });
+Day.belongsTo(Recipe);
+Recipe.hasMany(Day);
 
 sequelize
   .sync()//pass { force: true } to drop databases
@@ -293,8 +291,10 @@ app.post('/api/recipes', function(req, res) {
 app.delete('/api/recipes/:id', function(req, res) {
   Recipe.find(req.params.id).success(function(recipe) {
     if(recipe) {
-      recipe.destroy().success(function() {
-        getAllRecipes(res);
+      Day.destroy({ where: { RecipeId: recipe.id }}).success(function() {
+        recipe.destroy().success(function() {
+          getAllRecipes(res);
+        });
       });
     } else {
       getAllRecipes(res);
@@ -306,26 +306,20 @@ function daysToJSON(days) {
   return days.map(function(day) {
     return {
       id: day.id,
+      meal: day.meal,
       date: day.date,
-      recipes: day.Recipes.map(function(recipe){
-        return {
-          id: recipe.id,
-          name: recipe.name,
-          description: recipe.description,
-          meal: recipe.RecipesDays.meal,
-          ingredients: recipe.Ingredients.map(function(ingr) {
-            return {
-              id: ingr.id,
-              name: ingr.name,
-              amount: +ingr.IngredientsRecipe.amount,
-              unit: {
-                id: ingr.Unit.id,
-                name: ingr.Unit.name
-              }
-            }
-          })
-        };
-      })
+      recipe: {
+        id: day.Recipe.id,
+        name: day.Recipe.name,
+        description: day.Recipe.description,
+        ingredients: day.Recipe.Ingredients.map(function(ingr) {
+          return {
+            id: ingr.id,
+            name: ingr.name,
+            amount: +ingr.IngredientsRecipe.amount
+          }
+        })
+      }
     };
   });
 }
@@ -340,89 +334,53 @@ function getWeek(response, date) {
         lte: new Date(new Date(date).setDate(date.getDate() + 7))
       }
     },
+    order: 'date',
     include: [{
       model: Recipe,
       include: [ Ingredient ]
-    }],
-    order: ['date']
+    }]
   }).success(function(days) {
     response.json(daysToJSON(days));
   });
 }
 
-app.get('/api/init-calendar/:date', function(req, res) {
-  var recipesJSON, daysJSON,
-      date = new Date(req.params.date);
-
-  Recipe.findAll({
-    include: [{
-      model: Ingredient,
-      include: [ Unit ]
-    }],
-    order: ['name']
-  }).success(function(recipes) {
-    recipesJSON = recipesToJSON(recipes);
-    Day.findAll({
-      where: {
-        date: {
-          gte: new Date(date),
-          lte: new Date(date.setDate(date.getDate() + 7))
-        }
-      },
-      include: [{
-        model: Recipe,
-        include: [ Ingredient ]
-      }],
-      order: ['date']
-    }).success(function(days) {
-      daysJSON = daysToJSON(days);
-      res.json({
-        recipes: recipesJSON || [],
-        days: daysJSON || []
-      });
-    });
-  });
-});
 app.get('/api/calendar/:date', function(req, res) {
   getWeek(res, new Date(req.params.date));
 });
 app.post('/api/calendar/', function(req, res) {
-  var dayDate = req.body.date,
+  var dayDate = new Date(req.body.date),
       recipeId = req.body.recipeId,
       meal = req.body.meal;
 
-  Recipe.find(req.body.recipeId).success(function(recipe) {
+  Recipe.find(recipeId).success(function(recipe) {
     if(recipe) {
+      var newDay = {
+        date: dayDate,
+        meal: meal,
+        RecipeId: recipe.id
+      };
       Day.findOrCreate({
-        where: { date: new Date(req.body.date) }
-      }).success(function(day, created) {
-        recipe.RecipesDays = { meal: req.body.meal };
-
-        day.addRecipes(recipe).success(function() {
-          res.json({
-            message: 'success'
-          });
+        where: newDay
+      }, newDay).success(function(day) {
+        res.json({
+          message: 'success'
         });
       });
     }
   });
 });
-app.delete('/api/calendar/:date/:recipeId', function(req, res) {
-  Recipe.find(recipeId).success(function(recipe) {
-    recipe.RecipesDays.destroy().success(function() {
+app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
+  Day.find({
+    where: {
+      date: new Date(req.params.date),
+      meal: req.params.meal,
+      RecipeId: req.params.recipeId
+    }
+  }).success(function(day) {
+    day.destroy().success(function() {
       res.json({
         message: 'success'
       });
-    }).error(function(msg) {
-      res.json({
-        message: 'error',
-        text: msg
-      });
-    });
-  }).error(function() {
-    res.json({
-      message: 'error',
-      text: 'not found'
     });
   });
 });

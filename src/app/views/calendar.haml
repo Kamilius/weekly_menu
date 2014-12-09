@@ -16,12 +16,29 @@
       .col-xs-1.day-header Субота
       .col-xs-1.day-header Неділя
     .calendar-recipes
-      .day.col-xs-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ {{day.name}}: true, today: day.today() }', :ondragover => "event.preventDefault()", :'drag-enter-leave-animation' => ''}
+      .day.col-xs-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ today: day.today() }', :'data-day-name' => '{{ day.name }}', :ondragover => "event.preventDefault()"}
         .date {{ day.date | date }}
-        .recipe{:'ng-repeat' => 'recipe in day.recipes track by $index'}
-          %recipecontrols
-          %h5.recipe-title
-            {{ recipe.name }}
-          %ul.recipe-ingredients
-            %li{:'ng-repeat' => 'ing in recipe.ingredients'}
-              {{ ing.ingredient.name }}
+        .meal.breakfast{:'data-meal-name' => 'breakfast', :'drag-enter-leave-animation' => ''}
+          .recipe{:'ng-repeat' => 'recipe in day.breakfast track by $index'}
+            %recipecontrols
+            %h5.recipe-title
+              {{ recipe.name }}
+            %ul.recipe-ingredients
+              %li{:'ng-repeat' => 'ing in recipe.ingredients'}
+                {{ ing.name }}
+        .meal.lunch{:'data-meal-name' => 'lunch', :'drag-enter-leave-animation' => ''}
+          .recipe{:'ng-repeat' => 'recipe in day.lunch track by $index'}
+            %recipecontrols
+            %h5.recipe-title
+              {{ recipe.name }}
+            %ul.recipe-ingredients
+              %li{:'ng-repeat' => 'ing in recipe.ingredients'}
+                {{ ing.name }}
+        .meal.dinner{:'data-meal-name' => 'dinner', :'drag-enter-leave-animation' => ''}
+          .recipe{:'ng-repeat' => 'recipe in day.dinner track by $index'}
+            %recipecontrols
+            %h5.recipe-title
+              {{ recipe.name }}
+            %ul.recipe-ingredients
+              %li{:'ng-repeat' => 'ing in recipe.ingredients'}
+                {{ ing.name }}

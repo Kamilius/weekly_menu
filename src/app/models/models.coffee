@@ -9,14 +9,14 @@ class Ingredient
 
 class Recipe
 	processing: false
-	constructor: (@id = 0, @name = '', @description = '', @ingredients = []) ->
+	constructor: (@id = 0, @name = '', @description = '', @meal = '', @ingredients = []) ->
 
 class DayOfWeek
-	constructor: (@name, @recipes, @date) ->
+	constructor: (@name, @date) ->
+		@breakfast = []
+		@lunch = []
+		@dinner = []
 	today: ->
 		@date.toLocaleDateString() is new Date().toLocaleDateString()
-	setRecipes: (recipes) ->
-		@recipes = recipes
-
 class WeekSummary
 	constructor: (@week, @year, @recipes = []) ->

@@ -7,7 +7,7 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$root
 		if $routeParams.recipeId
 			$http.get("/api/recipes/#{$routeParams.recipeId}").success((data, status, headers, config) ->
 				if data
-					$scope.recipe = new Recipe(data.id, data.name, data.description, data.ingredients)
+					$scope.recipe = new Recipe(data.id, data.name, data.description, '', data.ingredients)
 			)
 		else
 			$scope.recipe = new Recipe()
