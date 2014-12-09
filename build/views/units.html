@@ -1,0 +1,12 @@
+<div class='container margin-top-25 units-container'>
+  <div class='row input-wrapper'>
+    <input class='form-control col-xs-12 col-sm-6 col-lg-3 item-name material-shadow' ng-model='unit.name' placeholder='введіть назву одиниці міри' type='text'>
+    <button class='btn btn-default item-add material-shadow' ng-click='saveUnit()'>Зберегти</button>
+  </div>
+  <div class='row'>
+    <div class='recipe' ng-class='unitActive(unit)' ng-click='editUnit(unit)' ng-repeat='unit in units' title='клікніть аби змінити'>
+      {{ unit.name }}
+      <span class='glyphicon glyphicon-remove' ng-click='removeUnit(unit)' title='Видалити'></span>
+    </div>
+  </div>
+</div>

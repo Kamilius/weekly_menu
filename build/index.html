@@ -1,0 +1,48 @@
+<html ng-app='weeklyMenuApp'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <title>Меню на тиждень</title>
+    <link href='styles/style.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='header-wrapper'>
+      <header>
+        <div class='container'>
+          <div class='logo'>
+            <img src='images/chef_hat_logo.png'>
+          </div>
+          <h2 class='title'>Меню на тиждень</h2>
+        </div>
+      </header>
+      <nav>
+        <div class='container'>
+          <ul>
+            <li ng-class='getClass("/home")'>
+              <a href='#/home'>Перелік рецептів</a>
+            </li>
+            <li ng-class='getClass("/recipes")'>
+              <a href='#/recipes'>Додати рецепт</a>
+            </li>
+            <li ng-class='getClass("/ingredients")'>
+              <a href='#/ingredients'>Інгредієнти</a>
+            </li>
+            <li ng-class='getClass("/units")'>
+              <a href='#/units'>Одиниці міри</a>
+            </li>
+            <li ng-class='getClass("/summary")'>
+              <a href='#/summary'>Чого бракує?</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class='message' ng-class='{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'>
+        {{ statusMessage.text }}
+      </div>
+    </div>
+    <div class='container animation-wrapper'>
+      <div class='page-body fade-animation' ng-view=''></div>
+    </div>
+    <script src='scripts/main.min.js'></script>
+  </body>
+</html>

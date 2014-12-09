@@ -1,0 +1,13 @@
+<div class='container margin-top-25 ingredients-container'>
+  <div class='row input-wrapper'>
+    <input class='form-control col-xs-6 col-sm-3 item-name material-shadow' ng-model='ingredient.name' placeholder='введіть назву інгредієнта' type='text'>
+    <select class='form-control col-xs-4 col-sm-2 item-units material-shadow' ng-model='ingredient.unit' ng-options='unit.name for unit in units track by unit.id'></select>
+    <button class='btn btn-default item-add material-shadow' ng-click='saveIngredient()'>Зберегти</button>
+  </div>
+  <div class='row'>
+    <div class='recipe' ng-class='ingredientActive(item)' ng-click='editIngredient(item)' ng-repeat='item in ingredients' title='клікніть аби змінити'>
+      {{ item.name + '(' + item.unit.name + ')' }}
+      <span class='glyphicon glyphicon-remove' ng-click='removeIngredient(item)' title='Видалити'></span>
+    </div>
+  </div>
+</div>

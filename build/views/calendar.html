@@ -1,0 +1,68 @@
+<div class='container margin-top-25'>
+  <section class='row calendar-pagination'>
+    <div class='col-xs-1 pull-right pagination-container'>
+      <button ng-click='prevWeek()'>
+        <span class='glyphicon glyphicon-backward'></span>
+      </button>
+      <div class='current-week'>{{ "Тиждень №" + currentDate() }}</div>
+      <button ng-click='nextWeek()'>
+        <span class='glyphicon glyphicon-forward'></span>
+      </button>
+    </div>
+  </section>
+  <section class='row calendar'>
+    <div class='calendar-days'>
+      <div class='col-xs-1 day-header'>Понеділок</div>
+      <div class='col-xs-1 day-header'>Вівторок</div>
+      <div class='col-xs-1 day-header'>Середа</div>
+      <div class='col-xs-1 day-header'>Четвер</div>
+      <div class='col-xs-1 day-header'>П'ятниця</div>
+      <div class='col-xs-1 day-header'>Субота</div>
+      <div class='col-xs-1 day-header'>Неділя</div>
+    </div>
+    <div class='calendar-recipes'>
+      <div class='day col-xs-1' data-day-name='{{ day.name }}' ng-class='{ today: day.today() }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
+        <div class='date'>{{ day.date | date }}</div>
+        <div class='meal breakfast' data-meal-name='breakfast' drag-enter-leave-animation=''>
+          <div class='recipe' ng-repeat='recipe in day.breakfast track by $index'>
+            <recipecontrols></recipecontrols>
+            <h5 class='recipe-title'>
+              {{ recipe.name }}
+            </h5>
+            <ul class='recipe-ingredients'>
+              <li ng-repeat='ing in recipe.ingredients'>
+                {{ ing.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class='meal lunch' data-meal-name='lunch' drag-enter-leave-animation=''>
+          <div class='recipe' ng-repeat='recipe in day.lunch track by $index'>
+            <recipecontrols></recipecontrols>
+            <h5 class='recipe-title'>
+              {{ recipe.name }}
+            </h5>
+            <ul class='recipe-ingredients'>
+              <li ng-repeat='ing in recipe.ingredients'>
+                {{ ing.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class='meal dinner' data-meal-name='dinner' drag-enter-leave-animation=''>
+          <div class='recipe' ng-repeat='recipe in day.dinner track by $index'>
+            <recipecontrols></recipecontrols>
+            <h5 class='recipe-title'>
+              {{ recipe.name }}
+            </h5>
+            <ul class='recipe-ingredients'>
+              <li ng-repeat='ing in recipe.ingredients'>
+                {{ ing.name }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

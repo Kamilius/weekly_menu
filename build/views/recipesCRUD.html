@@ -1,0 +1,48 @@
+<div class='container margin-top-25'>
+  <section class='row'>
+    <form class='recipe-form col-md-12' name='recipeForm' role='form'>
+      <div class='form-group'>
+        <label for='recipe-title'>Назва рецепту</label>
+        <input class='form-control material-shadow' ng-model='recipe.name' type='text'>
+      </div>
+      <div class='form-group recipe-ingredients'>
+        <label>Інгредієнти</label>
+        <div class='dropdown-filter row'>
+          <div class='col-xs-8'>
+            <input class='form-control material-shadow no-right-border-radius' ng-model='ingModel.name' placeholder='почніть вводити назву інгредієнта' type='text'>
+            <ul class='available-ingredients material-shadow'>
+              <li class='ingredient-item' ng-click='chooseIngredient(item)' ng-repeat='item in ingredients | filter:ingModel.name'>
+                {{ item.name }}
+              </li>
+            </ul>
+          </div>
+          <div class='col-xs-2'>
+            <input class='form-control material-shadow no-border-radius' ng-model='ingModel.amount' placeholder='к-сть' type='text'>
+          </div>
+          <div class='col-xs-1'>
+            <div class='form-control material-shadow no-border-radius'>
+              {{ ingModel.unit.name }}
+            </div>
+          </div>
+          <div class='col-xs-1'>
+            <button class='btn btn-default material-shadow no-left-border-radius' ng-click='addIngredient()'>Додати</button>
+          </div>
+        </div>
+        <div class='ingredient form-control material-shadow' ng-repeat='ing in recipe.ingredients'>
+          {{ ing.name + ' ' + ing.amount + ing.unit.name }}
+          <div class='remove-ingredient' ng-click='removeIngredient(recipe.ingredients[$index])'>&#57364;</div>
+        </div>
+      </div>
+      <div class='form-group recipe-description'>
+        <label>Опис</label>
+        <textarea class='form-control material-shadow' ng-model='recipe.description'></textarea>
+      </div>
+      <a class='btn btn-default pull-right material-shadow' href='#/home'>
+        Повернутись на головну
+      </a>
+      <button class='btn btn-success pull-right material-shadow' ng-click='saveRecipe()'>
+        Зберегти рецепт
+      </button>
+    </form>
+  </section>
+</div>
