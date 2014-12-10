@@ -18,7 +18,7 @@
     .calendar-recipes
       .day.col-xs-1{:'ng-repeat' => 'day in weeklyMenu', :'ng-class' => '{ today: day.today() }', :'data-day-name' => '{{ day.name }}', :ondragover => "event.preventDefault()"}
         .date {{ day.date | date }}
-        .meal.breakfast{:'data-meal-name' => 'breakfast', :'drag-enter-leave-animation' => ''}
+        .meal.breakfast{:'data-meal-name' => 'breakfast', :'drag-enter-leave-animation' => '', :title => 'Сніданок'}
           .recipe{:'ng-repeat' => 'recipe in day.breakfast track by $index'}
             %recipecontrols
             %h5.recipe-title
@@ -26,7 +26,7 @@
             %ul.recipe-ingredients
               %li{:'ng-repeat' => 'ing in recipe.ingredients'}
                 {{ ing.name }}
-        .meal.lunch{:'data-meal-name' => 'lunch', :'drag-enter-leave-animation' => ''}
+        .meal.lunch{:'data-meal-name' => 'lunch', :'drag-enter-leave-animation' => '', :title => 'Обід'}
           .recipe{:'ng-repeat' => 'recipe in day.lunch track by $index'}
             %recipecontrols
             %h5.recipe-title
@@ -34,7 +34,7 @@
             %ul.recipe-ingredients
               %li{:'ng-repeat' => 'ing in recipe.ingredients'}
                 {{ ing.name }}
-        .meal.dinner{:'data-meal-name' => 'dinner', :'drag-enter-leave-animation' => ''}
+        .meal.dinner{:'data-meal-name' => 'dinner', :'drag-enter-leave-animation' => '', :title => 'Вечеря'}
           .recipe{:'ng-repeat' => 'recipe in day.dinner track by $index'}
             %recipecontrols
             %h5.recipe-title

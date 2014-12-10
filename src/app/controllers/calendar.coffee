@@ -83,7 +83,8 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 		return false
 
 	init = () ->
-		$http.get('/api/calendar/' + encodeURIComponent(new Date().toLocaleDateString())).success((data) ->
+		buildWeek()
+		$http.get('/api/calendar/' + encodeURIComponent($scope.weeklyMenu[0].date.toLocaleDateString())).success((data) ->
 			#pack recipes according to day of week
 			data.forEach((dataDay) ->
 				date = new Date(dataDay.date).toLocaleDateString()
@@ -92,7 +93,6 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 				dayOfWeek[dataDay.meal].push(new Recipe(recipe.id, recipe.name, recipe.description, dataDay.meal, recipe.ingredients))
 			)
 		)
-		buildWeek()
 
 		#attach drag and drop "DROP" event handler
 		calendar = document.querySelector('.calendar-recipes')
@@ -117,7 +117,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 						day[mealName].push(recipe) if recipe
 					)
 				else
-					$scope.$root.setStatusMessage("Один день не може містити дві страви з однаковим ім'ям.", "error")
+					$scope.$root.setStatusMessage("Один прийом їжі не може містити дві страви з однаковим ім'ям.", "error")
 			droppable.classList.remove('over')
 			document.querySelector("[data-id=\"#{draggableId}\"]").style.opacity = '1'
 		, true
