@@ -399,7 +399,9 @@ app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
 
 //Program entry
 //-----------------------------------------------------------------
-var server = app.listen(3002, function() {
+app.set('port', (process.env.PORT || 3001));
+
+var server = app.listen(app.get('port'), function() {
   var host = server.address().address,
       port = server.address().port;
 
