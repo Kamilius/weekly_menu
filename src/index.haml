@@ -22,8 +22,8 @@
 							%a{:href => '#/ingredients'} Інгредієнти
 						%li{:'ng-class' => 'getClass("/units")'}
 							%a{:href => '#/units'} Одиниці міри
-						%li{:'ng-class' => 'getClass("/summary")'}
-							%a{:href => '#/summary'} Чого бракує?
+						-# %li{:'ng-class' => 'getClass("/summary")'}
+						-# 	%a{:href => '#/summary'} Чого бракує?
 
 			.message{:'ng-class' => '{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'}
 				{{ statusMessage.text }}

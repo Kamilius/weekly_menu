@@ -56,16 +56,17 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 		getRecipesForCurrentWeek()
 
 	$scope.removeRecipe = (recipe, day) ->
-		recipe.processing = true
+		day.mealInProgress = recipe.meal
+
 		deleteURL = "/api/calendar/#{encodeURIComponent(day.date.toLocaleDateString())}/#{recipe.meal}/#{recipe.id}"
 		$http.delete(deleteURL).success((data, status, headers, config) ->
-			recipe.processing = false
-
 			if data.message is 'error'
 				$scope.$root.setStatusMessage('Виникла помилка. Спробуйте видалити рецепт іще раз.', 'error')
 			else
 				day[recipe.meal].splice(day[recipe.meal].indexOf(recipe), 1)
 				$scope.$root.setStatusMessage('Рецепт успішно видалено', 'success')
+
+			day.mealInProgress = ''
 		)
 
 	removeAllRecipesById = (id) ->
@@ -116,6 +117,8 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 				date = day.date
 
 				if not recipeInMeal(dayName, mealName, draggableId)
+					day.mealInProgress = mealName
+
 					$http.post('/api/calendar', {
 						date: date.toUTCString()
 						recipeId: draggableId
@@ -123,6 +126,8 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 					}).success((data) ->
 						recipe = $recipeService.getById(draggableId)
 						day[mealName].push(recipe) if recipe
+
+						day.mealInProgress = ''
 					)
 				else
 					$scope.$root.setStatusMessage("Один прийом їжі не може містити дві страви з однаковим ім'ям.", "error")

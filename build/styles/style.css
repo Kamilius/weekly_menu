@@ -4583,6 +4583,23 @@ body {
 }
 
 /* line 78, ../../src/content/styles/style.sass */
+.has-spinner {
+  position: relative;
+}
+/* line 80, ../../src/content/styles/style.sass */
+.has-spinner:after {
+  content: "";
+  display: block;
+  background: url(../images/spinner.gif) no-repeat center;
+  background-size: cover;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+/* line 91, ../../src/content/styles/style.sass */
 .header-wrapper {
   position: fixed;
   width: 100%;
@@ -4590,7 +4607,7 @@ body {
   z-index: 200;
 }
 
-/* line 84, ../../src/content/styles/style.sass */
+/* line 97, ../../src/content/styles/style.sass */
 header {
   position: relative;
   z-index: 3;
@@ -4601,37 +4618,37 @@ header {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 91, ../../src/content/styles/style.sass */
+/* line 104, ../../src/content/styles/style.sass */
 header .container {
   display: flex;
 }
 
-/* line 93, ../../src/content/styles/style.sass */
+/* line 106, ../../src/content/styles/style.sass */
 .logo {
   position: relative;
   z-index: 2;
   max-width: 100px;
   height: auto;
 }
-/* line 98, ../../src/content/styles/style.sass */
+/* line 111, ../../src/content/styles/style.sass */
 .logo img {
   width: 100%;
   max-width: 100%;
 }
 
-/* line 101, ../../src/content/styles/style.sass */
+/* line 114, ../../src/content/styles/style.sass */
 .title {
   padding-left: 20px;
   display: flex;
   flex: 1;
   align-items: center;
 }
-/* line 106, ../../src/content/styles/style.sass */
+/* line 119, ../../src/content/styles/style.sass */
 .title:hover {
   cursor: default;
 }
 
-/* line 109, ../../src/content/styles/style.sass */
+/* line 122, ../../src/content/styles/style.sass */
 .material-shadow {
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
@@ -4642,7 +4659,7 @@ header .container {
   transition: box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
 
-/* line 113, ../../src/content/styles/style.sass */
+/* line 126, ../../src/content/styles/style.sass */
 nav {
   position: relative;
   background-color: #6b7877;
@@ -4651,7 +4668,7 @@ nav {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 118, ../../src/content/styles/style.sass */
+/* line 131, ../../src/content/styles/style.sass */
 nav ul {
   position: relative;
   margin: 0;
@@ -4662,7 +4679,7 @@ nav ul {
   align-items: center;
   height: 45px;
 }
-/* line 127, ../../src/content/styles/style.sass */
+/* line 140, ../../src/content/styles/style.sass */
 nav ul li {
   position: relative;
   z-index: 3;
@@ -4676,26 +4693,26 @@ nav ul li {
   -o-transition: background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 136, ../../src/content/styles/style.sass */
+/* line 149, ../../src/content/styles/style.sass */
 nav ul li:first-child {
   -webkit-box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: -1px 1px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 138, ../../src/content/styles/style.sass */
+/* line 151, ../../src/content/styles/style.sass */
 nav ul li:last-child {
   -webkit-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 140, ../../src/content/styles/style.sass */
+/* line 153, ../../src/content/styles/style.sass */
 nav ul li:hover {
   z-index: 4;
   -webkit-box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.7);
 }
-/* line 143, ../../src/content/styles/style.sass */
+/* line 156, ../../src/content/styles/style.sass */
 nav ul li a {
   display: flex;
   align-items: center;
@@ -4705,16 +4722,16 @@ nav ul li a {
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 148, ../../src/content/styles/style.sass */
+/* line 161, ../../src/content/styles/style.sass */
 nav ul li a:hover {
   color: whitesmoke;
 }
-/* line 150, ../../src/content/styles/style.sass */
+/* line 163, ../../src/content/styles/style.sass */
 nav ul li.active a {
   text-decoration: underline;
 }
 
-/* line 153, ../../src/content/styles/style.sass */
+/* line 166, ../../src/content/styles/style.sass */
 .message {
   text-align: center;
   line-height: 25px;
@@ -4736,25 +4753,25 @@ nav ul li.active a {
   -o-transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 167, ../../src/content/styles/style.sass */
+/* line 180, ../../src/content/styles/style.sass */
 .message.error, .message.success {
   max-height: 999px;
 }
-/* line 169, ../../src/content/styles/style.sass */
+/* line 182, ../../src/content/styles/style.sass */
 .message.error {
   background-color: #a28382;
 }
-/* line 171, ../../src/content/styles/style.sass */
+/* line 184, ../../src/content/styles/style.sass */
 .message.success {
   background-color: #71876d;
 }
 
-/* line 174, ../../src/content/styles/style.sass */
+/* line 187, ../../src/content/styles/style.sass */
 .margin-top-25 {
   margin-top: 25px;
 }
 
-/* line 177, ../../src/content/styles/style.sass */
+/* line 190, ../../src/content/styles/style.sass */
 .recipe {
   overflow-x: hidden;
   overflow-y: visible;
@@ -4773,21 +4790,21 @@ nav ul li.active a {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 186, ../../src/content/styles/style.sass */
+/* line 199, ../../src/content/styles/style.sass */
 .recipe.active {
   -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
 }
-/* line 189, ../../src/content/styles/style.sass */
+/* line 202, ../../src/content/styles/style.sass */
 .recipe[draggable=true]:hover {
   cursor: move;
 }
-/* line 191, ../../src/content/styles/style.sass */
+/* line 204, ../../src/content/styles/style.sass */
 .recipe[draggable=true]:hover .recipe-controls {
   opacity: 1;
 }
-/* line 193, ../../src/content/styles/style.sass */
+/* line 206, ../../src/content/styles/style.sass */
 .recipe .recipe-controls {
   position: absolute;
   top: 0;
@@ -4798,7 +4815,7 @@ nav ul li.active a {
   -o-transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: right 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 200, ../../src/content/styles/style.sass */
+/* line 213, ../../src/content/styles/style.sass */
 .recipe:hover .recipe-controls {
   background-color: rgba(255, 255, 255, 0.6);
   right: 0;
@@ -4807,11 +4824,11 @@ nav ul li.active a {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 205, ../../src/content/styles/style.sass */
+/* line 218, ../../src/content/styles/style.sass */
 .recipe:hover .recipe-controls .glyphicon-chevron-left {
   display: none;
 }
-/* line 207, ../../src/content/styles/style.sass */
+/* line 220, ../../src/content/styles/style.sass */
 .recipe .glyphicon {
   font-size: 12px;
   width: 12px;
@@ -4822,19 +4839,19 @@ nav ul li.active a {
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 213, ../../src/content/styles/style.sass */
+/* line 226, ../../src/content/styles/style.sass */
 .recipe .glyphicon:hover {
   color: #6b7877;
   cursor: pointer;
   text-decoration: none;
 }
 
-/* line 218, ../../src/content/styles/style.sass */
+/* line 231, ../../src/content/styles/style.sass */
 .calendar-pagination {
   position: relative;
   z-index: 2;
 }
-/* line 221, ../../src/content/styles/style.sass */
+/* line 234, ../../src/content/styles/style.sass */
 .calendar-pagination .pagination-container {
   background-color: whitesmoke;
   display: flex;
@@ -4845,13 +4862,13 @@ nav ul li.active a {
   border-bottom: 1px solid #b3b6b6;
   border-left: 1px solid #b3b6b6;
 }
-/* line 228, ../../src/content/styles/style.sass */
+/* line 241, ../../src/content/styles/style.sass */
 .calendar-pagination .current-week {
   padding: 0 5px 0 5px;
   font-size: 12px;
   text-align: center;
 }
-/* line 232, ../../src/content/styles/style.sass */
+/* line 245, ../../src/content/styles/style.sass */
 .calendar-pagination button {
   padding: 0;
   background: none;
@@ -4859,7 +4876,7 @@ nav ul li.active a {
   background-color: whitesmoke;
 }
 
-/* line 238, ../../src/content/styles/style.sass */
+/* line 251, ../../src/content/styles/style.sass */
 .calendar {
   position: relative;
   z-index: 2;
@@ -4869,64 +4886,64 @@ nav ul li.active a {
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
 
-/* line 243, ../../src/content/styles/style.sass */
+/* line 256, ../../src/content/styles/style.sass */
 calendar .col-xs-1 {
   width: 14.28571%;
   *width: 14.28571%;
 }
 
-/* line 246, ../../src/content/styles/style.sass */
+/* line 259, ../../src/content/styles/style.sass */
 .day {
   height: 400px;
   overflow: auto;
   padding: 0;
 }
-/* line 250, ../../src/content/styles/style.sass */
+/* line 263, ../../src/content/styles/style.sass */
 .day .date {
   width: 100%;
   font-size: 12px;
   line-height: 25px;
   text-align: center;
 }
-/* line 255, ../../src/content/styles/style.sass */
+/* line 268, ../../src/content/styles/style.sass */
 .day .meal {
   padding: 0 15px;
   min-height: 31.2%;
   width: 100%;
 }
-/* line 259, ../../src/content/styles/style.sass */
+/* line 272, ../../src/content/styles/style.sass */
 .day .meal.over {
   border: 2px dashed #6b7877;
 }
-/* line 261, ../../src/content/styles/style.sass */
+/* line 274, ../../src/content/styles/style.sass */
 .day .lunch, .day .breakfast, .day .dinner {
   border: 1px dashed #6b7877;
 }
-/* line 263, ../../src/content/styles/style.sass */
+/* line 276, ../../src/content/styles/style.sass */
 .day .recipe {
   width: 100%;
   height: auto;
   margin: 5px 0;
   padding: 10px 0;
 }
-/* line 268, ../../src/content/styles/style.sass */
+/* line 281, ../../src/content/styles/style.sass */
 .day .recipe .recipe-title {
   text-align: center;
   margin-top: 0;
 }
-/* line 271, ../../src/content/styles/style.sass */
+/* line 284, ../../src/content/styles/style.sass */
 .day .recipe .recipe-ingredients {
   margin: 0;
   font-size: 12px;
   padding: 0 0 0 27px;
 }
 
-/* line 276, ../../src/content/styles/style.sass */
+/* line 289, ../../src/content/styles/style.sass */
 .today {
   background-color: #dae5d8;
 }
 
-/* line 278, ../../src/content/styles/style.sass */
+/* line 291, ../../src/content/styles/style.sass */
 .day-header {
   padding: 0;
   text-align: center;
@@ -4937,17 +4954,17 @@ calendar .col-xs-1 {
   border-bottom: 1px solid #b3b6b6;
 }
 
-/* line 287, ../../src/content/styles/style.sass */
+/* line 300, ../../src/content/styles/style.sass */
 .day + *, .day-header + * {
   border-left: 1px solid #b3b6b6;
 }
 
-/* line 291, ../../src/content/styles/style.sass */
+/* line 304, ../../src/content/styles/style.sass */
 .recipes-container, .ingredients-container, .units-container {
   max-height: 310px;
   overflow: auto;
 }
-/* line 294, ../../src/content/styles/style.sass */
+/* line 307, ../../src/content/styles/style.sass */
 .recipes-container .recipe, .ingredients-container .recipe, .units-container .recipe {
   margin: 5px 5px 10px 5px;
   float: left;
@@ -4959,19 +4976,19 @@ calendar .col-xs-1 {
   height: 50px;
 }
 
-/* line 304, ../../src/content/styles/style.sass */
+/* line 317, ../../src/content/styles/style.sass */
 .recipes-container {
   padding: 15px 10px;
 }
 
-/* line 309, ../../src/content/styles/style.sass */
+/* line 322, ../../src/content/styles/style.sass */
 .recipe-form button:hover, .recipe-form a:hover, [draggable=true]:hover {
   -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
 }
 
-/* line 312, ../../src/content/styles/style.sass */
+/* line 325, ../../src/content/styles/style.sass */
 .recipe-form {
   background-color: #b3b6b6;
   padding: 25px;
@@ -4983,36 +5000,36 @@ calendar .col-xs-1 {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 318, ../../src/content/styles/style.sass */
+/* line 331, ../../src/content/styles/style.sass */
 .recipe-form button {
   height: 34px;
   max-width: 100%;
 }
-/* line 322, ../../src/content/styles/style.sass */
+/* line 335, ../../src/content/styles/style.sass */
 .recipe-form label {
   font-weight: normal;
 }
-/* line 325, ../../src/content/styles/style.sass */
+/* line 338, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 328, ../../src/content/styles/style.sass */
+/* line 341, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus {
   -webkit-border-radius: 4px 4px 0 4px;
   -moz-border-radius: 4px 4px 0 4px;
   -o-border-radius: 4px 4px 0 4px;
   border-radius: 4px 4px 0 4px;
 }
-/* line 330, ../../src/content/styles/style.sass */
+/* line 343, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus + .available-ingredients {
   max-height: 300px;
 }
-/* line 332, ../../src/content/styles/style.sass */
+/* line 345, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .col-xs-1, .recipe-form .dropdown-filter .col-xs-2, .recipe-form .dropdown-filter .col-xs-8 {
   padding: 0;
 }
-/* line 334, ../../src/content/styles/style.sass */
+/* line 347, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients {
   z-index: 10;
   overflow: auto;
@@ -5030,22 +5047,22 @@ calendar .col-xs-1 {
   -o-transition: max-height 1s ease;
   transition: max-height 1s ease;
 }
-/* line 347, ../../src/content/styles/style.sass */
+/* line 360, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item {
   padding-left: 12px;
   height: 33px;
   line-height: 33px;
 }
-/* line 351, ../../src/content/styles/style.sass */
+/* line 364, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item:hover {
   background-color: whitesmoke;
   cursor: pointer;
 }
-/* line 355, ../../src/content/styles/style.sass */
+/* line 368, ../../src/content/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 357, ../../src/content/styles/style.sass */
+/* line 370, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -5060,43 +5077,43 @@ calendar .col-xs-1 {
   -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 367, ../../src/content/styles/style.sass */
+/* line 380, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   cursor: pointer;
   color: #6b7877;
 }
-/* line 370, ../../src/content/styles/style.sass */
+/* line 383, ../../src/content/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 373, ../../src/content/styles/style.sass */
+/* line 386, ../../src/content/styles/style.sass */
 .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 375, ../../src/content/styles/style.sass */
+/* line 388, ../../src/content/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }
-/* line 378, ../../src/content/styles/style.sass */
+/* line 391, ../../src/content/styles/style.sass */
 .recipe-form .recipe-description textarea {
   width: 100%;
   min-height: 250px;
   resize: vertical;
 }
 
-/* line 384, ../../src/content/styles/style.sass */
+/* line 397, ../../src/content/styles/style.sass */
 .ingredients-container .input-wrapper, .units-container .input-wrapper {
   padding-bottom: 10px;
 }
-/* line 386, ../../src/content/styles/style.sass */
+/* line 399, ../../src/content/styles/style.sass */
 .ingredients-container .recipe:hover, .units-container .recipe:hover {
   cursor: pointer;
 }
-/* line 388, ../../src/content/styles/style.sass */
+/* line 401, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .ingredients-container .item-units, .units-container .item-name, .units-container .item-units {
   max-height: 33px;
 }
-/* line 390, ../../src/content/styles/style.sass */
+/* line 403, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .units-container .item-name {
   width: 25%;
   -webkit-border-radius: 4px 0px 0px 4px;
@@ -5104,7 +5121,7 @@ calendar .col-xs-1 {
   -o-border-radius: 4px 0px 0px 4px;
   border-radius: 4px 0px 0px 4px;
 }
-/* line 393, ../../src/content/styles/style.sass */
+/* line 406, ../../src/content/styles/style.sass */
 .ingredients-container .item-units, .units-container .item-units {
   width: 15%;
   -webkit-border-radius: 0;
@@ -5112,14 +5129,14 @@ calendar .col-xs-1 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 396, ../../src/content/styles/style.sass */
+/* line 409, ../../src/content/styles/style.sass */
 .ingredients-container .item-add, .units-container .item-add {
   -webkit-border-radius: 0px 4px 4px 0px;
   -moz-border-radius: 0px 4px 4px 0px;
   -o-border-radius: 0px 4px 4px 0px;
   border-radius: 0px 4px 4px 0px;
 }
-/* line 398, ../../src/content/styles/style.sass */
+/* line 411, ../../src/content/styles/style.sass */
 .ingredients-container .glyphicon-remove, .units-container .glyphicon-remove {
   position: absolute;
   top: 5px;

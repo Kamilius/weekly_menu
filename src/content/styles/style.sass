@@ -75,6 +75,19 @@ body
 		&.ng-leave-active
 			opacity: 0
 
+.has-spinner
+	position: relative
+	&:after
+		content: ""
+		display: block
+		background: url(../images/spinner.gif) no-repeat center
+		background-size: cover
+		width: 15px
+		height: 15px
+		position: absolute
+		top: 5px
+		right: 5px
+
 .header-wrapper
 	position: fixed
 	width: 100%

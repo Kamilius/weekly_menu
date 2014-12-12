@@ -16,7 +16,10 @@ class DayOfWeek
 		@breakfast = []
 		@lunch = []
 		@dinner = []
+		@mealInProgress = ''
 	today: ->
 		@date.toLocaleDateString() is new Date().toLocaleDateString()
+	isMealInProgress: (meal) ->
+		@mealInProgress is meal
 class WeekSummary
 	constructor: (@week, @year, @recipes = []) ->
