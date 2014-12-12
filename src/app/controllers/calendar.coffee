@@ -44,6 +44,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 		else
 			currentWeek++
 		buildWeek()
+		getRecipesForCurrentWeek()
 
 	$scope.prevWeek = ->
 		if currentWeek - 1 < 1
@@ -52,6 +53,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 		else
 			currentWeek--
 		buildWeek()
+		getRecipesForCurrentWeek()
 
 	$scope.removeRecipe = (recipe, day) ->
 		recipe.processing = true
@@ -82,17 +84,23 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 				return true
 		return false
 
-	init = () ->
-		buildWeek()
+	getRecipesForCurrentWeek = () ->
 		$http.get('/api/calendar/' + encodeURIComponent($scope.weeklyMenu[0].date.toLocaleDateString())).success((data) ->
 			#pack recipes according to day of week
 			data.forEach((dataDay) ->
 				date = new Date(dataDay.date).toLocaleDateString()
 				dayOfWeek = getDayByDate(date)
-				recipe = dataDay.recipe
-				dayOfWeek[dataDay.meal].push(new Recipe(recipe.id, recipe.name, recipe.description, dataDay.meal, recipe.ingredients))
+
+				if dayOfWeek
+					recipe = dataDay.recipe
+					dayOfWeek[dataDay.meal].push(new Recipe(recipe.id, recipe.name, recipe.description, dataDay.meal, recipe.ingredients))
 			)
 		)
+
+	init = () ->
+		buildWeek()
+
+		getRecipesForCurrentWeek()
 
 		#attach drag and drop "DROP" event handler
 		calendar = document.querySelector('.calendar-recipes')
@@ -109,7 +117,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 
 				if not recipeInMeal(dayName, mealName, draggableId)
 					$http.post('/api/calendar', {
-						date: date
+						date: date.toUTCString()
 						recipeId: draggableId
 						meal: mealName
 					}).success((data) ->

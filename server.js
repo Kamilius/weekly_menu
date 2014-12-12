@@ -13,11 +13,13 @@ if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     protocol: 'postgres',
     port: match[4],
     host: match[3],
-    logging: false
+    logging: false,
+    timezone: '+02:00'
   });
 } else {
   sequelize = new Sequelize('weekly_menu', 'dev', '1', {
-    dialect: 'postgres'
+    dialect: 'postgres',
+    timezone: '+02:00'
   });
 }
 
@@ -365,7 +367,7 @@ app.post('/api/calendar/', function(req, res) {
   Recipe.find(recipeId).success(function(recipe) {
     if(recipe) {
       var newDay = {
-        date: dayDate,
+        date: dayDate.toUTCString(),
         meal: meal,
         RecipeId: recipe.id
       };
