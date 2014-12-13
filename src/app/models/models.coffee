@@ -18,7 +18,7 @@ class DayOfWeek
 		@dinner = []
 		@mealInProgress = ''
 	today: ->
-		@date.toLocaleDateString() is new Date().toLocaleDateString()
+		formatDateString(@date) is formatDateString(new Date())
 	isMealInProgress: (meal) ->
 		@mealInProgress is meal
 class WeekSummary

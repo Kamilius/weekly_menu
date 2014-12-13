@@ -34,7 +34,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 
 	getDayByDate = (date) ->
 		for day in $scope.weeklyMenu
-			if day.date.toLocaleDateString() is date
+			if formatDateString(day.date) is date
 				return day
 
 	$scope.nextWeek = ->
@@ -58,7 +58,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 	$scope.removeRecipe = (recipe, day) ->
 		day.mealInProgress = recipe.meal
 
-		deleteURL = "/api/calendar/#{encodeURIComponent(day.date.toLocaleDateString())}/#{recipe.meal}/#{recipe.id}"
+		deleteURL = "/api/calendar/#{encodeURIComponent(formatDateString(day.date))}/#{recipe.meal}/#{recipe.id}"
 		$http.delete(deleteURL).success((data, status, headers, config) ->
 			if data.message is 'error'
 				$scope.$root.setStatusMessage('Виникла помилка. Спробуйте видалити рецепт іще раз.', 'error')
@@ -86,10 +86,10 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 		return false
 
 	getRecipesForCurrentWeek = () ->
-		$http.get('/api/calendar/' + encodeURIComponent($scope.weeklyMenu[0].date.toLocaleDateString())).success((data) ->
+		$http.get('/api/calendar/' + encodeURIComponent(formatDateString($scope.weeklyMenu[0].date))).success((data) ->
 			#pack recipes according to day of week
 			data.forEach((dataDay) ->
-				date = new Date(dataDay.date).toLocaleDateString()
+				date = formatDateString(new Date(dataDay.date))
 				dayOfWeek = getDayByDate(date)
 
 				if dayOfWeek

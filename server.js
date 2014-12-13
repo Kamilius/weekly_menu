@@ -17,7 +17,13 @@ if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     timezone: '+02:00'
   });
 } else {
-  sequelize = new Sequelize('weekly_menu', 'dev', '1', {
+  //remit laptop
+  // sequelize = new Sequelize('weekly_menu', 'dev', '1', {
+  //   dialect: 'postgres'
+  // });
+
+  //home
+  sequelize = new Sequelize('weekly_menu', 'postgres', '12356890', {
     dialect: 'postgres',
     timezone: '+02:00'
   });
@@ -339,11 +345,15 @@ function daysToJSON(days) {
 //Calendar
 function getWeek(response, date) {
   //get seven days starting from 'date'
+  console.log(date.toLocaleDateString());
+  console.log(new Date(date));
+  console.log(new Date(new Date(date).setDate(date.getDate() + 6)));
+  console.log('------------------------------');
   Day.findAll({
     where: {
       date: {
         gte: new Date(date),
-        lte: new Date(new Date(date).setDate(date.getDate() + 7))
+        lte: new Date(new Date(date).setDate(date.getDate() + 6))
       }
     },
     order: 'date',
@@ -352,6 +362,8 @@ function getWeek(response, date) {
       include: [ Ingredient ]
     }]
   }).success(function(days) {
+    console.log(days);
+    console.log('*************************************')
     response.json(daysToJSON(days));
   });
 }

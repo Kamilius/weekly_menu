@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 				files: {
 					'src/app/script.js': [
 						'src/app/app.coffee',
+						'src/app/helpers.coffee',
 						'src/app/controllers/*.coffee',
 						'src/app/models/*.coffee',
 						'src/app/services/*.coffee',
