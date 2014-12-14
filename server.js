@@ -388,6 +388,7 @@ app.post('/api/calendar/', function(req, res) {
   });
 });
 app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
+  console.log(req.params.date);
   Day.find({
     where: {
       date: new Date(req.params.date),
@@ -399,6 +400,12 @@ app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
       res.json({
         message: 'success'
       });
+    });
+  }).error(function(msg) {
+    console.log(msg);
+    res.json({
+      message: 'error',
+      text: msg
     });
   });
 });
