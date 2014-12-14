@@ -121,7 +121,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 					day.mealInProgress = mealName
 
 					$http.post('/api/calendar', {
-						date: date.toUTCString()
+						date: "#{date.getFullYear()}/#{date.getMonth() + 1}/#{date.getDate()}"
 						recipeId: draggableId
 						meal: mealName
 					}).success((data) ->

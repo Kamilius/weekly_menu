@@ -373,7 +373,7 @@ app.post('/api/calendar/', function(req, res) {
   Recipe.find(recipeId).success(function(recipe) {
     if(recipe) {
       var newDay = {
-        date: dayDate.toUTCString(),
+        date: new Date(req.body.date),
         meal: meal,
         RecipeId: recipe.id
       };
