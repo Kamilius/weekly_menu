@@ -1,7 +1,7 @@
 app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', ($scope, $http, $filter, $recipeService) ->
 	#private properties
 	dayNames = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-	currentWeek = +$filter('date')(new Date(), 'ww')
+	currentWeek = +$filter('date')(new Date(), 'ww', 'UTC')
 	currentYear = new Date().getFullYear()
 	#scope variables
 	$scope.weeklyMenu = []
