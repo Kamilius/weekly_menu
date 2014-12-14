@@ -345,6 +345,10 @@ function daysToJSON(days) {
 //Calendar
 function getWeek(response, date) {
   //get seven days starting from 'date'
+  console.log(date);
+  console.log(new Date(date));
+  console.log(new Date(new Date(date).setDate(date.getDate() + 6)));
+  console.log('******************************************')
   Day.findAll({
     where: {
       date: {
@@ -358,6 +362,8 @@ function getWeek(response, date) {
       include: [ Ingredient ]
     }]
   }).success(function(days) {
+    console.log(days);
+    response.json(daysToJSON(days));
   });
 }
 
