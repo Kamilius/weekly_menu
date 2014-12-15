@@ -4960,12 +4960,13 @@ calendar .col-xs-1 {
   border-left: 1px solid #B3B6B6;
 }
 
-/* line 304, ../../src/content/styles/style.sass */
-.recipes-container, .ingredients-container, .units-container {
+/* line 305, ../../src/content/styles/style.sass */
+.recipes-container {
   max-height: 310px;
   overflow: auto;
 }
-/* line 307, ../../src/content/styles/style.sass */
+
+/* line 310, ../../src/content/styles/style.sass */
 .recipes-container .recipe, .ingredients-container .recipe, .units-container .recipe {
   margin: 5px 5px 10px 5px;
   float: left;
@@ -4977,19 +4978,19 @@ calendar .col-xs-1 {
   height: 50px;
 }
 
-/* line 317, ../../src/content/styles/style.sass */
+/* line 320, ../../src/content/styles/style.sass */
 .recipes-container {
   padding: 15px 10px;
 }
 
-/* line 322, ../../src/content/styles/style.sass */
+/* line 325, ../../src/content/styles/style.sass */
 .recipe-form button:hover, .recipe-form a:hover, [draggable=true]:hover {
   -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
 }
 
-/* line 325, ../../src/content/styles/style.sass */
+/* line 328, ../../src/content/styles/style.sass */
 .recipe-form {
   background-color: #B3B6B6;
   padding: 25px;
@@ -5001,36 +5002,36 @@ calendar .col-xs-1 {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 331, ../../src/content/styles/style.sass */
+/* line 334, ../../src/content/styles/style.sass */
 .recipe-form button {
   height: 34px;
   max-width: 100%;
 }
-/* line 335, ../../src/content/styles/style.sass */
+/* line 338, ../../src/content/styles/style.sass */
 .recipe-form label {
   font-weight: normal;
 }
-/* line 338, ../../src/content/styles/style.sass */
+/* line 341, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 341, ../../src/content/styles/style.sass */
+/* line 344, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus {
   -webkit-border-radius: 4px 4px 0 4px;
   -moz-border-radius: 4px 4px 0 4px;
   -o-border-radius: 4px 4px 0 4px;
   border-radius: 4px 4px 0 4px;
 }
-/* line 343, ../../src/content/styles/style.sass */
+/* line 346, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus + .available-ingredients {
   max-height: 300px;
 }
-/* line 345, ../../src/content/styles/style.sass */
+/* line 348, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .col-xs-1, .recipe-form .dropdown-filter .col-xs-2, .recipe-form .dropdown-filter .col-xs-8 {
   padding: 0;
 }
-/* line 347, ../../src/content/styles/style.sass */
+/* line 350, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients {
   z-index: 10;
   overflow: auto;
@@ -5048,22 +5049,22 @@ calendar .col-xs-1 {
   -o-transition: max-height 1s ease;
   transition: max-height 1s ease;
 }
-/* line 360, ../../src/content/styles/style.sass */
+/* line 363, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item {
   padding-left: 12px;
   height: 33px;
   line-height: 33px;
 }
-/* line 364, ../../src/content/styles/style.sass */
+/* line 367, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item:hover {
   background-color: #F5F5F5;
   cursor: pointer;
 }
-/* line 368, ../../src/content/styles/style.sass */
+/* line 371, ../../src/content/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 370, ../../src/content/styles/style.sass */
+/* line 373, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -5078,43 +5079,43 @@ calendar .col-xs-1 {
   -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 380, ../../src/content/styles/style.sass */
+/* line 383, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   cursor: pointer;
   color: #6b7877;
 }
-/* line 383, ../../src/content/styles/style.sass */
+/* line 386, ../../src/content/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 386, ../../src/content/styles/style.sass */
+/* line 389, ../../src/content/styles/style.sass */
 .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 388, ../../src/content/styles/style.sass */
+/* line 391, ../../src/content/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }
-/* line 391, ../../src/content/styles/style.sass */
+/* line 394, ../../src/content/styles/style.sass */
 .recipe-form .recipe-description textarea {
   width: 100%;
   min-height: 250px;
   resize: vertical;
 }
 
-/* line 397, ../../src/content/styles/style.sass */
+/* line 400, ../../src/content/styles/style.sass */
 .ingredients-container .input-wrapper, .units-container .input-wrapper {
   padding-bottom: 10px;
 }
-/* line 399, ../../src/content/styles/style.sass */
+/* line 402, ../../src/content/styles/style.sass */
 .ingredients-container .recipe:hover, .units-container .recipe:hover {
   cursor: pointer;
 }
-/* line 401, ../../src/content/styles/style.sass */
+/* line 404, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .ingredients-container .item-units, .units-container .item-name, .units-container .item-units {
   max-height: 33px;
 }
-/* line 403, ../../src/content/styles/style.sass */
+/* line 406, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .units-container .item-name {
   width: 25%;
   -webkit-border-radius: 4px 0px 0px 4px;
@@ -5122,7 +5123,7 @@ calendar .col-xs-1 {
   -o-border-radius: 4px 0px 0px 4px;
   border-radius: 4px 0px 0px 4px;
 }
-/* line 406, ../../src/content/styles/style.sass */
+/* line 409, ../../src/content/styles/style.sass */
 .ingredients-container .item-units, .units-container .item-units {
   width: 15%;
   -webkit-border-radius: 0;
@@ -5130,14 +5131,14 @@ calendar .col-xs-1 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 409, ../../src/content/styles/style.sass */
+/* line 412, ../../src/content/styles/style.sass */
 .ingredients-container .item-add, .units-container .item-add {
   -webkit-border-radius: 0px 4px 4px 0px;
   -moz-border-radius: 0px 4px 4px 0px;
   -o-border-radius: 0px 4px 4px 0px;
   border-radius: 0px 4px 4px 0px;
 }
-/* line 411, ../../src/content/styles/style.sass */
+/* line 414, ../../src/content/styles/style.sass */
 .ingredients-container .glyphicon-remove, .units-container .glyphicon-remove {
   position: absolute;
   top: 5px;

@@ -12,6 +12,7 @@ app.controller 'IngredientsCtrl', ['$scope', '$http', 'ingredientsService', 'uni
 
 	loadIngredients = ->
 		$http.get('/api/ingredients').success((data, status, headers, config) ->
+			$scope.ingredients.splice(0, $scope.ingredients.length)
 			$ingredientsService.setIngredients(data)
 			$scope.ingredients = $ingredientsService.getIngredients()
 		)
@@ -46,7 +47,7 @@ app.controller 'IngredientsCtrl', ['$scope', '$http', 'ingredientsService', 'uni
 		if ingredient.id is $scope.ingredient.id then 'active' else ''
 
 	$scope.saveIngredient = ->
-		if $scope.ingredient.name.length > 0
+		if $scope.ingredient.name.length > 0 && $scope.ingredient.unit.id
 			$http.post('/api/ingredients', {
 				id: $scope.ingredient.id,
 				name: $scope.ingredient.name,
@@ -61,7 +62,7 @@ app.controller 'IngredientsCtrl', ['$scope', '$http', 'ingredientsService', 'uni
 				$scope.setStatusMessage('Інгредієнт успішно збережено.', 'success')
 			)
 		else
-			$scope.setStatusMessage('Інгредієнт має мати назву.', 'error')
+			$scope.setStatusMessage('Інгредієнт має мати назву і міру.', 'error')
 
 	$scope.editIngredient = (ingredient) ->
 		$scope.ingredient = ingredient

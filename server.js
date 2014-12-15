@@ -196,10 +196,10 @@ app.delete('/api/ingredients/:id', function(req, res) {
   Ingredient.find(req.params.id).success(function(ingredient) {
     if(ingredient) {
       ingredient.destroy().success(function() {
-        getAllItems(res, Ingredient);
+        getAllIngredients(res, Ingredient);
       });
     } else {
-      getAllItems(res, Ingredient);
+      getAllIngredients(res, Ingredient);
     }
   });
 });
