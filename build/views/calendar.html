@@ -29,11 +29,6 @@
             <h5 class='recipe-title'>
               {{ recipe.name }}
             </h5>
-            <ul class='recipe-ingredients'>
-              <li ng-repeat='ing in recipe.ingredients'>
-                {{ ing.name }}
-              </li>
-            </ul>
           </div>
         </div>
         <div class='meal lunch' data-meal-name='lunch' drag-enter-leave-animation='' ng-class="{ 'has-spinner': day.isMealInProgress('lunch')}" title='Обід'>
@@ -42,11 +37,6 @@
             <h5 class='recipe-title'>
               {{ recipe.name }}
             </h5>
-            <ul class='recipe-ingredients'>
-              <li ng-repeat='ing in recipe.ingredients'>
-                {{ ing.name }}
-              </li>
-            </ul>
           </div>
         </div>
         <div class='meal dinner' data-meal-name='dinner' drag-enter-leave-animation='' ng-class="{ 'has-spinner': day.isMealInProgress('dinner')}" title='Вечеря'>
@@ -55,11 +45,6 @@
             <h5 class='recipe-title'>
               {{ recipe.name }}
             </h5>
-            <ul class='recipe-ingredients'>
-              <li ng-repeat='ing in recipe.ingredients'>
-                {{ ing.name }}
-              </li>
-            </ul>
           </div>
         </div>
       </div>
