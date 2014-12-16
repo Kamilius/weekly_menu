@@ -18,15 +18,16 @@ if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
   });
 } else {
   //remit laptop
-  // sequelize = new Sequelize('weekly_menu', 'dev', '1', {
-  //   dialect: 'postgres'
-  // });
-
-  //home
-  sequelize = new Sequelize('weekly_menu', 'postgres', '12356890', {
+  sequelize = new Sequelize('weekly_menu', 'dev', '1', {
     dialect: 'postgres',
     timezone: '+02:00'
   });
+
+  //home
+  // sequelize = new Sequelize('weekly_menu', 'postgres', '12356890', {
+  //   dialect: 'postgres',
+  //   timezone: '+02:00'
+  // });
 }
 
 
@@ -404,6 +405,61 @@ app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
     res.json({
       message: 'error',
       text: msg
+    });
+  });
+});
+
+app.get('/api/weekly_summary/:date', function(req, res) {
+  var date = new Date(req.params.date);
+
+  Day.findAll({
+    where: {
+      date: {
+        gte: new Date(date),
+        lte: new Date(new Date(date).setDate(date.getDate() + 6))
+      }
+    },
+    include: [{
+      model: Recipe,
+      include: [{
+        model: Ingredient,
+        include: [ Unit ]
+      }]
+    }]
+  }).success(function(days) {
+    var ingredientsSummary = [];
+
+    function getIngredientIndex(id) {
+      for(var i = 0; i < ingredientsSummary.length; i++) {
+        if(ingredientsSummary[i].id === id)
+          return i;
+      }
+      return -1;
+    }
+
+    function getIngredientSummaryModel(ingredient) {
+      return {
+        id: ingredient.id,
+        name: ingredient.name,
+        amount: +ingredient.IngredientsRecipe.amount,
+        units: ingredient.Unit.name
+      };
+    }
+
+    days.forEach(function(day) {
+      day.Recipe.Ingredients.forEach(function(ingredient) {
+        var index = getIngredientIndex(ingredient.id);
+        if(index > -1) {
+          ingredientsSummary[index].amount += +ingredient.IngredientsRecipe.amount;
+        } else {
+          ingredientsSummary.push(getIngredientSummaryModel(ingredient));
+        }
+      });
+    });
+
+    res.json({
+      date: date,
+      ingredients: ingredientsSummary
     });
   });
 });

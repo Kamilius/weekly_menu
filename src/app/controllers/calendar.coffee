@@ -10,16 +10,6 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 	$scope.currentDate = ->
 		return "#{currentWeek}, #{currentYear}"
 
-	getDateOfISOWeek = (week, year) ->
-		simple = new Date(year, 0, 1 + (week - 1) * 7)
-		dow = simple.getDay()
-		ISOweekStart = simple
-		if dow <= 4
-			ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1)
-		else
-			ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay())
-		ISOweekStart
-
 	buildWeek = ->
 		monday = getDateOfISOWeek(currentWeek, currentYear)
 

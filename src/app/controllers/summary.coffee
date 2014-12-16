@@ -1,25 +1,20 @@
-app.controller 'SummaryCtrl', ['$scope', 'recipeService', ($scope, $recipeService) ->
-	$scope.summaryItems = []
+app.controller 'SummaryCtrl', ['$scope', '$http', '$filter', 'recipeService', ($scope, $http, $filter, $recipeService) ->
+	$scope.weeklySummary = {}
 
-	loadFromLocalStorage = (week, year) ->
-		data = localStorage.getItem("week_#{week}_#{year}")
-		recipes = []
-
-		#forming recipes list for current week of year
-		if data
-			JSON.parse(data).forEach (day) ->
-				recipes = recipes.concat(day.recipes.map((id) ->
-						$recipeService.getById(id)
-					))
-
-		recipes
+	$scope.showSummaryDate = ->
+		startDate = new Date($scope.weeklySummary.date)
+		endDate = new Date(new Date($scope.weeklySummary.date).setDate($scope.weeklySummary.date?.getDate() + 6))
+		return "#{startDate.getDate()}-#{endDate.getDate()} #{getMonthNameByNumber(startDate.getMonth())} #{startDate.getFullYear()}"
 
 	initSummary = ->
-		#create separate weekSummary for each week available in base
-		for key of localStorage
-			if key.indexOf('week') is 0
-				monthYear = key.match(/\d+/g)
-				$scope.summaryItems.push(new WeekSummary(monthYear[0], monthYear[1], loadFromLocalStorage(monthYear[0], monthYear[1])))
+		todayDate = new Date()
+		currentWeek = +$filter('date')(new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate()), 'ww', 'UTC')
+		currentYear = new Date().getFullYear()
+
+		$http.get('/api/weekly_summary/' + encodeURIComponent(formatDateString(getDateOfISOWeek(currentWeek, currentYear)))).success((data) ->
+			$scope.weeklySummary = data
+			$scope.weeklySummary.date = new Date($scope.weeklySummary.date)
+		)
 
 	initSummary()
 ]

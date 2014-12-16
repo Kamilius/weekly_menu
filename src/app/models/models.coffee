@@ -21,5 +21,6 @@ class DayOfWeek
 		formatDateString(@date) is formatDateString(new Date())
 	isMealInProgress: (meal) ->
 		@mealInProgress is meal
+
 class WeekSummary
-	constructor: (@week, @year, @recipes = []) ->
+	constructor: (@week, @date, @ingredients = []) ->

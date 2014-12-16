@@ -1,17 +1,12 @@
-<div class='container margin-top-25 summary'>
+<div class='container summary'>
   <div class='row'>
-    <div ng-repeat='item in summaryItems'>
-      <h3>
-        {{ item.week + ', ' + item.year }}
-      </h3>
-      <div ng-repeat='recipe in item.recipes'>
-        <h5>{{ recipe.name }}</h5>
-        <ul>
-          <li ng-repeat='ing in recipe.ingredients'>
-            {{ ing.ingredient.name }}: {{ ing.amount + ing.ingredient.unit }}
-          </li>
-        </ul>
-      </div>
-    </div>
+    <h3 class='summary-date'>
+      {{ showSummaryDate() }}
+    </h3>
+    <ul>
+      <li ng-repeat='ingr in weeklySummary.ingredients'>
+        {{ ingr.name }}: {{ ingr.amount + ' ' + ingr.units }}
+      </li>
+    </ul>
   </div>
 </div>

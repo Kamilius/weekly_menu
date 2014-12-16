@@ -1,5 +1,4 @@
-/*! "Weekly menu" 2014-12-15 */
-@charset "UTF-8";
+/*! "Weekly menu" 2014-12-16 */
 /* line 1, ../../src/content/styles/vendors/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -66,8 +65,8 @@ h1 {
 
 /* line 41, ../../src/content/styles/vendors/bootstrap.sass */
 mark {
-  background: #ff0;
-  color: #000;
+  background: yellow;
+  color: black;
 }
 
 /* line 45, ../../src/content/styles/vendors/bootstrap.sass */
@@ -203,7 +202,7 @@ input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webki
 
 /* line 132, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset {
-  border: 1px solid #c0c0c0;
+  border: 1px solid silver;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
@@ -255,1002 +254,1002 @@ td, th {
 
 /* line 171, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-asterisk:before {
-  content: "*";
+  content: "\2a";
 }
 
 /* line 174, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-plus:before {
-  content: "+";
+  content: "\2b";
 }
 
 /* line 177, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-euro:before, .glyphicon-eur:before {
-  content: "€";
+  content: "\20ac";
 }
 
 /* line 180, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-minus:before {
-  content: "−";
+  content: "\2212";
 }
 
 /* line 183, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cloud:before {
-  content: "☁";
+  content: "\2601";
 }
 
 /* line 186, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-envelope:before {
-  content: "✉";
+  content: "\2709";
 }
 
 /* line 189, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-pencil:before {
-  content: "✏";
+  content: "\270f";
 }
 
 /* line 192, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-glass:before {
-  content: "";
+  content: "\e001";
 }
 
 /* line 195, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-music:before {
-  content: "";
+  content: "\e002";
 }
 
 /* line 198, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-search:before {
-  content: "";
+  content: "\e003";
 }
 
 /* line 201, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-heart:before {
-  content: "";
+  content: "\e005";
 }
 
 /* line 204, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-star:before {
-  content: "";
+  content: "\e006";
 }
 
 /* line 207, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-star-empty:before {
-  content: "";
+  content: "\e007";
 }
 
 /* line 210, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-user:before {
-  content: "";
+  content: "\e008";
 }
 
 /* line 213, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-film:before {
-  content: "";
+  content: "\e009";
 }
 
 /* line 216, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-th-large:before {
-  content: "";
+  content: "\e010";
 }
 
 /* line 219, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-th:before {
-  content: "";
+  content: "\e011";
 }
 
 /* line 222, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-th-list:before {
-  content: "";
+  content: "\e012";
 }
 
 /* line 225, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ok:before {
-  content: "";
+  content: "\e013";
 }
 
 /* line 228, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-remove:before {
-  content: "";
+  content: "\e014";
 }
 
 /* line 231, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-zoom-in:before {
-  content: "";
+  content: "\e015";
 }
 
 /* line 234, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-zoom-out:before {
-  content: "";
+  content: "\e016";
 }
 
 /* line 237, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-off:before {
-  content: "";
+  content: "\e017";
 }
 
 /* line 240, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-signal:before {
-  content: "";
+  content: "\e018";
 }
 
 /* line 243, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cog:before {
-  content: "";
+  content: "\e019";
 }
 
 /* line 246, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-trash:before {
-  content: "";
+  content: "\e020";
 }
 
 /* line 249, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-home:before {
-  content: "";
+  content: "\e021";
 }
 
 /* line 252, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-file:before {
-  content: "";
+  content: "\e022";
 }
 
 /* line 255, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-time:before {
-  content: "";
+  content: "\e023";
 }
 
 /* line 258, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-road:before {
-  content: "";
+  content: "\e024";
 }
 
 /* line 261, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-download-alt:before {
-  content: "";
+  content: "\e025";
 }
 
 /* line 264, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-download:before {
-  content: "";
+  content: "\e026";
 }
 
 /* line 267, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-upload:before {
-  content: "";
+  content: "\e027";
 }
 
 /* line 270, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-inbox:before {
-  content: "";
+  content: "\e028";
 }
 
 /* line 273, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-play-circle:before {
-  content: "";
+  content: "\e029";
 }
 
 /* line 276, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-repeat:before {
-  content: "";
+  content: "\e030";
 }
 
 /* line 279, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-refresh:before {
-  content: "";
+  content: "\e031";
 }
 
 /* line 282, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-list-alt:before {
-  content: "";
+  content: "\e032";
 }
 
 /* line 285, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-lock:before {
-  content: "";
+  content: "\e033";
 }
 
 /* line 288, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-flag:before {
-  content: "";
+  content: "\e034";
 }
 
 /* line 291, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-headphones:before {
-  content: "";
+  content: "\e035";
 }
 
 /* line 294, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-volume-off:before {
-  content: "";
+  content: "\e036";
 }
 
 /* line 297, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-volume-down:before {
-  content: "";
+  content: "\e037";
 }
 
 /* line 300, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-volume-up:before {
-  content: "";
+  content: "\e038";
 }
 
 /* line 303, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-qrcode:before {
-  content: "";
+  content: "\e039";
 }
 
 /* line 306, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-barcode:before {
-  content: "";
+  content: "\e040";
 }
 
 /* line 309, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tag:before {
-  content: "";
+  content: "\e041";
 }
 
 /* line 312, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tags:before {
-  content: "";
+  content: "\e042";
 }
 
 /* line 315, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-book:before {
-  content: "";
+  content: "\e043";
 }
 
 /* line 318, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bookmark:before {
-  content: "";
+  content: "\e044";
 }
 
 /* line 321, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-print:before {
-  content: "";
+  content: "\e045";
 }
 
 /* line 324, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-camera:before {
-  content: "";
+  content: "\e046";
 }
 
 /* line 327, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-font:before {
-  content: "";
+  content: "\e047";
 }
 
 /* line 330, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bold:before {
-  content: "";
+  content: "\e048";
 }
 
 /* line 333, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-italic:before {
-  content: "";
+  content: "\e049";
 }
 
 /* line 336, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-text-height:before {
-  content: "";
+  content: "\e050";
 }
 
 /* line 339, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-text-width:before {
-  content: "";
+  content: "\e051";
 }
 
 /* line 342, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-left:before {
-  content: "";
+  content: "\e052";
 }
 
 /* line 345, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-center:before {
-  content: "";
+  content: "\e053";
 }
 
 /* line 348, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-right:before {
-  content: "";
+  content: "\e054";
 }
 
 /* line 351, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-justify:before {
-  content: "";
+  content: "\e055";
 }
 
 /* line 354, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-list:before {
-  content: "";
+  content: "\e056";
 }
 
 /* line 357, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-indent-left:before {
-  content: "";
+  content: "\e057";
 }
 
 /* line 360, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-indent-right:before {
-  content: "";
+  content: "\e058";
 }
 
 /* line 363, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-facetime-video:before {
-  content: "";
+  content: "\e059";
 }
 
 /* line 366, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-picture:before {
-  content: "";
+  content: "\e060";
 }
 
 /* line 369, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-map-marker:before {
-  content: "";
+  content: "\e062";
 }
 
 /* line 372, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-adjust:before {
-  content: "";
+  content: "\e063";
 }
 
 /* line 375, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tint:before {
-  content: "";
+  content: "\e064";
 }
 
 /* line 378, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-edit:before {
-  content: "";
+  content: "\e065";
 }
 
 /* line 381, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-share:before {
-  content: "";
+  content: "\e066";
 }
 
 /* line 384, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-check:before {
-  content: "";
+  content: "\e067";
 }
 
 /* line 387, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-move:before {
-  content: "";
+  content: "\e068";
 }
 
 /* line 390, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-step-backward:before {
-  content: "";
+  content: "\e069";
 }
 
 /* line 393, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fast-backward:before {
-  content: "";
+  content: "\e070";
 }
 
 /* line 396, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-backward:before {
-  content: "";
+  content: "\e071";
 }
 
 /* line 399, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-play:before {
-  content: "";
+  content: "\e072";
 }
 
 /* line 402, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-pause:before {
-  content: "";
+  content: "\e073";
 }
 
 /* line 405, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-stop:before {
-  content: "";
+  content: "\e074";
 }
 
 /* line 408, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-forward:before {
-  content: "";
+  content: "\e075";
 }
 
 /* line 411, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fast-forward:before {
-  content: "";
+  content: "\e076";
 }
 
 /* line 414, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-step-forward:before {
-  content: "";
+  content: "\e077";
 }
 
 /* line 417, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-eject:before {
-  content: "";
+  content: "\e078";
 }
 
 /* line 420, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-left:before {
-  content: "";
+  content: "\e079";
 }
 
 /* line 423, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-right:before {
-  content: "";
+  content: "\e080";
 }
 
 /* line 426, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-plus-sign:before {
-  content: "";
+  content: "\e081";
 }
 
 /* line 429, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-minus-sign:before {
-  content: "";
+  content: "\e082";
 }
 
 /* line 432, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-remove-sign:before {
-  content: "";
+  content: "\e083";
 }
 
 /* line 435, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ok-sign:before {
-  content: "";
+  content: "\e084";
 }
 
 /* line 438, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-question-sign:before {
-  content: "";
+  content: "\e085";
 }
 
 /* line 441, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-info-sign:before {
-  content: "";
+  content: "\e086";
 }
 
 /* line 444, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-screenshot:before {
-  content: "";
+  content: "\e087";
 }
 
 /* line 447, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-remove-circle:before {
-  content: "";
+  content: "\e088";
 }
 
 /* line 450, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ok-circle:before {
-  content: "";
+  content: "\e089";
 }
 
 /* line 453, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ban-circle:before {
-  content: "";
+  content: "\e090";
 }
 
 /* line 456, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-left:before {
-  content: "";
+  content: "\e091";
 }
 
 /* line 459, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-right:before {
-  content: "";
+  content: "\e092";
 }
 
 /* line 462, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-up:before {
-  content: "";
+  content: "\e093";
 }
 
 /* line 465, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-down:before {
-  content: "";
+  content: "\e094";
 }
 
 /* line 468, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-share-alt:before {
-  content: "";
+  content: "\e095";
 }
 
 /* line 471, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-full:before {
-  content: "";
+  content: "\e096";
 }
 
 /* line 474, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-small:before {
-  content: "";
+  content: "\e097";
 }
 
 /* line 477, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-exclamation-sign:before {
-  content: "";
+  content: "\e101";
 }
 
 /* line 480, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-gift:before {
-  content: "";
+  content: "\e102";
 }
 
 /* line 483, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-leaf:before {
-  content: "";
+  content: "\e103";
 }
 
 /* line 486, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fire:before {
-  content: "";
+  content: "\e104";
 }
 
 /* line 489, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-eye-open:before {
-  content: "";
+  content: "\e105";
 }
 
 /* line 492, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-eye-close:before {
-  content: "";
+  content: "\e106";
 }
 
 /* line 495, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-warning-sign:before {
-  content: "";
+  content: "\e107";
 }
 
 /* line 498, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-plane:before {
-  content: "";
+  content: "\e108";
 }
 
 /* line 501, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-calendar:before {
-  content: "";
+  content: "\e109";
 }
 
 /* line 504, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-random:before {
-  content: "";
+  content: "\e110";
 }
 
 /* line 507, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-comment:before {
-  content: "";
+  content: "\e111";
 }
 
 /* line 510, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-magnet:before {
-  content: "";
+  content: "\e112";
 }
 
 /* line 513, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-up:before {
-  content: "";
+  content: "\e113";
 }
 
 /* line 516, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-down:before {
-  content: "";
+  content: "\e114";
 }
 
 /* line 519, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-retweet:before {
-  content: "";
+  content: "\e115";
 }
 
 /* line 522, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-shopping-cart:before {
-  content: "";
+  content: "\e116";
 }
 
 /* line 525, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-folder-close:before {
-  content: "";
+  content: "\e117";
 }
 
 /* line 528, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-folder-open:before {
-  content: "";
+  content: "\e118";
 }
 
 /* line 531, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-vertical:before {
-  content: "";
+  content: "\e119";
 }
 
 /* line 534, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-horizontal:before {
-  content: "";
+  content: "\e120";
 }
 
 /* line 537, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hdd:before {
-  content: "";
+  content: "\e121";
 }
 
 /* line 540, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bullhorn:before {
-  content: "";
+  content: "\e122";
 }
 
 /* line 543, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bell:before {
-  content: "";
+  content: "\e123";
 }
 
 /* line 546, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-certificate:before {
-  content: "";
+  content: "\e124";
 }
 
 /* line 549, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-thumbs-up:before {
-  content: "";
+  content: "\e125";
 }
 
 /* line 552, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-thumbs-down:before {
-  content: "";
+  content: "\e126";
 }
 
 /* line 555, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-right:before {
-  content: "";
+  content: "\e127";
 }
 
 /* line 558, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-left:before {
-  content: "";
+  content: "\e128";
 }
 
 /* line 561, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-up:before {
-  content: "";
+  content: "\e129";
 }
 
 /* line 564, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-down:before {
-  content: "";
+  content: "\e130";
 }
 
 /* line 567, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-right:before {
-  content: "";
+  content: "\e131";
 }
 
 /* line 570, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-left:before {
-  content: "";
+  content: "\e132";
 }
 
 /* line 573, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-up:before {
-  content: "";
+  content: "\e133";
 }
 
 /* line 576, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-down:before {
-  content: "";
+  content: "\e134";
 }
 
 /* line 579, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-globe:before {
-  content: "";
+  content: "\e135";
 }
 
 /* line 582, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-wrench:before {
-  content: "";
+  content: "\e136";
 }
 
 /* line 585, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tasks:before {
-  content: "";
+  content: "\e137";
 }
 
 /* line 588, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-filter:before {
-  content: "";
+  content: "\e138";
 }
 
 /* line 591, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-briefcase:before {
-  content: "";
+  content: "\e139";
 }
 
 /* line 594, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fullscreen:before {
-  content: "";
+  content: "\e140";
 }
 
 /* line 597, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-dashboard:before {
-  content: "";
+  content: "\e141";
 }
 
 /* line 600, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-paperclip:before {
-  content: "";
+  content: "\e142";
 }
 
 /* line 603, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-heart-empty:before {
-  content: "";
+  content: "\e143";
 }
 
 /* line 606, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-link:before {
-  content: "";
+  content: "\e144";
 }
 
 /* line 609, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-phone:before {
-  content: "";
+  content: "\e145";
 }
 
 /* line 612, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-pushpin:before {
-  content: "";
+  content: "\e146";
 }
 
 /* line 615, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-usd:before {
-  content: "";
+  content: "\e148";
 }
 
 /* line 618, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-gbp:before {
-  content: "";
+  content: "\e149";
 }
 
 /* line 621, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort:before {
-  content: "";
+  content: "\e150";
 }
 
 /* line 624, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-alphabet:before {
-  content: "";
+  content: "\e151";
 }
 
 /* line 627, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-alphabet-alt:before {
-  content: "";
+  content: "\e152";
 }
 
 /* line 630, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-order:before {
-  content: "";
+  content: "\e153";
 }
 
 /* line 633, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-order-alt:before {
-  content: "";
+  content: "\e154";
 }
 
 /* line 636, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-attributes:before {
-  content: "";
+  content: "\e155";
 }
 
 /* line 639, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-attributes-alt:before {
-  content: "";
+  content: "\e156";
 }
 
 /* line 642, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-unchecked:before {
-  content: "";
+  content: "\e157";
 }
 
 /* line 645, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-expand:before {
-  content: "";
+  content: "\e158";
 }
 
 /* line 648, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-collapse-down:before {
-  content: "";
+  content: "\e159";
 }
 
 /* line 651, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-collapse-up:before {
-  content: "";
+  content: "\e160";
 }
 
 /* line 654, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-log-in:before {
-  content: "";
+  content: "\e161";
 }
 
 /* line 657, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-flash:before {
-  content: "";
+  content: "\e162";
 }
 
 /* line 660, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-log-out:before {
-  content: "";
+  content: "\e163";
 }
 
 /* line 663, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-new-window:before {
-  content: "";
+  content: "\e164";
 }
 
 /* line 666, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-record:before {
-  content: "";
+  content: "\e165";
 }
 
 /* line 669, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-save:before {
-  content: "";
+  content: "\e166";
 }
 
 /* line 672, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-open:before {
-  content: "";
+  content: "\e167";
 }
 
 /* line 675, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-saved:before {
-  content: "";
+  content: "\e168";
 }
 
 /* line 678, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-import:before {
-  content: "";
+  content: "\e169";
 }
 
 /* line 681, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-export:before {
-  content: "";
+  content: "\e170";
 }
 
 /* line 684, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-send:before {
-  content: "";
+  content: "\e171";
 }
 
 /* line 687, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-disk:before {
-  content: "";
+  content: "\e172";
 }
 
 /* line 690, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-saved:before {
-  content: "";
+  content: "\e173";
 }
 
 /* line 693, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-remove:before {
-  content: "";
+  content: "\e174";
 }
 
 /* line 696, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-save:before {
-  content: "";
+  content: "\e175";
 }
 
 /* line 699, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-open:before {
-  content: "";
+  content: "\e176";
 }
 
 /* line 702, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-credit-card:before {
-  content: "";
+  content: "\e177";
 }
 
 /* line 705, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-transfer:before {
-  content: "";
+  content: "\e178";
 }
 
 /* line 708, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cutlery:before {
-  content: "";
+  content: "\e179";
 }
 
 /* line 711, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-header:before {
-  content: "";
+  content: "\e180";
 }
 
 /* line 714, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-compressed:before {
-  content: "";
+  content: "\e181";
 }
 
 /* line 717, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-earphone:before {
-  content: "";
+  content: "\e182";
 }
 
 /* line 720, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-phone-alt:before {
-  content: "";
+  content: "\e183";
 }
 
 /* line 723, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tower:before {
-  content: "";
+  content: "\e184";
 }
 
 /* line 726, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-stats:before {
-  content: "";
+  content: "\e185";
 }
 
 /* line 729, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sd-video:before {
-  content: "";
+  content: "\e186";
 }
 
 /* line 732, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hd-video:before {
-  content: "";
+  content: "\e187";
 }
 
 /* line 735, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-subtitles:before {
-  content: "";
+  content: "\e188";
 }
 
 /* line 738, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-stereo:before {
-  content: "";
+  content: "\e189";
 }
 
 /* line 741, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-dolby:before {
-  content: "";
+  content: "\e190";
 }
 
 /* line 744, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-5-1:before {
-  content: "";
+  content: "\e191";
 }
 
 /* line 747, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-6-1:before {
-  content: "";
+  content: "\e192";
 }
 
 /* line 750, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-7-1:before {
-  content: "";
+  content: "\e193";
 }
 
 /* line 753, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-copyright-mark:before {
-  content: "";
+  content: "\e194";
 }
 
 /* line 756, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-registration-mark:before {
-  content: "";
+  content: "\e195";
 }
 
 /* line 759, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cloud-download:before {
-  content: "";
+  content: "\e197";
 }
 
 /* line 762, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cloud-upload:before {
-  content: "";
+  content: "\e198";
 }
 
 /* line 765, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tree-conifer:before {
-  content: "";
+  content: "\e199";
 }
 
 /* line 768, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tree-deciduous:before {
-  content: "";
+  content: "\e200";
 }
 
 /* line 771, ../../src/content/styles/vendors/bootstrap.sass */
@@ -1278,7 +1277,7 @@ body {
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
-  background-color: #ffffff;
+  background-color: white;
 }
 
 /* line 791, ../../src/content/styles/vendors/bootstrap.sass */
@@ -1333,7 +1332,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857;
-  background-color: #ffffff;
+  background-color: white;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -1573,7 +1572,7 @@ a.text-danger:hover {
 
 /* line 984, ../../src/content/styles/vendors/bootstrap.sass */
 .bg-primary {
-  color: #fff;
+  color: white;
   background-color: #428bca;
 }
 
@@ -1728,7 +1727,7 @@ blockquote footer, blockquote small, blockquote .small {
 }
 /* line 1087, ../../src/content/styles/vendors/bootstrap.sass */
 blockquote footer:before, blockquote small:before, blockquote .small:before {
-  content: "— ";
+  content: "\2014 \00A0";
 }
 
 /* line 1090, ../../src/content/styles/vendors/bootstrap.sass */
@@ -1747,7 +1746,7 @@ blockquote footer:before, blockquote small:before, blockquote .small:before {
 
 /* line 1100, ../../src/content/styles/vendors/bootstrap.sass */
 .blockquote-reverse footer:after, blockquote.pull-right footer:after, .blockquote-reverse small:after, blockquote.pull-right small:after, .blockquote-reverse .small:after, blockquote.pull-right .small:after {
-  content: " —";
+  content: "\00A0 \2014";
 }
 
 /* line 1103, ../../src/content/styles/vendors/bootstrap.sass */
@@ -2925,7 +2924,7 @@ output {
   font-size: 14px;
   line-height: 1.42857;
   color: #555555;
-  background-color: #ffffff;
+  background-color: white;
   background-image: none;
   border: 1px solid #cccccc;
   border-radius: 4px;
@@ -3440,7 +3439,7 @@ fieldset[disabled] .btn {
 /* line 2039, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default {
   color: #333333;
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 /* line 2043, ../../src/content/styles/vendors/bootstrap.sass */
@@ -3469,98 +3468,98 @@ fieldset[disabled] .btn {
 
 /* line 2061, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled, .btn-default[disabled] {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2065, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2070, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled:hover, .btn-default[disabled]:hover {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2074, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default:hover {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2079, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled:focus, .btn-default[disabled]:focus {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2083, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default:focus {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2088, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled.focus, .btn-default[disabled].focus {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2092, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default.focus {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2097, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled:active, .btn-default[disabled]:active {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2101, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default:active {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2106, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled.active, .btn-default[disabled].active {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2110, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default.active {
-  background-color: #ffffff;
+  background-color: white;
   border-color: #cccccc;
 }
 
 /* line 2114, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default .badge {
-  color: #ffffff;
+  color: white;
   background-color: #333333;
 }
 
 /* line 2118, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-primary {
-  color: #ffffff;
+  color: white;
   background-color: #428bca;
   border-color: #357ebd;
 }
 /* line 2122, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
-  color: #ffffff;
+  color: white;
   background-color: #3071a9;
   border-color: #285e8e;
 }
 
 /* line 2127, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-primary {
-  color: #ffffff;
+  color: white;
   background-color: #3071a9;
   border-color: #285e8e;
 }
@@ -3650,25 +3649,25 @@ fieldset[disabled] .btn-primary.active {
 /* line 2193, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-primary .badge {
   color: #428bca;
-  background-color: #ffffff;
+  background-color: white;
 }
 
 /* line 2197, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-success {
-  color: #ffffff;
+  color: white;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
 /* line 2201, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active {
-  color: #ffffff;
+  color: white;
   background-color: #449d44;
   border-color: #398439;
 }
 
 /* line 2206, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-success {
-  color: #ffffff;
+  color: white;
   background-color: #449d44;
   border-color: #398439;
 }
@@ -3758,25 +3757,25 @@ fieldset[disabled] .btn-success.active {
 /* line 2272, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-success .badge {
   color: #5cb85c;
-  background-color: #ffffff;
+  background-color: white;
 }
 
 /* line 2276, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-info {
-  color: #ffffff;
+  color: white;
   background-color: #5bc0de;
   border-color: #46b8da;
 }
 /* line 2280, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active {
-  color: #ffffff;
+  color: white;
   background-color: #31b0d5;
   border-color: #269abc;
 }
 
 /* line 2285, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-info {
-  color: #ffffff;
+  color: white;
   background-color: #31b0d5;
   border-color: #269abc;
 }
@@ -3866,25 +3865,25 @@ fieldset[disabled] .btn-info.active {
 /* line 2351, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-info .badge {
   color: #5bc0de;
-  background-color: #ffffff;
+  background-color: white;
 }
 
 /* line 2355, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-warning {
-  color: #ffffff;
+  color: white;
   background-color: #f0ad4e;
   border-color: #eea236;
 }
 /* line 2359, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-warning:hover, .btn-warning:focus, .btn-warning.focus, .btn-warning:active, .btn-warning.active {
-  color: #ffffff;
+  color: white;
   background-color: #ec971f;
   border-color: #d58512;
 }
 
 /* line 2364, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-warning {
-  color: #ffffff;
+  color: white;
   background-color: #ec971f;
   border-color: #d58512;
 }
@@ -3974,25 +3973,25 @@ fieldset[disabled] .btn-warning.active {
 /* line 2430, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-warning .badge {
   color: #f0ad4e;
-  background-color: #ffffff;
+  background-color: white;
 }
 
 /* line 2434, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-danger {
-  color: #ffffff;
+  color: white;
   background-color: #d9534f;
   border-color: #d43f3a;
 }
 /* line 2438, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active {
-  color: #ffffff;
+  color: white;
   background-color: #c9302c;
   border-color: #ac2925;
 }
 
 /* line 2443, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-danger {
-  color: #ffffff;
+  color: white;
   background-color: #c9302c;
   border-color: #ac2925;
 }
@@ -4082,7 +4081,7 @@ fieldset[disabled] .btn-danger.active {
 /* line 2509, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-danger .badge {
   color: #d9534f;
-  background-color: #ffffff;
+  background-color: white;
 }
 
 /* line 2513, ../../src/content/styles/vendors/bootstrap.sass */
@@ -4534,7 +4533,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 
 /* line 49, ../../src/content/styles/style.sass */
 a, a:focus, a:active {
-  color: #F5F5F5;
+  color: whitesmoke;
 }
 
 /* line 52, ../../src/content/styles/style.sass */
@@ -4613,7 +4612,7 @@ header {
   position: relative;
   z-index: 3;
   background-color: #506362;
-  color: #fff;
+  color: white;
   padding: 20px 0;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
@@ -4717,7 +4716,7 @@ nav ul li:hover {
 nav ul li a {
   display: flex;
   align-items: center;
-  color: #F5F5F5;
+  color: whitesmoke;
   -webkit-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -moz-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
@@ -4725,7 +4724,7 @@ nav ul li a {
 }
 /* line 161, ../../src/content/styles/style.sass */
 nav ul li a:hover {
-  color: #F5F5F5;
+  color: whitesmoke;
 }
 /* line 163, ../../src/content/styles/style.sass */
 nav ul li.active a {
@@ -4760,11 +4759,11 @@ nav ul li.active a {
 }
 /* line 182, ../../src/content/styles/style.sass */
 .message.error {
-  background-color: #A28382;
+  background-color: #a28382;
 }
 /* line 184, ../../src/content/styles/style.sass */
 .message.success {
-  background-color: #71876D;
+  background-color: #71876d;
 }
 
 /* line 187, ../../src/content/styles/style.sass */
@@ -4776,7 +4775,7 @@ nav ul li.active a {
 .recipe {
   overflow-x: hidden;
   overflow-y: visible;
-  background-color: #B3B6B6;
+  background-color: #b3b6b6;
   font-size: 1.5rem;
   position: relative;
   -webkit-border-radius: 5px;
@@ -4834,7 +4833,7 @@ nav ul li.active a {
   font-size: 12px;
   width: 12px;
   height: 14px;
-  color: #333;
+  color: #333333;
   -webkit-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -moz-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
@@ -4854,14 +4853,14 @@ nav ul li.active a {
 }
 /* line 234, ../../src/content/styles/style.sass */
 .calendar-pagination .pagination-container {
-  background-color: #F5F5F5;
+  background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
-  border-bottom: 1px solid #B3B6B6;
-  border-left: 1px solid #B3B6B6;
+  border-bottom: 1px solid #b3b6b6;
+  border-left: 1px solid #b3b6b6;
 }
 /* line 241, ../../src/content/styles/style.sass */
 .calendar-pagination .current-week {
@@ -4874,77 +4873,83 @@ nav ul li.active a {
   padding: 0;
   background: none;
   border: none;
-  background-color: #F5F5F5;
+  background-color: whitesmoke;
 }
 
 /* line 251, ../../src/content/styles/style.sass */
-.calendar {
+.calendar, .summary {
   position: relative;
   z-index: 2;
-  background-color: #F5F5F5;
+  background-color: whitesmoke;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
 
-/* line 256, ../../src/content/styles/style.sass */
+/* line 257, ../../src/content/styles/style.sass */
+.summary {
+  margin: 25px 15px;
+  padding: 25px;
+}
+
+/* line 261, ../../src/content/styles/style.sass */
 calendar .col-xs-1 {
   width: 14.28571%;
   *width: 14.28571%;
 }
 
-/* line 259, ../../src/content/styles/style.sass */
+/* line 264, ../../src/content/styles/style.sass */
 .day {
   height: 400px;
   overflow: auto;
   padding: 0;
 }
-/* line 263, ../../src/content/styles/style.sass */
+/* line 268, ../../src/content/styles/style.sass */
 .day .date {
   width: 100%;
   font-size: 12px;
   line-height: 25px;
   text-align: center;
 }
-/* line 268, ../../src/content/styles/style.sass */
+/* line 273, ../../src/content/styles/style.sass */
 .day .meal {
   padding: 0 15px;
   min-height: 31.2%;
   width: 100%;
 }
-/* line 272, ../../src/content/styles/style.sass */
+/* line 277, ../../src/content/styles/style.sass */
 .day .meal.over {
   border: 2px dashed #6b7877;
 }
-/* line 274, ../../src/content/styles/style.sass */
+/* line 279, ../../src/content/styles/style.sass */
 .day .lunch, .day .breakfast, .day .dinner {
   border: 1px dashed #6b7877;
 }
-/* line 276, ../../src/content/styles/style.sass */
+/* line 281, ../../src/content/styles/style.sass */
 .day .recipe {
   width: 100%;
   height: auto;
   margin: 5px 0;
   padding: 10px 0;
 }
-/* line 281, ../../src/content/styles/style.sass */
+/* line 286, ../../src/content/styles/style.sass */
 .day .recipe .recipe-title {
   text-align: center;
   margin: 0;
 }
-/* line 284, ../../src/content/styles/style.sass */
+/* line 289, ../../src/content/styles/style.sass */
 .day .recipe .recipe-ingredients {
   margin: 0;
   font-size: 12px;
   padding: 0 0 0 27px;
 }
 
-/* line 289, ../../src/content/styles/style.sass */
+/* line 294, ../../src/content/styles/style.sass */
 .today {
-  background-color: #DAE5D8;
+  background-color: #dae5d8;
 }
 
-/* line 291, ../../src/content/styles/style.sass */
+/* line 296, ../../src/content/styles/style.sass */
 .day-header {
   padding: 0;
   text-align: center;
@@ -4952,21 +4957,21 @@ calendar .col-xs-1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #B3B6B6;
-}
-
-/* line 300, ../../src/content/styles/style.sass */
-.day + *, .day-header + * {
-  border-left: 1px solid #B3B6B6;
+  border-bottom: 1px solid #b3b6b6;
 }
 
 /* line 305, ../../src/content/styles/style.sass */
+.day + *, .day-header + * {
+  border-left: 1px solid #b3b6b6;
+}
+
+/* line 310, ../../src/content/styles/style.sass */
 .recipes-container {
   max-height: 310px;
   overflow: auto;
 }
 
-/* line 310, ../../src/content/styles/style.sass */
+/* line 315, ../../src/content/styles/style.sass */
 .recipes-container .recipe, .ingredients-container .recipe, .units-container .recipe {
   margin: 5px 5px 10px 5px;
   float: left;
@@ -4978,22 +4983,23 @@ calendar .col-xs-1 {
   height: 50px;
 }
 
-/* line 320, ../../src/content/styles/style.sass */
+/* line 325, ../../src/content/styles/style.sass */
 .recipes-container {
   padding: 15px 10px;
 }
 
-/* line 325, ../../src/content/styles/style.sass */
+/* line 330, ../../src/content/styles/style.sass */
 .recipe-form button:hover, .recipe-form a:hover, [draggable=true]:hover {
   -webkit-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.7);
 }
 
-/* line 328, ../../src/content/styles/style.sass */
+/* line 333, ../../src/content/styles/style.sass */
 .recipe-form {
-  background-color: #B3B6B6;
+  background-color: #b3b6b6;
   padding: 25px;
+  overflow: hidden;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -5002,36 +5008,36 @@ calendar .col-xs-1 {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 334, ../../src/content/styles/style.sass */
+/* line 340, ../../src/content/styles/style.sass */
 .recipe-form button {
   height: 34px;
   max-width: 100%;
 }
-/* line 338, ../../src/content/styles/style.sass */
+/* line 344, ../../src/content/styles/style.sass */
 .recipe-form label {
   font-weight: normal;
 }
-/* line 341, ../../src/content/styles/style.sass */
+/* line 347, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 344, ../../src/content/styles/style.sass */
+/* line 350, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus {
   -webkit-border-radius: 4px 4px 0 4px;
   -moz-border-radius: 4px 4px 0 4px;
   -o-border-radius: 4px 4px 0 4px;
   border-radius: 4px 4px 0 4px;
 }
-/* line 346, ../../src/content/styles/style.sass */
+/* line 352, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus + .available-ingredients {
   max-height: 300px;
 }
-/* line 348, ../../src/content/styles/style.sass */
+/* line 354, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .col-xs-1, .recipe-form .dropdown-filter .col-xs-2, .recipe-form .dropdown-filter .col-xs-8 {
   padding: 0;
 }
-/* line 350, ../../src/content/styles/style.sass */
+/* line 356, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients {
   z-index: 10;
   overflow: auto;
@@ -5041,7 +5047,7 @@ calendar .col-xs-1 {
   position: absolute;
   top: 33px;
   left: 0;
-  background-color: #fff;
+  background-color: white;
   min-width: 25%;
   list-style: none;
   -webkit-transition: max-height 1s ease;
@@ -5049,22 +5055,22 @@ calendar .col-xs-1 {
   -o-transition: max-height 1s ease;
   transition: max-height 1s ease;
 }
-/* line 363, ../../src/content/styles/style.sass */
+/* line 369, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item {
   padding-left: 12px;
   height: 33px;
   line-height: 33px;
 }
-/* line 367, ../../src/content/styles/style.sass */
+/* line 373, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item:hover {
-  background-color: #F5F5F5;
+  background-color: whitesmoke;
   cursor: pointer;
 }
-/* line 371, ../../src/content/styles/style.sass */
+/* line 377, ../../src/content/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 373, ../../src/content/styles/style.sass */
+/* line 379, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -5079,43 +5085,43 @@ calendar .col-xs-1 {
   -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
-/* line 383, ../../src/content/styles/style.sass */
+/* line 389, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   cursor: pointer;
   color: #6b7877;
 }
-/* line 386, ../../src/content/styles/style.sass */
+/* line 392, ../../src/content/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 389, ../../src/content/styles/style.sass */
+/* line 395, ../../src/content/styles/style.sass */
 .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 391, ../../src/content/styles/style.sass */
+/* line 397, ../../src/content/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }
-/* line 394, ../../src/content/styles/style.sass */
+/* line 400, ../../src/content/styles/style.sass */
 .recipe-form .recipe-description textarea {
   width: 100%;
   min-height: 250px;
   resize: vertical;
 }
 
-/* line 400, ../../src/content/styles/style.sass */
+/* line 406, ../../src/content/styles/style.sass */
 .ingredients-container .input-wrapper, .units-container .input-wrapper {
   padding-bottom: 10px;
 }
-/* line 402, ../../src/content/styles/style.sass */
+/* line 408, ../../src/content/styles/style.sass */
 .ingredients-container .recipe:hover, .units-container .recipe:hover {
   cursor: pointer;
 }
-/* line 404, ../../src/content/styles/style.sass */
+/* line 410, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .ingredients-container .item-units, .units-container .item-name, .units-container .item-units {
   max-height: 33px;
 }
-/* line 406, ../../src/content/styles/style.sass */
+/* line 412, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .units-container .item-name {
   width: 25%;
   -webkit-border-radius: 4px 0px 0px 4px;
@@ -5123,7 +5129,7 @@ calendar .col-xs-1 {
   -o-border-radius: 4px 0px 0px 4px;
   border-radius: 4px 0px 0px 4px;
 }
-/* line 409, ../../src/content/styles/style.sass */
+/* line 415, ../../src/content/styles/style.sass */
 .ingredients-container .item-units, .units-container .item-units {
   width: 15%;
   -webkit-border-radius: 0;
@@ -5131,14 +5137,14 @@ calendar .col-xs-1 {
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 412, ../../src/content/styles/style.sass */
+/* line 418, ../../src/content/styles/style.sass */
 .ingredients-container .item-add, .units-container .item-add {
   -webkit-border-radius: 0px 4px 4px 0px;
   -moz-border-radius: 0px 4px 4px 0px;
   -o-border-radius: 0px 4px 4px 0px;
   border-radius: 0px 4px 4px 0px;
 }
-/* line 414, ../../src/content/styles/style.sass */
+/* line 420, ../../src/content/styles/style.sass */
 .ingredients-container .glyphicon-remove, .units-container .glyphicon-remove {
   position: absolute;
   top: 5px;
@@ -5147,4 +5153,8 @@ calendar .col-xs-1 {
   height: 20px;
 }
 
-/*# sourceMappingURL=style.css.map */
+/* line 428, ../../src/content/styles/style.sass */
+.summary .summary-date {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
