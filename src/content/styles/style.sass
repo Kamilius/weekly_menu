@@ -50,10 +50,10 @@ a, a:focus, a:active
 	color: $whitesmoke
 
 body
-	font-family: zantroke
-	background-color: $backgroundColor
-	font-size: 14px
 	position: relative
+	font-family: zantroke
+	font-size: 14px
+	background-color: $backgroundColor
 
 .animation-wrapper
 	position: relative
@@ -79,35 +79,35 @@ body
 	position: relative
 	&:after
 		content: ""
-		display: block
-		background: url(../images/spinner.gif) no-repeat center
-		background-size: cover
-		width: 15px
-		height: 15px
 		position: absolute
 		top: 5px
 		right: 5px
+		display: block
+		width: 15px
+		height: 15px
+		background: url(../images/spinner.gif) no-repeat center
+		background-size: cover
 
 .header-wrapper
 	position: fixed
-	width: 100%
 	top: 0
 	z-index: map-get($z-indexes, header)
+	width: 100%
 
 header
 	position: relative
 	z-index: 3
-	background-color: $headerColor
-	color: $white
 	padding: 20px 0
+	color: $white
+	background-color: $headerColor
 	+box-shadow(0px 2px 1px 0px $shadowColor)
 	.container
 		display: flex
 .logo
 	position: relative
-	z-index: 2
-	max-width: 100px
 	height: auto
+	max-width: 100px
+	z-index: 2
 	img
 		width: 100%
 		max-width: 100%
@@ -125,26 +125,26 @@ header
 
 nav
 	position: relative
-	background-color: $navColor
 	height: 45px
+	background-color: $navColor
 	+box-shadow(0px 2px 1px 0px $shadowColor)
 	ul
 		position: relative
+		height: 45px
+		align-items: center
+		justify-content: flex-start
 		margin: 0
 		padding: 0
 		display: flex
-		justify-content: flex-start
 		list-style: none
-		align-items: center
-		height: 45px
 		li
 			position: relative
 			z-index: 3
-			background-color: $navColor
 			height: 100%
-			padding: 0 10px
 			display: flex
 			align-items: stretch
+			padding: 0 10px
+			background-color: $navColor
 			+transition((background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
 			&:first-child
 				+box-shadow(-1px 1px 1px 0px $shadowColor)
@@ -164,18 +164,18 @@ nav
 				text-decoration: underline
 
 .message
-	text-align: center
-	line-height: 25px
-	max-height: 0
-	overflow: hidden
-	font-size: 12px
-	background-color: transparent
 	position: absolute
 	top: 0
 	right: 0
-	padding: 10px
-	+border-radius(25px 0 0 25px)
 	z-index: map-get($z-indexes, message)
+	max-height: 0
+	padding: 10px
+	overflow: hidden
+	font-size: 12px
+	line-height: 25px
+	text-align: center
+	+border-radius(25px 0 0 25px)
+	background-color: transparent
 	+transition((max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	&.error, &.success
 		max-height: 999px
@@ -188,11 +188,11 @@ nav
 	margin-top: 25px
 
 .recipe
+	position: relative
 	overflow-x: hidden
 	overflow-y: visible
-	background-color: $recipeBackgroundColor
 	font-size: 1.5rem
-	position: relative
+	background-color: $recipeBackgroundColor
 	+border-radius(5px)
 	+transition((opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	+box-shadow(0px 2px 1px 0px $shadowColor)
@@ -211,33 +211,33 @@ nav
 		+transition((right 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
 	&:hover
 		.recipe-controls
-			background-color: rgba(255, 255, 255, 0.6)
 			right: 0
 			padding-left: 5px
+			background-color: rgba(255, 255, 255, 0.6)
 			+box-shadow(0px 2px 1px 0px $shadowColor)
 			.glyphicon-chevron-left
 				display: none
 	.glyphicon
-		font-size: 12px
 		width: 12px
 		height: 14px
+		font-size: 12px
 		color: #333
 		+transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
 		&:hover
 			color: $navColor
-			cursor: pointer
 			text-decoration: none
+			cursor: pointer
 // Calendar styles
 .calendar-pagination
 	position: relative
 	z-index: 2
 	.pagination-container
-		background-color: $whitesmoke
 		display: flex
 		justify-content: space-between
-		+box-shadow(0px 2px 1px 0px $shadowColor)
+		background-color: $whitesmoke
 		border-bottom: 1px solid $recipeBackgroundColor
 		border-left: 1px solid $recipeBackgroundColor
+		+box-shadow(0px 2px 1px 0px $shadowColor)
 	.current-week
 		padding: 0 5px 0 5px
 		font-size: 12px
@@ -271,9 +271,9 @@ calendar .col-xs-1
 		line-height: 25px
 		text-align: center
 	.meal
-		padding: 0 15px
-		min-height: 31.2%
 		width: 100%
+		min-height: 31.2%
+		padding: 0 15px
 		&.over
 			border: 2px dashed $navColor
 	.lunch, .breakfast, .dinner
@@ -284,22 +284,22 @@ calendar .col-xs-1
 		margin: 5px 0
 		padding: 10px 0
 		.recipe-title
-			text-align: center
 			margin: 0
+			text-align: center
 		.recipe-ingredients
 			margin: 0
-			font-size: 12px
 			padding: 0 0 0 27px
+			font-size: 12px
 //Day with today's date mark
 .today
 	background-color: #DAE5D8
 .day-header
-	padding: 0
-	text-align: center
 	height: 50px
+	padding: 0
 	display: flex
 	align-items: center
 	justify-content: center
+	text-align: center
 	border-bottom: 1px solid $recipeBackgroundColor
 .day, .day-header
 	&+*
@@ -313,14 +313,14 @@ calendar .col-xs-1
 
 .recipes-container, .ingredients-container, .units-container
 	.recipe
+		width: 19%
+		height: 50px
 		margin: 5px 5px 10px 5px
 		float: left
 		display: flex
 		align-items: center
 		justify-content: center
 		text-align: center
-		width: 19%
-		height: 50px
 
 .recipes-container
 	padding: 15px 10px
@@ -331,9 +331,9 @@ calendar .col-xs-1
 		+box-shadow(0px 3px 8px 1px $shadowColor)
 
 .recipe-form
-	background-color: $recipeBackgroundColor
 	padding: 25px
 	overflow: hidden
+	background-color: $recipeBackgroundColor
 	+border-radius(5px)
 	+box-shadow(0px 2px 1px 0px $shadowColor)
 
@@ -354,18 +354,18 @@ calendar .col-xs-1
 		.col-xs-1, .col-xs-2, .col-xs-8
 			padding: 0
 		.available-ingredients
-			z-index: 10
-			overflow: auto
-			max-height: 0
-			padding: 0
-			margin: 0
 			position: absolute
 			top: 33px
 			left: 0
-			background-color: $white
+			z-index: 10
+			max-height: 0
 			min-width: 25%
-			list-style: none
+			padding: 0
+			margin: 0
+			overflow: auto
+			background-color: $white
 			+transition(max-height 1s ease)
+			list-style: none
 			.ingredient-item
 				padding-left: 12px
 				height: 33px
@@ -380,15 +380,15 @@ calendar .col-xs-1
 			position: absolute
 			top: 8px
 			right: 8px
-			font-family: "Glyphicons Halflings"
 			display: block
 			width: 14px
 			height: 14px
-			opacity: 0
+			font-family: "Glyphicons Halflings"
 			+transition(opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
+			opacity: 0
 			&:hover
-				cursor: pointer
 				color: $navColor
+				cursor: pointer
 		& + *
 			margin-top: 10px
 		&:hover
