@@ -58,6 +58,6 @@
       {{ recipeDetails.name }}
     %ul.recipe-ingredients
       %li{:'ng-repeat' => 'ing in recipeDetails.ingredients'}
-        {{ ing.name }}
+        {{ ing.name }}: {{ ing.amount + ' ' + ing.units }}
     .recipe-description
-      {{ recipe.description }}
+      {{ recipeDetails.description }}

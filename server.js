@@ -335,7 +335,8 @@ function daysToJSON(days) {
           return {
             id: ingr.id,
             name: ingr.name,
-            amount: +ingr.IngredientsRecipe.amount
+            amount: +ingr.IngredientsRecipe.amount,
+            units: ingr.Unit.name
           }
         })
       }
@@ -356,7 +357,10 @@ function getWeek(response, date) {
     order: 'date',
     include: [{
       model: Recipe,
-      include: [ Ingredient ]
+      include: [{
+          model: Ingredient,
+          include: [ Unit ]
+      }]
     }]
   }).success(function(days) {
     response.json(daysToJSON(days));

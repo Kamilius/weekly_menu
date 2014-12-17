@@ -5196,13 +5196,23 @@ calendar .col-xs-1 {
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
 /* line 250, ../../src/content/styles/style.sass */
+.details-overlay .recipe-title, .details-overlay .recipe-ingredients {
+  margin-bottom: 25px;
+}
+/* line 252, ../../src/content/styles/style.sass */
 .details-overlay .recipe-ingredients {
+  padding: 0;
+  line-height: 25px;
   -webkit-column-count: 2;
   -moz-column-count: 2;
   -o-column-count: 2;
-  padding: 0;
 }
-/* line 253, ../../src/content/styles/style.sass */
+/* line 256, ../../src/content/styles/style.sass */
 .details-overlay .recipe-ingredients li {
   margin-left: 25px;
+}
+/* line 258, ../../src/content/styles/style.sass */
+.details-overlay .recipe-description {
+  line-height: 25px;
+  text-indent: 25px;
 }
