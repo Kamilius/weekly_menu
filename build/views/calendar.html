@@ -24,7 +24,7 @@
       <div class='day col-xs-1' data-day-name='{{ day.name }}' ng-class='{ today: day.today() }' ng-repeat='day in weeklyMenu' ondragover='event.preventDefault()'>
         <div class='date'>{{ day.date | date }}</div>
         <div class='meal breakfast' data-meal-name='breakfast' drag-enter-leave-animation='' ng-class="{ 'has-spinner': day.isMealInProgress('breakfast')}" title='Сніданок'>
-          <div class='recipe fade-animation' ng-class="{ 'has-spinner': processing }" ng-repeat='recipe in day.breakfast track by $index'>
+          <div class='recipe fade-animation' ng-class="{ 'has-spinner': processing }" ng-click='showRecipeDetails(recipe)' ng-repeat='recipe in day.breakfast track by $index'>
             <recipecontrols></recipecontrols>
             <h5 class='recipe-title'>
               {{ recipe.name }}
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class='meal lunch' data-meal-name='lunch' drag-enter-leave-animation='' ng-class="{ 'has-spinner': day.isMealInProgress('lunch')}" title='Обід'>
-          <div class='recipe fade-animation' ng-repeat='recipe in day.lunch track by $index'>
+          <div class='recipe fade-animation' ng-class="{ 'has-spinner': processing }" ng-click='showRecipeDetails(recipe)' ng-repeat='recipe in day.lunch track by $index'>
             <recipecontrols></recipecontrols>
             <h5 class='recipe-title'>
               {{ recipe.name }}
@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class='meal dinner' data-meal-name='dinner' drag-enter-leave-animation='' ng-class="{ 'has-spinner': day.isMealInProgress('dinner')}" title='Вечеря'>
-          <div class='recipe fade-animation' ng-repeat='recipe in day.dinner track by $index'>
+          <div class='recipe fade-animation' ng-class="{ 'has-spinner': processing }" ng-click='showRecipeDetails(recipe)' ng-repeat='recipe in day.dinner track by $index'>
             <recipecontrols></recipecontrols>
             <h5 class='recipe-title'>
               {{ recipe.name }}
@@ -50,4 +50,19 @@
       </div>
     </div>
   </section>
+</div>
+<div class='details-overlay' ng-class='{ visible: recipeDetailsVisible }' ng-click='hideRecipeDetails()'>
+  <div class='details-body'>
+    <h3 class='recipe-title'>
+      {{ recipeDetails.name }}
+    </h3>
+    <ul class='recipe-ingredients'>
+      <li ng-repeat='ing in recipeDetails.ingredients'>
+        {{ ing.name }}
+      </li>
+    </ul>
+    <div class='recipe-description'>
+      {{ recipe.description }}
+    </div>
+  </div>
 </div>

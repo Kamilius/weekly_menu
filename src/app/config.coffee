@@ -36,21 +36,10 @@ app.run ['$rootScope', '$location', ($rootScope, $location) ->
 			)($rootScope)
 		, 10000
 
-	clearEmptyWeeks = (week, weekItemName) ->
-		counter = 0
-		for day in week
-			if day.recipes.length > 0
-				counter++
-				break
-
-		if counter is 0
-			localStorage.removeItem(weekItemName)
-			return true
-
-		return false
-
 	$rootScope.getClass = (path) ->
 		if $location.path().substr(0, path.length) == path then 'active' else ''
+
+	$rootScope.recipeDetailsVisible = false
 ]
 
 app.directive 'calendar', ->

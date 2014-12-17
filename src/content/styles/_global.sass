@@ -1,0 +1,209 @@
+//color palette url - http://paletton.com/#uid=13g0u0k1It801XU0-Dn3toq6ekh
+$z-indexes: (message: 300, header: 200, body: 100, overlay: 500)
+
+//Colors
+$whitesmoke: #F5F5F5
+$headerColor: #506362
+$navColor: #6b7877
+$backgroundColor: #878f8e
+$recipeBackgroundColor: #B3B6B6
+$white: #fff
+$error: #A28382
+$success: #71876D
+$shadowColor: rgba(0, 0, 0, 0.7)
+
+@font-face
+  font-family: zantroke
+  src: url(../fonts/Zantroke.otf)
+
+.no-left-border-radius
+  +border-radius(0 4px 4px 0)
+.no-right-border-radius
+  +border-radius(4px 0 0 4px)
+.no-border-radius
+  +border-radius(0)
+
+.row
+  margin: 0
+
+a, a:focus, a:active
+  color: $whitesmoke
+
+body
+  position: relative
+  font-family: zantroke
+  font-size: 14px
+  background-color: $backgroundColor
+
+.animation-wrapper
+  position: relative
+.page-body
+  padding-top: 173px
+  z-index: map-get($z-indexes, body)
+
+.fade-animation
+  position: absolute
+  top: 0
+  left: 0
+  +transition(opacity 0.4s ease)
+  &.ng-enter
+    opacity: 0
+    &.ng-enter-active
+      opacity: 1
+  &.ng-leave
+    opacity: 1
+    &.ng-leave-active
+      opacity: 0
+
+.has-spinner
+  position: relative
+  &:after
+    content: ""
+    position: absolute
+    top: 5px
+    right: 5px
+    display: block
+    width: 15px
+    height: 15px
+    background: url(../images/spinner.gif) no-repeat center
+    background-size: cover
+
+.header-wrapper
+  position: fixed
+  top: 0
+  z-index: map-get($z-indexes, header)
+  width: 100%
+
+header
+  position: relative
+  z-index: 3
+  padding: 20px 0
+  color: $white
+  background-color: $headerColor
+  +box-shadow(0px 2px 1px 0px $shadowColor)
+  .container
+    display: flex
+.logo
+  position: relative
+  height: auto
+  max-width: 100px
+  z-index: 2
+  img
+    width: 100%
+    max-width: 100%
+.title
+  padding-left: 20px
+  display: flex
+  flex: 1
+  align-items: center
+  &:hover
+    cursor: default
+
+.material-shadow
+  +box-shadow(0px 2px 1px 0px $shadowColor)
+  +transition(box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940))
+
+nav
+  position: relative
+  height: 45px
+  background-color: $navColor
+  +box-shadow(0px 2px 1px 0px $shadowColor)
+  ul
+    position: relative
+    height: 45px
+    align-items: center
+    justify-content: flex-start
+    margin: 0
+    padding: 0
+    display: flex
+    list-style: none
+    li
+      position: relative
+      z-index: 3
+      height: 100%
+      display: flex
+      align-items: stretch
+      padding: 0 10px
+      background-color: $navColor
+      +transition((background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
+      &:first-child
+        +box-shadow(-1px 1px 1px 0px $shadowColor)
+      &:last-child
+        +box-shadow(1px 1px 1px 0px $shadowColor)
+      &:hover
+        z-index: 4
+        +box-shadow(0px 2px 8px 1px $shadowColor)
+      a
+        display: flex
+        align-items: center
+        color: $whitesmoke
+        +transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
+        &:hover
+          color: $whitesmoke
+      &.active a
+        text-decoration: underline
+
+.message
+  position: absolute
+  top: 0
+  right: 0
+  z-index: map-get($z-indexes, message)
+  max-height: 0
+  padding: 10px
+  overflow: hidden
+  font-size: 12px
+  line-height: 25px
+  text-align: center
+  +border-radius(25px 0 0 25px)
+  background-color: transparent
+  +transition((max-height 0.4s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.4s cubic-bezier(0.865, 0, 0.425, 0.940)))
+  &.error, &.success
+    max-height: 999px
+  &.error
+    background-color: $error
+  &.success
+    background-color: $success
+
+.margin-top-25
+  margin-top: 25px
+
+.recipe
+  position: relative
+  overflow-x: hidden
+  overflow-y: visible
+  font-size: 1.5rem
+  background-color: $recipeBackgroundColor
+  +border-radius(5px)
+  +transition((opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), box-shadow 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
+  +box-shadow(0px 2px 1px 0px $shadowColor)
+  &.active
+    +box-shadow(0px 3px 8px 1px $shadowColor)
+  &[draggable=true]
+    &:hover
+      cursor: move
+      .recipe-controls
+        opacity: 1
+  .recipe-controls
+    position: absolute
+    top: 0
+    right: -38px
+    padding-right: 5px
+    +transition((right 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), background-color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940), padding-left 0.3s cubic-bezier(0.865, 0, 0.425, 0.940)))
+  &:hover
+    .recipe-controls
+      right: 0
+      padding-left: 5px
+      background-color: rgba(255, 255, 255, 0.6)
+      +box-shadow(0px 2px 1px 0px $shadowColor)
+      .glyphicon-chevron-left
+        display: none
+  .glyphicon
+    width: 12px
+    height: 14px
+    font-size: 12px
+    color: #333
+    +transition(color 0.3s cubic-bezier(0.865, 0, 0.425, 0.940))
+    &:hover
+      color: $navColor
+      text-decoration: none
+      cursor: pointer

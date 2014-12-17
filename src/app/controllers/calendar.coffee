@@ -6,6 +6,22 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 	currentYear = new Date().getFullYear()
 	#scope variables
 	$scope.weeklyMenu = []
+	$scope.recipeDetails = {
+		name: ''
+		ingredients: []
+		description: ''
+	}
+
+	$scope.showRecipeDetails = (recipe) ->
+		$scope.recipeDetails = recipe
+		$scope.recipeDetailsVisible = {
+			name: ''
+			ingredients: []
+			description: ''
+		}
+
+	$scope.hideRecipeDetails = () ->
+		$scope.recipeDetailsVisible = false
 
 	$scope.currentDate = ->
 		return "#{currentWeek}, #{currentYear}"
