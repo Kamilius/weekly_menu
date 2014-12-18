@@ -50,14 +50,3 @@
             %recipecontrols
             %h5.recipe-title
               {{ recipe.name }}
-
-.details-overlay{:'ng-class' => "{ visible: recipeDetailsVisible }",
-                :'ng-click' => 'hideRecipeDetails()'}
-  .details-body
-    %h3.recipe-title
-      {{ recipeDetails.name }}
-    %ul.recipe-ingredients
-      %li{:'ng-repeat' => 'ing in recipeDetails.ingredients'}
-        {{ ing.name }}: {{ ing.amount + ' ' + ing.units }}
-    .recipe-description
-      {{ recipeDetails.description }}

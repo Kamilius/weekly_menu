@@ -44,6 +44,21 @@
     <div class='container animation-wrapper'>
       <div class='page-body fade-animation' ng-view=''></div>
     </div>
+    <div class='details-overlay' ng-click='hideRecipeDetails()' ng-controller='DetailsOverlayCtrl' ng-show='recipeDetailsVisible'>
+      <div class='details-body'>
+        <h3 class='recipe-title'>
+          {{ recipeDetails.name }}
+        </h3>
+        <ul class='recipe-ingredients'>
+          <li ng-repeat='ing in recipeDetails.ingredients'>
+            {{ ing.name }}: {{ ing.amount + ' ' + ing.units }}
+          </li>
+        </ul>
+        <div class='recipe-description'>
+          {{ recipeDetails.description }}
+        </div>
+      </div>
+    </div>
     <script src='scripts/main.min.js'></script>
   </body>
 </html>

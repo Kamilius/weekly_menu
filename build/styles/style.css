@@ -1,4 +1,4 @@
-/*! "Weekly menu" 2014-12-17 */
+/*! "Weekly menu" 2014-12-18 */
 /* line 1, ../../src/content/styles/vendors/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -5170,16 +5170,15 @@ calendar .col-xs-1 {
   top: 0;
   left: 0;
   z-index: 500;
-  display: none;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
 }
-/* line 238, ../../src/content/styles/style.sass */
+/* line 237, ../../src/content/styles/style.sass */
 .details-overlay.visible {
   display: block;
 }
-/* line 240, ../../src/content/styles/style.sass */
+/* line 239, ../../src/content/styles/style.sass */
 .details-overlay .details-body {
   position: absolute;
   top: 50%;
@@ -5195,11 +5194,11 @@ calendar .col-xs-1 {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 250, ../../src/content/styles/style.sass */
+/* line 249, ../../src/content/styles/style.sass */
 .details-overlay .recipe-title, .details-overlay .recipe-ingredients {
   margin-bottom: 25px;
 }
-/* line 252, ../../src/content/styles/style.sass */
+/* line 251, ../../src/content/styles/style.sass */
 .details-overlay .recipe-ingredients {
   padding: 0;
   line-height: 25px;
@@ -5207,11 +5206,11 @@ calendar .col-xs-1 {
   -moz-column-count: 2;
   -o-column-count: 2;
 }
-/* line 256, ../../src/content/styles/style.sass */
+/* line 255, ../../src/content/styles/style.sass */
 .details-overlay .recipe-ingredients li {
   margin-left: 25px;
 }
-/* line 258, ../../src/content/styles/style.sass */
+/* line 257, ../../src/content/styles/style.sass */
 .details-overlay .recipe-description {
   line-height: 25px;
   text-indent: 25px;

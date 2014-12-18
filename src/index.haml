@@ -31,4 +31,16 @@
 		.container.animation-wrapper
 			.page-body.fade-animation{:'ng-view' => ''}
 
+		.details-overlay{:'ng-controller' => "DetailsOverlayCtrl",
+										 								:'ng-show' => "recipeDetailsVisible",
+																		:'ng-click' => 'hideRecipeDetails()'}
+			.details-body
+				%h3.recipe-title
+					{{ recipeDetails.name }}
+				%ul.recipe-ingredients
+					%li{:'ng-repeat' => 'ing in recipeDetails.ingredients'}
+						{{ ing.name }}: {{ ing.amount + ' ' + ing.units }}
+				.recipe-description
+					{{ recipeDetails.description }}
+
 		%script{:src => 'scripts/main.min.js'}
