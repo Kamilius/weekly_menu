@@ -4,7 +4,9 @@ var express = require('express'),
     app = express(),
     Sequelize = require('sequelize'),
     sequelize,
-    Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays;
+    Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays, User,
+    passport = require('passport'),
+    expressSession = require('express-session');
 
 if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
   var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
@@ -34,6 +36,7 @@ if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
 //DATABASE
 //-----------------------------------------------------------------
 //Database structure creation and bootstrap
+
 Unit = sequelize.define('Unit', {
   name: Sequelize.STRING
 });
@@ -63,6 +66,19 @@ Day = sequelize.define('Day', {
 Day.belongsTo(Recipe);
 Recipe.hasMany(Day);
 
+User = sequelize.define('User', {
+  name: Sequelize.STRING,
+  password: Sequelize.STRING,
+  email: Sequelize.STRING
+});
+
+User.hasMany(Recipe);
+Recipe.hasMany(User);
+User.hasMany(Ingredient);
+Ingredient.hasMany(User);
+User.hasMany(Unit);
+Unit.hasMany(User);
+
 sequelize
   .sync()//pass { force: true } to drop databases
   .complete(function(err) {
@@ -78,6 +94,11 @@ app.use(bodyParser.json());
 
 //set build folder as public
 app.use(express.static(__dirname + '/build'));
+
+//authentication system settings
+app.use(expressSession({ secret: 'mySecretKey' }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //ROUTING
 //-----------------------------------------------------------------
@@ -467,6 +488,40 @@ app.get('/api/weekly_summary/:date', function(req, res) {
     });
   });
 });
+
+//Authentication system
+//-----------------------------------------------------------------
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+passport.use('login', new LocalStrategy({
+    passReqToCallback: true
+  },
+  function(req, username, password, done) {
+    User.find({ where: { username: username }}).success(function(user) {
+      if(!user) {
+        console.log('User Not Found with username ' + username);
+        return done(null, false, 'invalid username');
+      }
+      if(!isValidPassword(user, password)) {
+        console.log('Invalid password');
+        return done(null, false, 'invalid password');
+      }
+
+      return done(null, user);
+    }).error(function(msg) {
+      return done(msg);
+    });
+  });
+);
 
 //Program entry
 //-----------------------------------------------------------------

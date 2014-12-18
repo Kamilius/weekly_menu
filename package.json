@@ -18,10 +18,12 @@
     "grunt-contrib-concat": "~0.5.0",
     "grunt-contrib-clean": "~0.6.0",
     "sequelize": "~2.0",
+    "passport": "~0.2.1",
     "pg": "*"
   },
   "dependencies": {
     "express": "^4.10.2",
-    "body-parser": "~1.9.2"
+    "body-parser": "~1.9.2",
+    "express-session": "~1.9.3"
   }
 }
