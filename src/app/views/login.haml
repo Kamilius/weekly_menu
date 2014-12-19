@@ -1,14 +1,15 @@
-.account-page
-  %form.login{:role => 'form'}
-    .form-group
-      %label{:for => "username"} Адреса електронної пошти
-      %input.username{:type => "text", :id => "username", :'ng-model' => 'user.username', :placeholder => 'Адреса електронної пошти'}
-    .form-group
-      %label{:for => "password"} Пароль
-      %input.password{:type => "password", :id => "password", :'ng-model' => 'user.password', :placeholder => 'Пароль'}
-    .form-group
-      %label{:for => "password-check"} Перевірка паролю
-      %input.password-check{:type => "password-check", :id => "password-check", :'ng-model' => 'user.passwordCheck', :placeholder => 'Введіть пароль повторно'}
-    .form-group
-      %button.btn.btn-success{:'ng-click' => 'signIn()'} Увійти
-      %button.btn.btn-success{:'ng-click' => 'showSignUpForm()'} Зареєструватись
+.container.login-form-container
+  .row
+    %form.login-form{:role => 'form'}
+      .form-group
+        %label{:for => "username"} Адреса електронної пошти
+        %input.username.form-control{:type => "text", :id => "username", :'ng-model' => 'user.username', :placeholder => 'Адреса електронної пошти'}
+      .form-group
+        %label{:for => "password"} Пароль
+        %input.password.form-control{:type => "password", :id => "password", :'ng-model' => 'user.password', :placeholder => 'Пароль'}
+      .form-group{:'ng-if' => "signUpFormVisible"}
+        %label{:for => "password-check"} Перевірка паролю
+        %input.password-check.form-control{:type => "password", :id => "password-check", :'ng-model' => 'user.passwordCheck', :placeholder => 'Введіть пароль повторно'}
+      .form-group
+        %button.btn.btn-success.pull-right{:'ng-click' => 'showSignUpForm()'} Зареєструватись
+        %button.login-btn.btn.btn-success.pull-right{:'ng-click' => 'signIn()'} Увійти

@@ -126,7 +126,7 @@ calendar .col-xs-1
 	&:hover
 		+box-shadow(0px 3px 8px 1px $shadowColor)
 
-.recipe-form
+.recipe-form, .login-form
 	padding: 25px
 	overflow: hidden
 	background-color: $recipeBackgroundColor
@@ -140,6 +140,7 @@ calendar .col-xs-1
 	label
 		font-weight: normal
 
+.recipe-form
 	.dropdown-filter
 		position: relative
 		margin-bottom: 10px
@@ -257,3 +258,19 @@ calendar .col-xs-1
 	.recipe-description
 		line-height: 25px
 		text-indent: 25px
+
+//Login page
+.login-form-container
+	position: relative
+	min-height: 460px
+	.login-form
+		position: absolute
+		top: 50%
+		left: 50%
+		+transform(translate(-50%, -50%))
+		width: 100%
+		max-width: 460px
+		input[type="text"], input[type="password"], .btn
+			+box-shadow(0px 2px 1px 0px $shadowColor)
+		.login-btn
+			margin-right: 5px
