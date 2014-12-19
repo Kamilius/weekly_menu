@@ -1,0 +1,20 @@
+<div class='account-page'>
+  <form class='login' role='form'>
+    <div class='form-group'>
+      <label for='username'>Адреса електронної пошти</label>
+      <input class='username' id='username' ng-model='user.username' placeholder='Адреса електронної пошти' type='text'>
+    </div>
+    <div class='form-group'>
+      <label for='password'>Пароль</label>
+      <input class='password' id='password' ng-model='user.password' placeholder='Пароль' type='password'>
+    </div>
+    <div class='form-group'>
+      <label for='password-check'>Перевірка паролю</label>
+      <input class='password-check' id='password-check' ng-model='user.passwordCheck' placeholder='Введіть пароль повторно' type='password-check'>
+    </div>
+    <div class='form-group'>
+      <button class='btn btn-success' ng-click='signIn()'>Увійти</button>
+      <button class='btn btn-success' ng-click='showSignUpForm()'>Зареєструватись</button>
+    </div>
+  </form>
+</div>

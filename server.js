@@ -6,6 +6,8 @@ var express = require('express'),
     sequelize,
     Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays, User,
     passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    bCrypt = require('bcrypt-nodejs'),
     expressSession = require('express-session');
 
 if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
@@ -96,7 +98,11 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/build'));
 
 //authentication system settings
-app.use(expressSession({ secret: 'mySecretKey' }));
+app.use(expressSession({
+  secret: 'mySecretKey',
+  saveUninitialized: true,
+  resave: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -489,8 +495,26 @@ app.get('/api/weekly_summary/:date', function(req, res) {
   });
 });
 
+app.post('/api/login', passport.authenticate('login', {
+  successRedirect: '/',
+  failureRedirect: '/login'
+}));
+
+app.post('/api/signup', passport.authenticate('signup', {
+  successRedirect: '/',
+  failureRedirect: '/signup'
+}));
+
 //Authentication system
 //-----------------------------------------------------------------
+
+var isValidPassword = function(user, password) {
+  return bCrypt.compareSync(password, user.password);
+};
+
+var createHash = function(password) {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+};
 
 passport.serializeUser(function(user, done) {
   done(null, user._id);
@@ -506,7 +530,7 @@ passport.use('login', new LocalStrategy({
     passReqToCallback: true
   },
   function(req, username, password, done) {
-    User.find({ where: { username: username }}).success(function(user) {
+    User.find({ where: { name: username }}).success(function(user) {
       if(!user) {
         console.log('User Not Found with username ' + username);
         return done(null, false, 'invalid username');
@@ -520,8 +544,46 @@ passport.use('login', new LocalStrategy({
     }).error(function(msg) {
       return done(msg);
     });
-  });
+  })
 );
+
+passport.use('signup', new LocalStrategy({
+    passReqToCallback: true
+  },
+  function(req, username, password, done) {
+    var findOrCreateUser = function() {
+      User.findOrCreate({ where: { name: username, email: req.body.email } })
+          .success(function(user, created) {
+            if(!created) {
+              console.log('User already exists');
+              return done(null, false, 'User already exists');
+            } else {
+              user.name = username;
+              user.password = createHash(password);
+              user.email = req.body.email;
+
+              user.save()
+                  .success(function() {
+                    console.log('User Registration successful');
+                    return done(null, user);
+                  })
+                  .error(function(msg) {
+                    console.log('Error in Saving user: ' + msg);
+                    throw msg;
+                    return done(msg);
+                  });
+            }
+          })
+          .error(function(msg) {
+            console.log('Error in SignUp: ' + msg);
+            return done(msg);
+          });
+    }
+
+    process.nextTick(findOrCreateUser);
+  }
+));
+
 
 //Program entry
 //-----------------------------------------------------------------

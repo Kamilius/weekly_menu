@@ -16,6 +16,9 @@ app.config ['$routeProvider', ($routeProvider) ->
 	).when('/summary',
 		templateUrl: 'views/summary.html'
 		controller: 'SummaryCtrl'
+	).when('/login',
+		templateUrl: 'views/login.html',
+		controller: 'AccountCtrl'
 	).
 	otherwise(redirectTo: '/')
 ]

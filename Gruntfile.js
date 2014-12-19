@@ -51,7 +51,8 @@ module.exports = function(grunt) {
 					'build/views/recipesContainer.html': 'src/app/views/recipesContainer.haml',
 					'build/views/recipesCRUD.html': 'src/app/views/recipesCRUD.haml',
 					'build/views/summary.html': 'src/app/views/summary.haml',
-					'build/views/units.html': 'src/app/views/units.haml'
+					'build/views/units.html': 'src/app/views/units.haml',
+					'build/views/login.html': 'src/app/views/login.haml'
 				}
 			}
 		},
