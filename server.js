@@ -2,94 +2,11 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     app = express(),
-    Sequelize = require('sequelize'),
-    sequelize,
-    Unit, Ingredient, Recipe, IngredientsRecipes, Day, RecipesDays, User,
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     bCrypt = require('bcrypt-nodejs'),
-    expressSession = require('express-session');
-
-if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
-  var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
-  sequelize = new Sequelize(match[5], match[1], match[2], {
-    dialect: 'postgres',
-    protocol: 'postgres',
-    port: match[4],
-    host: match[3],
-    logging: false,
-    timezone: '+02:00'
-  });
-} else {
-  //remit laptop
-  sequelize = new Sequelize('weekly_menu', 'dev', '1', {
-    dialect: 'postgres',
-    timezone: '+02:00'
-  });
-
-  //home
-  // sequelize = new Sequelize('weekly_menu', 'postgres', '12356890', {
-  //   dialect: 'postgres',
-  //   timezone: '+02:00'
-  // });
-}
-
-
-//DATABASE
-//-----------------------------------------------------------------
-//Database structure creation and bootstrap
-
-Unit = sequelize.define('Unit', {
-  name: Sequelize.STRING
-});
-Ingredient = sequelize.define('Ingredient', {
-  name: Sequelize.STRING
-});
-
-Ingredient.belongsTo(Unit);
-Unit.hasMany(Ingredient);
-
-Recipe = sequelize.define('Recipe', {
-  name: Sequelize.STRING,
-  description: Sequelize.TEXT
-});
-IngredientsRecipes = sequelize.define('IngredientsRecipes', {
-  amount: Sequelize.STRING
-});
-
-Recipe.hasMany(Ingredient, { through: IngredientsRecipes });
-Ingredient.hasMany(Recipe, { through: IngredientsRecipes });
-
-Day = sequelize.define('Day', {
-  date: Sequelize.DATE,
-  meal: Sequelize.STRING
-});
-
-Day.belongsTo(Recipe);
-Recipe.hasMany(Day);
-
-User = sequelize.define('User', {
-  name: Sequelize.STRING,
-  password: Sequelize.STRING,
-  email: Sequelize.STRING
-});
-
-User.hasMany(Recipe);
-Recipe.hasMany(User);
-User.hasMany(Ingredient);
-Ingredient.hasMany(User);
-User.hasMany(Unit);
-Unit.hasMany(User);
-
-sequelize
-  .sync()//pass { force: true } to drop databases
-  .complete(function(err) {
-    if (!!err) {
-      console.log('An error occurred while creating the table: %s', err);
-    } else {
-      console.log('Table created.');
-    }
-  });
+    expressSession = require('express-session'),
+    db = require('./server/database');
 
 //parse JSON post requests
 app.use(bodyParser.json());
@@ -106,20 +23,31 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+var isAuthenticated = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.json({ message: 'Ви не авторизовані.' });
+};
+
 //ROUTING
 //-----------------------------------------------------------------
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/build/index.html');
 });
 
+app.get('/api/authentication', function(req, res) {
+  res.json({ authenticated: req.isAuthenticated() });
+});
+
 //retrieve all items of passed collection ordered by name
 function getAllUnits(response) {
-  Unit.findAll({ order: ['name'] }).success(function(items) {
+  db.Unit.findAll({ order: ['name'] }).success(function(items) {
     response.json(items);
   });
 }
 function getUnitById(response, id) {
-  Unit.find(id).success(function(item) {
+  db.Unit.find(id).success(function(item) {
     response.json(item);
   });
 }
@@ -131,8 +59,8 @@ app.get('/api/units', function(req, res) {
 app.get('/api/units/:id', function(req, res) {
   getUnitById(res, req.params.id);
 });
-app.post('/api/units', function(req, res) {
-  Unit.findOrCreate({ where: { id: req.body.id }, defaults: req.body }).success(function(unit, created) {
+app.post('/api/units', isAuthenticated, function(req, res) {
+  db.Unit.findOrCreate({ where: { id: req.body.id }, defaults: req.body }).success(function(unit, created) {
     if(!created) {
       unit.name = req.body.name;
       unit.save().success(function() {
@@ -143,8 +71,8 @@ app.post('/api/units', function(req, res) {
     }
   });
 });
-app.delete('/api/units/:id', function(req, res) {
-  Unit.find(req.params.id).success(function(unit) {
+app.delete('/api/units/:id', isAuthenticated, function(req, res) {
+  db.Unit.find(req.params.id).success(function(unit) {
     if(unit) {
       unit.getIngredients().success(function(ingredients) {
         if(ingredients.length > 0) {
@@ -167,7 +95,7 @@ app.delete('/api/units/:id', function(req, res) {
 });
 
 function getAllIngredients(response) {
-  Ingredient.findAll({ include: [ Unit ], order: ['name'] }).success(function(items) {
+  db.Ingredient.findAll({ include: [ db.Unit ], order: ['name'] }).success(function(items) {
     response.json(items.map(function(item) {
       return {
         id: item.id,
@@ -182,7 +110,7 @@ function getAllIngredients(response) {
 }
 
 function getIngredientById(response, id) {
-  Ingredient.find(id).success(function(item) {
+  db.Ingredient.find(id).success(function(item) {
     response.json({
       id: item.id,
       name: item.name,
@@ -201,9 +129,9 @@ app.get('/api/ingredients/', function(req, res) {
 app.get('/api/ingredients/:id', function(req, res) {
   getIngredientById(res, req.params.id);
 });
-app.post('/api/ingredients', function(req, res) {
-  Unit.find(req.body.unit.id).success(function(unit) {
-    Ingredient
+app.post('/api/ingredients', isAuthenticated, function(req, res) {
+  db.Unit.find(req.body.unit.id).success(function(unit) {
+    db.Ingredient
       .findOrCreate({
         where: { id: req.body.id },
         defaults: { name: req.body.name }
@@ -220,8 +148,8 @@ app.post('/api/ingredients', function(req, res) {
   });
 });
 
-app.delete('/api/ingredients/:id', function(req, res) {
-  Ingredient.find(req.params.id).success(function(ingredient) {
+app.delete('/api/ingredients/:id', isAuthenticated, function(req, res) {
+  db.Ingredient.find(req.params.id).success(function(ingredient) {
     if(ingredient) {
       ingredient.destroy().success(function() {
         getAllIngredients(res, Ingredient);
@@ -254,10 +182,10 @@ function recipesToJSON(recipes) {
 }
 
 function getAllRecipes(response) {
-  Recipe.findAll({
+  db.Recipe.findAll({
     include: [{
-      model: Ingredient,
-      include: [ Unit ]
+      model: db.Ingredient,
+      include: [ db.Unit ]
     }],
     order: ['name']
   }).success(function(recipes) {
@@ -266,13 +194,13 @@ function getAllRecipes(response) {
 }
 
 function getRecipeById(response, id) {
-  Recipe.find({
+  db.Recipe.find({
     where:  {
       id: id
     },
     include: [{
-      model: Ingredient,
-      include: [ Unit ]
+      model: db.Ingredient,
+      include: [ db.Unit ]
     }]
   }).success(function(recipe) {
     response.json({
@@ -301,9 +229,9 @@ app.get('/api/recipes/', function(req, res) {
 app.get('/api/recipes/:id', function(req, res) {
   getRecipeById(res, req.params.id);
 });
-app.post('/api/recipes', function(req, res) {
+app.post('/api/recipes', isAuthenticated, function(req, res) {
   var newIngredients = req.body.ingredients;
-  Ingredient.findAll({
+  db.Ingredient.findAll({
     where: {
       id: req.body.ingredients.map(function(ingr) {
         return ingr.id;
@@ -311,7 +239,7 @@ app.post('/api/recipes', function(req, res) {
     }
   }).success(function(ingredients) {
     if(ingredients.length > 0) {
-      Recipe.findOrCreate({ where: { id: req.body.id } })
+      db.Recipe.findOrCreate({ where: { id: req.body.id } })
         .success(function(recipe, created) {
           recipe.name = req.body.name;
           recipe.description = req.body.description;
@@ -334,10 +262,10 @@ app.post('/api/recipes', function(req, res) {
     getAllRecipes(res);
   });
 });
-app.delete('/api/recipes/:id', function(req, res) {
-  Recipe.find(req.params.id).success(function(recipe) {
+app.delete('/api/recipes/:id', isAuthenticated, function(req, res) {
+  db.Recipe.find(req.params.id).success(function(recipe) {
     if(recipe) {
-      Day.destroy({ where: { RecipeId: recipe.id }}).success(function() {
+      db.Day.destroy({ where: { RecipeId: recipe.id }}).success(function() {
         recipe.destroy().success(function() {
           getAllRecipes(res);
         });
@@ -374,7 +302,7 @@ function daysToJSON(days) {
 //Calendar
 function getWeek(response, date) {
   //get seven days starting from 'date'
-  Day.findAll({
+  db.Day.findAll({
     where: {
       date: {
         gte: new Date(date),
@@ -383,10 +311,10 @@ function getWeek(response, date) {
     },
     order: 'date',
     include: [{
-      model: Recipe,
+      model: db.Recipe,
       include: [{
-          model: Ingredient,
-          include: [ Unit ]
+          model: db.Ingredient,
+          include: [ db.Unit ]
       }]
     }]
   }).success(function(days) {
@@ -397,19 +325,19 @@ function getWeek(response, date) {
 app.get('/api/calendar/:date', function(req, res) {
   getWeek(res, new Date(req.params.date));
 });
-app.post('/api/calendar/', function(req, res) {
+app.post('/api/calendar/', isAuthenticated, function(req, res) {
   var dayDate = new Date(req.body.date),
       recipeId = req.body.recipeId,
       meal = req.body.meal;
 
-  Recipe.find(recipeId).success(function(recipe) {
+  db.Recipe.find(recipeId).success(function(recipe) {
     if(recipe) {
       var newDay = {
         date: new Date(req.body.date),
         meal: meal,
         RecipeId: recipe.id
       };
-      Day.findOrCreate({
+      db.Day.findOrCreate({
         where: newDay
       }, newDay).success(function(day) {
         res.json({
@@ -419,8 +347,8 @@ app.post('/api/calendar/', function(req, res) {
     }
   });
 });
-app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
-  Day.find({
+app.delete('/api/calendar/:date/:meal/:recipeId', isAuthenticated, function(req, res) {
+  db.Day.find({
     where: {
       date: new Date(req.params.date),
       meal: req.params.meal,
@@ -443,7 +371,7 @@ app.delete('/api/calendar/:date/:meal/:recipeId', function(req, res) {
 app.get('/api/weekly_summary/:date', function(req, res) {
   var date = new Date(req.params.date);
 
-  Day.findAll({
+  db.Day.findAll({
     where: {
       date: {
         gte: new Date(date),
@@ -451,10 +379,10 @@ app.get('/api/weekly_summary/:date', function(req, res) {
       }
     },
     include: [{
-      model: Recipe,
+      model: db.Recipe,
       include: [{
-        model: Ingredient,
-        include: [ Unit ]
+        model: db.Ingredient,
+        include: [ db.Unit ]
       }]
     }]
   }).success(function(days) {
@@ -495,15 +423,25 @@ app.get('/api/weekly_summary/:date', function(req, res) {
   });
 });
 
-app.post('/api/login', passport.authenticate('login', {
-  successRedirect: '/',
-  failureRedirect: '/login'
-}));
+app.post('/api/login', function(req, res, next) {
+  passport.authenticate('login', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.json({ message: 'Wrong username.' }); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.json({ message: 'success' });
+    });
+  })(req, res, next);
+});
 
-app.post('/api/signup', passport.authenticate('signup', {
-  successRedirect: '/',
-  failureRedirect: '/signup'
-}));
+app.post('/api/signup', passport.authenticate('signup'), function(req, res) {
+  res.json({ message: 'success' });
+});
+
+app.get('/api/signout', function(req, res) {
+  req.logout();
+  res.json({ message: 'success' });
+});
 
 //Authentication system
 //-----------------------------------------------------------------
@@ -517,20 +455,24 @@ var createHash = function(password) {
 };
 
 passport.serializeUser(function(user, done) {
-  done(null, user._id);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
+  db.User.find(id)
+    .success(function(user) {
+      done(null, user);
+    })
+    .error(function(msg) {
+      done(msg, null)
+    });
 });
 
 passport.use('login', new LocalStrategy({
     passReqToCallback: true
   },
   function(req, username, password, done) {
-    User.find({ where: { name: username }}).success(function(user) {
+    db.User.find({ where: { name: username }}).success(function(user) {
       if(!user) {
         console.log('User Not Found with username ' + username);
         return done(null, false, 'invalid username');
@@ -552,7 +494,7 @@ passport.use('signup', new LocalStrategy({
   },
   function(req, username, password, done) {
     var findOrCreateUser = function() {
-      User.findOrCreate({ where: { name: username, email: req.body.email } })
+      db.User.findOrCreate({ where: { name: username, email: req.body.email } })
           .success(function(user, created) {
             if(!created) {
               console.log('User already exists');

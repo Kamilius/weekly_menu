@@ -9,13 +9,16 @@
         <label for='password'>Пароль</label>
         <input class='password form-control' id='password' ng-model='user.password' placeholder='Пароль' type='password'>
       </div>
-      <div class='form-group' ng-if='signUpFormVisible'>
+      <div class='form-group fade-animation' ng-if='signUpFormVisible'>
         <label for='password-check'>Перевірка паролю</label>
         <input class='password-check form-control' id='password-check' ng-model='user.passwordCheck' placeholder='Введіть пароль повторно' type='password'>
       </div>
-      <div class='form-group'>
-        <button class='btn btn-success pull-right' ng-click='showSignUpForm()'>Зареєструватись</button>
+      <div class='form-group' ng-show='!signUpFormVisible'>
+        <button class='btn btn-success pull-right' ng-click='showSignUpForm()'>Створити користувача</button>
         <button class='login-btn btn btn-success pull-right' ng-click='signIn()'>Увійти</button>
+      </div>
+      <div class='form-group' ng-show='signUpFormVisible'>
+        <button class='btn btn-success btn-block' ng-click='signUp()'>Зареєструватись</button>
       </div>
     </form>
   </div>

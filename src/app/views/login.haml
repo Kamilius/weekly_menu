@@ -3,13 +3,25 @@
     %form.login-form{:role => 'form'}
       .form-group
         %label{:for => "username"} Адреса електронної пошти
-        %input.username.form-control{:type => "text", :id => "username", :'ng-model' => 'user.username', :placeholder => 'Адреса електронної пошти'}
+        %input.username.form-control{:type => "text",
+                                     :id => "username",
+                                     :'ng-model' => 'user.username',
+                                     :placeholder => 'Адреса електронної пошти'}
       .form-group
         %label{:for => "password"} Пароль
-        %input.password.form-control{:type => "password", :id => "password", :'ng-model' => 'user.password', :placeholder => 'Пароль'}
-      .form-group{:'ng-if' => "signUpFormVisible"}
+        %input.password.form-control{:type => "password",
+                                     :id => "password",
+                                     :'ng-model' => 'user.password',
+                                     :placeholder => 'Пароль'}
+      .form-group.fade-animation{:'ng-if' => "signUpFormVisible"}
         %label{:for => "password-check"} Перевірка паролю
-        %input.password-check.form-control{:type => "password", :id => "password-check", :'ng-model' => 'user.passwordCheck', :placeholder => 'Введіть пароль повторно'}
-      .form-group
-        %button.btn.btn-success.pull-right{:'ng-click' => 'showSignUpForm()'} Зареєструватись
+        %input.password-check.form-control{:type => "password",
+                                           :id => "password-check",
+                                           :'ng-model' => 'user.passwordCheck',
+                                           :placeholder => 'Введіть пароль повторно'}
+      .form-group{:'ng-show' => '!signUpFormVisible'}
+        %button.btn.btn-success.pull-right{:'ng-click' => 'showSignUpForm()'} Створити користувача
         %button.login-btn.btn.btn-success.pull-right{:'ng-click' => 'signIn()'} Увійти
+
+      .form-group{:'ng-show' => 'signUpFormVisible'}
+        %button.btn.btn-success.btn-block{:'ng-click' => 'signUp()'} Зареєструватись

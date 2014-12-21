@@ -19,16 +19,19 @@
       <nav>
         <div class='container'>
           <ul>
+            <li class='fade-animation relative' ng-class='getClass("/login")' ng-if='!userAuthenticated'>
+              <a href='#/login'>Увійти</a>
+            </li>
             <li ng-class='getClass("/home")'>
               <a href='#/home'>Перелік рецептів</a>
             </li>
-            <li ng-class='getClass("/recipes")'>
+            <li class='fade-animation relative' ng-class='getClass("/recipes")' ng-if='userAuthenticated'>
               <a href='#/recipes'>Додати рецепт</a>
             </li>
-            <li ng-class='getClass("/ingredients")'>
+            <li class='fade-animation relative' ng-class='getClass("/ingredients")' ng-if='userAuthenticated'>
               <a href='#/ingredients'>Інгредієнти</a>
             </li>
-            <li ng-class='getClass("/units")'>
+            <li class='fade-animation relative' ng-class='getClass("/units")' ng-if='userAuthenticated'>
               <a href='#/units'>Одиниці міри</a>
             </li>
             <li ng-class='getClass("/summary")'>

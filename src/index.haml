@@ -15,13 +15,15 @@
 			%nav
 				.container
 					%ul
+						%li.fade-animation.relative{:'ng-if' => '!userAuthenticated', :'ng-class' => 'getClass("/login")'}
+							%a{:href => '#/login'} Увійти
 						%li{:'ng-class' => 'getClass("/home")'}
 							%a{:href => '#/home'} Перелік рецептів
-						%li{:'ng-class' => 'getClass("/recipes")'}
+						%li.fade-animation.relative{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/recipes")'}
 							%a{:href => '#/recipes'} Додати рецепт
-						%li{:'ng-class' => 'getClass("/ingredients")'}
+						%li.fade-animation.relative{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/ingredients")'}
 							%a{:href => '#/ingredients'} Інгредієнти
-						%li{:'ng-class' => 'getClass("/units")'}
+						%li.fade-animation.relative{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/units")'}
 							%a{:href => '#/units'} Одиниці міри
 						%li{:'ng-class' => 'getClass("/summary")'}
 							%a{:href => '#/summary'} Підсумок інгредієнтів

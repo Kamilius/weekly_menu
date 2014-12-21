@@ -23,7 +23,14 @@ app.config ['$routeProvider', ($routeProvider) ->
 	otherwise(redirectTo: '/')
 ]
 
-app.run ['$rootScope', '$location', ($rootScope, $location) ->
+app.run ['$rootScope', '$location', '$http', ($rootScope, $location, $http) ->
+	$rootScope.userAuthenticated = false
+
+	$http.get('/api/authentication').success((data) ->
+		$rootScope.userAuthenticated = data.authenticated
+	)
+
+
 	$rootScope.statusMessage =
 		text: ''
 		type: ''
