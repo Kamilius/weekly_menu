@@ -19,8 +19,8 @@
       <nav ng-controller='TopNavCtrl'>
         <div class='container'>
           <ul>
-            <li ng-class='getClass("/home")'>
-              <a href='#/home'>Перелік рецептів</a>
+            <li ng-class='getClass("/calendar")' ng-if='userAuthenticated'>
+              <a href='#/calendar'>Календар</a>
             </li>
             <li ng-class='getClass("/recipes")' ng-if='userAuthenticated'>
               <a href='#/recipes'>Додати рецепт</a>

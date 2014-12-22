@@ -1,6 +1,6 @@
 app.config ['$routeProvider', ($routeProvider) ->
 	$routeProvider.when('/',
-		templateUrl: 'views/home.html'
+		templateUrl: 'views/calendar-page.html'
 	).when('/recipes',
 		templateUrl: 'views/recipesCRUD.html'
 		controller: 'RecipesCRUDCtrl'
@@ -28,16 +28,19 @@ app.run ['$rootScope', '$location', '$http', ($rootScope, $location, $http) ->
 
 	$http.get('/api/authentication').success((data) ->
 		$rootScope.userAuthenticated = data.authenticated
-	)
 
-	$rootScope.$on('$routeChangeStart', (event, next, current) ->
-		if $rootScope.userAuthenticated is false
-			switch next.templateUrl
-				when "views/summary.html", "views/recipesCRUD.html", "views/ingredients.html", "viwes/units.html"
-					$location.path('/login')
-		else
-			if next.templateUrl is "views/login.html"
-				$location.path('/')
+		if !data.authenticated
+			$location.path('/login')
+
+		$rootScope.$on('$routeChangeStart', (event, next, current) ->
+			if $rootScope.userAuthenticated is false
+				switch next.templateUrl
+					when "views/summary.html", "views/recipesCRUD.html", "views/ingredients.html", "viwes/units.html", "views/calendar-page.html"
+						$location.path('/login')
+			else
+				if next.templateUrl is "views/login.html"
+					$location.path('/calendar')
+		)
 	)
 
 	$rootScope.statusMessage =
@@ -109,3 +112,38 @@ app.directive 'dragEnterLeaveAnimation', ->
 			@classList.add('over')
 		element.on 'dragleave', (event) ->
 			@classList.remove('over')
+
+app.directive 'fileread', ->
+	(scope, element, attributes) ->
+		element.bind('change', (event) ->
+			img = new Image()
+			img.onload = () ->
+				width = img.width
+				height = img.height
+				maxWidthHieght = 167
+				ratio = 0
+
+				if width > maxWidthHieght
+					ratio = maxWidthHieght / width
+					width *= ratio
+					height *= ratio
+				if height > maxWidthHieght
+					ratio = maxWidthHieght / height
+					width *= ratio
+					height *= ratio
+
+				canvas = document.createElement('canvas')
+				canvas.width = width
+				canvas.height = height
+				ctx = canvas.getContext('2d')
+				ctx.drawImage(img, 0, 0, width, height)
+
+				scope.$apply(() ->
+					scope.recipe.image = canvas.toDataURL("image/jpeg")
+				)
+
+			reader = new FileReader()
+			reader.onload = (loadEvent) ->
+				img.src = loadEvent.target.result
+			reader.readAsDataURL(event.target.files[0])
+		)

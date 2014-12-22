@@ -2,30 +2,43 @@
   <section class='row'>
     <form class='recipe-form col-md-12' name='recipeForm' role='form'>
       <div class='form-group'>
-        <label for='recipe-title'>Назва рецепту</label>
-        <input class='form-control material-shadow' ng-model='recipe.name' type='text'>
-      </div>
-      <div class='form-group recipe-ingredients'>
-        <label>Інгредієнти</label>
-        <div class='dropdown-filter row'>
-          <div class='col-xs-8'>
-            <input class='form-control material-shadow no-right-border-radius' ng-model='ingModel.name' placeholder='почніть вводити назву інгредієнта' type='text'>
-            <ul class='available-ingredients material-shadow'>
-              <li class='ingredient-item' ng-click='chooseIngredient(item)' ng-repeat='item in ingredients | filter:ingModel.name'>
-                {{ item.name }}
-              </li>
-            </ul>
-          </div>
-          <div class='col-xs-2'>
-            <input class='form-control material-shadow no-border-radius' ng-model='ingModel.amount' placeholder='к-сть' type='text'>
-          </div>
-          <div class='col-xs-1'>
-            <div class='form-control material-shadow no-border-radius'>
-              {{ ingModel.unit.name }}
+        <div class='row recipe-form-header'>
+          <div class='col-xs-10'>
+            <div class='row recipe-title-row'>
+              <label for='recipe-title'>Назва рецепту</label>
+              <input class='form-control material-shadow' ng-model='recipe.name' type='text'>
+            </div>
+            <div class='row'>
+              <label class='ingredients-label'>Інгредієнти</label>
+              <div class='dropdown-filter row'>
+                <div class='col-xs-7'>
+                  <input class='form-control material-shadow no-right-border-radius' ng-model='ingModel.name' placeholder='почніть вводити назву інгредієнта' type='text'>
+                  <ul class='available-ingredients material-shadow'>
+                    <li class='ingredient-item' ng-click='chooseIngredient(item)' ng-repeat='item in ingredients | filter:ingModel.name'>
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                </div>
+                <div class='col-xs-2'>
+                  <input class='form-control material-shadow no-border-radius' ng-model='ingModel.amount' placeholder='к-сть' type='text'>
+                </div>
+                <div class='col-xs-1'>
+                  <div class='form-control material-shadow no-border-radius'>
+                    {{ ingModel.unit.name }}
+                  </div>
+                </div>
+                <div class='col-xs-2'>
+                  <button class='btn btn-default material-shadow no-left-border-radius add-ingredient-btn' ng-click='addIngredient()'>Додати</button>
+                </div>
+              </div>
             </div>
           </div>
-          <div class='col-xs-1'>
-            <button class='btn btn-default material-shadow no-left-border-radius' ng-click='addIngredient()'>Додати</button>
+          <div class='col-xs-2 image-column'>
+            <label for='recipe-image'>Зображення</label>
+            <label class='image-overlay' for='recipe-image'>
+              <img class='material-shadow' ng-src='{{ getRecipeImage() }}'>
+            </label>
+            <input class='upload-input form-control' fileread='' id='recipe-image' ng-model='recipe.image' type='file'>
           </div>
         </div>
         <div class='ingredient form-control material-shadow' ng-repeat='ing in recipe.ingredients'>

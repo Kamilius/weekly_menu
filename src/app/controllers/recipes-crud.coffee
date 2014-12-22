@@ -1,13 +1,15 @@
 app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$rootScope', '$http', 'ingredientsService', ($scope, $routeParams, $location, $rootScope, $http, $ingredientsService) ->
 	$scope.ingredients = []
 	$scope.ingModel = new Ingredient()
-	$scope.recipe = null
+	$scope.recipe = {
+		image: ''
+	}
 
 	setFormModel = ->
 		if $routeParams.recipeId
 			$http.get("/api/recipes/#{$routeParams.recipeId}").success((data, status, headers, config) ->
 				if data
-					$scope.recipe = new Recipe(data.id, data.name, data.description, '', data.ingredients)
+					$scope.recipe = new Recipe(data.id, data.name, data.description, '', data.image, data.ingredients)
 			)
 		else
 			$scope.recipe = new Recipe()
@@ -24,6 +26,12 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$root
 		else
 			$scope.ingredients = $ingredientsService.getIngredients()
 			setFormModel()
+
+	$scope.getRecipeImage = () ->
+		if typeof $scope.recipe.image is 'string' and $scope.recipe.image.length > 0
+			return $scope.recipe.image
+		else
+			return 'http://placehold.it/167x167'
 
 	$scope.chooseIngredient = (ing) ->
 		$scope.ingModel = new Ingredient(ing.id, ing.name, ing.unit)
@@ -55,8 +63,13 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$root
 							amount: ingr.amount
 						}
 				}).success((data, status, headers, config) ->
-					$scope.setStatusMessage('Рецепт успішно збережено.', 'success')
-					$location.path("/home")
+					if data.message is 'success' and $scope.recipe.image
+						$http.put("/api/recipes/#{data.recipeId}", {image: $scope.recipe.image})
+							.success((data) ->
+								if data.message is 'success'
+									$scope.setStatusMessage('Рецепт успішно збережено.', 'success')
+									$location.path("/home")
+						)
 				)
 			else
 				$rootScope.setStatusMessage('Рецепт має містити назву.', 'error')

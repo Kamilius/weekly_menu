@@ -9,7 +9,7 @@ class Ingredient
 
 class Recipe
 	processing: false
-	constructor: (@id = 0, @name = '', @description = '', @meal = '', @ingredients = []) ->
+	constructor: (@id = 0, @name = '', @description = '', @meal = '', @image = '', @ingredients = []) ->
 
 class DayOfWeek
 	constructor: (@name, @date) ->

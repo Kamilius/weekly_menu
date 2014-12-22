@@ -6,7 +6,8 @@ var express = require('express'),
     LocalStrategy = require('passport-local').Strategy,
     bCrypt = require('bcrypt-nodejs'),
     expressSession = require('express-session'),
-    db = require('./server/database');
+    db = require('./server/database'),
+    fs = require('fs');
 
 //parse JSON post requests
 app.use(bodyParser.json());
@@ -166,6 +167,7 @@ function recipesToJSON(recipes) {
       id: recipe.id,
       name: recipe.name,
       description: recipe.description,
+      image: recipe.image,
       ingredients: recipe.Ingredients.map(function(ingr) {
         return {
           id: ingr.id,
@@ -207,6 +209,7 @@ function getRecipeById(response, id) {
       id: recipe.id,
       name: recipe.name,
       description: recipe.description,
+      image: recipe.image,
       ingredients: recipe.Ingredients.map(function(ingr) {
         return {
           id: ingr.id,
@@ -253,13 +256,48 @@ app.post('/api/recipes', isAuthenticated, function(req, res) {
           }
           recipe.setIngredients(ingredients).success(function() {
             recipe.save().success(function() {
-              getAllRecipes(res);
+              // getAllRecipes(res);
+              res.json({
+                message: 'success',
+                recipeId: recipe.id
+              });
             });
           });
-        })
+      });
     }
   }).error(function(err) {
-    getAllRecipes(res);
+    console.log(err);
+    res.json({
+      mesage: 'error'
+    });
+  });
+});
+//saving image after recipe is saved
+app.put('/api/recipes/:id', isAuthenticated, function(req, res) {
+  var base64data = req.body.image.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+  fs.writeFile("build/images/recipes/" + req.params.id + ".png", base64data, 'base64', function(err) {
+    if(err) {
+      console.log(err);
+    }
+    else {
+      db.Recipe.find(req.params.id).success(function(recipe) {
+        recipe.image = '/images/recipes/' + req.params.id + '.png';
+        recipe.save().success(function() {
+          res.json({
+            message: 'success'
+          });
+        }).error(function(msg) {
+          console.log(msg);
+          res.json({
+            message: 'Не вдалось зберегти зображення'
+          });
+        });
+      }).error(function(msg) {
+        res.json({
+          message: 'Немає рецепту з таким номером'
+        });
+      });
+    }
   });
 });
 app.delete('/api/recipes/:id', isAuthenticated, function(req, res) {

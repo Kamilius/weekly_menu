@@ -48,7 +48,8 @@ Unit.hasMany(Ingredient);
 
 Recipe = sequelize.define('Recipe', {
   name: Sequelize.STRING,
-  description: Sequelize.TEXT
+  description: Sequelize.TEXT,
+  image: Sequelize.STRING
 });
 IngredientsRecipes = sequelize.define('IngredientsRecipes', {
   amount: Sequelize.STRING
@@ -78,6 +79,8 @@ User.hasMany(Ingredient);
 Ingredient.belongsTo(User);
 User.hasMany(Unit);
 Unit.belongsTo(User);
+User.hasMany(Day);
+Day.belongsTo(User);
 
 sequelize
   .sync()//pass { force: true } to drop databases

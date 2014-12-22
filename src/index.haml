@@ -15,19 +15,26 @@
 			%nav{:'ng-controller' => 'TopNavCtrl'}
 				.container
 					%ul
-						%li{:'ng-class' => 'getClass("/home")'}
-							%a{:href => '#/home'} Перелік рецептів
-						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/recipes")'}
+						%li{:'ng-if' => 'userAuthenticated',
+								:'ng-class' => 'getClass("/calendar")'}
+							%a{:href => '#/calendar'} Календар
+						%li{:'ng-if' => 'userAuthenticated',
+								:'ng-class' => 'getClass("/recipes")'}
 							%a{:href => '#/recipes'} Додати рецепт
-						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/ingredients")'}
+						%li{:'ng-if' => 'userAuthenticated',
+								:'ng-class' => 'getClass("/ingredients")'}
 							%a{:href => '#/ingredients'} Інгредієнти
-						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/units")'}
+						%li{:'ng-if' => 'userAuthenticated',
+								:'ng-class' => 'getClass("/units")'}
 							%a{:href => '#/units'} Одиниці міри
-						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/summary")'}
+						%li{:'ng-if' => 'userAuthenticated',
+								:'ng-class' => 'getClass("/summary")'}
 							%a{:href => '#/summary'} Підсумок інгредієнтів
-						%li{:'ng-if' => '!userAuthenticated', :'ng-class' => 'getClass("/login")'}
+						%li{:'ng-if' => '!userAuthenticated',
+								:'ng-class' => 'getClass("/login")'}
 							%a{:href => '#/login'} Увійти
-						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/logout")'}
+						%li{:'ng-if' => 'userAuthenticated',
+								:'ng-class' => 'getClass("/logout")'}
 							%a{:href => '', :'ng-click' => 'signOut()'} Вийти
 
 			.message{:'ng-class' => '{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'}
@@ -36,8 +43,8 @@
 			.page-body.fade-animation{:'ng-view' => ''}
 
 		.details-overlay{:'ng-controller' => "DetailsOverlayCtrl",
-										 								:'ng-show' => "recipeDetailsVisible",
-																		:'ng-click' => 'hideRecipeDetails()'}
+		 								 :'ng-show' => "recipeDetailsVisible",
+										 :'ng-click' => 'hideRecipeDetails()'}
 			.details-body
 				%h3.recipe-title
 					{{ recipeDetails.name }}

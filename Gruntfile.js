@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 				files: {
 					'build/index.html': 'src/index.haml',
 					'build/views/calendar.html': 'src/app/views/calendar.haml',
-					'build/views/home.html': 'src/app/views/home.haml',
+					'build/views/calendar-page.html': 'src/app/views/calendar-page.haml',
 					'build/views/ingredients.html': 'src/app/views/ingredients.haml',
 					'build/views/recipeControls.html': 'src/app/views/recipeControls.haml',
 					'build/views/recipesContainer.html': 'src/app/views/recipesContainer.haml',

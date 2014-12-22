@@ -88,7 +88,7 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 
 				if dayOfWeek
 					recipe = dataDay.recipe
-					dayOfWeek[dataDay.meal].push(new Recipe(recipe.id, recipe.name, recipe.description, dataDay.meal, recipe.ingredients))
+					dayOfWeek[dataDay.meal].push(new Recipe(recipe.id, recipe.name, recipe.description, dataDay.meal, recipe.image, recipe.ingredients))
 			)
 		)
 
