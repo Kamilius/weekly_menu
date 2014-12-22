@@ -12,21 +12,23 @@
 					.logo
 						%img{:src => 'images/chef_hat_logo.png'}
 					%h2.title Меню на тиждень
-			%nav
+			%nav{:'ng-controller' => 'TopNavCtrl'}
 				.container
 					%ul
-						%li.fade-animation.relative{:'ng-if' => '!userAuthenticated', :'ng-class' => 'getClass("/login")'}
-							%a{:href => '#/login'} Увійти
 						%li{:'ng-class' => 'getClass("/home")'}
 							%a{:href => '#/home'} Перелік рецептів
-						%li.fade-animation.relative{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/recipes")'}
+						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/recipes")'}
 							%a{:href => '#/recipes'} Додати рецепт
-						%li.fade-animation.relative{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/ingredients")'}
+						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/ingredients")'}
 							%a{:href => '#/ingredients'} Інгредієнти
-						%li.fade-animation.relative{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/units")'}
+						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/units")'}
 							%a{:href => '#/units'} Одиниці міри
-						%li{:'ng-class' => 'getClass("/summary")'}
+						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/summary")'}
 							%a{:href => '#/summary'} Підсумок інгредієнтів
+						%li{:'ng-if' => '!userAuthenticated', :'ng-class' => 'getClass("/login")'}
+							%a{:href => '#/login'} Увійти
+						%li{:'ng-if' => 'userAuthenticated', :'ng-class' => 'getClass("/logout")'}
+							%a{:href => '', :'ng-click' => 'signOut()'} Вийти
 
 			.message{:'ng-class' => '{ error: statusMessage.type == "error", success: statusMessage.type == "success"}'}
 				{{ statusMessage.text }}

@@ -426,7 +426,7 @@ app.get('/api/weekly_summary/:date', function(req, res) {
 app.post('/api/login', function(req, res, next) {
   passport.authenticate('login', function(err, user, info) {
     if (err) { return next(err); }
-    if (!user) { return res.json({ message: 'Wrong username.' }); }
+    if (!user) { return res.json({ message: "Невірні ім'я користувача, або пароль" }); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.json({ message: 'success' });

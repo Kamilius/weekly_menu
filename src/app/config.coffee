@@ -30,6 +30,15 @@ app.run ['$rootScope', '$location', '$http', ($rootScope, $location, $http) ->
 		$rootScope.userAuthenticated = data.authenticated
 	)
 
+	$rootScope.$on('$routeChangeStart', (event, next, current) ->
+		if $rootScope.userAuthenticated is false
+			switch next.templateUrl
+				when "views/summary.html", "views/recipesCRUD.html", "views/ingredients.html", "viwes/units.html"
+					$location.path('/login')
+		else
+			if next.templateUrl is "views/login.html"
+				$location.path('/')
+	)
 
 	$rootScope.statusMessage =
 		text: ''
