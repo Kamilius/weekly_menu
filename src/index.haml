@@ -30,9 +30,9 @@
 						%li{:'ng-if' => 'userAuthenticated',
 								:'ng-class' => 'getClass("/summary")'}
 							%a{:href => '#/summary'} Підсумок інгредієнтів
-						%li{:'ng-if' => '!userAuthenticated',
-								:'ng-class' => 'getClass("/login")'}
-							%a{:href => '#/login'} Увійти
+						-# %li{:'ng-if' => '!userAuthenticated',
+						-# 		:'ng-class' => 'getClass("/login")'}
+						-# 	%a{:href => '#/login'} Увійти
 						%li{:'ng-if' => 'userAuthenticated',
 								:'ng-class' => 'getClass("/logout")'}
 							%a{:href => '', :'ng-click' => 'signOut()'} Вийти

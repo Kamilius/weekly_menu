@@ -451,7 +451,7 @@ app.delete('/api/calendar/:date/:meal/:recipeId', isAuthenticated, function(req,
         RecipeId: req.params.recipeId
       }
     }).success(function(day) {
-      day.destroy().success(function() {
+      day[0].destroy().success(function() {
         res.json({
           message: 'success'
         });

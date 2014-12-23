@@ -34,9 +34,6 @@
             <li ng-class='getClass("/summary")' ng-if='userAuthenticated'>
               <a href='#/summary'>Підсумок інгредієнтів</a>
             </li>
-            <li ng-class='getClass("/login")' ng-if='!userAuthenticated'>
-              <a href='#/login'>Увійти</a>
-            </li>
             <li ng-class='getClass("/logout")' ng-if='userAuthenticated'>
               <a href='' ng-click='signOut()'>Вийти</a>
             </li>
