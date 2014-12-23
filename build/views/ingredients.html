@@ -7,7 +7,7 @@
   <div class='row'>
     <div class='recipe' ng-class='ingredientActive(item)' ng-click='editIngredient(item)' ng-repeat='item in ingredients' title='клікніть аби змінити'>
       {{ item.name + '(' + item.unit.name + ')' }}
-      <span class='glyphicon glyphicon-remove' ng-click='removeIngredient(item)' title='Видалити'></span>
+      <span class='glyphicon glyphicon-remove' ng-click='removeIngredient(item); $event.stopPropagination();' title='Видалити'></span>
     </div>
   </div>
 </div>

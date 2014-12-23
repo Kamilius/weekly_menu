@@ -119,7 +119,8 @@ app.controller 'CalendarCtrl', ['$scope', '$http', '$filter', 'recipeService', (
 						meal: mealName
 					}).success((data) ->
 						recipe = $recipeService.getById(draggableId)
-						day[mealName].push(recipe) if recipe
+						if recipe
+							day[mealName].push(recipe)
 
 						day.mealInProgress = ''
 					)

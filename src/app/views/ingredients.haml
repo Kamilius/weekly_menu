@@ -6,4 +6,4 @@
   .row
     .recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)', :title => 'клікніть аби змінити'}
       {{ item.name + '(' + item.unit.name + ')' }}
-      %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeIngredient(item)'}
+      %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeIngredient(item); $event.stopPropagination();'}

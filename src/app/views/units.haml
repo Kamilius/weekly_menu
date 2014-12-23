@@ -5,4 +5,4 @@
   .row
     .recipe{:'ng-repeat' => 'unit in units', :'ng-click' => 'editUnit(unit)', :'ng-class' => 'unitActive(unit)', :title => 'клікніть аби змінити'}
       {{ unit.name }}
-      %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeUnit(unit)'}
+      %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeUnit(unit); $event.stopPropagination();'}

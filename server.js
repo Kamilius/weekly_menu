@@ -41,78 +41,88 @@ app.get('/api/authentication', function(req, res) {
   res.json({ authenticated: req.isAuthenticated() });
 });
 
-//retrieve all items of passed collection ordered by name
-function getAllUnits(response) {
-  db.Unit.findAll({ order: ['name'] }).success(function(items) {
-    response.json(items);
-  });
-}
-function getUnitById(response, id) {
-  db.Unit.find(id).success(function(item) {
-    response.json(item);
-  });
-}
-
 //Units
-app.get('/api/units', function(req, res) {
-  getAllUnits(res);
+app.get('/api/units', isAuthenticated, function(req, res) {
+  db.User.find(req.user.id).success(function(user) {
+    user.getUnits({ order: ['name']}).success(function(units) {
+      res.json(units.map(function(unit) {
+        return {
+          id: unit.id,
+          name: unit.name
+        };
+      }));
+    })
+    .error(function(msg) {
+      console.log(msg);
+      res.json({ message: 'Can not get units' });
+    });
+  })
+  .error(function(msg) {
+    console.log(msg);
+    res.json({ message: 'User not found' });
+  });
 });
-app.get('/api/units/:id', function(req, res) {
-  getUnitById(res, req.params.id);
+app.get('/api/units/:id', isAuthenticated, function(req, res) {
+  db.Unit.find({ where: { UserId: req.user.id, id: req.params.id }}).success(function(item) {
+    res.json(item);
+  });
 });
 app.post('/api/units', isAuthenticated, function(req, res) {
-  db.Unit.findOrCreate({ where: { id: req.body.id }, defaults: req.body }).success(function(unit, created) {
-    if(!created) {
-      unit.name = req.body.name;
-      unit.save().success(function() {
-        getAllUnits(res);
-      });
-    } else {
-      getAllUnits(res);
+  db.Unit.findOrCreate({ where: { id: req.body.id, UserId: req.user.id }}).success(function(unit, created) {
+    if(created) {
+      unit.UserId = req.user.id;
     }
+    unit.name = req.body.name;
+    unit.save().success(function() {
+      res.json({ message: 'success', unitId: unit.id });
+    });
   });
 });
 app.delete('/api/units/:id', isAuthenticated, function(req, res) {
   db.Unit.find(req.params.id).success(function(unit) {
-    if(unit) {
-      unit.getIngredients().success(function(ingredients) {
-        if(ingredients.length > 0) {
+    unit.getIngredients().success(function(ingredients) {
+      if(ingredients.length > 0) {
+        res.json({
+          message: "error",
+          ingredients: ingredients.map(function(ingr) {
+            return ingr.name;
+          })
+        });
+      } else {
+        unit.destroy().success(function() {
           res.json({
-            message: "error",
-            ingredients: ingredients.map(function(ingr) {
-              return ingr.name;
-            })
+            message: "success",
+            unitId: unit.id
           });
-        } else {
-          unit.destroy().success(function() {
-            getAllUnits(res);
-          });
-        }
-      })
-    } else {
-      getAllUnits(res);
-    }
+        });
+      }
+    })
+  }).error(function(msg) {
+    console.log(msg);
+    res.json({ message: 'Unit not found' });
   });
 });
 
-function getAllIngredients(response) {
-  db.Ingredient.findAll({ include: [ db.Unit ], order: ['name'] }).success(function(items) {
-    response.json(items.map(function(item) {
-      return {
-        id: item.id,
-        name: item.name,
-        unit: {
-          id: item.Unit.id,
-          name: item.Unit.name
-        }
-      };
-    }));
+//Ingredients
+app.get('/api/ingredients/', function(req, res) {
+  db.User.find(req.user.id).success(function(user) {
+    user.getIngredients({ include: [ db.Unit ], order: ['name'] }).success(function(items) {
+      res.json(items.map(function(item) {
+        return {
+          id: item.id,
+          name: item.name,
+          unit: {
+            id: item.Unit.id,
+            name: item.Unit.name
+          }
+        };
+      }));
+    });
   });
-}
-
-function getIngredientById(response, id) {
-  db.Ingredient.find(id).success(function(item) {
-    response.json({
+});
+app.get('/api/ingredients/:id', function(req, res) {
+  db.Ingredient.find({ where: { UserId: req.user.id, id: req.params.id }}).success(function(item) {
+    res.json({
       id: item.id,
       name: item.name,
       unit: {
@@ -120,47 +130,57 @@ function getIngredientById(response, id) {
         name: item.Unit.name
       }
     });
+  }).error(function(msg) {
+    console.log(msg);
+    res.json({
+      message: 'Ingredient not found'
+    });
   });
-}
-
-//Ingredients
-app.get('/api/ingredients/', function(req, res) {
-  getAllIngredients(res);
-});
-app.get('/api/ingredients/:id', function(req, res) {
-  getIngredientById(res, req.params.id);
 });
 app.post('/api/ingredients', isAuthenticated, function(req, res) {
-  db.Unit.find(req.body.unit.id).success(function(unit) {
-    db.Ingredient
-      .findOrCreate({
-        where: { id: req.body.id },
-        defaults: { name: req.body.name }
-      }).success(function(ingredient, created) {
-        if(!created) {
+  db.User.find(req.user.id).success(function(user) {
+    user.getUnits({ where: { id: req.body.unit.id }}).success(function(units) {
+      db.Ingredient.findOrCreate({
+          where: { id: req.body.id, UserId: req.user.id }
+        }).success(function(ingredient, created) {
           ingredient.name = req.body.name;
-        }
-        ingredient.setUnit(unit).success(function() {
-          ingredient.save().success(function() {
-            getAllIngredients(res);
+          ingredient.setUnit(units[0]).success(function() {
+            ingredient.save().success(function() {
+              res.json({
+                message: 'success',
+                ingrId: ingredient.id
+              });
+            });
           });
         });
-      });
+    });
   });
 });
 
 app.delete('/api/ingredients/:id', isAuthenticated, function(req, res) {
-  db.Ingredient.find(req.params.id).success(function(ingredient) {
-    if(ingredient) {
-      ingredient.destroy().success(function() {
-        getAllIngredients(res, Ingredient);
+  db.User.find(req.user.id).success(function(user) {
+    user.getIngredients({ where: { id: req.params.id }}).success(function(ingredients) {
+      ingredients[0].getRecipes().success(function(recipes) {
+        if(recipes.length > 0) {
+          res.json({
+            message: "error",
+            recipes: recipes.map(function(recipe) {
+              return recipe.name;
+            })
+          });
+        } else {
+          ingredients[0].destroy().success(function() {
+            res.json({
+              message: 'success'
+            });
+          });
+        }
       });
-    } else {
-      getAllIngredients(res, Ingredient);
-    }
+    });
   });
 });
 
+//Recipes
 function recipesToJSON(recipes) {
   return recipes.map(function(recipe) {
     return {
@@ -183,88 +203,95 @@ function recipesToJSON(recipes) {
   })
 }
 
-function getAllRecipes(response) {
-  db.Recipe.findAll({
-    include: [{
-      model: db.Ingredient,
-      include: [ db.Unit ]
-    }],
-    order: ['name']
-  }).success(function(recipes) {
-    response.json(recipesToJSON(recipes));
-  });
-}
-
-function getRecipeById(response, id) {
-  db.Recipe.find({
-    where:  {
-      id: id
-    },
-    include: [{
-      model: db.Ingredient,
-      include: [ db.Unit ]
-    }]
-  }).success(function(recipe) {
-    response.json({
-      id: recipe.id,
-      name: recipe.name,
-      description: recipe.description,
-      image: recipe.image,
-      ingredients: recipe.Ingredients.map(function(ingr) {
-        return {
-          id: ingr.id,
-          name: ingr.name,
-          amount: +ingr.IngredientsRecipe.amount,
-          unit: {
-            id: ingr.Unit.id,
-            name: ingr.Unit.name
-          }
-        }
-      })
+app.get('/api/recipes/', function(req, res) {
+  db.User.find(req.user.id).success(function(user) {
+    user.getRecipes({
+      include: [{
+        model: db.Ingredient,
+        include: [ db.Unit ]
+      }],
+      order: ['name']
+    }).success(function(recipes) {
+      res.json(recipesToJSON(recipes));
     });
   });
-}
-
-//Recipes
-app.get('/api/recipes/', function(req, res) {
-  getAllRecipes(res);
 });
 app.get('/api/recipes/:id', function(req, res) {
-  getRecipeById(res, req.params.id);
+  db.User.find(req.user.id).success(function(user) {
+    user.getRecipes({
+      where: {
+        id: req.params.id
+      },
+      include: [{
+        model: db.Ingredient,
+        include: [ db.Unit ]
+      }]
+    }).success(function(recipes) {
+      if(recipes.length > 0) {
+        var recipe = recipes[0];
+        res.statusCode = 200;
+        res.json({
+          id: recipe.id,
+          name: recipe.name,
+          description: recipe.description,
+          image: recipe.image,
+          ingredients: recipe.Ingredients.map(function(ingr) {
+            return {
+              id: ingr.id,
+              name: ingr.name,
+              amount: +ingr.IngredientsRecipe.amount,
+              unit: {
+                id: ingr.Unit.id,
+                name: ingr.Unit.name
+              }
+            }
+          })
+        });
+      } else {
+        res.statusCode = 404;
+        res.json({
+          message: 'Recipe not found'
+        });
+      }
+    });
+  });
 });
 app.post('/api/recipes', isAuthenticated, function(req, res) {
   var newIngredients = req.body.ingredients;
-  db.Ingredient.findAll({
-    where: {
-      id: req.body.ingredients.map(function(ingr) {
-        return ingr.id;
-      })
-    }
-  }).success(function(ingredients) {
-    if(ingredients.length > 0) {
-      db.Recipe.findOrCreate({ where: { id: req.body.id } })
-        .success(function(recipe, created) {
-          recipe.name = req.body.name;
-          recipe.description = req.body.description;
-          for(var i = 0, len = ingredients.length; i < len; i++) {
-            for(var j = 0, newLen = newIngredients.length; j < newLen; j++) {
-              if(ingredients[i].id === newIngredients[j].id) {
-                ingredients[i].IngredientsRecipes = { amount: parseFloat(newIngredients[j].amount) };
-                break;
+  db.User.find(req.user.id).success(function(user) {
+    user.getIngredients({
+      where: {
+        id: req.body.ingredients.map(function(ingr) {
+          return ingr.id;
+        })
+      }
+    }).success(function(ingredients) {
+      if(ingredients.length > 0) {
+        db.Recipe.findOrCreate({ where: { id: req.body.id, UserId: req.user.id } })
+          .success(function(recipe, created) {
+            recipe.name = req.body.name;
+            recipe.description = req.body.description;
+
+            for(var i = 0, len = ingredients.length; i < len; i++) {
+              for(var j = 0, newLen = newIngredients.length; j < newLen; j++) {
+                if(ingredients[i].id === newIngredients[j].id) {
+                  ingredients[i].IngredientsRecipes = { amount: parseFloat(newIngredients[j].amount) };
+                  break;
+                }
               }
             }
-          }
-          recipe.setIngredients(ingredients).success(function() {
-            recipe.save().success(function() {
-              // getAllRecipes(res);
-              res.json({
-                message: 'success',
-                recipeId: recipe.id
+            recipe.setIngredients(ingredients).success(function() {
+              recipe.save().success(function() {
+                res.statusCode = 200;
+                res.json({
+                  message: 'success',
+                  recipeId: recipe.id
+                });
               });
             });
-          });
-      });
-    }
+        });
+      }
+    })
   }).error(function(err) {
     console.log(err);
     res.json({
@@ -272,6 +299,7 @@ app.post('/api/recipes', isAuthenticated, function(req, res) {
     });
   });
 });
+
 //saving image after recipe is saved
 app.put('/api/recipes/:id', isAuthenticated, function(req, res) {
   var base64data = req.body.image.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
@@ -305,15 +333,37 @@ app.delete('/api/recipes/:id', isAuthenticated, function(req, res) {
     if(recipe) {
       db.Day.destroy({ where: { RecipeId: recipe.id }}).success(function() {
         recipe.destroy().success(function() {
-          getAllRecipes(res);
+          var imagePath = "build/images/recipes/" + req.params.id + ".png";
+          fs.exists(imagePath, function(exists) {
+            if(exists) {
+              fs.unlink(imagePath, function(err) {
+                if(err)
+                  throw err;
+
+                res.statusCode = 200;
+                res.json({
+                  message: 'success'
+                });
+              });
+            } else {
+              res.statusCode = 200;
+              res.json({
+                message: 'success'
+              });
+            }
+          })
         });
       });
     } else {
-      getAllRecipes(res);
+      res.statusCode = 200;
+      res.json({
+        message: 'success'
+      });
     }
   });
 });
 
+//Calendar
 function daysToJSON(days) {
   return days.map(function(day) {
     return {
@@ -329,7 +379,10 @@ function daysToJSON(days) {
             id: ingr.id,
             name: ingr.name,
             amount: +ingr.IngredientsRecipe.amount,
-            units: ingr.Unit.name
+            unit: {
+              id: ingr.Unit.id,
+              name: ingr.Unit.name
+            }
           }
         })
       }
@@ -337,126 +390,136 @@ function daysToJSON(days) {
   });
 }
 
-//Calendar
-function getWeek(response, date) {
-  //get seven days starting from 'date'
-  db.Day.findAll({
-    where: {
-      date: {
-        gte: new Date(date),
-        lte: new Date(new Date(date).setDate(date.getDate() + 6))
-      }
-    },
-    order: 'date',
-    include: [{
-      model: db.Recipe,
-      include: [{
-          model: db.Ingredient,
-          include: [ db.Unit ]
-      }]
-    }]
-  }).success(function(days) {
-    response.json(daysToJSON(days));
-  });
-}
-
 app.get('/api/calendar/:date', function(req, res) {
-  getWeek(res, new Date(req.params.date));
+  var date = new Date(req.params.date);
+
+  db.User.find(req.user.id).success(function(user) {
+    user.getDays({
+      where: {
+        date: {
+          gte: new Date(date),
+          lte: new Date(new Date(date).setDate(date.getDate() + 6))
+        }
+      },
+      order: 'date',
+      include: [{
+        model: db.Recipe,
+        include: [{
+            model: db.Ingredient,
+            include: [ db.Unit ]
+        }]
+      }]
+    }).success(function(days) {
+      res.statusCode = 200;
+      res.json(daysToJSON(days));
+    });
+  });
 });
 app.post('/api/calendar/', isAuthenticated, function(req, res) {
   var dayDate = new Date(req.body.date),
       recipeId = req.body.recipeId,
       meal = req.body.meal;
 
-  db.Recipe.find(recipeId).success(function(recipe) {
-    if(recipe) {
-      var newDay = {
-        date: new Date(req.body.date),
-        meal: meal,
-        RecipeId: recipe.id
-      };
-      db.Day.findOrCreate({
-        where: newDay
-      }, newDay).success(function(day) {
+  db.User.find(req.user.id).success(function(user) {
+    user.getRecipes({ where: { id: recipeId }}).success(function(recipes) {
+      var recipe = recipes[0]
+      if(recipe) {
+        var newDay = {
+          date: new Date(req.body.date),
+          meal: meal,
+          RecipeId: recipe.id,
+          UserId: req.user.id
+        };
+        db.Day.findOrCreate({
+          where: newDay
+        }, newDay).success(function(day) {
+          res.statusCode = 200;
+          res.json({
+            message: 'success'
+          });
+        });
+      }
+    });
+  });
+});
+app.delete('/api/calendar/:date/:meal/:recipeId', isAuthenticated, function(req, res) {
+  db.User.find(req.user.id).success(function(user) {
+    user.getDays({
+      where: {
+        date: new Date(req.params.date),
+        meal: req.params.meal,
+        RecipeId: req.params.recipeId
+      }
+    }).success(function(day) {
+      day.destroy().success(function() {
         res.json({
           message: 'success'
         });
       });
-    }
-  });
-});
-app.delete('/api/calendar/:date/:meal/:recipeId', isAuthenticated, function(req, res) {
-  db.Day.find({
-    where: {
-      date: new Date(req.params.date),
-      meal: req.params.meal,
-      RecipeId: req.params.recipeId
-    }
-  }).success(function(day) {
-    day.destroy().success(function() {
+    }).error(function(msg) {
+      throw msg;
+
+      res.statusCode = 500;
       res.json({
-        message: 'success'
+        message: 'error'
       });
-    });
-  }).error(function(msg) {
-    res.json({
-      message: 'error',
-      text: msg
     });
   });
 });
 
-app.get('/api/weekly_summary/:date', function(req, res) {
+app.get('/api/weekly_summary/:date', isAuthenticated, function(req, res) {
   var date = new Date(req.params.date);
 
-  db.Day.findAll({
-    where: {
-      date: {
-        gte: new Date(date),
-        lte: new Date(new Date(date).setDate(date.getDate() + 6))
-      }
-    },
-    include: [{
-      model: db.Recipe,
-      include: [{
-        model: db.Ingredient,
-        include: [ db.Unit ]
-      }]
-    }]
-  }).success(function(days) {
-    var ingredientsSummary = [];
-
-    function getIngredientIndex(id) {
-      for(var i = 0; i < ingredientsSummary.length; i++) {
-        if(ingredientsSummary[i].id === id)
-          return i;
-      }
-      return -1;
-    }
-
-    function getIngredientSummaryModel(ingredient) {
-      return {
-        id: ingredient.id,
-        name: ingredient.name,
-        amount: +ingredient.IngredientsRecipe.amount,
-        units: ingredient.Unit.name
-      };
-    }
-
-    days.forEach(function(day) {
-      day.Recipe.Ingredients.forEach(function(ingredient) {
-        var index = getIngredientIndex(ingredient.id);
-        if(index > -1) {
-          ingredientsSummary[index].amount += +ingredient.IngredientsRecipe.amount;
-        } else {
-          ingredientsSummary.push(getIngredientSummaryModel(ingredient));
+  db.User.find(req.user.id).success(function(user) {
+    user.getDays({
+      where: {
+        date: {
+          gte: new Date(date),
+          lte: new Date(new Date(date).setDate(date.getDate() + 6))
         }
-      });
-    });
+      },
+      include: [{
+        model: db.Recipe,
+        include: [{
+          model: db.Ingredient,
+          include: [ db.Unit ]
+        }]
+      }]
+    }).success(function(days) {
+      var ingredientsSummary = [];
 
-    res.json({
-      date: date,
-      ingredients: ingredientsSummary
+      function getIngredientIndex(id) {
+        for(var i = 0; i < ingredientsSummary.length; i++) {
+          if(ingredientsSummary[i].id === id)
+            return i;
+        }
+        return -1;
+      }
+
+      function getIngredientSummaryModel(ingredient) {
+        return {
+          id: ingredient.id,
+          name: ingredient.name,
+          amount: +ingredient.IngredientsRecipe.amount,
+          unit: ingredient.Unit.name
+        };
+      }
+
+      days.forEach(function(day) {
+        day.Recipe.Ingredients.forEach(function(ingredient) {
+          var index = getIngredientIndex(ingredient.id);
+          if(index > -1) {
+            ingredientsSummary[index].amount += +ingredient.IngredientsRecipe.amount;
+          } else {
+            ingredientsSummary.push(getIngredientSummaryModel(ingredient));
+          }
+        });
+      });
+
+      res.json({
+        date: date,
+        ingredients: ingredientsSummary
+      });
     });
   });
 });

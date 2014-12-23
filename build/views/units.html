@@ -6,7 +6,7 @@
   <div class='row'>
     <div class='recipe' ng-class='unitActive(unit)' ng-click='editUnit(unit)' ng-repeat='unit in units' title='клікніть аби змінити'>
       {{ unit.name }}
-      <span class='glyphicon glyphicon-remove' ng-click='removeUnit(unit)' title='Видалити'></span>
+      <span class='glyphicon glyphicon-remove' ng-click='removeUnit(unit); $event.stopPropagination();' title='Видалити'></span>
     </div>
   </div>
 </div>

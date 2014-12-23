@@ -1,4 +1,4 @@
-/*! "Weekly menu" 2014-12-22 */
+/*! "Weekly menu" 2014-12-23 */
 /* line 1, ../../src/content/styles/vendors/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -5058,9 +5058,8 @@ calendar .col-xs-1 {
   position: relative;
   height: 167px;
   width: 167px;
-  border: 1px solid #6b7877;
 }
-/* line 159, ../../src/content/styles/style.sass */
+/* line 158, ../../src/content/styles/style.sass */
 .recipe-form .image-overlay img {
   position: absolute;
   top: 50%;
@@ -5071,30 +5070,30 @@ calendar .col-xs-1 {
   max-width: 100%;
   max-height: 100%;
 }
-/* line 166, ../../src/content/styles/style.sass */
+/* line 165, ../../src/content/styles/style.sass */
 .recipe-form .recipe-title-row {
   margin-bottom: 15px;
 }
-/* line 168, ../../src/content/styles/style.sass */
+/* line 167, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter {
   position: relative;
   margin-bottom: 10px;
 }
-/* line 171, ../../src/content/styles/style.sass */
+/* line 170, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus {
   -webkit-border-radius: 4px 4px 0 4px;
   -moz-border-radius: 4px 4px 0 4px;
   -o-border-radius: 4px 4px 0 4px;
 }
-/* line 173, ../../src/content/styles/style.sass */
+/* line 172, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter input[type=text]:focus + .available-ingredients {
   max-height: 300px;
 }
-/* line 175, ../../src/content/styles/style.sass */
+/* line 174, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .col-xs-1, .recipe-form .dropdown-filter .col-xs-2, .recipe-form .dropdown-filter .col-xs-7 {
   padding: 0;
 }
-/* line 177, ../../src/content/styles/style.sass */
+/* line 176, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients {
   position: absolute;
   top: 33px;
@@ -5111,26 +5110,26 @@ calendar .col-xs-1 {
   -o-transition: max-height 1s ease;
   list-style: none;
 }
-/* line 190, ../../src/content/styles/style.sass */
+/* line 189, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item {
   padding-left: 12px;
   height: 33px;
   line-height: 33px;
 }
-/* line 194, ../../src/content/styles/style.sass */
+/* line 193, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item:hover {
   background-color: whitesmoke;
   cursor: pointer;
 }
-/* line 197, ../../src/content/styles/style.sass */
+/* line 196, ../../src/content/styles/style.sass */
 .recipe-form .add-ingredient-btn {
   width: 100%;
 }
-/* line 199, ../../src/content/styles/style.sass */
+/* line 198, ../../src/content/styles/style.sass */
 .recipe-form .ingredient {
   position: relative;
 }
-/* line 201, ../../src/content/styles/style.sass */
+/* line 200, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient {
   position: absolute;
   top: 8px;
@@ -5144,63 +5143,63 @@ calendar .col-xs-1 {
   -o-transition: opacity 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   opacity: 0;
 }
-/* line 211, ../../src/content/styles/style.sass */
+/* line 210, ../../src/content/styles/style.sass */
 .recipe-form .ingredient .remove-ingredient:hover {
   color: #6b7877;
   cursor: pointer;
 }
-/* line 214, ../../src/content/styles/style.sass */
+/* line 213, ../../src/content/styles/style.sass */
 .recipe-form .ingredient + * {
   margin-top: 10px;
 }
-/* line 217, ../../src/content/styles/style.sass */
+/* line 216, ../../src/content/styles/style.sass */
 .recipe-form .ingredient:hover > .remove-ingredient {
   opacity: 1;
 }
-/* line 219, ../../src/content/styles/style.sass */
+/* line 218, ../../src/content/styles/style.sass */
 .recipe-form .btn-success {
   margin-right: 5px;
 }
-/* line 222, ../../src/content/styles/style.sass */
+/* line 221, ../../src/content/styles/style.sass */
 .recipe-form .recipe-description textarea {
   width: 100%;
   min-height: 250px;
   resize: vertical;
 }
 
-/* line 228, ../../src/content/styles/style.sass */
+/* line 227, ../../src/content/styles/style.sass */
 .ingredients-container .input-wrapper, .units-container .input-wrapper {
   padding-bottom: 10px;
 }
-/* line 230, ../../src/content/styles/style.sass */
+/* line 229, ../../src/content/styles/style.sass */
 .ingredients-container .recipe:hover, .units-container .recipe:hover {
   cursor: pointer;
 }
-/* line 232, ../../src/content/styles/style.sass */
+/* line 231, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .ingredients-container .item-units, .units-container .item-name, .units-container .item-units {
   max-height: 33px;
 }
-/* line 234, ../../src/content/styles/style.sass */
+/* line 233, ../../src/content/styles/style.sass */
 .ingredients-container .item-name, .units-container .item-name {
   width: 25%;
   -webkit-border-radius: 4px 0px 0px 4px;
   -moz-border-radius: 4px 0px 0px 4px;
   -o-border-radius: 4px 0px 0px 4px;
 }
-/* line 237, ../../src/content/styles/style.sass */
+/* line 236, ../../src/content/styles/style.sass */
 .ingredients-container .item-units, .units-container .item-units {
   width: 15%;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -o-border-radius: 0;
 }
-/* line 240, ../../src/content/styles/style.sass */
+/* line 239, ../../src/content/styles/style.sass */
 .ingredients-container .item-add, .units-container .item-add {
   -webkit-border-radius: 0px 4px 4px 0px;
   -moz-border-radius: 0px 4px 4px 0px;
   -o-border-radius: 0px 4px 4px 0px;
 }
-/* line 242, ../../src/content/styles/style.sass */
+/* line 241, ../../src/content/styles/style.sass */
 .ingredients-container .glyphicon-remove, .units-container .glyphicon-remove {
   position: absolute;
   top: 5px;
@@ -5209,13 +5208,13 @@ calendar .col-xs-1 {
   height: 20px;
 }
 
-/* line 251, ../../src/content/styles/style.sass */
+/* line 250, ../../src/content/styles/style.sass */
 .summary .summary-date {
   margin-top: 0;
   margin-bottom: 25px;
 }
 
-/* line 255, ../../src/content/styles/style.sass */
+/* line 254, ../../src/content/styles/style.sass */
 .details-overlay {
   position: fixed;
   top: 0;
@@ -5225,11 +5224,11 @@ calendar .col-xs-1 {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
 }
-/* line 263, ../../src/content/styles/style.sass */
+/* line 262, ../../src/content/styles/style.sass */
 .details-overlay.visible {
   display: block;
 }
-/* line 265, ../../src/content/styles/style.sass */
+/* line 264, ../../src/content/styles/style.sass */
 .details-overlay .details-body {
   position: absolute;
   top: 50%;
@@ -5245,11 +5244,11 @@ calendar .col-xs-1 {
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 275, ../../src/content/styles/style.sass */
+/* line 274, ../../src/content/styles/style.sass */
 .details-overlay .recipe-title, .details-overlay .recipe-ingredients {
   margin-bottom: 25px;
 }
-/* line 277, ../../src/content/styles/style.sass */
+/* line 276, ../../src/content/styles/style.sass */
 .details-overlay .recipe-ingredients {
   padding: 0;
   line-height: 25px;
@@ -5257,26 +5256,26 @@ calendar .col-xs-1 {
   -moz-column-count: 2;
   -o-column-count: 2;
 }
-/* line 281, ../../src/content/styles/style.sass */
+/* line 280, ../../src/content/styles/style.sass */
 .details-overlay .recipe-ingredients li {
   margin-left: 25px;
 }
-/* line 283, ../../src/content/styles/style.sass */
+/* line 282, ../../src/content/styles/style.sass */
 .details-overlay .recipe-description {
   line-height: 25px;
   text-indent: 25px;
 }
 
-/* line 288, ../../src/content/styles/style.sass */
+/* line 287, ../../src/content/styles/style.sass */
 .login-form-container {
   position: relative;
   min-height: 460px;
 }
-/* line 291, ../../src/content/styles/style.sass */
+/* line 290, ../../src/content/styles/style.sass */
 .login-form-container .form-group {
   position: relative;
 }
-/* line 293, ../../src/content/styles/style.sass */
+/* line 292, ../../src/content/styles/style.sass */
 .login-form-container .login-form {
   position: absolute;
   top: 50%;
@@ -5287,13 +5286,13 @@ calendar .col-xs-1 {
   width: 100%;
   max-width: 460px;
 }
-/* line 300, ../../src/content/styles/style.sass */
+/* line 299, ../../src/content/styles/style.sass */
 .login-form-container .login-form input[type="text"], .login-form-container .login-form input[type="password"], .login-form-container .login-form .btn {
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
 }
-/* line 302, ../../src/content/styles/style.sass */
+/* line 301, ../../src/content/styles/style.sass */
 .login-form-container .login-form .login-btn {
   margin-right: 5px;
 }
