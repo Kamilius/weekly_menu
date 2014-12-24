@@ -1,4 +1,4 @@
-app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$rootScope', '$http', 'ingredientsService', ($scope, $routeParams, $location, $rootScope, $http, $ingredientsService) ->
+app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$rootScope', '$http', ($scope, $routeParams, $location, $rootScope, $http) ->
 	$scope.ingredients = []
 	$scope.ingModel = new Ingredient()
 	$scope.recipe = {
@@ -14,17 +14,11 @@ app.controller 'RecipesCRUDCtrl', ['$scope', '$routeParams', '$location', '$root
 		else
 			$scope.recipe = new Recipe()
 
-	initRecipeForm = ->
-		if $ingredientsService.getIngredients().length is 0
-			$http.get("/api/ingredients").success((data, status, headers, config) ->
-				if data
-					$ingredientsService.setIngredients(data)
-					$scope.ingredients = $ingredientsService.getIngredients()
+	initRecipeForm = () ->
+		$http.get("/api/ingredients").success (data, status, headers, config) ->
+			if data
+				$scope.ingredients = data
 
-				setFormModel()
-			)
-		else
-			$scope.ingredients = $ingredientsService.getIngredients()
 			setFormModel()
 
 	$scope.getRecipeImage = () ->

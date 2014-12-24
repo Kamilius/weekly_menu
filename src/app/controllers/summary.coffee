@@ -1,4 +1,4 @@
-app.controller 'SummaryCtrl', ['$scope', '$http', '$filter', 'recipeService', ($scope, $http, $filter, $recipeService) ->
+app.controller 'SummaryCtrl', ['$scope', '$http', '$filter', ($scope, $http, $filter) ->
 	$scope.weeklySummary = {}
 
 	$scope.showSummaryDate = ->

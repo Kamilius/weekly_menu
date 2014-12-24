@@ -11,20 +11,24 @@ var express = require('express'),
     summary = require('./routes/summary'),
     account = require('./routes/account');
 
-//parse JSON post requests
-app.use(bodyParser.json());
+app.configure(function() {
+  //parse JSON post requests
+  app.use(bodyParser.json());
 
-//set build folder as public
-app.use(express.static(__dirname + '/build'));
+  //set build folder as public
+  app.use(express.static(__dirname + '/build'));
 
-//authentication system settings
-app.use(expressSession({
-  secret: 'mySecretKey',
-  saveUninitialized: true,
-  resave: true
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+  //authentication system settings
+  app.use(expressSession({
+    secret: 'mySecretKey',
+    saveUninitialized: true,
+    resave: true
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.set('port', (process.env.PORT || 3001));
+});
 
 
 //ROUTING
@@ -74,8 +78,6 @@ app.get('/api/signout', account.signout);
 
 //Program entry
 //-----------------------------------------------------------------
-app.set('port', (process.env.PORT || 3001));
-
 var server = app.listen(app.get('port'), function() {
   var host = server.address().address,
       port = server.address().port;

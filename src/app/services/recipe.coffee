@@ -1,4 +1,4 @@
-app.service 'recipeService', ['$rootScope', 'ingredientsService', ($rootScope, $ingredientsService) ->
+app.service 'recipeService', ['$rootScope', ($rootScope) ->
 	recipes = []
 
 	setRecipes = (data) ->
