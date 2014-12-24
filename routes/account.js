@@ -84,6 +84,13 @@ passport.use('signup', new LocalStrategy({
   }
 ));
 
+exports.isAuthenticated = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.json({ message: 'Ви не авторизовані.' });
+};
+
 exports.login = function(req, res, next) {
   passport.authenticate('login', function(err, user, info) {
     if (err) { return next(err); }
