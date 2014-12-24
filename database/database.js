@@ -19,16 +19,16 @@ if(process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
   });
 } else {
   //remit laptop
-  sequelize = new Sequelize('weekly_menu', 'dev', '1', {
-    dialect: 'postgres',
-    timezone: '+02:00'
-  });
-
-  //home
-  // sequelize = new Sequelize('weekly_menu', 'postgres', '12356890', {
+  // sequelize = new Sequelize('weekly_menu', 'dev', '1', {
   //   dialect: 'postgres',
   //   timezone: '+02:00'
   // });
+
+  //home
+  sequelize = new Sequelize('weekly_menu', 'postgres', '12356890', {
+    dialect: 'postgres',
+    timezone: '+02:00'
+  });
 }
 
 
