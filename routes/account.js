@@ -1,7 +1,8 @@
+'use strict';
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     bCrypt = require('bcrypt-nodejs'),
-    db = require('../database/database')
+    db = require('../database/database');
 
 var isValidPassword = function(user, password) {
   return bCrypt.compareSync(password, user.password);
