@@ -1,2 +1,5 @@
-language: javascript
-#some comment to trigger Travis.CI
+language: nodejs
+
+node install
+grunt build
+node server.js
