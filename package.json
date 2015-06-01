@@ -22,7 +22,7 @@
     "pg": "*"
   },
   "dependencies": {
-    "express": "^4.10.2",
+    "express": "~4.10.2",
     "body-parser": "~1.9.2",
     "express-session": "~1.9.3",
     "passport-local": "~1.0.0",
