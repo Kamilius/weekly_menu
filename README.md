@@ -8,7 +8,7 @@ To build a project you'll need to:
 * go to repository directory
 * run following commands in terminal:
 ```bash
- $ node install
+ $ npm install
  $ grunt build
  $ node server.js
 ```
