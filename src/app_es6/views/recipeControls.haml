@@ -1,0 +1,4 @@
+.recipe-controls
+  %span.glyphicon.glyphicon-chevron-left
+  %a.glyphicon.glyphicon-pencil{:title => 'Редагувати', :href => '#/recipes/{{ recipe.id }}'}
+  %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeRecipe(recipe, day)'}

@@ -1,0 +1,9 @@
+.container.margin-top-25.ingredients-container
+  .row.input-wrapper
+    %input.form-control.col-xs-6.col-sm-3.item-name.material-shadow{:type => 'text', :'ng-model' => 'ingredient.name', :placeholder => 'введіть назву інгредієнта'}
+    %select.form-control.col-xs-4.col-sm-2.item-units.material-shadow{:'ng-options' => 'unit.name for unit in units track by unit.id', :'ng-model' => 'ingredient.unit' }
+    %button.btn.btn-default.item-add.material-shadow{:'ng-click' => 'saveIngredient()'} Зберегти
+  .row
+    .recipe{:'ng-repeat' => 'item in ingredients', :'ng-click' => 'editIngredient(item)', :'ng-class' => 'ingredientActive(item)', :title => 'клікніть аби змінити'}
+      {{ item.name + '(' + item.unit.name + ')' }}
+      %span.glyphicon.glyphicon-remove{:title => 'Видалити', :'ng-click' => 'removeIngredient(item)'}

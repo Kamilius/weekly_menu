@@ -1,4 +1,5 @@
-/*! "Weekly menu" 2014-12-18 */
+/*! "Weekly menu" 2015-11-22 */
+@charset "UTF-8";
 /* line 1, ../../src/content/styles/vendors/bootstrap.sass */
 html {
   font-family: sans-serif;
@@ -65,8 +66,8 @@ h1 {
 
 /* line 41, ../../src/content/styles/vendors/bootstrap.sass */
 mark {
-  background: yellow;
-  color: black;
+  background: #ff0;
+  color: #000;
 }
 
 /* line 45, ../../src/content/styles/vendors/bootstrap.sass */
@@ -202,7 +203,7 @@ input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webki
 
 /* line 132, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset {
-  border: 1px solid silver;
+  border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em;
 }
@@ -254,1002 +255,1002 @@ td, th {
 
 /* line 171, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-asterisk:before {
-  content: "\2a";
+  content: "*";
 }
 
 /* line 174, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-plus:before {
-  content: "\2b";
+  content: "+";
 }
 
 /* line 177, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-euro:before, .glyphicon-eur:before {
-  content: "\20ac";
+  content: "€";
 }
 
 /* line 180, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-minus:before {
-  content: "\2212";
+  content: "−";
 }
 
 /* line 183, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cloud:before {
-  content: "\2601";
+  content: "☁";
 }
 
 /* line 186, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-envelope:before {
-  content: "\2709";
+  content: "✉";
 }
 
 /* line 189, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-pencil:before {
-  content: "\270f";
+  content: "✏";
 }
 
 /* line 192, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-glass:before {
-  content: "\e001";
+  content: "";
 }
 
 /* line 195, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-music:before {
-  content: "\e002";
+  content: "";
 }
 
 /* line 198, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-search:before {
-  content: "\e003";
+  content: "";
 }
 
 /* line 201, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-heart:before {
-  content: "\e005";
+  content: "";
 }
 
 /* line 204, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-star:before {
-  content: "\e006";
+  content: "";
 }
 
 /* line 207, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-star-empty:before {
-  content: "\e007";
+  content: "";
 }
 
 /* line 210, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-user:before {
-  content: "\e008";
+  content: "";
 }
 
 /* line 213, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-film:before {
-  content: "\e009";
+  content: "";
 }
 
 /* line 216, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-th-large:before {
-  content: "\e010";
+  content: "";
 }
 
 /* line 219, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-th:before {
-  content: "\e011";
+  content: "";
 }
 
 /* line 222, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-th-list:before {
-  content: "\e012";
+  content: "";
 }
 
 /* line 225, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ok:before {
-  content: "\e013";
+  content: "";
 }
 
 /* line 228, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-remove:before {
-  content: "\e014";
+  content: "";
 }
 
 /* line 231, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-zoom-in:before {
-  content: "\e015";
+  content: "";
 }
 
 /* line 234, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-zoom-out:before {
-  content: "\e016";
+  content: "";
 }
 
 /* line 237, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-off:before {
-  content: "\e017";
+  content: "";
 }
 
 /* line 240, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-signal:before {
-  content: "\e018";
+  content: "";
 }
 
 /* line 243, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cog:before {
-  content: "\e019";
+  content: "";
 }
 
 /* line 246, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-trash:before {
-  content: "\e020";
+  content: "";
 }
 
 /* line 249, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-home:before {
-  content: "\e021";
+  content: "";
 }
 
 /* line 252, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-file:before {
-  content: "\e022";
+  content: "";
 }
 
 /* line 255, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-time:before {
-  content: "\e023";
+  content: "";
 }
 
 /* line 258, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-road:before {
-  content: "\e024";
+  content: "";
 }
 
 /* line 261, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-download-alt:before {
-  content: "\e025";
+  content: "";
 }
 
 /* line 264, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-download:before {
-  content: "\e026";
+  content: "";
 }
 
 /* line 267, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-upload:before {
-  content: "\e027";
+  content: "";
 }
 
 /* line 270, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-inbox:before {
-  content: "\e028";
+  content: "";
 }
 
 /* line 273, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-play-circle:before {
-  content: "\e029";
+  content: "";
 }
 
 /* line 276, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-repeat:before {
-  content: "\e030";
+  content: "";
 }
 
 /* line 279, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-refresh:before {
-  content: "\e031";
+  content: "";
 }
 
 /* line 282, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-list-alt:before {
-  content: "\e032";
+  content: "";
 }
 
 /* line 285, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-lock:before {
-  content: "\e033";
+  content: "";
 }
 
 /* line 288, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-flag:before {
-  content: "\e034";
+  content: "";
 }
 
 /* line 291, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-headphones:before {
-  content: "\e035";
+  content: "";
 }
 
 /* line 294, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-volume-off:before {
-  content: "\e036";
+  content: "";
 }
 
 /* line 297, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-volume-down:before {
-  content: "\e037";
+  content: "";
 }
 
 /* line 300, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-volume-up:before {
-  content: "\e038";
+  content: "";
 }
 
 /* line 303, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-qrcode:before {
-  content: "\e039";
+  content: "";
 }
 
 /* line 306, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-barcode:before {
-  content: "\e040";
+  content: "";
 }
 
 /* line 309, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tag:before {
-  content: "\e041";
+  content: "";
 }
 
 /* line 312, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tags:before {
-  content: "\e042";
+  content: "";
 }
 
 /* line 315, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-book:before {
-  content: "\e043";
+  content: "";
 }
 
 /* line 318, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bookmark:before {
-  content: "\e044";
+  content: "";
 }
 
 /* line 321, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-print:before {
-  content: "\e045";
+  content: "";
 }
 
 /* line 324, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-camera:before {
-  content: "\e046";
+  content: "";
 }
 
 /* line 327, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-font:before {
-  content: "\e047";
+  content: "";
 }
 
 /* line 330, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bold:before {
-  content: "\e048";
+  content: "";
 }
 
 /* line 333, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-italic:before {
-  content: "\e049";
+  content: "";
 }
 
 /* line 336, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-text-height:before {
-  content: "\e050";
+  content: "";
 }
 
 /* line 339, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-text-width:before {
-  content: "\e051";
+  content: "";
 }
 
 /* line 342, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-left:before {
-  content: "\e052";
+  content: "";
 }
 
 /* line 345, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-center:before {
-  content: "\e053";
+  content: "";
 }
 
 /* line 348, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-right:before {
-  content: "\e054";
+  content: "";
 }
 
 /* line 351, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-align-justify:before {
-  content: "\e055";
+  content: "";
 }
 
 /* line 354, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-list:before {
-  content: "\e056";
+  content: "";
 }
 
 /* line 357, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-indent-left:before {
-  content: "\e057";
+  content: "";
 }
 
 /* line 360, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-indent-right:before {
-  content: "\e058";
+  content: "";
 }
 
 /* line 363, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-facetime-video:before {
-  content: "\e059";
+  content: "";
 }
 
 /* line 366, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-picture:before {
-  content: "\e060";
+  content: "";
 }
 
 /* line 369, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-map-marker:before {
-  content: "\e062";
+  content: "";
 }
 
 /* line 372, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-adjust:before {
-  content: "\e063";
+  content: "";
 }
 
 /* line 375, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tint:before {
-  content: "\e064";
+  content: "";
 }
 
 /* line 378, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-edit:before {
-  content: "\e065";
+  content: "";
 }
 
 /* line 381, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-share:before {
-  content: "\e066";
+  content: "";
 }
 
 /* line 384, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-check:before {
-  content: "\e067";
+  content: "";
 }
 
 /* line 387, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-move:before {
-  content: "\e068";
+  content: "";
 }
 
 /* line 390, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-step-backward:before {
-  content: "\e069";
+  content: "";
 }
 
 /* line 393, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fast-backward:before {
-  content: "\e070";
+  content: "";
 }
 
 /* line 396, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-backward:before {
-  content: "\e071";
+  content: "";
 }
 
 /* line 399, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-play:before {
-  content: "\e072";
+  content: "";
 }
 
 /* line 402, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-pause:before {
-  content: "\e073";
+  content: "";
 }
 
 /* line 405, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-stop:before {
-  content: "\e074";
+  content: "";
 }
 
 /* line 408, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-forward:before {
-  content: "\e075";
+  content: "";
 }
 
 /* line 411, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fast-forward:before {
-  content: "\e076";
+  content: "";
 }
 
 /* line 414, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-step-forward:before {
-  content: "\e077";
+  content: "";
 }
 
 /* line 417, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-eject:before {
-  content: "\e078";
+  content: "";
 }
 
 /* line 420, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-left:before {
-  content: "\e079";
+  content: "";
 }
 
 /* line 423, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-right:before {
-  content: "\e080";
+  content: "";
 }
 
 /* line 426, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-plus-sign:before {
-  content: "\e081";
+  content: "";
 }
 
 /* line 429, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-minus-sign:before {
-  content: "\e082";
+  content: "";
 }
 
 /* line 432, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-remove-sign:before {
-  content: "\e083";
+  content: "";
 }
 
 /* line 435, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ok-sign:before {
-  content: "\e084";
+  content: "";
 }
 
 /* line 438, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-question-sign:before {
-  content: "\e085";
+  content: "";
 }
 
 /* line 441, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-info-sign:before {
-  content: "\e086";
+  content: "";
 }
 
 /* line 444, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-screenshot:before {
-  content: "\e087";
+  content: "";
 }
 
 /* line 447, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-remove-circle:before {
-  content: "\e088";
+  content: "";
 }
 
 /* line 450, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ok-circle:before {
-  content: "\e089";
+  content: "";
 }
 
 /* line 453, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-ban-circle:before {
-  content: "\e090";
+  content: "";
 }
 
 /* line 456, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-left:before {
-  content: "\e091";
+  content: "";
 }
 
 /* line 459, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-right:before {
-  content: "\e092";
+  content: "";
 }
 
 /* line 462, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-up:before {
-  content: "\e093";
+  content: "";
 }
 
 /* line 465, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-arrow-down:before {
-  content: "\e094";
+  content: "";
 }
 
 /* line 468, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-share-alt:before {
-  content: "\e095";
+  content: "";
 }
 
 /* line 471, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-full:before {
-  content: "\e096";
+  content: "";
 }
 
 /* line 474, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-small:before {
-  content: "\e097";
+  content: "";
 }
 
 /* line 477, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-exclamation-sign:before {
-  content: "\e101";
+  content: "";
 }
 
 /* line 480, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-gift:before {
-  content: "\e102";
+  content: "";
 }
 
 /* line 483, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-leaf:before {
-  content: "\e103";
+  content: "";
 }
 
 /* line 486, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fire:before {
-  content: "\e104";
+  content: "";
 }
 
 /* line 489, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-eye-open:before {
-  content: "\e105";
+  content: "";
 }
 
 /* line 492, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-eye-close:before {
-  content: "\e106";
+  content: "";
 }
 
 /* line 495, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-warning-sign:before {
-  content: "\e107";
+  content: "";
 }
 
 /* line 498, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-plane:before {
-  content: "\e108";
+  content: "";
 }
 
 /* line 501, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-calendar:before {
-  content: "\e109";
+  content: "";
 }
 
 /* line 504, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-random:before {
-  content: "\e110";
+  content: "";
 }
 
 /* line 507, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-comment:before {
-  content: "\e111";
+  content: "";
 }
 
 /* line 510, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-magnet:before {
-  content: "\e112";
+  content: "";
 }
 
 /* line 513, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-up:before {
-  content: "\e113";
+  content: "";
 }
 
 /* line 516, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-chevron-down:before {
-  content: "\e114";
+  content: "";
 }
 
 /* line 519, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-retweet:before {
-  content: "\e115";
+  content: "";
 }
 
 /* line 522, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-shopping-cart:before {
-  content: "\e116";
+  content: "";
 }
 
 /* line 525, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-folder-close:before {
-  content: "\e117";
+  content: "";
 }
 
 /* line 528, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-folder-open:before {
-  content: "\e118";
+  content: "";
 }
 
 /* line 531, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-vertical:before {
-  content: "\e119";
+  content: "";
 }
 
 /* line 534, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-resize-horizontal:before {
-  content: "\e120";
+  content: "";
 }
 
 /* line 537, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hdd:before {
-  content: "\e121";
+  content: "";
 }
 
 /* line 540, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bullhorn:before {
-  content: "\e122";
+  content: "";
 }
 
 /* line 543, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-bell:before {
-  content: "\e123";
+  content: "";
 }
 
 /* line 546, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-certificate:before {
-  content: "\e124";
+  content: "";
 }
 
 /* line 549, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-thumbs-up:before {
-  content: "\e125";
+  content: "";
 }
 
 /* line 552, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-thumbs-down:before {
-  content: "\e126";
+  content: "";
 }
 
 /* line 555, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-right:before {
-  content: "\e127";
+  content: "";
 }
 
 /* line 558, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-left:before {
-  content: "\e128";
+  content: "";
 }
 
 /* line 561, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-up:before {
-  content: "\e129";
+  content: "";
 }
 
 /* line 564, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hand-down:before {
-  content: "\e130";
+  content: "";
 }
 
 /* line 567, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-right:before {
-  content: "\e131";
+  content: "";
 }
 
 /* line 570, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-left:before {
-  content: "\e132";
+  content: "";
 }
 
 /* line 573, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-up:before {
-  content: "\e133";
+  content: "";
 }
 
 /* line 576, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-circle-arrow-down:before {
-  content: "\e134";
+  content: "";
 }
 
 /* line 579, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-globe:before {
-  content: "\e135";
+  content: "";
 }
 
 /* line 582, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-wrench:before {
-  content: "\e136";
+  content: "";
 }
 
 /* line 585, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tasks:before {
-  content: "\e137";
+  content: "";
 }
 
 /* line 588, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-filter:before {
-  content: "\e138";
+  content: "";
 }
 
 /* line 591, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-briefcase:before {
-  content: "\e139";
+  content: "";
 }
 
 /* line 594, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-fullscreen:before {
-  content: "\e140";
+  content: "";
 }
 
 /* line 597, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-dashboard:before {
-  content: "\e141";
+  content: "";
 }
 
 /* line 600, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-paperclip:before {
-  content: "\e142";
+  content: "";
 }
 
 /* line 603, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-heart-empty:before {
-  content: "\e143";
+  content: "";
 }
 
 /* line 606, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-link:before {
-  content: "\e144";
+  content: "";
 }
 
 /* line 609, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-phone:before {
-  content: "\e145";
+  content: "";
 }
 
 /* line 612, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-pushpin:before {
-  content: "\e146";
+  content: "";
 }
 
 /* line 615, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-usd:before {
-  content: "\e148";
+  content: "";
 }
 
 /* line 618, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-gbp:before {
-  content: "\e149";
+  content: "";
 }
 
 /* line 621, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort:before {
-  content: "\e150";
+  content: "";
 }
 
 /* line 624, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-alphabet:before {
-  content: "\e151";
+  content: "";
 }
 
 /* line 627, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-alphabet-alt:before {
-  content: "\e152";
+  content: "";
 }
 
 /* line 630, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-order:before {
-  content: "\e153";
+  content: "";
 }
 
 /* line 633, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-order-alt:before {
-  content: "\e154";
+  content: "";
 }
 
 /* line 636, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-attributes:before {
-  content: "\e155";
+  content: "";
 }
 
 /* line 639, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sort-by-attributes-alt:before {
-  content: "\e156";
+  content: "";
 }
 
 /* line 642, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-unchecked:before {
-  content: "\e157";
+  content: "";
 }
 
 /* line 645, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-expand:before {
-  content: "\e158";
+  content: "";
 }
 
 /* line 648, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-collapse-down:before {
-  content: "\e159";
+  content: "";
 }
 
 /* line 651, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-collapse-up:before {
-  content: "\e160";
+  content: "";
 }
 
 /* line 654, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-log-in:before {
-  content: "\e161";
+  content: "";
 }
 
 /* line 657, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-flash:before {
-  content: "\e162";
+  content: "";
 }
 
 /* line 660, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-log-out:before {
-  content: "\e163";
+  content: "";
 }
 
 /* line 663, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-new-window:before {
-  content: "\e164";
+  content: "";
 }
 
 /* line 666, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-record:before {
-  content: "\e165";
+  content: "";
 }
 
 /* line 669, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-save:before {
-  content: "\e166";
+  content: "";
 }
 
 /* line 672, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-open:before {
-  content: "\e167";
+  content: "";
 }
 
 /* line 675, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-saved:before {
-  content: "\e168";
+  content: "";
 }
 
 /* line 678, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-import:before {
-  content: "\e169";
+  content: "";
 }
 
 /* line 681, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-export:before {
-  content: "\e170";
+  content: "";
 }
 
 /* line 684, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-send:before {
-  content: "\e171";
+  content: "";
 }
 
 /* line 687, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-disk:before {
-  content: "\e172";
+  content: "";
 }
 
 /* line 690, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-saved:before {
-  content: "\e173";
+  content: "";
 }
 
 /* line 693, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-remove:before {
-  content: "\e174";
+  content: "";
 }
 
 /* line 696, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-save:before {
-  content: "\e175";
+  content: "";
 }
 
 /* line 699, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-floppy-open:before {
-  content: "\e176";
+  content: "";
 }
 
 /* line 702, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-credit-card:before {
-  content: "\e177";
+  content: "";
 }
 
 /* line 705, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-transfer:before {
-  content: "\e178";
+  content: "";
 }
 
 /* line 708, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cutlery:before {
-  content: "\e179";
+  content: "";
 }
 
 /* line 711, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-header:before {
-  content: "\e180";
+  content: "";
 }
 
 /* line 714, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-compressed:before {
-  content: "\e181";
+  content: "";
 }
 
 /* line 717, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-earphone:before {
-  content: "\e182";
+  content: "";
 }
 
 /* line 720, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-phone-alt:before {
-  content: "\e183";
+  content: "";
 }
 
 /* line 723, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tower:before {
-  content: "\e184";
+  content: "";
 }
 
 /* line 726, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-stats:before {
-  content: "\e185";
+  content: "";
 }
 
 /* line 729, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sd-video:before {
-  content: "\e186";
+  content: "";
 }
 
 /* line 732, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-hd-video:before {
-  content: "\e187";
+  content: "";
 }
 
 /* line 735, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-subtitles:before {
-  content: "\e188";
+  content: "";
 }
 
 /* line 738, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-stereo:before {
-  content: "\e189";
+  content: "";
 }
 
 /* line 741, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-dolby:before {
-  content: "\e190";
+  content: "";
 }
 
 /* line 744, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-5-1:before {
-  content: "\e191";
+  content: "";
 }
 
 /* line 747, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-6-1:before {
-  content: "\e192";
+  content: "";
 }
 
 /* line 750, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-sound-7-1:before {
-  content: "\e193";
+  content: "";
 }
 
 /* line 753, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-copyright-mark:before {
-  content: "\e194";
+  content: "";
 }
 
 /* line 756, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-registration-mark:before {
-  content: "\e195";
+  content: "";
 }
 
 /* line 759, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cloud-download:before {
-  content: "\e197";
+  content: "";
 }
 
 /* line 762, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-cloud-upload:before {
-  content: "\e198";
+  content: "";
 }
 
 /* line 765, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tree-conifer:before {
-  content: "\e199";
+  content: "";
 }
 
 /* line 768, ../../src/content/styles/vendors/bootstrap.sass */
 .glyphicon-tree-deciduous:before {
-  content: "\e200";
+  content: "";
 }
 
 /* line 771, ../../src/content/styles/vendors/bootstrap.sass */
@@ -1277,7 +1278,7 @@ body {
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* line 791, ../../src/content/styles/vendors/bootstrap.sass */
@@ -1332,7 +1333,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857;
-  background-color: white;
+  background-color: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -1572,7 +1573,7 @@ a.text-danger:hover {
 
 /* line 984, ../../src/content/styles/vendors/bootstrap.sass */
 .bg-primary {
-  color: white;
+  color: #fff;
   background-color: #428bca;
 }
 
@@ -1727,7 +1728,7 @@ blockquote footer, blockquote small, blockquote .small {
 }
 /* line 1087, ../../src/content/styles/vendors/bootstrap.sass */
 blockquote footer:before, blockquote small:before, blockquote .small:before {
-  content: "\2014 \00A0";
+  content: "— ";
 }
 
 /* line 1090, ../../src/content/styles/vendors/bootstrap.sass */
@@ -1746,7 +1747,7 @@ blockquote footer:before, blockquote small:before, blockquote .small:before {
 
 /* line 1100, ../../src/content/styles/vendors/bootstrap.sass */
 .blockquote-reverse footer:after, blockquote.pull-right footer:after, .blockquote-reverse small:after, blockquote.pull-right small:after, .blockquote-reverse .small:after, blockquote.pull-right .small:after {
-  content: "\00A0 \2014";
+  content: " —";
 }
 
 /* line 1103, ../../src/content/styles/vendors/bootstrap.sass */
@@ -2924,7 +2925,7 @@ output {
   font-size: 14px;
   line-height: 1.42857;
   color: #555555;
-  background-color: white;
+  background-color: #ffffff;
   background-image: none;
   border: 1px solid #cccccc;
   border-radius: 4px;
@@ -3439,7 +3440,7 @@ fieldset[disabled] .btn {
 /* line 2039, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default {
   color: #333333;
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 /* line 2043, ../../src/content/styles/vendors/bootstrap.sass */
@@ -3468,98 +3469,98 @@ fieldset[disabled] .btn {
 
 /* line 2061, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled, .btn-default[disabled] {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2065, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2070, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled:hover, .btn-default[disabled]:hover {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2074, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default:hover {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2079, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled:focus, .btn-default[disabled]:focus {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2083, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default:focus {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2088, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled.focus, .btn-default[disabled].focus {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2092, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default.focus {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2097, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled:active, .btn-default[disabled]:active {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2101, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default:active {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2106, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default.disabled.active, .btn-default[disabled].active {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2110, ../../src/content/styles/vendors/bootstrap.sass */
 fieldset[disabled] .btn-default.active {
-  background-color: white;
+  background-color: #ffffff;
   border-color: #cccccc;
 }
 
 /* line 2114, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-default .badge {
-  color: white;
+  color: #ffffff;
   background-color: #333333;
 }
 
 /* line 2118, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-primary {
-  color: white;
+  color: #ffffff;
   background-color: #428bca;
   border-color: #357ebd;
 }
 /* line 2122, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
-  color: white;
+  color: #ffffff;
   background-color: #3071a9;
   border-color: #285e8e;
 }
 
 /* line 2127, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-primary {
-  color: white;
+  color: #ffffff;
   background-color: #3071a9;
   border-color: #285e8e;
 }
@@ -3649,25 +3650,25 @@ fieldset[disabled] .btn-primary.active {
 /* line 2193, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-primary .badge {
   color: #428bca;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* line 2197, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-success {
-  color: white;
+  color: #ffffff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
 /* line 2201, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active {
-  color: white;
+  color: #ffffff;
   background-color: #449d44;
   border-color: #398439;
 }
 
 /* line 2206, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-success {
-  color: white;
+  color: #ffffff;
   background-color: #449d44;
   border-color: #398439;
 }
@@ -3757,25 +3758,25 @@ fieldset[disabled] .btn-success.active {
 /* line 2272, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-success .badge {
   color: #5cb85c;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* line 2276, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-info {
-  color: white;
+  color: #ffffff;
   background-color: #5bc0de;
   border-color: #46b8da;
 }
 /* line 2280, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active {
-  color: white;
+  color: #ffffff;
   background-color: #31b0d5;
   border-color: #269abc;
 }
 
 /* line 2285, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-info {
-  color: white;
+  color: #ffffff;
   background-color: #31b0d5;
   border-color: #269abc;
 }
@@ -3865,25 +3866,25 @@ fieldset[disabled] .btn-info.active {
 /* line 2351, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-info .badge {
   color: #5bc0de;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* line 2355, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-warning {
-  color: white;
+  color: #ffffff;
   background-color: #f0ad4e;
   border-color: #eea236;
 }
 /* line 2359, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-warning:hover, .btn-warning:focus, .btn-warning.focus, .btn-warning:active, .btn-warning.active {
-  color: white;
+  color: #ffffff;
   background-color: #ec971f;
   border-color: #d58512;
 }
 
 /* line 2364, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-warning {
-  color: white;
+  color: #ffffff;
   background-color: #ec971f;
   border-color: #d58512;
 }
@@ -3973,25 +3974,25 @@ fieldset[disabled] .btn-warning.active {
 /* line 2430, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-warning .badge {
   color: #f0ad4e;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* line 2434, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-danger {
-  color: white;
+  color: #ffffff;
   background-color: #d9534f;
   border-color: #d43f3a;
 }
 /* line 2438, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active {
-  color: white;
+  color: #ffffff;
   background-color: #c9302c;
   border-color: #ac2925;
 }
 
 /* line 2443, ../../src/content/styles/vendors/bootstrap.sass */
 .open > .dropdown-toggle.btn-danger {
-  color: white;
+  color: #ffffff;
   background-color: #c9302c;
   border-color: #ac2925;
 }
@@ -4081,7 +4082,7 @@ fieldset[disabled] .btn-danger.active {
 /* line 2509, ../../src/content/styles/vendors/bootstrap.sass */
 .btn-danger .badge {
   color: #d9534f;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* line 2513, ../../src/content/styles/vendors/bootstrap.sass */
@@ -4530,7 +4531,7 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 
 /* line 29, ../../src/content/styles/_global.sass */
 a, a:focus, a:active {
-  color: whitesmoke;
+  color: #F5F5F5;
 }
 
 /* line 32, ../../src/content/styles/_global.sass */
@@ -4608,7 +4609,7 @@ header {
   position: relative;
   z-index: 3;
   padding: 20px 0;
-  color: white;
+  color: #fff;
   background-color: #506362;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
@@ -4710,14 +4711,14 @@ nav ul li:hover {
 nav ul li a {
   display: flex;
   align-items: center;
-  color: whitesmoke;
+  color: #F5F5F5;
   -webkit-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -moz-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
 }
 /* line 141, ../../src/content/styles/_global.sass */
 nav ul li a:hover {
-  color: whitesmoke;
+  color: #F5F5F5;
 }
 /* line 143, ../../src/content/styles/_global.sass */
 nav ul li.active a {
@@ -4750,11 +4751,11 @@ nav ul li.active a {
 }
 /* line 162, ../../src/content/styles/_global.sass */
 .message.error {
-  background-color: #a28382;
+  background-color: #A28382;
 }
 /* line 164, ../../src/content/styles/_global.sass */
 .message.success {
-  background-color: #71876d;
+  background-color: #71876D;
 }
 
 /* line 167, ../../src/content/styles/_global.sass */
@@ -4768,7 +4769,7 @@ nav ul li.active a {
   overflow-x: hidden;
   overflow-y: visible;
   font-size: 1.5rem;
-  background-color: #b3b6b6;
+  background-color: #B3B6B6;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -4821,7 +4822,7 @@ nav ul li.active a {
   width: 12px;
   height: 14px;
   font-size: 12px;
-  color: #333333;
+  color: #333;
   -webkit-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -moz-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
   -o-transition: color 0.3s cubic-bezier(0.865, 0, 0.425, 0.94);
@@ -4842,9 +4843,9 @@ nav ul li.active a {
 .calendar-pagination .pagination-container {
   display: flex;
   justify-content: space-between;
-  background-color: whitesmoke;
-  border-bottom: 1px solid #b3b6b6;
-  border-left: 1px solid #b3b6b6;
+  background-color: #F5F5F5;
+  border-bottom: 1px solid #B3B6B6;
+  border-left: 1px solid #B3B6B6;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
@@ -4860,14 +4861,14 @@ nav ul li.active a {
   padding: 0;
   background: none;
   border: none;
-  background-color: whitesmoke;
+  background-color: #F5F5F5;
 }
 
 /* line 30, ../../src/content/styles/style.sass */
 .calendar, .summary {
   position: relative;
   z-index: 2;
-  background-color: whitesmoke;
+  background-color: #F5F5F5;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
@@ -4958,7 +4959,7 @@ calendar .col-xs-1 {
 
 /* line 90, ../../src/content/styles/style.sass */
 .today {
-  background-color: #dae5d8;
+  background-color: #DAE5D8;
 }
 
 /* line 92, ../../src/content/styles/style.sass */
@@ -4969,12 +4970,12 @@ calendar .col-xs-1 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  border-bottom: 1px solid #b3b6b6;
+  border-bottom: 1px solid #B3B6B6;
 }
 
 /* line 101, ../../src/content/styles/style.sass */
 .day + *, .day-header + * {
-  border-left: 1px solid #b3b6b6;
+  border-left: 1px solid #B3B6B6;
 }
 
 /* line 106, ../../src/content/styles/style.sass */
@@ -5011,7 +5012,7 @@ calendar .col-xs-1 {
 .recipe-form {
   padding: 25px;
   overflow: hidden;
-  background-color: #b3b6b6;
+  background-color: #B3B6B6;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -5058,7 +5059,7 @@ calendar .col-xs-1 {
   padding: 0;
   margin: 0;
   overflow: auto;
-  background-color: white;
+  background-color: #fff;
   -webkit-transition: max-height 1s ease;
   -moz-transition: max-height 1s ease;
   -o-transition: max-height 1s ease;
@@ -5072,7 +5073,7 @@ calendar .col-xs-1 {
 }
 /* line 169, ../../src/content/styles/style.sass */
 .recipe-form .dropdown-filter .available-ingredients .ingredient-item:hover {
-  background-color: whitesmoke;
+  background-color: #F5F5F5;
   cursor: pointer;
 }
 /* line 173, ../../src/content/styles/style.sass */
@@ -5189,7 +5190,7 @@ calendar .col-xs-1 {
   width: 100%;
   max-width: 740px;
   padding: 25px;
-  background-color: whitesmoke;
+  background-color: #F5F5F5;
   -webkit-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -moz-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
   -o-box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.7);
@@ -5215,3 +5216,5 @@ calendar .col-xs-1 {
   line-height: 25px;
   text-indent: 25px;
 }
+
+/*# sourceMappingURL=style.css.map */

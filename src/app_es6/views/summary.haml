@@ -1,0 +1,7 @@
+.container.summary
+  .row
+    %h3.summary-date
+      {{ showSummaryDate() }}
+    %ul
+      %li{:'ng-repeat' => 'ingr in weeklySummary.ingredients'}
+        {{ ingr.name }}: {{ ingr.amount + ' ' + ingr.units }}
