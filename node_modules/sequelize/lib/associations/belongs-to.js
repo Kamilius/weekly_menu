@@ -100,13 +100,15 @@ module.exports = (function() {
     instancePrototype[this.accessors.get] = function(params) {
       var where = {};
 
-      params = params || {};
+      params = association.target.__optClone(params) || {};
       params.where = (params.where && [params.where]) || [];
 
       where[association.targetIdentifier] = this.get(association.identifier);
       params.where.push(where);
 
       params.where = new Utils.and(params.where);
+
+      if (params.limit === undefined) params.limit = null;
 
       return association.target.find(params);
     };
@@ -119,12 +121,16 @@ module.exports = (function() {
     var association = this;
 
     instancePrototype[this.accessors.set] = function(associatedInstance, options) {
+      options = options || {};
+
       var value = associatedInstance;
       if (associatedInstance instanceof association.target.Instance) {
         value = associatedInstance[association.targetIdentifier];
       }
 
       this.set(association.identifier, value);
+
+      if (options.save === false) return;
 
       options = Utils._.extend({
         fields: [association.identifier],
